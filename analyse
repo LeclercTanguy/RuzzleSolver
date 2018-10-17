@@ -36,3 +36,12 @@ ruzzle
 			parcourir grille
 
 Analyse
+
+transcoder
+Créer un dictionnaire sous la forme d'un arbre lexicographique (TAD Dictionnaire) à partir de dico-ref-ascii-sans-accent.txt
+
+ruzzleSolver
+1) Transformer la chaîne passée en paramètre de ruzzleSolver en Grille
+2) Trouver tous les mots possibles dans la grille (TAD CasesContigues)
+3) Calculer le nombre de points associés à un mot (TAD CasesContigues)
+4) Trier les mots par le nombre de points
