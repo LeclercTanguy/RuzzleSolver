@@ -7,27 +7,94 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphics}
 \usepackage{algorithmeUTF8}
+\newcommand{\noun}[1]{\textsc{#1}}
 
-\title{}
-\author{Simon Lebeaud}
-\date{}
+\title{Projet Ruzzle}
+\author{Nina \noun{Lardière}, Yves \noun{Le Guennec}, Simon \noun{Lebeaud}, Tanguy \noun{Leclerc}}
+\date{Novembre 2018}
 
 \begin{document}
 	\maketitle
-	\newpage
-	\tableofcontents
-	\section{Les TAD:}
+	%\newpage
+	%\tableofcontents
+	\section{Les TAD}
+
+	\begin{tad}
+		\tadNom{Bonus}
+		\tadParametres{\booleen}
+		\begin{tadOperations}{fixerMotCompteDouble}%nom de l'opération le plus long
+			\tadOperation{creerBonus}{}{\tadUnParam{Bonus}}
+			\tadOperation{compteDouble}{\tadUnParam{Bonus}}{\tadUnParam{\booleen}}
+			\tadOperation{compteTriple}{\tadUnParam{Bonus}}{\tadUnParam{\booleen}}
+			\tadOperation{motCompteDouble}{\tadUnParam{Bonus}}{\tadUnParam{\booleen}}
+			\tadOperation{motCompteTriple}{\tadUnParam{Bonus}}{\tadUnParam{\booleen}}
+			\tadOperation{fixerCompteDouble}{\tadDeuxParams{Bonus}{\booleen}}{\tadUnParam{Bonus}}
+			\tadOperation{fixerCompteTriple}{\tadDeuxParams{Bonus}{\booleen}}{\tadUnParam{Bonus}}
+			\tadOperation{fixerMotCompteDouble}{\tadDeuxParams{Bonus}{\booleen}}{\tadUnParam{Bonus}}
+			\tadOperation{fixerMotCompteTriple}{\tadDeuxParams{Bonus}{\booleen}}{\tadUnParam{Bonus}}
+		\end{tadOperations}
+		\begin{tadAxiomes}
+			\tadAxiome{compteDouble(fixerCompteDouble(creerBonus(),VRAI))=VRAI}
+			\tadAxiome{...}
+		\end{tadAxiomes}
+	\end{tad}
+	.\\
+	\begin{tad}
+		\tadNom{Case}
+		\tadParametres{\caractere,\naturel,Bonus}
+		\tadDependances{\booleen}
+		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
+			\tadOperation{obtenirLettre}{\tadUnParam{Case}}{\tadUnParam{\caractere}}
+			\tadOperation{obtenirNbPoints}{\tadUnParam{Case}}{\tadUnParam{\naturel}}
+			\tadOperation{obtenirBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
+			\tadOperation{fixerLettre}{\tadDeuxParams{Case}{\caractere}}{\tadUnParam{Case}}
+			\tadOperation{fixerNbPoints}{\tadDeuxParams{Case}{\naturel}}{\tadUnParam{Case}}
+			\tadOperation{obtenirBonus}{\tadDeuxParams{Case}{Bonus}}{\tadUnParam{Case}}
+			\tadOperation{estUtilisee}{\tadUnParam{Case}}{\tadUnParam{\booleen}}
+			\tadOperation{DebutUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
+			\tadOperation{FinUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
+		\end{tadOperations}
+	\end{tad}
+	.\\
+	\begin{tad}
+		\tadNom{Grille}
+		\tadParametres{Case}
+		\tadDependances{\booleen}
+		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
+			\tadOperation{obtenirCase}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Case}}
+
+		\end{tadOperations}
+	\end{tad}
+	.\\
 	\begin{tad}
 		\tadNom{Mot}
 		\tadParametres{}
 		\tadDependances{}
-		\begin{tadOperation}{Case}
-			\tadOperation{chaîne de Caractère}{}{\tadUnParam{Case}}
-		\end{tadOperation}
-		
-		
+		\begin{tadOperations}{}%nom de l'opération le plus long
+			\tadOperation{motVide}{}{\tadUnParam{Mot}}
+			\tadOperation{iemeLettre}{\tadDeuxParams{Mot}{\naturel}}{\tadUnParam{\caractere}}
+			\tadOperation{longueur}{\tadUnParam{Mot}}{\tadUnParam{\naturel}}
+			\tadOperation{ajouterLettre}{\tadDeuxParams{Mot}{\caractere}{\tadUnParam{Mot}}}
+			\tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}{\tadUnParam{Mot}}}
+		\end{tadOperations}
+		%\begin{tadPreconditions}
+			%\tadPrecondition{retirerLettre}{longueur(mot) $>$ 0}
+		%\end{tadPreconditions}
 	\end{tad}
-	
+	.\\
+	\begin{tad}
+		\tadNom{Dictionnaire}
+		\tadDependances{Mot}
+		\begin{tadOperations}{}%nom de l'opération le plus long
+			\tadOperation{dictionnaireVide}{}{\tadUnParam{Dictionnaire}}
+			\tadOperation{fixerLettre}{\tadDeuxParams{Dictionnaire}{\caractere}}{\tadUnParam{Dictionnaire}}
+			\tadOperation{fixerSuffixe}{\tadDeuxParams{Dictionnaire}{Dictionnaire}}{\tadUnParam{Dictionnaire}}
+			\tadOperation{fixerMotSuivant}{\tadDeuxParams{Dictionnaire}{Dictionnaire}}{\tadUnParam{Dictionnaire}}
+			\tadOperation{estUnPrefixe}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{\booleen}}
+			\tadOperation{estUnMot}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{\booleen}}
+		\end{tadOperations}
+	\end{tad}
 
-	
+
+
 \end{document}
