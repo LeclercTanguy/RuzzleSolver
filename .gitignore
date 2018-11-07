@@ -5,7 +5,6 @@ tests/
 doc/
 *.o
 *.pdf
-*.sty
 *.log
 *.toc
 *.aux
