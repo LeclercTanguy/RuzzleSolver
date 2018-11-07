@@ -74,6 +74,22 @@
 			\tadOperation{charger}{\tadUnParam{Fichier}}{\tadUnParam{Dictionnaire}}
 		\end{tadOperations}
 	\end{tad}
-
+	.\\
+	\begin{tad}
+		\tadNom{Cases Contigues}
+		\tadDependances{Grille,Case}
+		\begin{tadOperations}{}
+			\tadOperation{CaseContigue}{\tadTroisParams{Grille}{Case}{\naturel}}{\tadUnParam{Cases}}
+			\tadOperation{nbCasesContigue}{\tadDeuxParams{Grille}{Case}}{\tadUnParam{\naturel}}
+		\end{tadOperations}
+	\end{tad}
+	.\\
+	\begin{tad}
+		\tadNom{Grille}
+		\tadDependances{Case}
+		\begin{tadOperations}{}
+			\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
+		\end{tadOperations}
+	\end{tad}
 
 \end{document}
