@@ -49,7 +49,7 @@
 			\tadOperation{obtenirBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
 			\tadOperation{fixerLettre}{\tadDeuxParams{Case}{\caractere}}{\tadUnParam{Case}}
 			\tadOperation{fixerNbPoints}{\tadDeuxParams{Case}{\naturel}}{\tadUnParam{Case}}
-			\tadOperation{obtenirBonus}{\tadDeuxParams{Case}{Bonus}}{\tadUnParam{Case}}
+			\tadOperation{fixerBonus}{\tadDeuxParams{Case}{Bonus}}{\tadUnParam{Case}}
 			\tadOperation{estUtilisee}{\tadUnParam{Case}}{\tadUnParam{\booleen}}
 			\tadOperation{DebutUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
 			\tadOperation{FinUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
@@ -75,7 +75,7 @@
 			\tadOperation{iemeLettre}{\tadDeuxParams{Mot}{\naturel}}{\tadUnParam{\caractere}}
 			\tadOperation{longueur}{\tadUnParam{Mot}}{\tadUnParam{\naturel}}
 			\tadOperation{ajouterLettre}{\tadDeuxParams{Mot}{\caractere}{\tadUnParam{Mot}}}
-			\tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}{\tadUnParam{Mot}}}
+			\tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}}{\tadUnParam{Mot}}
 		\end{tadOperations}
 		%\begin{tadPreconditions}
 			%\tadPrecondition{retirerLettre}{longueur(mot) $>$ 0}
@@ -94,7 +94,22 @@
 			\tadOperation{estUnMot}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{\booleen}}
 		\end{tadOperations}
 	\end{tad}
-
-
+	.\\
+	\begin{tad}
+		\tadNom{Cases Contigues}
+		\tadDependances{Grille,Case}
+		\begin{tadOperations}{}
+			\tadOperation{CaseContigue}{\tadTroisParams{Grille}{Case}{\naturel}}{\tadUnParam{Cases}}
+			\tadOperation{nbCasesContigue}{\tadDeuxParams{Grille}{Case}}{\tadUnParam{\naturel}}
+		\end{tadOperations}
+	\end{tad}
+	.\\
+	\begin{tad}
+		\tadNom{Grille}
+		\tadDependances{Case}
+		\begin{tadOperations}{}
+			\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
+		\end{tadOperations}
+	\end{tad}
 
 \end{document}
