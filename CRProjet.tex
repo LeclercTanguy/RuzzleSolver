@@ -30,9 +30,6 @@
 			\tadOperation{obtenirLettre}{\tadUnParam{Case}}{\tadUnParam{\caractere}}
 			\tadOperation{obtenirNbPoints}{\tadUnParam{Case}}{\tadUnParam{NaturelNonNul}}
 			\tadOperation{obtenirBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
-			\tadOperation{estUtilisee}{\tadUnParam{Case}}{\tadUnParam{\booleen}}
-			\tadOperation{DebutUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
-			\tadOperation{FinUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
 		\end{tadOperations}
 	\end{tad}
 	.\\
@@ -76,19 +73,28 @@
 	\end{tad}
 	.\\
 	\begin{tad}
-		\tadNom{Cases Contigues}
+		\tadNom{CasesContigues}
 		\tadDependances{Grille,Case}
 		\begin{tadOperations}{}
-			\tadOperation{CaseContigue}{\tadTroisParams{Grille}{Case}{\naturel}}{\tadUnParam{Cases}}
-			\tadOperation{nbCasesContigue}{\tadDeuxParams{Grille}{Case}}{\tadUnParam{\naturel}}
+			\tadOperation{creerCasesContigues}{}{\tadUnParam{CasesContigues}}
+			\tadOperation{ajouterCase}{\tadDeuxParams{CasesContigues}{Case}}{\tadUnParam{CasesContigues}}
+			\tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
+			\tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
 		\end{tadOperations}
+		\begin{tadAxiomes}
+			\tadAxiome{supprimerCase(ajouterCase(suiteCases,uneCase))=uneCase}
+			\tadAxiome{nbCasesContigues(creerCasesContigues())=0}
+		\end{tadAxiomes}
 	\end{tad}
 	.\\
 	\begin{tad}
 		\tadNom{Grille}
-		\tadDependances{Case}
+		\tadDependances{Case,Point2D}
 		\begin{tadOperations}{}
 			\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
+			\tadOperation{estUtilisee}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{\booleen}}
+			\tadOperation{DebutUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
+			\tadOperation{FinUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
 		\end{tadOperations}
 	\end{tad}
 
