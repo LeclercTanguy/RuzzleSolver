@@ -4,7 +4,7 @@
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
-\usepackage[T1]{fontenc}
+%\usepackage[utf8]{fontenc}
 \usepackage{graphics}
 \usepackage{algorithmeUTF8}
 \newcommand{\noun}[1]{\textsc{#1}}
@@ -53,15 +53,17 @@
 		\tadParametres{}
 		\tadDependances{}
 		\begin{tadOperations}{}%nom de l'opération le plus long
-			%\tadOperation{motVide}{}{\tadUnParam{Mot}}
+			\tadOperationAvecPreconditions{creerMot}{\tadUnParam{Caracteres}}{\tadUnParam{Mot}}
 			\tadOperation{iemeLettre}{\tadDeuxParams{Mot}{NaturelNonNul}}{\tadUnParam{\caractere}}
 			\tadOperation{longueur}{\tadUnParam{Mot}}{\tadUnParam{\naturel}}
 			\tadOperation{ajouterLettre}{\tadDeuxParams{Mot}{\caractere}}{\tadUnParam{Mot}}
 			\tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}}{\tadUnParam{Mot}}
 		\end{tadOperations}
-		% \begin{tadPreconditions}
-		% 	\tadPrecondition{retirerLettre}{longueur(mot) $>$ 0}
-		% \end{tadPreconditions}
+
+		 \begin{tadPreconditions}
+		 	\tadPrecondition{creerMot}{longueur(unMot) $≥$ 2}
+		 	\tadPrecondition{retirerLettre}{longueur(unMot) $>$ 2}
+		 \end{tadPreconditions}
 	\end{tad}
 	.\\ \\
 	\begin{tad}
