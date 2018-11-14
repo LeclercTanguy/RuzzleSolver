@@ -20,8 +20,7 @@
 	\section{Les TAD}
 	\begin{tad}
 		\tadNom{Case}
-		\tadParametres{\caractere,\naturel,Bonus}
-		\tadDependances{\booleen}
+		\tadDependances{\booleen,\caractere,\naturel,Bonus}
 		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
 			\tadOperation{creerCase}{}{\tadUnParam{Case}}
 			\tadOperation{fixerLettre}{\tadDeuxParams{Case}{\caractere}}{\tadUnParam{Case}}
@@ -34,6 +33,12 @@
 			\tadOperation{DebutUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
 			\tadOperation{FinUtilisation}{\tadUnParam{Case}}{\tadUnParam{Case}}
 		\end{tadOperations}
+\begin{tadAxiomes}
+\tadAxiome{obtenirLettre(fixerLettre(uneCase,uneLettre))=uneLettre}
+\tadAxiome{obtenirBonus(fixerBonus(uneCase,leBonus))=leBonus}
+\tadAxiome{obtenirNbPoints(fixerNbPoints(uneCase,nbPoints))=nbPoints}
+
+\end{tadAxiomes}
 	\end{tad}
 	.\\
 	\begin{tad}
@@ -41,8 +46,8 @@
 		\tadParametres{Case}
 		\tadDependances{\booleen,Point2D}
 		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
-			\tadOperation{obtenirCase}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Case}}
-
+				\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
+				\tadOperation{obtenirCase}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Case}}
 		\end{tadOperations}
 	\end{tad}
 	.\\
@@ -61,7 +66,7 @@
 		% 	\tadPrecondition{retirerLettre}{longueur(mot) $>$ 0}
 		% \end{tadPreconditions}
 	\end{tad}
-	.\\
+	.\\ \\
 	\begin{tad}
 		\tadNom{Dictionnaire}
 		\tadDependances{Mot,Fichier}
@@ -73,6 +78,7 @@
 			\tadOperation{sauvegarder}{\tadUnParam{Dictionnaire}}{\tadUnParam{Fichier}}
 			\tadOperation{charger}{\tadUnParam{Fichier}}{\tadUnParam{Dictionnaire}}
 		\end{tadOperations}
+		
 	\end{tad}
 	.\\
 	\begin{tad}
@@ -84,12 +90,5 @@
 		\end{tadOperations}
 	\end{tad}
 	.\\
-	\begin{tad}
-		\tadNom{Grille}
-		\tadDependances{Case}
-		\begin{tadOperations}{}
-			\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
-		\end{tadOperations}
-	\end{tad}
 
 \end{document}
