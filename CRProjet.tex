@@ -4,9 +4,9 @@
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
-\usepackage[T1]{fontenc}
 \usepackage{graphics}
 \usepackage{algorithmeUTF8}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
 \newcommand{\noun}[1]{\textsc{#1}}
 
 \title{Projet Ruzzle}
@@ -20,7 +20,7 @@
 	\section{Les TAD}
 	\begin{tad}
 		\tadNom{Case}
-		\tadDependances{\booleen,\caractere,\naturel,Bonus}
+		\tadDependances{\caractere,\naturelNonNul,Bonus}
 		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
 			\tadOperation{creerCase}{}{\tadUnParam{Case}}
 			\tadOperation{fixerLettre}{\tadDeuxParams{Case}{\caractere}}{\tadUnParam{Case}}
@@ -30,31 +30,37 @@
 			\tadOperation{obtenirNbPoints}{\tadUnParam{Case}}{\tadUnParam{\naturelNonNul}}
 			\tadOperation{obtenirBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
 		\end{tadOperations}
-\begin{tadAxiomes}
-\tadAxiome{obtenirLettre(fixerLettre(uneCase,uneLettre))=uneLettre}
-\tadAxiome{obtenirBonus(fixerBonus(uneCase,leBonus))=leBonus}
-\tadAxiome{obtenirNbPoints(fixerNbPoints(uneCase,nbPoints))=nbPoints}
-
-\end{tadAxiomes}
+		\begin{tadAxiomes}
+			\tadAxiome{obtenirLettre(creerCase())='\textvisiblespace'}
+			\tadAxiome{obtenirNbPoints(creerCase())=1}
+			\tadAxiome{obtenirBonus(creerCase())="\textvisiblespace\textvisiblespace"}
+			\tadAxiome{obtenirLettre(fixerLettre(uneCase,uneLettre))=uneLettre}
+			\tadAxiome{obtenirBonus(fixerBonus(uneCase,leBonus))=leBonus}
+			\tadAxiome{obtenirNbPoints(fixerNbPoints(uneCase,nbPoints))=nbPoints}
+		\end{tadAxiomes}
 	\end{tad}
 	.\\
 	\begin{tad}
 		\tadNom{Grille}
-		\tadParametres{Case}
-		\tadDependances{\booleen,Point2D}
-		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
-				\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
-				\tadOperation{creerGrille}{\tadUnParam{\chaine}}{\tadUnParam{Grille}}
-				\tadOperation{obtenirCase}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Case}}
-				\tadOperation{estUtilisee}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{\booleen}}
-				\tadOperation{DebutUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
-				\tadOperation{FinUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
+		\tadDependances{Case,\booleen,1..4}
+		\begin{tadOperations}{DebutUtilisation}%nom de l'opération le plus long
+				\tadOperation{creerGrille}{}{\tadUnParam{Grille}}
+				\tadOperation{obtenirCase}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{Case}}
+				\tadOperation{fixerCase}{\tadTroisParams{Case}{1..4}{1..4}}{\tadUnParam{Grille}}
+				\tadOperation{estUtilisee}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{\booleen}}
+				\tadOperation{debutUtilisation}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{Grille}}
+				\tadOperation{finUtilisation}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{Grille}}
 		\end{tadOperations}
+		\begin{tadAxiomes}
+			\tadAxiome{obtenirCase(creerGrille,x,y)=creerCase()}
+			\tadAxiome{obtenirCase(fixerCase(c,x,y))=c}
+			\tadAxiome{estUtilisee(debutUtilisation(g,x,y))=VRAI}
+			\tadAxiome{estUtilisee(finUtilisation(g,x,y))=FAUX}
+		\end{tadAxiomes}
 	\end{tad}
 	.\\
 	\begin{tad}
 		\tadNom{Mot}
-		\tadParametres{}
 		\tadDependances{\chaine,\naturelNonNul,\caractere}
 		\begin{tadOperations}{ajouterLettre}%nom de l'opération le plus long
 			\tadOperationAvecPreconditions{creerMot}{\tadUnParam{\chaine}}{\tadUnParam{Mot}}
@@ -63,16 +69,18 @@
 			\tadOperation{ajouterLettre}{\tadDeuxParams{Mot}{\caractere}}{\tadUnParam{Mot}}
 			\tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}}{\tadUnParam{Mot}}
 		\end{tadOperations}
-
 		 \begin{tadPreconditions}{retirerLettre}
 		 	\tadPrecondition{creerMot}{longueur(unMot) $\geq$ 2}
 		 	\tadPrecondition{retirerLettre}{longueur(unMot) $>$ 2}
 		 \end{tadPreconditions}
+		 \begin{tadAxiomes}
+
+		 \end{tadAxiomes}
 	\end{tad}
 	.\\
 	\begin{tad}
 		\tadNom{Dictionnaire}
-		\tadDependances{Mot,Fichier}
+		\tadDependances{Mot,Fichier,\booleen}
 		\begin{tadOperations}{dictionnaireVide}%nom de l'opération le plus long
 			\tadOperation{dictionnaireVide}{}{\tadUnParam{Dictionnaire}}
 			\tadOperation{ajouterMot}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{Dictionnaire}}
@@ -81,35 +89,30 @@
 			\tadOperation{sauvegarder}{\tadUnParam{Dictionnaire}}{\tadUnParam{Fichier}}
 			\tadOperation{charger}{\tadUnParam{Fichier}}{\tadUnParam{Dictionnaire}}
 		\end{tadOperations}
+		\begin{tadAxiomes}
+
+		\end{tadAxiomes}
 
 	\end{tad}
 	.\\
 	\begin{tad}
 		\tadNom{CasesContigues}
-		\tadDependances{Grille,Case}
-		\tadDependances{Case,\chaine}
-		\begin{tadOperations}{}
+		\tadDependances{Case,\naturel,\chaine}
+		\begin{tadOperations}{CasesContiguesEnChaine}
 			\tadOperation{creerCasesContigues}{}{\tadUnParam{CasesContigues}}
 			\tadOperation{ajouterCase}{\tadDeuxParams{CasesContigues}{Case}}{\tadUnParam{CasesContigues}}
 			\tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
 			\tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
 			\tadOperation{CasesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
 		\end{tadOperations}
+		\begin{tadPreconditions}{supprimerCase}
+			 \tadPrecondition{supprimerCase}{nbCasesContigues(suiteCases) $>$ 0}
+		\end{tadPreconditions}
 		\begin{tadAxiomes}
 			\tadAxiome{supprimerCase(ajouterCase(suiteCases,uneCase))=uneCase}
 			\tadAxiome{nbCasesContigues(creerCasesContigues())=0}
 		\end{tadAxiomes}
 	\end{tad}
-	.\\
-	\begin{tad}
-		\tadNom{Grille}
-		\tadDependances{Case,Point2D}
-		\begin{tadOperations}{}
-			\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
-			\tadOperation{estUtilisee}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{\booleen}}
-			\tadOperation{DebutUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
-			\tadOperation{FinUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
-		\end{tadOperations}
-	\end{tad}
+
 
 \end{document}
