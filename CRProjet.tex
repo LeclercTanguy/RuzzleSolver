@@ -4,7 +4,7 @@
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
-%\usepackage[utf8]{fontenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphics}
 \usepackage{algorithmeUTF8}
 \newcommand{\noun}[1]{\textsc{#1}}
@@ -24,10 +24,10 @@
 		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
 			\tadOperation{creerCase}{}{\tadUnParam{Case}}
 			\tadOperation{fixerLettre}{\tadDeuxParams{Case}{\caractere}}{\tadUnParam{Case}}
-			\tadOperation{fixerNbPoints}{\tadDeuxParams{Case}{NaturelNonNul}}{\tadUnParam{Case}}
+			\tadOperation{fixerNbPoints}{\tadDeuxParams{Case}{\naturelNonNul}}{\tadUnParam{Case}}
 			\tadOperation{fixerBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
 			\tadOperation{obtenirLettre}{\tadUnParam{Case}}{\tadUnParam{\caractere}}
-			\tadOperation{obtenirNbPoints}{\tadUnParam{Case}}{\tadUnParam{NaturelNonNul}}
+			\tadOperation{obtenirNbPoints}{\tadUnParam{Case}}{\tadUnParam{\naturelNonNul}}
 			\tadOperation{obtenirBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
 		\end{tadOperations}
 \begin{tadAxiomes}
@@ -44,28 +44,32 @@
 		\tadDependances{\booleen,Point2D}
 		\begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
 				\tadOperation{creerGrille}{\tadUnParam{Chaîne de Caractères}}{\tadUnParam{Grille}}
+				\tadOperation{creerGrille}{\tadUnParam{\chaine}}{\tadUnParam{Grille}}
 				\tadOperation{obtenirCase}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Case}}
+				\tadOperation{estUtilisee}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{\booleen}}
+				\tadOperation{DebutUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
+				\tadOperation{FinUtilisation}{\tadDeuxParams{Grille}{Point2D}}{\tadUnParam{Grille}}
 		\end{tadOperations}
 	\end{tad}
 	.\\
 	\begin{tad}
 		\tadNom{Mot}
 		\tadParametres{}
-		\tadDependances{}
-		\begin{tadOperations}{}%nom de l'opération le plus long
-			\tadOperationAvecPreconditions{creerMot}{\tadUnParam{Caracteres}}{\tadUnParam{Mot}}
-			\tadOperation{iemeLettre}{\tadDeuxParams{Mot}{NaturelNonNul}}{\tadUnParam{\caractere}}
+		\tadDependances{\chaine,\naturelNonNul,\caractere}
+		\begin{tadOperations}{ajouterLettre}%nom de l'opération le plus long
+			\tadOperationAvecPreconditions{creerMot}{\tadUnParam{\chaine}}{\tadUnParam{Mot}}
+			\tadOperation{iemeLettre}{\tadDeuxParams{Mot}{\naturelNonNul}}{\tadUnParam{\caractere}}
 			\tadOperation{longueur}{\tadUnParam{Mot}}{\tadUnParam{\naturel}}
 			\tadOperation{ajouterLettre}{\tadDeuxParams{Mot}{\caractere}}{\tadUnParam{Mot}}
 			\tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}}{\tadUnParam{Mot}}
 		\end{tadOperations}
 
-		 \begin{tadPreconditions}
-		 	\tadPrecondition{creerMot}{longueur(unMot) $≥$ 2}
+		 \begin{tadPreconditions}{retirerLettre}
+		 	\tadPrecondition{creerMot}{longueur(unMot) $\geq$ 2}
 		 	\tadPrecondition{retirerLettre}{longueur(unMot) $>$ 2}
 		 \end{tadPreconditions}
 	\end{tad}
-	.\\ \\
+	.\\
 	\begin{tad}
 		\tadNom{Dictionnaire}
 		\tadDependances{Mot,Fichier}
@@ -83,11 +87,13 @@
 	\begin{tad}
 		\tadNom{CasesContigues}
 		\tadDependances{Grille,Case}
+		\tadDependances{Case,\chaine}
 		\begin{tadOperations}{}
 			\tadOperation{creerCasesContigues}{}{\tadUnParam{CasesContigues}}
 			\tadOperation{ajouterCase}{\tadDeuxParams{CasesContigues}{Case}}{\tadUnParam{CasesContigues}}
 			\tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
 			\tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
+			\tadOperation{CasesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
 		\end{tadOperations}
 		\begin{tadAxiomes}
 			\tadAxiome{supprimerCase(ajouterCase(suiteCases,uneCase))=uneCase}

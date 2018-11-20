@@ -38,7 +38,7 @@
 
 % Modification depuis la version 2.3.2
 %   * structure est maintenant un environnement qui s'integre dans l'environnement algorithme
-%   * \champStructure a pris une majuscule  
+%   * \champStructure a pris une majuscule
 %   * Apparition de \tadSemantiquesAxiomatiques
 %   * Apparition de l'environnement \tadAxiomes et et commande \tadAxiome
 %   * Apparition de \typePointeur, \pointeur, \pointeurNULL, \champPointee, \allouer, \desallouer
@@ -168,7 +168,7 @@
 \newcommand{\entetealgo}[6]{
   \instruction{\textbf{\motclefAlgoNom : }#1}
   \instruction{\textbf{\motclefAlgoRole : }#2}
-  \instruction{\textbf{\motclefAlgoEntree : }#3}        
+  \instruction{\textbf{\motclefAlgoEntree : }#3}
   \instruction{\textbf{\motclefAlgoSortie : }#4}
   \instruction{\textbf{\motclefAlgoEntreeSortie : }#5}
   \instruction{\textbf{\motclefAlgoDeclaration : }#6}
@@ -437,7 +437,7 @@
 %% #3 : Signification de l'algo (rôle)
 %% #4 : Paramètre en entrée
 %% #5 : Paramètre en sortie
-%% #6 : Paramètre en entrée/sortie 
+%% #6 : Paramètre en entrée/sortie
 %% #7 : Déclaration variable locale
 %% #8 : Corps de l'algo
 \newcommand{\algo}[8]{
@@ -526,7 +526,7 @@
 %% #4 : Corps de la procédure
 \newcommand{\procedure}[4]{
   \instruction{\textbf{\motclefProcedure} #1 \textbf{(}#2\textbf{)}}
-  \ifx\empty#3\empty 
+  \ifx\empty#3\empty
   \else
 %  \unbloc{\variables{#3}}
   \variables{#3}
@@ -543,7 +543,7 @@
 \newcommand{\procedureAvecPreconditions}[5]{
   \instruction{\textbf{\motclefProcedure} #1 \textbf{(}#2\textbf{)}}
   \preconditions{#3}
-  \ifx\empty#4\empty 
+  \ifx\empty#4\empty
   \else
   \variables{#4}
   \fi
@@ -603,7 +603,7 @@
 
 %% Commandes \tadXXParams
 %% Produit cartesien des types des parametres
-%% Plusieurs commande car pour l'instant impossible de créer une commande avec nombre d'arguement variable 
+%% Plusieurs commande car pour l'instant impossible de créer une commande avec nombre d'arguement variable
 \newcommand{\tadUnParam}[1]{#1}
 \newcommand{\tadDeuxParams}[2]{#1 $\times$ #2}
 \newcommand{\tadTroisParams}[3]{#1 $\times$ #2 $\times$ #3}
@@ -616,7 +616,7 @@
 
 %% toutes les operations (tadOperation) doivent etre definies dans un environnement tadOperations
 \newenvironment{tadOperations}[1]
-{\item[\textbf{\motclefTADOperations}]  
+{\item[\textbf{\motclefTADOperations}]
   \begin{listeAlignee}{#1}{0cm}{:}
 }
 {\end{listeAlignee}}
@@ -644,7 +644,7 @@
 
 % toutes les semantiques d'operations (\tadSemantique) doivent etre definies dans un environnement tadSemantiques
 \newenvironment{tadSemantiquesAxiomatiques}[1]
-{\item[\textbf{\motclefTADSemantiques}] 
+{\item[\textbf{\motclefTADSemantiques}]
   \begin{listeAlignee}{#1}{0cm}{ =}
 }
 {\end{listeAlignee}}
@@ -663,7 +663,7 @@
 
 
 \newenvironment{tadAxiomes}[0]
-{\item[\textbf{\motclefTADAxiomes}] 
+{\item[\textbf{\motclefTADAxiomes}]
   \begin{axiomelist}{0cm}
 }
 {\end{axiomelist}}
@@ -685,7 +685,7 @@
 
 
 
-%% La définition d'un tad ce fait dans un environnement tad
+%% La définition d'un tad se fait dans un environnement tad
 \newenvironment{tad}{\begin{listeAlignee}{\textbf{\motclefTADPreconditions}}{0cm}{:}}{\end{listeAlignee}}
 
 
@@ -702,4 +702,3 @@
 \newcommand{\desallouer}[1]{\textbf{\motclefDesallouer}(#1)}
 
 \endinput
-
