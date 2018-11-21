@@ -17,7 +17,8 @@
 	\maketitle
 	%\newpage
 	%\tableofcontents
-	\section{Les TAD}
+	\section{Analyse}
+	\subsection{Les TAD}
 	\begin{tad}
 		\tadNom{Case}
 		\tadDependances{\caractere,\naturelNonNul,Bonus}
@@ -25,7 +26,7 @@
 			\tadOperation{creerCase}{}{\tadUnParam{Case}}
 			\tadOperation{fixerLettre}{\tadDeuxParams{Case}{\caractere}}{\tadUnParam{Case}}
 			\tadOperation{fixerNbPoints}{\tadDeuxParams{Case}{\naturelNonNul}}{\tadUnParam{Case}}
-			\tadOperation{fixerBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
+			\tadOperation{fixerBonus}{\tadDeuxParams{Case}{Bonus}}{\tadUnParam{Case}}
 			\tadOperation{obtenirLettre}{\tadUnParam{Case}}{\tadUnParam{\caractere}}
 			\tadOperation{obtenirNbPoints}{\tadUnParam{Case}}{\tadUnParam{\naturelNonNul}}
 			\tadOperation{obtenirBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
@@ -46,7 +47,7 @@
 		\begin{tadOperations}{DebutUtilisation}%nom de l'opération le plus long
 				\tadOperation{creerGrille}{}{\tadUnParam{Grille}}
 				\tadOperation{obtenirCase}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{Case}}
-				\tadOperation{fixerCase}{\tadTroisParams{Case}{1..4}{1..4}}{\tadUnParam{Grille}}
+				\tadOperation{fixerCase}{\tadQuatreParams{Grille}{Case}{1..4}{1..4}}{\tadUnParam{Grille}}
 				\tadOperation{estUtilisee}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{\booleen}}
 				\tadOperation{debutUtilisation}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{Grille}}
 				\tadOperation{finUtilisation}{\tadTroisParams{Grille}{1..4}{1..4}}{\tadUnParam{Grille}}
@@ -84,14 +85,16 @@
 		\begin{tadOperations}{dictionnaireVide}%nom de l'opération le plus long
 			\tadOperation{dictionnaireVide}{}{\tadUnParam{Dictionnaire}}
 			\tadOperation{ajouterMot}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{Dictionnaire}}
-			\tadOperation{estUnPrefixe}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{\booleen}}
-			\tadOperation{estUnMot}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{\booleen}}
+			\tadOperation{estUnPrefixe}{\tadTroisParams{Dictionnaire}{Mot}{\naturelNonNul}}{\tadUnParam{\booleen}}
+			\tadOperation{estUnMot}{\tadTroisParams{Dictionnaire}{Mot}{\naturelNonNul}}{\tadUnParam{\booleen}}
 			\tadOperation{sauvegarder}{\tadUnParam{Dictionnaire}}{\tadUnParam{Fichier}}
 			\tadOperation{charger}{\tadUnParam{Fichier}}{\tadUnParam{Dictionnaire}}
 		\end{tadOperations}
-		\begin{tadAxiomes}
-
-		\end{tadAxiomes}
+		\begin{tadSemantiques}{}
+			\tadSemantique{dictionnaireVide}{crée un dictionnaire ne contenant aucun mot}
+			\tadSemantique{ajouterMot}{ajoute un mot dans le dictionnaire}
+			\tadSemantique{estUnPrefixe}
+		\end{tadSemantiques}
 
 	\end{tad}
 	.\\
@@ -113,6 +116,15 @@
 			\tadAxiome{nbCasesContigues(creerCasesContigues())=0}
 		\end{tadAxiomes}
 	\end{tad}
+
+	\subsection{Analyse descendante}
+
+	\section{Conception préliminaire}
+	\subsection{Signatures des fonctions et procédures des TAD}
+
+
+	\subsection{Signatures des fonctions et procédures de l'analyse descendante}
+
 
 
 \end{document}
