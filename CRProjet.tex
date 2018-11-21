@@ -114,5 +114,57 @@
 		\end{tadAxiomes}
 	\end{tad}
 
+ \section{Conception préliminaire}
+ %\
+ %fonction {1}{2}{3}{4}{5}
+ %(1) Le nom de la fonction
+ %(2) Les param`etres
+ %(3) Le type de retour
+ %(4) Les variables locales
+ %(5) Les instructions
+ TAD Case
+ \begin{algorithme}
+ 	\signaturefonction
+ 	{creerCase}{}{Case}
+
+ 	\signatureprocedure
+ 	{fixerLettre}{\paramEntreeSortie{c : Case}; \paramEntree{uneLettre :\caractere}}
+
+ 	\signatureprocedure
+ 	{fixerNbPoints}{\paramEntreeSortie{c : Case}; \paramEntree{point : Naturel Non Nul}}
+
+ 	\signatureprocedure
+ 	{fixerBonus}{\paramEntreeSortie{c : Case}; \paramEntree{bonus : Bonus}}
+
+	\signaturefonction
+	{obtenirLettre}{c : Case}{\caractere}
+
+	\signaturefonction
+	{obtenirNbPoints}{c : Case}{Naturel Non Nul}
+
+	\signaturefonction
+	{obtenirBonus}{c : Case}{Bonus}
+\end{algorithme}
+TAD Grille
+\begin{algorithme}
+	\signaturefonction
+	{creerGrille}{}{Grille}
+
+	\signaturefonction
+	{obtenirCase}{g : Grille ; coordX, coordY : 1..4 }{Case}
+
+	\signatureprocedure
+	{fixerCase}{\paramEntreeSortie{g : Grille}; \paramEntree{c :Case ; coordX, coordY : 1..4}}
+
+	\signaturefonction
+	{estUtilisee}{g : Grille ; coordX, coordY : 1..4}{\booleen}
+
+	\signatureprocedure
+	{ddebutUtilisation}{\paramEntreeSortie{g : Grille}; \paramEntree{xUtilisee, yUtilisee : 1..4}}
+
+	\signatureprocedure
+	{ddebutUtilisation}{\paramEntreeSortie{g : Grille}; \paramEntree{xUtilisee, yUtilisee : 1..4}}
+
+\end{algorithme}
 
 \end{document}
