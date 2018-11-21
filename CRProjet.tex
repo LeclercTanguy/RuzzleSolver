@@ -103,7 +103,7 @@
 			\tadOperation{ajouterCase}{\tadDeuxParams{CasesContigues}{Case}}{\tadUnParam{CasesContigues}}
 			\tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
 			\tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
-			\tadOperation{CasesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
+			\tadOperation{casesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
 		\end{tadOperations}
 		\begin{tadPreconditions}{supprimerCase}
 			 \tadPrecondition{supprimerCase}{nbCasesContigues(suiteCases) $>$ 0}
@@ -115,4 +115,7 @@
 	\end{tad}
 
 
+
+	\input{Signatures/signatureCasesContigues}
+	
 \end{document}
