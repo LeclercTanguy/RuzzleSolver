@@ -1,0 +1,32 @@
+\paragraph{Dictionnaire}
+\begin{algorithme}
+  
+  \signaturefonction
+  {creerDictionnaire}{ens : Ensemble<\chaine>}{dico : Dictionnaire}
+  
+  \signatureProcedure
+  {ajouterMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{ch : \chaine}}{estUnPrefixe(dico,motEnChaine(unMot)+lettre)}
+  
+  % pas nécessaire pour le Ruzzle, tous les mots étant contenus dans le fichier utilisé par creerDictionnaire
+  \signatureProcedureAvecPreconditions 
+  {supprimerMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{mot : Mot}}{estUnMot(motASupprimer)}
+
+  % pas nécessaire pour le Ruzzle
+  \signaturefonction
+  {estUnPrefixe}{dico : Dictionnaire ; ch : chaine}{estPrefixe : \booleen}
+  
+  \signaturefonction
+  {estUnMot}{dico : Dictionnaire ; mot : Mot}{estMot : \booleen}
+  
+  \signaturefonction
+  {obtenirLettresSuivantes}{dico : Dictionnaire ; mot : Mot}{ens : Ensemble<A..Z>}
+  
+  \signaturefonction
+  {sauvegarder}{dico : Dictionnaire}{fichier : Fichier}	\tadOperation{charger}{\tadUnParam{Fichier}}{\tadDeuxParams{Dictionnaire}{\booleen}}
+  
+  \signaturefonction
+  {charger}{fichier : Fichier}{dico : Dictionnaire ; reussite : \booleen}
+  
+\end{algorithme}
+
+

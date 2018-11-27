@@ -1,0 +1,18 @@
+\paragraph{Mot}
+\begin{algorithme}
+  \signaturefonctionAvecPrecondition
+  {chaineEnMot}{dico : Dictionnaire ; ch : \chaine}{mot : Mot}{estUnPrefixe(dico,chaine) ET longueur(chaine)$\geq$1}
+
+  \signaturefonction
+  {motEnChaine}{mot : Mot}{ch : \chaine}
+  
+  \signaturefonction
+  {longueur}{mot : Mot}{n : \naturelNonNul}
+  
+  \signatureProcedureAvecPreconditions 
+  {ajouterLettre}{\paramEntreeSortie{mot : Mot} \paramEntree{car : \caractere; dico : Dictionnaire}}{estUnPrefixe(dico,motEnChaine(unMot)+lettre)}
+  
+  \signatureProcedureAvecPreconditions 
+  {retirerLettre}{\paramEntreeSortie{mot : Mot}}{estUnPrefixe(dico,motEnChaine(unMot)+lettre)}
+
+\end{algorithme}
