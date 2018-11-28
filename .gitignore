@@ -1,8 +1,4 @@
-bin/
-include/
-lib/
-tests/
-doc/
+
 *.o
 *.pdf
 *.gz
