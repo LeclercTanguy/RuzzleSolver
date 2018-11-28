@@ -1,0 +1,47 @@
+ruzzle
+
+	TAD
+
+		pour chaque case
+
+			lire case (chaine de caracteres en entree)
+				obtenir lettre
+				obtenir points
+				obtenir bonus
+
+			creer case (tad case du programme)
+				ecrire lettres
+				ecrire points
+				ecrire bonus
+				ecrire utilisation
+
+		pour chaque mot
+
+			obtenir mot
+
+		dictionnaire
+
+			stocker (serialiser) dictionnaire
+			obtenir mot
+
+		cases contigues
+
+			lire case
+			ecrire case
+			calculer points
+
+		grille
+
+			ecrire grille
+			parcourir grille
+
+Analyse
+
+transcoder
+Créer un dictionnaire sous la forme d'un arbre lexicographique (TAD Dictionnaire) à partir de dico-ref-ascii-sans-accent.txt
+
+ruzzleSolver
+1) Transformer la chaîne passée en paramètre de ruzzleSolver en Grille
+2) Trouver tous les mots possibles dans la grille (TAD CasesContigues)
+3) Calculer le nombre de points associés à un mot (TAD CasesContigues)
+4) Trier les mots par le nombre de points

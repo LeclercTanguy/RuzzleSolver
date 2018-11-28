@@ -1,0 +1,15 @@
+Clés SSH
+  Créer la clé (si besoin) : ssh-keygen -o -t rsa -C "login@insa-rouen.fr" -b 4096
+  L'afficher : cat ~/.ssh/id_rsa.pub
+  L'ajouter dans Settings / SSH Keys
+
+Cloner le projet en local
+  git clone ssh://git@gitlab.insa-rouen.fr/the-best-ruzzle-project/ruzzle_nlardiere_slebeaud_tleclerc_jlecordier_yleguennec
+
+Pour envoyer les modifications
+1) git add .
+  git status pour voir les fichiers modifiés
+2) git commit -m 'Message de commit'
+3) git push
+
+Plus de détails sur https://moodle.insa-rouen.fr/pluginfile.php/87086/mod_resource/content/3/Git.pdf
