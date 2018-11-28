@@ -105,9 +105,12 @@
     \tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
     \tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
     \tadOperation{casesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
+    \tadOperation{obtenirPosition}{\tadDeuxParams{CasesContigues}{\naturel}}{\tadDeuxParams{\naturel}{\naturel}}
+    \tadOperation{fixerPosition}{\tadQuatreParams{CaseContigues}{\naturel}{\naturel}{\naturel}}{\tadUnParam{CasesContigues}}
   \end{tadOperations}
   \begin{tadPreconditions}{supprimerCase}
      \tadPrecondition{supprimerCase}{nbCasesContigues(suiteCases) $>$ 0}
+     \tadPrecondition{fixerPosition}{0$<$(indexCase, posX, posY : Naturel)$<$5}
   \end{tadPreconditions}
   \begin{tadAxiomes}
     \tadAxiome{supprimerCase(ajouterCase(suiteCases,uneCase))=uneCase}
