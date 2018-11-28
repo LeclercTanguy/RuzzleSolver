@@ -9,3 +9,4 @@ int estUnMot(Dictionnaire,Mot);
 Ensemble obtenirLettresSuivantes(Dictionnaire,Mot);
 void sauvegarder(Dictionnaire);
 void charger(*char);
+#endif
