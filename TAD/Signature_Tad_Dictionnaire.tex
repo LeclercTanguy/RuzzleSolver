@@ -1,32 +1,30 @@
 \paragraph{Dictionnaire}
 \begin{algorithme}
-  
+
   \signaturefonction
-  {creerDictionnaire}{ens : Ensemble<\chaine>}{dico : Dictionnaire}
-  
+  {creerDictionnaire}{lesMots : Ensemble<\chaine>}{Dictionnaire}
+
   \signatureProcedure
-  {ajouterMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{ch : \chaine}}{estUnPrefixe(dico,motEnChaine(unMot)+lettre)}
-  
+  {ajouterMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{leMot : \chaine}}
   % pas nécessaire pour le Ruzzle, tous les mots étant contenus dans le fichier utilisé par creerDictionnaire
-  \signatureProcedureAvecPreconditions 
-  {supprimerMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{mot : Mot}}{estUnMot(motASupprimer)}
+
+  \signatureProcedureAvecPreconditions
+  {supprimerMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{motASupprimer : Mot}}{estUnMot(motASupprimer)}
 
   % pas nécessaire pour le Ruzzle
   \signaturefonction
-  {estUnPrefixe}{dico : Dictionnaire ; ch : chaine}{estPrefixe : \booleen}
-  
+  {estUnPrefixe}{dico : Dictionnaire ; chaine : \chaine}{\booleen}
+
   \signaturefonction
-  {estUnMot}{dico : Dictionnaire ; mot : Mot}{estMot : \booleen}
-  
+  {estUnMot}{dico : Dictionnaire ; prefixe : Mot}{\booleen}
+
   \signaturefonction
-  {obtenirLettresSuivantes}{dico : Dictionnaire ; mot : Mot}{ens : Ensemble<A..Z>}
-  
-  \signaturefonction
-  {sauvegarder}{dico : Dictionnaire}{fichier : Fichier}	\tadOperation{charger}{\tadUnParam{Fichier}}{\tadDeuxParams{Dictionnaire}{\booleen}}
-  
-  \signaturefonction
-  {charger}{fichier : Fichier}{dico : Dictionnaire ; reussite : \booleen}
-  
+  {obtenirLettresSuivantes}{dico : Dictionnaire ; prefixe : Mot}{Ensemble<A..Z>}
+
+  \signatureProcedure
+  {sauvegarder}{\paramEntree{dico : Dictionnaire}}
+
+  \signatureProcedure
+  {charger}{\paramEntree{fichier : Fichier} \paramSortie{dico : Dictionnaire ; erreur : \booleen}}
+
 \end{algorithme}
-
-
