@@ -1,0 +1,24 @@
+\begin{algorithme}
+  \procedure
+    {trouverMot}
+    {\paramEntree{posX, posY: 1..4 ; dico: Dictionnaire} \paramEntreeSortie{g: Grille; prefixe: Mot; cheminRuzzle : CasesContigues, resultat: solutionRuzzle}}
+    {lettresPossibles: Ensemble<A..Z>}
+    {
+      \instruction{debutUtilisation(g,posX,posY)}
+      \affecter{lettresPossibles}{obtenirLettresSuivantes(dico,prefixe)}
+      \pourChaque{case}{casesAdjacentesNonUtilisees(posX,posY,g)}{
+        \sialors{estPresent(obtenirLettre(case),lettresPossibles)}{
+          \instruction{ajouterLettre(dico,prefixe,obtenirLettre(case))}
+          \instruction{ajouterCase(cheminRuzzle,case)}
+          \sialors{estUnMot(prefixe)}{
+            \instruction{insererMotResultat(resultat,cheminRuzzle)}
+          }
+          \instruction{trouverMot(obtenirPosX(case),obtenirPosY(case),dico,g,prefixe,cheminRuzzle,resultat)}
+          \instruction{retirerLettre(prefixe)}
+          \instruction{supprimerCase(cheminRuzzle)}
+        }
+
+      }
+      \instruction{finUtilisation(g,posX,posY)}
+    }
+\end{algorithme}

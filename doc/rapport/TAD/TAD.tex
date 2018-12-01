@@ -1,6 +1,6 @@
 \begin{tad}
   \tadNom{Case}
-  \tadDependances{A..Z,\naturelNonNul,Bonus}
+  \tadDependances{A..Z,\naturelNonNul,Bonus,1..4}
   \begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
     \tadOperation{creerCase}{}{\tadUnParam{Case}}
     \tadOperation{fixerLettre}{\tadDeuxParams{Case}{A..Z}}{\tadUnParam{Case}}
@@ -9,6 +9,9 @@
     \tadOperation{obtenirLettre}{\tadUnParam{Case}}{\tadUnParam{A..Z}}
     \tadOperation{obtenirNbPoints}{\tadUnParam{Case}}{\tadUnParam{\naturelNonNul}}
     \tadOperation{obtenirBonus}{\tadUnParam{Case}}{\tadUnParam{Bonus}}
+    \tadOperation{obtenirPosX}{\tadUnParam{Case}}{\tadUnParam{1..4}}
+    \tadOperation{obtenirPosY}{\tadUnParam{Case}}{\tadUnParam{1..4}}
+    \tadOperation{fixerPosition}{\tadTroisParams{Case}{1..4}{1..4}}{\tadUnParam{Case}}
   \end{tadOperations}
   \begin{tadAxiomes}
     \tadAxiome{obtenirLettre(creerCase())='A'}
@@ -17,6 +20,8 @@
     \tadAxiome{obtenirLettre(fixerLettre(uneCase,uneLettre))=uneLettre}
     \tadAxiome{obtenirBonus(fixerBonus(uneCase,leBonus))=leBonus}
     \tadAxiome{obtenirNbPoints(fixerNbPoints(uneCase,nbPoints))=nbPoints}
+    \tadAxiome{obtenirPosX(fixerPosition(uneCase,x,y))=x}
+    \tadAxiome{obtenirPosY(fixerPosition(uneCase,x,y))=y}
   \end{tadAxiomes}
 \end{tad}
 \medskip
@@ -105,12 +110,9 @@
     \tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
     \tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
     \tadOperation{casesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
-    \tadOperation{obtenirPosition}{\tadDeuxParams{CasesContigues}{\naturel}}{\tadDeuxParams{\naturel}{\naturel}}
-    \tadOperation{fixerPosition}{\tadQuatreParams{CaseContigues}{\naturel}{\naturel}{\naturel}}{\tadUnParam{CasesContigues}}
   \end{tadOperations}
   \begin{tadPreconditions}{supprimerCase}
      \tadPrecondition{supprimerCase}{nbCasesContigues(suiteCases) $>$ 0}
-     \tadPrecondition{fixerPosition}{0$<$(indexCase, posX, posY : Naturel)$<$5}
   \end{tadPreconditions}
   \begin{tadAxiomes}
     \tadAxiome{supprimerCase(ajouterCase(suiteCases,uneCase))=uneCase}

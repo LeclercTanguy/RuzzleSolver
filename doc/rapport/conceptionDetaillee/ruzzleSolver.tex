@@ -1,0 +1,20 @@
+\begin{algorithme}
+  \procedure
+    {ruzzleSolver}
+    {\paramEntree{grilleRuzzle, nomFichierDico: \chaine}}
+    {g : Grille, dico: Dictionnaire, resultat: solutionRuzzle, initMot : Mot, initChemin : CasesContigues}
+    {
+      \affecter{g}{chaineEnGrille(grilleRuzzle)}
+      \affecter{dico}{charger(nomFichierDico)}
+      \affecter{resultat}{creer()}
+      \pour{y}{1}{4}{}{
+        \pour{x}{1}{4}{}{
+          \affecter{initMot}{chaineEnMot(dico,caractereEnChaine(obtenirLettre(obtenirCase(g,x,y))))}
+          \affecter{initChemin}{creerCasesContigues()}
+          \instruction{ajouterCase(initChemin,obtenirCase(g,x,y))}
+          \instruction{trouverMot(x,y,dico,g,initMot,initChemin,resultat)}
+        }
+      }
+      \instruction{afficherResultat(resultat)}
+    }
+\end{algorithme}
