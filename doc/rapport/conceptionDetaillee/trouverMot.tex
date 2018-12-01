@@ -1,7 +1,7 @@
 \begin{algorithme}
   \procedure
-    {trouverMot}
-    {\paramEntree{posX, posY: 1..4 ; dico: Dictionnaire} \paramEntreeSortie{g: Grille; prefixe: Mot; cheminRuzzle : CasesContigues, resultat: solutionRuzzle}}
+    {trouverMots}
+    {\paramEntree{posX, posY: 1..4 ; dico: Dictionnaire} \paramEntreeSortie{g: Grille; prefixe: Mot; cheminRuzzle : CasesContigues, resultat: SolutionRuzzle}}
     {lettresPossibles: Ensemble<A..Z>}
     {
       \instruction{debutUtilisation(g,posX,posY)}
@@ -13,7 +13,7 @@
           \sialors{estUnMot(prefixe)}{
             \instruction{insererMotResultat(resultat,cheminRuzzle)}
           }
-          \instruction{trouverMot(obtenirPosX(case),obtenirPosY(case),dico,g,prefixe,cheminRuzzle,resultat)}
+          \instruction{trouverMots(obtenirPosX(case),obtenirPosY(case),dico,g,prefixe,cheminRuzzle,resultat)}
           \instruction{retirerLettre(prefixe)}
           \instruction{supprimerCase(cheminRuzzle)}
         }

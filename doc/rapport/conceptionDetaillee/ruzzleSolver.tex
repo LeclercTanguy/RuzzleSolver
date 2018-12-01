@@ -2,7 +2,7 @@
   \procedure
     {ruzzleSolver}
     {\paramEntree{grilleRuzzle, nomFichierDico: \chaine}}
-    {g : Grille, dico: Dictionnaire, resultat: solutionRuzzle, initMot : Mot, initChemin : CasesContigues}
+    {g : Grille, dico: Dictionnaire, resultat: SolutionRuzzle, initMot : Mot, initChemin : CasesContigues}
     {
       \affecter{g}{chaineEnGrille(grilleRuzzle)}
       \affecter{dico}{charger(nomFichierDico)}
@@ -12,7 +12,7 @@
           \affecter{initMot}{chaineEnMot(dico,caractereEnChaine(obtenirLettre(obtenirCase(g,x,y))))}
           \affecter{initChemin}{creerCasesContigues()}
           \instruction{ajouterCase(initChemin,obtenirCase(g,x,y))}
-          \instruction{trouverMot(x,y,dico,g,initMot,initChemin,resultat)}
+          \instruction{trouverMots(x,y,dico,g,initMot,initChemin,resultat)}
         }
       }
       \instruction{afficherResultat(resultat)}

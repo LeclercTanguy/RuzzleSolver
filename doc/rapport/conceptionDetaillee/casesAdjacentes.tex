@@ -1,0 +1,22 @@
+\begin{algorithme}
+  \fonction
+    {casesAdjacentesNonUtilisees}
+    {posX, posY : 1..4 ; g : Grille}
+    {Ensemble<Case>}
+    {x, y, borneMinX, borneMaxX, borneMinY, borneMaxY : 1..4 ; casesAdjacentes : Ensemble<Case>}
+    {
+      \affecter{borneMinX}{max(1,posX-1)}
+      \affecter{borneMaxX}{min(4,posX+1)}
+      \affecter{borneMinY}{max(1,posY-1)}
+      \affecter{borneMaxY}{min(4,posY+1)}
+      \affecter{casesAdjacentes}{ensemble()}
+      \pour{y}{borneMinY}{borneMaxY}{}{
+        \pour{x}{borneMinX}{borneMaxX}{}{
+          \sialors{((x$\ne$posX) OU (y$\ne$posY)) ET non estUtilisee(g,x,y)}{
+            \instruction{ajouter(casesAdjacentes,obtenirCase(g,x,y))}
+          }
+        }
+      }
+      \retourner{casesAdjacentes}
+    }
+\end{algorithme}
