@@ -12,6 +12,8 @@
     \champStructure{lettre}{a..z}
     \champStructure{nbPoints}{NaturelNonNul}
     \champStructure{bonus}{Bonus}
+    \champStructure{posX}{1..4}
+    \champStructure{posY}{1..4}
   \end{structure}
 
   \fonction
@@ -49,7 +51,7 @@
   {\paramEntreeSortie{case : Case} \paramEntree{bonus : Bonus}}
   {}
   {
-    \affecter{c.bonus}{bonus}
+    \affecter{case.bonus}{bonus}
   }
 
   \fonction
@@ -77,4 +79,31 @@
   {}
   {
     \retourner{case.bonus}
+  }
+
+  \procedure
+  {fixerPosition}
+  {\paramEntreeSortie{case : Case} \paramEntree{posX,pasY : 1..4}}
+  {}
+  {
+    \affecter{case.posX}{posX}
+    \affecter{case.posY}{posY}
+  }
+
+  \fonction
+  {obtenirPosX}
+  {case :Case}
+  {1..4}
+  {}
+  {
+    \retourner{case.posX}
+  }
+
+  \fonction
+  {obtenirPosY}
+  {case :Case}
+  {1..4}
+  {}
+  {
+    \retourner{case.posY}
   }
