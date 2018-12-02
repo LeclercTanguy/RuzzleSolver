@@ -1,0 +1,80 @@
+
+%fonction
+%{1}{2}{3}{4}{5}
+%(1)Lenomdelafonction
+%(2)Lesparam`etres
+%(3)Letypederetour
+%(4)Lesvariableslocales
+%(5)Les instructions
+
+\begin{algorithme}
+  \begin{structure}{Case}
+    \champStructure{lettre}{a..z}
+    \champStructure{nbPoints}{NaturelNonNul}
+    \champStructure{bonus}{Bonus}
+  \end{structure}
+
+  \fonction
+  {creerCase}
+  {}
+  {Case}
+  {case : Case , car : a..z , bonus : CDC}
+  {
+    \affecter{car}{'a'}
+    \affecter{bonus}{'  '}
+    fixerLettre(case,car)
+    fixerBonus(case,bonus)
+    fixerNbPoints(c,1)
+    \retouner{case}
+  }
+
+  \procedure
+  {fixerLettre}
+  {\paramEntreeSortie{case : Case} \paramEntree{car : \caractere}}
+  {}
+  {
+    \affecter{c.lettre}{car}
+  }
+
+  \procedure
+  {fixerNbPoints}
+  {\paramEntreeSortie{case : Case} \paramEntree{point : \naturel}}
+  {}
+  {
+    \affecter{c.nbPoints}{point}
+  }
+
+  \procedure
+  {fixerBonus}
+  {\paramEntreeSortie{case : Case} \paramEntree{bonus : Bonus}}
+  {}
+  {
+    \affecter{c.bonus}{bonus}
+  }
+
+  \fonction
+  {obtenirLettre}
+  {case: Case}
+  {a..z}
+  {}
+  {
+    \retourner{case.lettre}
+  }
+
+  \fonction
+  {obtenirNbPoints}
+  {case: Case}
+  {NaturelNonNul}
+  {}
+  {
+    \retourner{case.nbPoints}
+  }
+
+  \fonction
+  {obtenirBonus}
+  {case: Case}
+  {Bonus}
+  {}
+  {
+    \retourner{case.bonus}
+  }
