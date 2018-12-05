@@ -5,7 +5,7 @@
 typedef struct Dictionnaire {*Arbre
     ;}
 
-
+Dictionnaire Dictionnaire();
 void ajouterMot(Dictionnaire , Mot);
 int estUnPrefixe(Dictionnaire,*char);
 int estUnMot(Dictionnaire,Mot);
