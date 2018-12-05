@@ -1,7 +1,7 @@
 \paragraph{CasesContigues}
 \begin{algorithme}
 	\signaturefonction{creerCasesContigues}{}{CasesContigues}
-	\signatureprocedure{ajouterCase}{\paramEntreeSortie{suiteCases : CasesContigues} \paramSortie{uneCase : Case}}
+	\signatureprocedure{ajouterCase}{\paramEntreeSortie{suiteCases : CasesContigues} \paramEntree{uneCase : Case}}
 	\signatureProcedureAvecPreconditions {supprimerCase}{\paramEntreeSortie{suiteCases : CasesContigues}}{nbCasesContigues(suiteCases) $>$ 0}
 	\signaturefonction{nbCasesContigues}{suiteCase : CasesContigues}{\naturel}
 	\signaturefonction{casesContiguesEnChaine}{suiteCases : CasesContigues}{\chaine}
