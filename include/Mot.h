@@ -1,23 +1,23 @@
-#ifndef __Mot__
-#define __Mot__
+#ifndef __MOT__
+#define __MOT__
 #include "Dictionnaire.h"
 
+typedef struct Mot_Lettre Mot_Lettre;
+struct Mot_Lettre{
+  char lettre;
+  Dictionnaire *refDico; //pointeur vers le nœud correspondant dans le dictionnaire
+  Mot_Lettre *lettrePrecedente; //pointeur vers la lettre prédédente dans la mot
+};
 
-typedef Lettre* ListeChaineeDeLettres;
-typedef struct Lettre {
-  char caractere;
-  ListeChaineeDeLettres lettreSuivante;
-} Lettre;
-
-typedef struct Mot {
-  ListeChaineeDeLettres lettres;
-  int longueur;
+typedef struct {
+  Mot_Lettre *lettres; //dernière lettre du mot
+  unsigned int longueur;
 } Mot;
 
+Mot chaineEnMot (Dictionnaire *dico, char *chaine);
+char motEnChaine (Mot leMot);
+unsigned int Mot_longueur (Mot leMot);
+void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire *dico);
+void Mot_retirerLettre(Mot *leMot);
 
-Mot chaineEnMot (Dictionnaire dico, *char chaine);
-char motEnChaine (Mot lemot);
-unsigned int longueur (Mot lemot);
-void ajouterLettre(Mot lemot, char lettre, Dictionnaire dico);
-void retirerLettre(Mot lemot)
 #endif
