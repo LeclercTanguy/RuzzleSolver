@@ -2,7 +2,8 @@
 #define _Dictionnaire_
 
 
-typedef Dictionnaire *Arbre;
+typedef struct Dictionnaire {*Arbre
+    ;}
 
 
 void ajouterMot(Dictionnaire , Mot);

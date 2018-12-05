@@ -8,7 +8,7 @@ typedef struct Grille {
 
 
 G_grille G_grille();
-Case G_obtenirCase(Grille,int,int);
+Case G_obtenirCase(Grille ,int,int);
 void G_FixerCase(Grille,int,int);
 int G_EstUtilise(Grille,int,int);
 void G_debutUtilisation(Grille,int,int);
