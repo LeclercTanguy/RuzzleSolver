@@ -1,6 +1,6 @@
 #ifndef _Dictionnaire_
 #define _Dictionnaire_
-
+#include "Mot.h"
 
 typedef Dictionnaire *Arbre;
 
