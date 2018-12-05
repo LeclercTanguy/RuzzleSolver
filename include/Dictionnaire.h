@@ -3,6 +3,8 @@
 
 
 typedef Dictionnaire *Arbre;
+
+
 void ajouterMot(Dictionnaire , Mot);
 int estUnPrefixe(Dictionnaire,*char);
 int estUnMot(Dictionnaire,Mot);
