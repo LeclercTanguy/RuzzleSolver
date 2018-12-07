@@ -5,7 +5,7 @@
 typedef struct Ensemble {
   ListeChainee lesElements;
   int nbElements;
-};
+}Ensemble;
 
 Ensemble ensemble(void);
 void ajouter(Ensemble,char);
