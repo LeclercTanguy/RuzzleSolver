@@ -3,17 +3,16 @@
 #include "ListeChainee.h"
 
 typedef struct Ensemble {
-  ListeChainee lesElements;
+  LC_ListeChainee lesElements;
   int nbElements;
 }Ensemble;
 
-Ensemble ensemble(void);
-void ajouter(Ensemble,char);
-void ajouter(Ensemble,char);
-int estPresent(Ensemble,char);
-int cardinalite(Ensemble);
-void union(Ensemble,Ensemble)
-void intersection(Ensemble,Ensemble);
-void soustraction(Ensemble,Ensemble);
+Ensemble Ens_ensemble(void);
+void Ens_ajouter(Ensemble,char);
+int Ens_estPresent(Ensemble,char);
+int Ens_cardinalite(Ensemble);
+void Ens_union(Ensemble,Ensemble);
+void Ens_intersection(Ensemble,Ensemble);
+void Ens_soustraction(Ensemble,Ensemble);
 
 #endif

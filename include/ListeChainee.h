@@ -1,5 +1,5 @@
-#ifndef _ListeChainee_
-#define _ListeChainee_
+#ifndef __LISTE_CHAINEE__
+#define __LISTE_CHAINEE__
 
 typedef struct LC_Noeud* LC_ListeChainee;
 typedef struct LC_Noeud {
