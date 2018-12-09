@@ -15,11 +15,11 @@ typedef ArbreBinaire Dictionnaire;
 #include "Mot.h"
 
 Dictionnaire DC_creerDictionnaire(char *fichierDictionnaire);
-void DC_ajouterMot(Dictionnaire* dico, char *leMot);
-void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer);
+void DC_ajouterMot(Dictionnaire dico, char *leMot);
+void DC_supprimerMot(Dictionnaire dico, Mot motASupprimer);
 int DC_estUnPrefixe(Dictionnaire dico, char *chaine);
 int DC_estUnMot(Dictionnaire dico, Mot prefixe);
-Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe); //Ensemble de Caractères, à définir
+Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe);
 void DC_sauvegarder(Dictionnaire dico, char *nomFichier);
-int DC_charger(char *nomFichier, Dictionnaire *dico);
+int DC_charger(char *nomFichier, Dictionnaire dico);
 #endif

@@ -10,10 +10,15 @@ struct Noeud{
 };
 
 ArbreBinaire AB_arbreBinaire();
-int AB_estVide(ArbreBinaire);
-ArbreBinaire AB_ajouterRacine(ArbreBinaire,ArbreBinaire,char);
-char AB_obtenirElement(ArbreBinaire);
-ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire);
-ArbreBinaire AB_obtenirFilsDroit(ArbreBinaire);
+int AB_estVide(ArbreBinaire a);
+ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element);
+char AB_obtenirElement(ArbreBinaire a);
+ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a);
+ArbreBinaire AB_obtenirFilsDroit(ArbreBinaire a);
+void AB_fixerFilsGauche(ArbreBinaire a, ArbreBinaire ag);
+void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad);
+void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire fg, ArbreBinaire fd);
+void AB_supprimer(ArbreBinaire a);
+
 
 #endif
