@@ -1,18 +1,24 @@
-#ifndef _ArbreB_
-#define _ArbreB_
+#ifndef __ARBRE_B__
+#define __ARBRE_B__
 
-typedef ArbreB *Noeud
-typedef struct Noeud{
-  char IELement;
+typedef struct Noeud Noeud;
+typedef Noeud* ArbreBinaire;
+struct Noeud{
+  char lELement;
   ArbreBinaire filsGauche;
   ArbreBinaire filsDroit;
 };
 
-ArbreBinaire arbreBinaire(void);
-int estVide(ArbreBinaire);
-ArbreBinaire ajouterRacine(ArbreBinaire,ArbreBinaire,char);
-char obtenirElement(ArbreBinaire);
-ArbreBinaire obtenirFilsGauche(ArbreBinaire);
-ArbreBinaire obtenirFilsDroit(ArbreBinaire);
+ArbreBinaire AB_arbreBinaire();
+int AB_estVide(ArbreBinaire a);
+ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element);
+char AB_obtenirElement(ArbreBinaire a);
+ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a);
+ArbreBinaire AB_obtenirFilsDroit(ArbreBinaire a);
+void AB_fixerFilsGauche(ArbreBinaire a, ArbreBinaire ag);
+void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad);
+void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire fg, ArbreBinaire fd);
+void AB_supprimer(ArbreBinaire a);
+
 
 #endif
