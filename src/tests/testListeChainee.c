@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include<CUnit/Basic.h>
-#include <testListeChainee.h>
-#include <ListeChainee.h>
+#include <CUnit/Basic.h>
+#include "ListeChainee.h"
 #define TRUE 1
 #define FALSE 0
 
