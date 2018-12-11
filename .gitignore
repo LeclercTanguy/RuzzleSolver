@@ -1,3 +1,6 @@
+*
+!*/
+!*.*
 .DS_Store
 *.o
 *.pdf
@@ -6,3 +9,4 @@
 *.toc
 *.aux
 *.gch
+*.exe
