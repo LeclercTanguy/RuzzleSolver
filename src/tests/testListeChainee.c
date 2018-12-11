@@ -1,10 +1,6 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <CUnit/Basic.h>
 #include "ListeChainee.h"
-#define TRUE 1
-#define FALSE 0
 
 void test_ListeChainee(void){
   LC_ListeChainee lc = LC_listeVide();
@@ -12,36 +8,31 @@ void test_ListeChainee(void){
 }
 
 void test_LC_ajouter(void){
-  LC_ListeChainee lc = LC_listeVide();
+  LC_ListeChainee lc = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
   char lettre ='a';
-  LC_ajouter(lc,lettre);
-  lc=(LC_ListeChainee)malloc(sizeof(LC_ListeChainee));
-  printf("%c",LC_obtenirElement(lc));
-  CU_ASSERT_TRUE(!LC_estVide(lc));
-  free(lc);
+  LC_ajouter(&lc,lettre);
+  CU_ASSERT_TRUE((LC_obtenirElement(lc)==lettre) && (!LC_estVide(LC_obtenirListeSuivante(lc))));
+  LC_supprimer(&lc);
 }
 
 void test_LC_obtenir(void){
-  LC_ListeChainee lc = LC_listeVide();
+  LC_ListeChainee lc = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
   LC_ListeChainee temp;
   char lettre ='a';
-  temp=(LC_ListeChainee)malloc(sizeof(LC_ListeChainee));
   temp = lc;
-  lc=(LC_ListeChainee)malloc(sizeof(LC_ListeChainee));
-  LC_ajouter(lc,lettre);
+  LC_ajouter(&lc,lettre);
   CU_ASSERT_TRUE((LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
-  free(lc);
+  LC_supprimer(&lc);
 }
 
 void test_LC_fixer(void){
-  LC_ListeChainee lc = LC_listeVide();
-  LC_ListeChainee temp;
-  temp=(LC_ListeChainee)malloc(sizeof(LC_ListeChainee));
-  lc = (LC_ListeChainee)malloc(sizeof(LC_ListeChainee));
+  LC_ListeChainee lc = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+  LC_ListeChainee temp = LC_listeVide();
   char lettre ='a';
   LC_fixerElement(lc,lettre);
   LC_fixerListeSuivante(lc,temp);
   CU_ASSERT_TRUE((LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
+  LC_supprimer(&lc);
 }
 
 int main(int argc, char** argv){
@@ -60,8 +51,8 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "créer une liste Vide", test_ListeChainee))
-      || (NULL == CU_add_test(pSuite, "ajouter un élément à la Liste Chainée", test_LC_ajouter))
+  if ((NULL == CU_add_test(pSuite, "créer une liste vide", test_ListeChainee))
+      || (NULL == CU_add_test(pSuite, "ajouter un élément à la Liste Chaînée", test_LC_ajouter))
       || (NULL == CU_add_test(pSuite, "obtenir élément et liste suivante", test_LC_obtenir))
       || (NULL == CU_add_test(pSuite,"fixer élément et liste suivante", test_LC_fixer))
       )
