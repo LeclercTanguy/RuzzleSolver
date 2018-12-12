@@ -19,16 +19,33 @@ ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
 }
 
 char AB_obtenirElement(ArbreBinaire a){
-    char element ;
-    element = a->lELement;
-    return element;
+    assert (!AB_estVide(a));
+    return a->element;
 
 }
 
 ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a){
+    assert (!AB_estVide(a));
     return a->filsGauche;
 }
 
 ArbreBinaire AB_obtenirFilsDroit(ArbreBinaire a){
+    assert (!AB_estVide(a));
     return a->filsDroit;
+}
+
+void AB_fixerFilsGauche(ArbreBinaire a, ArbreBinaire ag){
+    assert (!AB_estVide(a));
+    a->filsGauche=ag;
+}
+
+void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad){
+    assert (!AB_estVide(a));
+    a->filsGauche=ad;
+}
+
+void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire *fg, ArbreBinaire *fd){
+    assert (!AB_estVide(a));
+    
+
 }
