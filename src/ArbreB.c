@@ -1,17 +1,18 @@
+#include <stdlib.h>
 #include "ArbreB.h"
 
 ArbreBinaire AB_arbreBinaire(){
-    return *Noeud;
+    return NULL;
 }
 
 int AB_estVide(ArbreBinaire a){
-    return a==Null;
+    return a==NULL;
 }
 
 
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
     ArbreBinaire a;
-    a = (ArbreBinaire)malloc(sizeof(ArbreBinaire));
+    a = (ArbreBinaire)malloc(sizeof(AB_Noeud));
     a->lELement = element;
     a->filsGauche = fg;
     a->filsDroit = fd;
