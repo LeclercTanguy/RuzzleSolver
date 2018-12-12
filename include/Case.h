@@ -13,10 +13,10 @@ typedef struct Case {
 
 Case CASE_creerCase(void);
 void CASE_fixerLettre(Case*,char uneLettre);
-void CASE_fixerNbPoints(Case*,unsigned short points);
+void CASE_fixerNBPoints(Case*,unsigned short points);
 void CASE_fixerBonus(Case*,Bonus);
 char CASE_obtenirLettre(Case);
-unsigned short CASE_obtenirNbPoints(Case);
+unsigned short CASE_obtenirNBPoints(Case);
 Bonus CASE_obtenirBonus(Case);
 void CASE_fixerPosition(Case*,unsigned short positionX,unsigned short positionY);
 unsigned short CASE_obtenirPositionX(Case);

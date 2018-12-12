@@ -4,6 +4,7 @@
 
 void test_CASE_creerCase(void){
 
+  //CU_ASSERT_TRUE();
 }
 
 void test_CASE_fixerLettre(void){
@@ -32,7 +33,7 @@ void test_CASE_fixerPosition(void){
   unsigned short positionX = 2;
   unsigned short positionY = 3;
   CASE_fixerPosition(&uneCase, positionX, positionY);
-  CU_ASSERT_TRUE((CASE_obtenirPositionX(uneCase)==positionX)&&(CASE_obtenirPositionY(uneCase)==positionY);
+  CU_ASSERT_TRUE((CASE_obtenirPositionX(uneCase)==positionX)&&(CASE_obtenirPositionY(uneCase)==positionY));
 }
 
 int main(int argc, char** argv){
@@ -51,7 +52,7 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "créer case", test_CASE_creerCase))
+  if ((NULL == CU_add_test(pSuite, "creer case", test_CASE_creerCase))
       || (NULL == CU_add_test(pSuite, "fixer lettre", test_CASE_fixerLettre))
       || (NULL == CU_add_test(pSuite, "fixer nb de points", test_CASE_fixerNBPoints))
       || (NULL == CU_add_test(pSuite,"fixer bonus", test_CASE_fixerBonus))
