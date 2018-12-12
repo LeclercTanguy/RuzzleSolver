@@ -8,6 +8,10 @@ LC_ListeChainee LC_listeVide(void){
   return NULL;
 }
 
+LC_ListeChainee LC_allouer(void) {
+  return (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+}
+
 int LC_estVide(LC_ListeChainee lc){
     return lc==NULL;
 }
@@ -23,7 +27,7 @@ int LC_estPresent(LC_ListeChainee lc,char lettre){
   if (LC_estVide(lc)){
     return FALSE;
   }else{
-    if (LC_obtenirElement(lc)= lettre){
+    if (LC_obtenirElement(lc)==lettre){
       return TRUE;
     }else{
       return LC_estPresent(LC_obtenirListeSuivante(lc),lettre);

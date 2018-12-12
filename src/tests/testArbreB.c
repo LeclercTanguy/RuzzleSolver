@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <Cunit/Basic.h>
-#include "Arbreb.h"
+#include <CUnit/Basic.h>
+#include "ArbreB.h"
 
 void test_ArbreBinaire(void){
     ArbreBinaire a=AB_arbreBinaire();
@@ -9,7 +9,7 @@ void test_ArbreBinaire(void){
 
 void test_AB_ajouterRacine(void){
     ArbreBinaire a ,fd=AB_arbreBinaire(),fg=AB_arbreBinaire();
-
+    char element = 'A';
     a = AB_ajouterRacine(fg,fd,element);
     CU_ASSERT_TRUE((AB_obtenirElement(a)==element) && (AB_obtenirFilsDroit(a)==fd) && (AB_obtenirFilsGauche(a)==fg));
 

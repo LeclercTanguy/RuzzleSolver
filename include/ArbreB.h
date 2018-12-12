@@ -1,13 +1,12 @@
 #ifndef __ARBRE_B__
 #define __ARBRE_B__
 
-typedef struct Noeud Noeud;
-typedef Noeud* ArbreBinaire;
-struct Noeud{
+typedef struct AB_Noeud* ArbreBinaire;
+typedef struct AB_Noeud{
   char lELement;
   ArbreBinaire filsGauche;
   ArbreBinaire filsDroit;
-};
+} AB_Noeud;
 
 ArbreBinaire AB_arbreBinaire();
 int AB_estVide(ArbreBinaire a);
