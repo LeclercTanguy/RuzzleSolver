@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "ListeChainee.h"
+#define TRUE 1
+#define FALSE 0
 
 LC_ListeChainee LC_listeVide(void){
   return NULL;
@@ -15,6 +17,18 @@ void LC_ajouter(LC_ListeChainee* lc,char lettre){
   LC_fixerElement(temp,lettre);
   LC_fixerListeSuivante(temp,*lc);
   *lc = temp;
+}
+
+int LC_estPresent(LC_ListeChainee lc,char lettre){
+  if (LC_estVide(lc)){
+    return FALSE;
+  }else{
+    if (LC_obtenirElement(lc)= lettre){
+      return TRUE;
+    }else{
+      return LC_estPresent(LC_obtenirListeSuivante(lc),lettre);
+    }
+  }
 }
 
 char LC_obtenirElement(LC_ListeChainee lc){
