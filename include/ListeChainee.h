@@ -8,6 +8,7 @@ typedef struct LC_Noeud {
 }LC_Noeud;
 
 LC_ListeChainee LC_listeVide(void);
+LC_ListeChainee LC_allouer(void);
 int LC_estVide(LC_ListeChainee);
 int LC_estPresent(LC_ListeChainee,char);
 void LC_ajouter(LC_ListeChainee*,char);

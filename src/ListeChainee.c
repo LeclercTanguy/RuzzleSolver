@@ -8,6 +8,10 @@ LC_ListeChainee LC_listeVide(void){
   return NULL;
 }
 
+LC_ListeChainee LC_allouer(void) {
+  return (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+}
+
 int LC_estVide(LC_ListeChainee lc){
     return lc==NULL;
 }
