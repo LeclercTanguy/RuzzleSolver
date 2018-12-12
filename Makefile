@@ -10,10 +10,16 @@ CFLAGS=-Wall -pedantic -g -std=gnu99  -I$(INCLUDEDIR)
 LDFLAGS=-L$(LIBDIR)
 EXEC=ruzzleSolver
 
-tests: $(SRCTESTS)/testListeChainee.o $(LIBDIR)/libListeChainee.a
-	$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lListeChainee -lcunit
+tests:
+	$(SRCTESTS)/testListeChainee.o $(LIBDIR)/libListeChainee.a
+		$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lListeChainee -lcunit
+	$(SRCTESTS)/testArbreB.o $(LIBDIR)/libArbreB.a
+		$(CC) -o $(TESTDIR)/testArbreB $^ $(LDFLAGS) -lArbreB -lcunit
 
 $(LIBDIR)/libListeChainee.a : $(SRCDIR)/ListeChainee.o
+	$(AR) -r $@ $^
+
+$(LIBDIR)/libArbreB.a : $(SRCDIR)/ArbreB.o
 	$(AR) -r $@ $^
 
 $(SRCDIR)/%.o : $(SRCDIR)/%.c
