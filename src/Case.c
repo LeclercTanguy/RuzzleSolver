@@ -4,6 +4,8 @@
 
 Case CASE_creerCase() {
   Case uneCase;
+  CASE_fixerLettre(&uneCase, 'A');
+  CASE_fixerBonus(&uneCase,AB);
   return uneCase;
 }
 
@@ -11,7 +13,7 @@ void CASE_fixerLettre(Case* uneCase, char uneLettre){
   (*uneCase).lettre=uneLettre;
 }
 
-void CASE_fixerNBPoints(Case* uneCase, int points){
+void CASE_fixerNBPoints(Case* uneCase, unsigned short points){
   (*uneCase).nbPoints=points;
 }
 
@@ -19,7 +21,7 @@ void CASE_fixerBonus(Case* uneCase, Bonus unBonus){
   (*uneCase).bonus=unBonus;
 }
 
-void CASE_fixerPosition(Case* uneCase, int positionX, int positionY){
+void CASE_fixerPosition(Case* uneCase, unsigned short positionX, unsigned short positionY){
   (*uneCase).posX=positionX;
   (*uneCase).posY=positionY;
 }
@@ -29,8 +31,8 @@ char CASE_obtenirLettre(Case uneCase){
   return laLettre;
 }
 
-int CASE_obtenirNBPoints(Case uneCase){
-  int leNBPoints = uneCase.nbPoints;
+unsigned short CASE_obtenirNBPoints(Case uneCase){
+  unsigned short leNBPoints = uneCase.nbPoints;
   return leNBPoints;
 }
 
@@ -39,4 +41,12 @@ Bonus CASE_obtenirBonus(Case uneCase){
   return leBonus;
 }
 
-//Reste obtenir position 
+unsigned short CASE_obtenirPositionX(Case uneCase){
+  unsigned short positionX = uneCase.posX;
+  return positionX;
+}
+
+unsigned short CASE_obtenirPositionY(Case uneCase){
+  unsigned short positionY = uneCase.posY;
+  return positionY;
+}
