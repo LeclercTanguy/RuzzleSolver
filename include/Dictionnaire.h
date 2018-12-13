@@ -14,8 +14,9 @@ typedef ArbreBinaire Dictionnaire;
 
 #include "Mot.h"
 
-Dictionnaire DC_creerDictionnaire(char *fichierDictionnaire);
-void DC_ajouterMot(Dictionnaire dico, char *leMot);
+Dictionnaire DC_creerDictionnaire(void);
+int DC_estVide(Dictionnaire dico);
+void DC_ajouterMot(Dictionnaire* dico, char *leMot);
 void DC_supprimerMot(Dictionnaire dico, Mot motASupprimer);
 int DC_estUnPrefixe(Dictionnaire dico, char *chaine);
 int DC_estUnMot(Dictionnaire dico, Mot prefixe);

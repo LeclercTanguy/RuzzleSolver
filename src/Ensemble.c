@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <Ensemble.h>
-#include <ListeChainee.h>
+#include "Ensemble.h"
+#include "ListeChainee.h"
 #define TRUE 1
 #define FALSE 0
 
@@ -17,7 +17,7 @@ LC_ListeChainee Ens_obtenirLesElements(Ensemble ens){
 }
 
 int Ens_obtenirNbElements(Ensemble ens){
-  return ens.nbElements
+  return ens.nbElements;
 }
 
 

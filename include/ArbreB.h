@@ -3,7 +3,7 @@
 
 typedef struct AB_Noeud* ArbreBinaire;
 typedef struct AB_Noeud{
-  char lELement;
+  char lElement;
   ArbreBinaire filsGauche;
   ArbreBinaire filsDroit;
 } AB_Noeud;

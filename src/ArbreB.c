@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <assert.h>
 #include "ArbreB.h"
 
 ArbreBinaire AB_arbreBinaire(){
@@ -13,7 +14,7 @@ int AB_estVide(ArbreBinaire a){
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
     ArbreBinaire a;
     a = (ArbreBinaire)malloc(sizeof(AB_Noeud));
-    a->lELement = element;
+    a->lElement = element;
     a->filsGauche = fg;
     a->filsDroit = fd;
     return a;
@@ -21,7 +22,7 @@ ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
 
 char AB_obtenirElement(ArbreBinaire a){
     assert (!AB_estVide(a));
-    return a->element;
+    return a->lElement;
 
 }
 
@@ -47,6 +48,6 @@ void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad){
 
 void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire *fg, ArbreBinaire *fd){
     assert (!AB_estVide(a));
-    
+
 
 }
