@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "ArbreB.h"
 #include "Ensemble.h"
 #include "Dictionnaire.h"
@@ -14,7 +15,7 @@ int DC_estVide(Dictionnaire dico) {
   return AB_estVide(dico);
 }
 
-void DC_ajouterMot(Dictionnaire* dico, char* leMot) {
+void DC_ajouterMot_R(Dictionnaire* dico, char* leMot, int* finDuMot) {
   Dictionnaire temp;
   if (DC_estVide(*dico)) {
     //aucun nœud frère ni fils
@@ -22,19 +23,27 @@ void DC_ajouterMot(Dictionnaire* dico, char* leMot) {
   } else if (AB_obtenirElement(*dico)-leMot[0]<0) {
     //la lettre à insérer est plus grande, on passe au frère suivant
     temp = AB_obtenirFilsDroit(*dico);
-    DC_ajouterMot(&temp,leMot);
+    DC_ajouterMot_R(&temp,leMot,finDuMot);
     AB_fixerFilsDroit(*dico,temp);
   } else if (AB_obtenirElement(*dico)-leMot[0]>0) {
     //la lettre à insérer est plus petite, on insère le nœud avant le frère suivant
     *dico = AB_ajouterRacine(AB_arbreBinaire(),*dico,leMot[0]);
   }
   //si le nœud est déjà présent : rien à faire
-  if (leMot[0]!='\0') {
+
+  *finDuMot = *finDuMot || (leMot[0]=='\0');
+  //pour ne pas recommencer à descendre quand on remonte les appels récursifs
+  if (!(*finDuMot)) {
     //si on n'est pas à la fin du mot, on continue
     temp = AB_obtenirFilsGauche(*dico);
-    DC_ajouterMot(&temp,leMot+1);
+    DC_ajouterMot_R(&temp,leMot+1,finDuMot);
     AB_fixerFilsGauche(*dico,temp);
   }
+}
+
+void DC_ajouterMot(Dictionnaire* dico, char* leMot) {
+  int finDuMot = FALSE;
+  DC_ajouterMot_R(dico,leMot,&finDuMot);
 }
 
 void DC_supprimerMot(Dictionnaire dico, Mot motASupprimer) {
@@ -77,7 +86,7 @@ void DC_sauvegarder_R(Dictionnaire dico, FILE* data) {
     DC_sauvegarder_R(AB_obtenirFilsDroit(dico),data);
   } else {
     //si vide -> espace
-    fputc(' ',data);
+    fputc('\n',data);
   }
 }
 

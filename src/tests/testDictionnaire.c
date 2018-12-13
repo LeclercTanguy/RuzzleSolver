@@ -8,23 +8,21 @@ void test_DC_creerDictionnaire() {
 
 void test_DC_ajoutMot() {
   Dictionnaire dico = DC_creerDictionnaire();
-  DC_ajouterMot (&dico,"TEST");
   DC_ajouterMot (&dico,"DICO");
+  DC_ajouterMot (&dico,"TESTER");
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"TEST"));
-  CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"TES"));
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"DICO"));
-  CU_ASSERT_FALSE(DC_estUnPrefixe(dico,"TESTER"));
+  CU_ASSERT_FALSE(DC_estUnPrefixe(dico,"TESTEUR"));
 }
 
-void test_DC_auvegarder() {
+void test_DC_sauvegarder() {
   Dictionnaire dico = DC_creerDictionnaire();
   int err;
   DC_ajouterMot (&dico,"LA");
   DC_ajouterMot (&dico,"SAUVEGARDE");
   DC_ajouterMot (&dico,"FONCTIONNE");
-  DC_ajouterMot (&dico,"OU");
+  DC_ajouterMot (&dico,"ET");
   DC_ajouterMot (&dico,"FONCTIONNERA");
-  DC_ajouterMot (&dico,"BIENTOT");
   err = DC_sauvegarder(dico,"tests/dico.txt");
   CU_ASSERT_FALSE(err);
 }
@@ -48,7 +46,7 @@ int main(int argc, char** argv){
   if (
     (NULL == CU_add_test(pSuite, "dictionnaire vide", test_DC_creerDictionnaire)) ||
     (NULL == CU_add_test(pSuite, "ajout d'un mot", test_DC_ajoutMot)) ||
-    (NULL == CU_add_test(pSuite, "sauvegarde sans erreur", test_DC_auvegarder))
+    (NULL == CU_add_test(pSuite, "sauvegarde sans erreur", test_DC_sauvegarder))
       )
     {
       CU_cleanup_registry();

@@ -43,7 +43,7 @@ void AB_fixerFilsGauche(ArbreBinaire a, ArbreBinaire ag){
 
 void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad){
     assert (!AB_estVide(a));
-    a->filsGauche=ad;
+    a->filsDroit=ad;
 }
 
 void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire *fg, ArbreBinaire *fd){
