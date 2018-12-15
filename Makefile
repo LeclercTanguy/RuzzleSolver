@@ -10,6 +10,9 @@ CFLAGS=-Wall -pedantic -g -std=gnu99  -I$(INCLUDEDIR)
 LDFLAGS=-L$(LIBDIR)
 EXEC=ruzzleSolver
 
+all : $(SRCDIR)/transcoder.o $(LIBDIR)/libDictionnaire.a
+	$(CC) -o $(BINDIR)/transcoder $^ $(LDFLAGS) -lDictionnaire -lArbreB -lEnsemble -lListeChainee
+
 tests: testLC testAB testC
 
 testLC: $(SRCTESTS)/testListeChainee.o $(LIBDIR)/libListeChainee.a
@@ -20,8 +23,11 @@ testC: $(SRCTESTS)/testCase.o $(LIBDIR)/libCase.a
 		$(CC) -o $(TESTDIR)/testCase $^ $(LDFLAGS) -lCase -lcunit
 testE: $(SRCTESTS)/testEnsemble.o $(LIBDIR)/libEnsemble.a $(LIBDIR)/libListeChainee.a
 		$(CC) -o $(TESTDIR)/testEnsemble $^ $(LDFLAGS) -lEnsemble -lListeChainee -lcunit
-testD: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreB.a $(LIBDIR)/libListeChainee.a
-		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lArbreB -lEnsemble -lListeChainee -lcunit
+testD: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreB.a $(LIBDIR)/libListeChainee.a $(LIBDIR)/libComparer.a
+		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lArbreB -lEnsemble -lComparer -lListeChainee -lcunit
+
+$(LIBDIR)/libComparer.a : $(SRCDIR)/comparer.o
+	$(AR) -r $@ $^
 
 $(LIBDIR)/libListeChainee.a : $(SRCDIR)/ListeChainee.o
 	$(AR) -r $@ $^

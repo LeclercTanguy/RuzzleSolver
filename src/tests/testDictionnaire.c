@@ -1,4 +1,5 @@
 #include <CUnit/Basic.h>
+#include <comparer.h>
 #include "Dictionnaire.h"
 
 void test_DC_creerDictionnaire() {
@@ -23,8 +24,17 @@ void test_DC_sauvegarder() {
   DC_ajouterMot (&dico,"FONCTIONNE");
   DC_ajouterMot (&dico,"ET");
   DC_ajouterMot (&dico,"FONCTIONNERA");
-  err = DC_sauvegarder(dico,"tests/dico.txt");
+  err = DC_sauvegarder(dico,"tests/dico.dat");
   CU_ASSERT_FALSE(err);
+}
+
+void test_DC_charger() {
+  Dictionnaire dico;
+  int errCharger = DC_charger("tests/dico.dat",&dico);
+  int errSauvegarder = DC_sauvegarder(dico,"tests/dico2.dat");
+  CU_ASSERT_FALSE(errCharger);
+  CU_ASSERT_FALSE(errSauvegarder);
+  CU_ASSERT_TRUE(comparer2Fichiers("tests/dico.dat","tests/dico2.dat"));
 }
 
 int main(int argc, char** argv){
@@ -46,7 +56,8 @@ int main(int argc, char** argv){
   if (
     (NULL == CU_add_test(pSuite, "dictionnaire vide", test_DC_creerDictionnaire)) ||
     (NULL == CU_add_test(pSuite, "ajout d'un mot", test_DC_ajoutMot)) ||
-    (NULL == CU_add_test(pSuite, "sauvegarde sans erreur", test_DC_sauvegarder))
+    (NULL == CU_add_test(pSuite, "sauvegarde sans erreur", test_DC_sauvegarder)) ||
+    (NULL == CU_add_test(pSuite, "chargement",test_DC_charger))
       )
     {
       CU_cleanup_registry();

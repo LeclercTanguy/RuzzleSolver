@@ -101,6 +101,35 @@ int DC_sauvegarder(Dictionnaire dico, char* nomFichier) {
   }
 }
 
-int DC_charger(char *nomFichier, Dictionnaire dico) {
-  return 0;
+void DC_charger_R(Dictionnaire* dico, FILE* data) {
+  char c = fgetc(data);
+  if (c!=EOF) {
+    if (c!='\n') {
+      *dico = AB_ajouterRacine(DC_creerDictionnaire(),DC_creerDictionnaire(),c);
+        Dictionnaire* temp = (Dictionnaire*)AB_allouer();
+        DC_charger_R(temp,data);
+        if (!DC_estVide(*temp)) { //il y a un fils gauche
+          AB_fixerFilsGauche(*dico,*temp);
+        } else {
+          DC_charger_R(temp,data);
+          if (!DC_estVide(*temp)) { //il y a un fils droit
+            AB_fixerFilsDroit(*dico,*temp);
+          }
+        }
+    } else { //fin de branche
+      *dico = DC_creerDictionnaire();
+    }
+  }
+}
+
+int DC_charger(char *nomFichier, Dictionnaire* dico) {
+  FILE* data = fopen (nomFichier,"r");
+  if (data!=NULL) {
+    *dico = DC_creerDictionnaire();
+    DC_charger_R(dico,data);
+    return fclose(data);
+  } else {
+    return 1;
+    printf("Impossible d'ouvrir le fichier %s",nomFichier);
+  }
 }

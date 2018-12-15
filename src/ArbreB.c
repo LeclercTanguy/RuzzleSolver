@@ -10,6 +10,9 @@ int AB_estVide(ArbreBinaire a){
     return a==NULL;
 }
 
+ArbreBinaire AB_allouer(void) {
+  return (ArbreBinaire)malloc(sizeof(AB_Noeud));
+}
 
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
     ArbreBinaire a;

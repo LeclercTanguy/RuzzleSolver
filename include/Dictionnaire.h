@@ -22,5 +22,5 @@ int DC_estUnPrefixe(Dictionnaire dico, char *chaine);
 int DC_estUnMot(Dictionnaire dico, Mot prefixe);
 Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe);
 int DC_sauvegarder(Dictionnaire dico, char *nomFichier);
-int DC_charger(char *nomFichier, Dictionnaire dico);
+int DC_charger(char *nomFichier, Dictionnaire* dico);
 #endif
