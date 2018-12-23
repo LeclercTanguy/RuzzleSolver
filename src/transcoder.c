@@ -4,7 +4,7 @@
 #define LONGUEUR_MAX_MOT 30
 
 int main(int argc, char* argv[]) {
-  if (argc<=3) {
+  if (argc==3) {
     char* source = argv[1];
     char* destination = argv[2];
     FILE* listeMots = fopen (source,"r");

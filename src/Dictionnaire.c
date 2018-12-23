@@ -11,6 +11,10 @@ Dictionnaire DC_creerDictionnaire(void) {
   return AB_arbreBinaire();
 }
 
+Dictionnaire* DC_allouer(void) {
+  return (Dictionnaire*)AB_allouer();
+}
+
 int DC_estVide(Dictionnaire dico) {
   return AB_estVide(dico);
 }
@@ -73,7 +77,10 @@ int DC_estUnMot(Dictionnaire dico, Mot prefixe) {
 }
 
 Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe) {
-  return Ens_ensemble();
+  Ensemble lettresSuivantes = Ens_ensemble();
+  //Dictionnaire temp = AB_obtenirFilsGauche(prefixe)
+  //AB_obtenirElement(AB_obtenirFilsGauche)
+  return lettresSuivantes;
 }
 
 void DC_sauvegarder_R(Dictionnaire dico, FILE* data) {
@@ -85,7 +92,7 @@ void DC_sauvegarder_R(Dictionnaire dico, FILE* data) {
     //écrire fils droit
     DC_sauvegarder_R(AB_obtenirFilsDroit(dico),data);
   } else {
-    //si vide -> espace
+    //si vide -> \n (on peut donc stocker des mots avec des espaces)
     fputc('\n',data);
   }
 }
@@ -103,20 +110,18 @@ int DC_sauvegarder(Dictionnaire dico, char* nomFichier) {
 
 void DC_charger_R(Dictionnaire* dico, FILE* data) {
   char c = fgetc(data);
-  if (c!=EOF) {
-    if (c!='\n') {
+  if (c!=EOF) { //tant que l'on est pas à la fin
+    if (c!='\n') { //arbre non vide
       *dico = AB_ajouterRacine(DC_creerDictionnaire(),DC_creerDictionnaire(),c);
-        Dictionnaire* temp = (Dictionnaire*)AB_allouer();
-        DC_charger_R(temp,data);
-        if (!DC_estVide(*temp)) { //il y a un fils gauche
-          AB_fixerFilsGauche(*dico,*temp);
-        } else {
-          DC_charger_R(temp,data);
-          if (!DC_estVide(*temp)) { //il y a un fils droit
-            AB_fixerFilsDroit(*dico,*temp);
-          }
-        }
-    } else { //fin de branche
+      //fils gauche
+      Dictionnaire* arbreGauche = DC_allouer();
+      DC_charger_R(arbreGauche,data);
+      AB_fixerFilsGauche(*dico,*arbreGauche);
+      //fils droit
+      Dictionnaire* arbreDroit = DC_allouer();
+      DC_charger_R(arbreDroit,data);
+      AB_fixerFilsDroit(*dico,*arbreDroit);
+    } else { //arbre vide
       *dico = DC_creerDictionnaire();
     }
   }
