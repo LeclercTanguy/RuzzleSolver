@@ -72,14 +72,37 @@ int DC_estUnPrefixe(Dictionnaire dico, char *chaine) {
   }
 }
 
+Dictionnaire DC_obtenirReferenceLettre_R(Dictionnaire dico, char lettre) {
+  if (!DC_estVide(dico)) {
+    if (AB_obtenirElement(dico)==lettre) {
+      //on a trouvé la bonne lettre
+      return dico;
+    } else if (AB_obtenirElement(dico)-lettre<0) {
+      //le caractère est plus grand, on essaye le frère suivant
+      return DC_obtenirReferenceLettre(AB_obtenirFilsDroit(dico),lettre);
+    } else {
+      return NULL;  //la lettre n'est pas dans le dictionnaire
+    }
+  } else {
+    return NULL; //la lettre n'est pas dans le dictionnaire (pas de fils droit)
+  }
+}
+
+Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre) {
+  assert(!DC_estVide(refPrecedente));
+  //la référence pointe vers un dictionnaire vide, on ne peut pas continuer
+  Dictionnaire dico = AB_obtenirFilsGauche(refPrecedente);
+  return DC_obtenirReferenceLettre_R(dico,lettre);
+}
+
 int DC_estUnMot(Dictionnaire dico, Mot prefixe) {
   return 0; //AB_obtenirElement(AB_obtenirFilsGauche(prefixe->lettres->refDico))=='\0';
 }
 
 Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe) {
   Ensemble lettresSuivantes = Ens_ensemble();
-  //Dictionnaire temp = AB_obtenirFilsGauche(prefixe)
-  //AB_obtenirElement(AB_obtenirFilsGauche)
+  //Dictionnaire temp = AB_obtenirFilsGauche(prefixe);
+  //AB_obtenirElement(AB_obtenirFilsGauche);
   return lettresSuivantes;
 }
 
