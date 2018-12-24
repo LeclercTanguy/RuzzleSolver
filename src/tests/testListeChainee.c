@@ -8,7 +8,7 @@ void test_ListeChainee(void){
 }
 
 void test_LC_ajouter(void){
-  LC_ListeChainee lc = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+  LC_ListeChainee lc = LC_allouer();
   char lettre ='a';
   LC_ajouter(&lc,lettre);
   CU_ASSERT_TRUE((LC_obtenirElement(lc)==lettre) && (!LC_estVide(LC_obtenirListeSuivante(lc))));
@@ -16,7 +16,7 @@ void test_LC_ajouter(void){
 }
 
 void test_LC_obtenir(void){
-  LC_ListeChainee lc = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+  LC_ListeChainee lc = LC_allouer();
   LC_ListeChainee temp;
   char lettre ='a';
   temp = lc;
@@ -26,7 +26,7 @@ void test_LC_obtenir(void){
 }
 
 void test_LC_fixer(void){
-  LC_ListeChainee lc = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+  LC_ListeChainee lc = LC_allouer();
   LC_ListeChainee temp = LC_listeVide();
   char lettre ='a';
   LC_fixerElement(lc,lettre);

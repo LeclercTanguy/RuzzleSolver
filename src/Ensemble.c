@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <Ensemble.h>
-#include <ListeChainee.h>
+#include "Ensemble.h"
+#include "ListeChainee.h"
 #define TRUE 1
 #define FALSE 0
 
@@ -16,7 +16,11 @@ LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble ens){
   return ens.lesElements;
 }
 
+<<<<<<< HEAD
 int Ens_cardinalite(Ens_Ensemble ens){
+=======
+int Ens_obtenirNbElements(Ensemble ens){
+>>>>>>> 61b6d2ed5792ced9dd390e5ac2828fff69cbe6a3
   return ens.nbElements;
 }
 
