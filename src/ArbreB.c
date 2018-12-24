@@ -16,7 +16,7 @@ ArbreBinaire AB_allouer(void) {
 
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
     ArbreBinaire a;
-    a = (ArbreBinaire)malloc(sizeof(AB_Noeud));
+    a = AB_allouer();
     a->lElement = element;
     a->filsGauche = fg;
     a->filsDroit = fd;
@@ -26,7 +26,6 @@ ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
 char AB_obtenirElement(ArbreBinaire a){
     assert (!AB_estVide(a));
     return a->lElement;
-
 }
 
 ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a){
