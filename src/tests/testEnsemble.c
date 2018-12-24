@@ -4,10 +4,12 @@
 #include "ListeChainee.h"
 
 void test_Ens_ensemble(void){
-  Ensemble resultat;
+  Ens_Ensemble resultat;
   resultat = Ens_ensemble();
   CU_ASSERT_TRUE((LC_estVide(resultat.lesElements))&&(resultat.nbElements==0));
 }
+
+
 
 int main(int argc, char** argv){
 

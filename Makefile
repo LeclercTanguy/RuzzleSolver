@@ -15,8 +15,10 @@ tests:
 		$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lListeChainee -lcunit
 	$(SRCTESTS)/testArbreB.o $(LIBDIR)/libArbreB.a
 		$(CC) -o $(TESTDIR)/testArbreB $^ $(LDFLAGS) -lCase -lcunit
-$(SRCTESTS)/testCase.o $(LIBDIR)/libCase.a
+	$(SRCTESTS)/testCase.o $(LIBDIR)/libCase.a
 			$(CC) -o $(TESTDIR)/testCase $^ $(LDFLAGS) -lCase -lcunit
+	$(SRCTESTS)/testEnsemble.o $(LIBDIR)/libEnsemble.a
+			$(CC) -o $(TESTDIR)/testEnsemble $^ $(LDFLAGS) -lListeChainee -lEnsemble -lcunit
 
 $(LIBDIR)/libListeChainee.a : $(SRCDIR)/ListeChainee.o
 	$(AR) -r $@ $^

@@ -23,7 +23,7 @@ int LC_estPresent(LC_ListeChainee lc,char lettre){
   if (LC_estVide(lc)){
     return FALSE;
   }else{
-    if (LC_obtenirElement(lc)= lettre){
+    if (LC_obtenirElement(lc)==lettre){
       return TRUE;
     }else{
       return LC_estPresent(LC_obtenirListeSuivante(lc),lettre);
