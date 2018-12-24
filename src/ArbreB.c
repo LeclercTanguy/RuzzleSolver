@@ -10,11 +10,14 @@ int AB_estVide(ArbreBinaire a){
     return a==NULL;
 }
 
+ArbreBinaire AB_allouer(void) {
+  return (ArbreBinaire)malloc(sizeof(AB_Noeud));
+}
 
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
     ArbreBinaire a;
     a = (ArbreBinaire)malloc(sizeof(AB_Noeud));
-    a->lELement = element;
+    a->lElement = element;
     a->filsGauche = fg;
     a->filsDroit = fd;
     return a;
@@ -22,7 +25,11 @@ ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
 
 char AB_obtenirElement(ArbreBinaire a){
     assert (!AB_estVide(a));
+<<<<<<< HEAD
     return a->lELement;
+=======
+    return a->lElement;
+>>>>>>> 61b6d2ed5792ced9dd390e5ac2828fff69cbe6a3
 
 }
 
@@ -43,7 +50,7 @@ void AB_fixerFilsGauche(ArbreBinaire a, ArbreBinaire ag){
 
 void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad){
     assert (!AB_estVide(a));
-    a->filsGauche=ad;
+    a->filsDroit=ad;
 }
 
 void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire *fg, ArbreBinaire *fd){

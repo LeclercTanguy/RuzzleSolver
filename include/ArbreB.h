@@ -3,12 +3,13 @@
 
 typedef struct AB_Noeud* ArbreBinaire;
 typedef struct AB_Noeud{
-  char lELement;
+  char lElement;
   ArbreBinaire filsGauche;
   ArbreBinaire filsDroit;
 } AB_Noeud;
 
 ArbreBinaire AB_arbreBinaire();
+ArbreBinaire AB_allouer(void);
 int AB_estVide(ArbreBinaire a);
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element);
 char AB_obtenirElement(ArbreBinaire a);
