@@ -1,6 +1,7 @@
 #include <CUnit/Basic.h>
 #include <comparer.h>
 #include "Dictionnaire.h"
+#include "Mot.h"
 
 void test_DC_creerDictionnaire() {
   Dictionnaire dico = DC_creerDictionnaire();
@@ -30,12 +31,22 @@ void test_DC_sauvegarder() {
 
 void test_DC_charger() {
   Dictionnaire dico;
-  int errCharger = DC_charger("tests/dico.dat",&dico);
+  int errCharger = DC_charger("tests/dico.dat",&dico); //généré au test précédent
   int errSauvegarder = DC_sauvegarder(dico,"tests/dico2.dat");
   CU_ASSERT_FALSE(errCharger);
   CU_ASSERT_FALSE(errSauvegarder);
   CU_ASSERT_TRUE(comparer2Fichiers("tests/dico.dat","tests/dico2.dat"));
 }
+
+// void test_DC_obtenirLettresSuivantes() {
+//   Dictionnaire dico = DC_creerDictionnaire();
+//   Ensemble lettresSuivantes;
+//   DC_ajouterMot (&dico,"LA");
+//   DC_ajouterMot (&dico,"LE");
+//   DC_ajouterMot (&dico,"LIT");
+//   lettresSuivantes = DC_obtenirLettresSuivantes(dico,chaineEnMot(&dico,"L"));
+//   CU_ASSERT_TRUE(Ens_estPresent(lettresSuivantes,'A') && Ens_estPresent(lettresSuivantes,'E') && Ens_estPresent(lettresSuivantes,'I'));
+// }
 
 int main(int argc, char** argv){
 

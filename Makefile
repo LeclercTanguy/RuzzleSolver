@@ -13,7 +13,7 @@ EXEC=ruzzleSolver
 all : $(SRCDIR)/transcoder.o $(LIBDIR)/libDictionnaire.a
 	$(CC) -o $(BINDIR)/transcoder $^ $(LDFLAGS) -lDictionnaire -lArbreB -lEnsemble -lListeChainee
 
-tests: testLC testAB testC
+tests: testLC testAB testC testD
 
 testLC: $(SRCTESTS)/testListeChainee.o $(LIBDIR)/libListeChainee.a
 		$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lListeChainee -lcunit
@@ -25,6 +25,8 @@ testE: $(SRCTESTS)/testEnsemble.o $(LIBDIR)/libEnsemble.a $(LIBDIR)/libListeChai
 		$(CC) -o $(TESTDIR)/testEnsemble $^ $(LDFLAGS) -lEnsemble -lListeChainee -lcunit
 testD: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreB.a $(LIBDIR)/libListeChainee.a $(LIBDIR)/libComparer.a
 		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lArbreB -lEnsemble -lComparer -lListeChainee -lcunit
+testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreB.a $(LIBDIR)/libListeChainee.a
+		$(CC) -o $(TESTDIR)/testPerformance $^ $(LDFLAGS) -lDictionnaire -lArbreB -lEnsemble -lListeChainee
 
 $(LIBDIR)/libComparer.a : $(SRCDIR)/comparer.o
 	$(AR) -r $@ $^
