@@ -13,7 +13,7 @@ EXEC=ruzzleSolver
 all : $(SRCDIR)/transcoder.o $(LIBDIR)/libDictionnaire.a
 	$(CC) -o $(BINDIR)/transcoder $^ $(LDFLAGS) -lDictionnaire -lArbreB -lEnsemble -lListeChainee
 
-tests: testLC testAB testC testD
+tests: testLC testAB testC testD testE
 
 testLC: $(SRCTESTS)/testListeChainee.o $(LIBDIR)/libListeChainee.a
 		$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lListeChainee -lcunit

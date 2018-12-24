@@ -33,13 +33,13 @@ Ens_Ensemble Ens_ensemble(void);
 
 LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble);
 int Ens_obtenirNbElements(Ens_Ensemble);
-void Ens_ajouter(Ens_Ensemble,char);
+void Ens_ajouter(Ens_Ensemble*,char);
 int Ens_estPresent(Ens_Ensemble,char);
-void Ens_ajouterElmentsDUneAutreListe(Ens_Ensemble,LC_ListeChainee);
+void Ens_ajouterElementsDUneAutreListe(Ens_Ensemble*,LC_ListeChainee);
 Ens_Ensemble Ens_union(Ens_Ensemble,Ens_Ensemble);
-void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble,LC_ListeChainee,Ens_Ensemble);
+void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble*,LC_ListeChainee,Ens_Ensemble);
 Ens_Ensemble Ens_intersection(Ens_Ensemble,Ens_Ensemble);
-void ajouterElementsListeSiPresent(Ens_Ensemble,LC_ListeChainee,Ens_Ensemble);
+void ajouterElementsListeSiPresent(Ens_Ensemble*,LC_ListeChainee,Ens_Ensemble);
 Ens_Ensemble Ens_soustraction(Ens_Ensemble,Ens_Ensemble);
 
 #endif

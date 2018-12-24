@@ -18,7 +18,7 @@ void test_Ens_obtenir(void){
 void test_Ens_ajouterEtestPresent(void){
   Ens_Ensemble ens = Ens_ensemble();
   char lettre = 'a';
-  Ens_ajouter(ens,lettre);
+  Ens_ajouter(&ens,lettre);
   CU_ASSERT_TRUE(Ens_obtenirNbElements(ens)==1);
 }
 
