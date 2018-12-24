@@ -2,14 +2,25 @@
 #include <CUnit/Basic.h>
 #include "Ensemble.h"
 #include "ListeChainee.h"
+#define TRUE 1
+#define FALSE 0
 
 void test_Ens_ensemble(void){
-  Ens_Ensemble resultat;
-  resultat = Ens_ensemble();
-  CU_ASSERT_TRUE((LC_estVide(resultat.lesElements))&&(resultat.nbElements==0));
+  Ens_Ensemble ens= Ens_ensemble();
+  CU_ASSERT_TRUE((LC_estVide(ens.lesElements))&&(ens.nbElements==0));
 }
 
+void test_Ens_obtenir(void){
+  Ens_Ensemble ens = Ens_ensemble();
+  CU_ASSERT_TRUE((Ens_obtenirLesElements(ens)==NULL)&&(Ens_obtenirNbElements(ens)==0));
+}
 
+void test_Ens_ajouterEtestPresent(void){
+  Ens_Ensemble ens = Ens_ensemble();
+  char lettre = 'a';
+  Ens_ajouter(ens,lettre);
+  CU_ASSERT_TRUE(Ens_obtenirNbElements(ens)==1);
+}
 
 int main(int argc, char** argv){
 
@@ -28,8 +39,8 @@ int main(int argc, char** argv){
 
   /* Ajout des tests à la suite de tests boite noire */
   if ((NULL == CU_add_test(pSuite, "créer un Ensemble", test_Ens_ensemble))
-      //|| (NULL == CU_add_test(pSuite, "ajouter un élément à la Liste Chaînée", test_LC_ajouter))
-    //  || (NULL == CU_add_test(pSuite, "obtenir élément et liste suivante", test_LC_obtenir))
+      || (NULL == CU_add_test(pSuite, "obtenir les éléments et le nombre d'éléments", test_Ens_obtenir))
+      || (NULL == CU_add_test(pSuite, "ajouter une lettre à un ensemble", test_Ens_ajouterEtestPresent))
     //  || (NULL == CU_add_test(pSuite,"fixer élément et liste suivante", test_LC_fixer))
       )
     {

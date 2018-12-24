@@ -16,19 +16,14 @@ LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble ens){
   return ens.lesElements;
 }
 
-<<<<<<< HEAD
-int Ens_cardinalite(Ens_Ensemble ens){
-=======
-int Ens_obtenirNbElements(Ensemble ens){
->>>>>>> 61b6d2ed5792ced9dd390e5ac2828fff69cbe6a3
+int Ens_obtenirNbElements(Ens_Ensemble ens){
   return ens.nbElements;
 }
 
 void Ens_ajouter(Ens_Ensemble ens,char lettre){
-  LC_ListeChainee lesElementsDeLEnsemble = Ens_obtenirLesElements(ens);
-  LC_ajouter(&lesElementsDeLEnsemble,lettre);
-  int nb = Ens_cardinalite(ens);
-  nb = nb+1;
+//  LC_ListeChainee lesElementsDeLEnsemble = Ens_obtenirLesElements(ens);
+  LC_ajouter(&ens.lesElements,lettre);
+  ens.nbElements=Ens_obtenirNbElements(ens)+1;
 }
 
 int Ens_estPresent(Ens_Ensemble ens,char lettre){

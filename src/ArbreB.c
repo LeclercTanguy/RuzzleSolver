@@ -25,7 +25,11 @@ ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
 
 char AB_obtenirElement(ArbreBinaire a){
     assert (!AB_estVide(a));
+<<<<<<< HEAD
+    return a->lELement;
+=======
     return a->lElement;
+>>>>>>> 61b6d2ed5792ced9dd390e5ac2828fff69cbe6a3
 
 }
 

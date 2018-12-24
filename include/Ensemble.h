@@ -32,9 +32,9 @@ Ens_Ensemble Ens_ensemble(void);
 */
 
 LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble);
+int Ens_obtenirNbElements(Ens_Ensemble);
 void Ens_ajouter(Ens_Ensemble,char);
 int Ens_estPresent(Ens_Ensemble,char);
-int Ens_cardinalite(Ens_Ensemble);
 void Ens_ajouterElmentsDUneAutreListe(Ens_Ensemble,LC_ListeChainee);
 Ens_Ensemble Ens_union(Ens_Ensemble,Ens_Ensemble);
 void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble,LC_ListeChainee,Ens_Ensemble);
