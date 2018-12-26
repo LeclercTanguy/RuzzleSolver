@@ -19,8 +19,64 @@ void test_Ens_ajouterEtestPresent(void){
   Ens_Ensemble ens = Ens_ensemble();
   char lettre = 'a';
   Ens_ajouter(&ens,lettre);
-  CU_ASSERT_TRUE(Ens_obtenirNbElements(ens)==1);
+  CU_ASSERT_TRUE((Ens_obtenirNbElements(ens)==1)&&(Ens_estPresent(ens,lettre)));
 }
+
+void test_Ens_ajouterDUneAutreListe(void){
+  Ens_Ensemble ens = Ens_ensemble();
+  char lettre = 'b';
+  Ens_ajouter(&ens,lettre);
+  LC_ListeChainee lc = LC_listeVide();
+  lettre = 'c';
+  LC_ajouter(&lc,lettre);
+  lettre = 'd';
+  LC_ajouter(&lc,lettre);
+  Ens_ajouterElementsDUneAutreListe(&ens,lc);
+  CU_ASSERT_TRUE((Ens_estPresent(ens,'b'))&&(Ens_estPresent(ens,'c'))&&(Ens_estPresent(ens,'d')));
+  LC_supprimer(&lc);
+}
+
+void test_Ens_union(void){
+  Ens_Ensemble ens1 = Ens_ensemble();
+  Ens_Ensemble ens2 = Ens_ensemble();
+  Ens_Ensemble ens3 = Ens_ensemble();
+  char lettre = 'a';
+  Ens_ajouter(&ens1,lettre);
+  lettre = 'b';
+  Ens_ajouter(&ens2,lettre);
+  ens3 = Ens_union(ens1,ens2);
+  CU_ASSERT_TRUE((Ens_estPresent(ens3,'a'))&&(Ens_estPresent(ens3,'b')));
+
+}
+
+void test_Ens_soustraction(void){
+  Ens_Ensemble ens1 = Ens_ensemble();
+  Ens_Ensemble ens2 = Ens_ensemble();
+  Ens_Ensemble ens3 = Ens_ensemble();
+  char lettre = 'a';
+  Ens_ajouter(&ens1,lettre);
+  Ens_ajouter(&ens2,lettre);
+  lettre = 'b';
+  Ens_ajouter(&ens1,lettre);
+  ens3 = Ens_soustraction(ens1,ens2);
+  CU_ASSERT_TRUE((Ens_estPresent(ens3,'b'))&&(!Ens_estPresent(ens3,'a')));
+}
+
+void test_Ens_intersection(void){
+  Ens_Ensemble ens1 = Ens_ensemble();
+  Ens_Ensemble ens2 = Ens_ensemble();
+  Ens_Ensemble ens3 = Ens_ensemble();
+  char lettre = 'a';
+  Ens_ajouter(&ens1,lettre);
+  Ens_ajouter(&ens2,lettre);
+  lettre = 'b';
+  Ens_ajouter(&ens1,lettre);
+  ens3 = Ens_intersection(ens1,ens2);
+  CU_ASSERT_TRUE((Ens_estPresent(ens3,'a'))&&(!Ens_estPresent(ens3,'b')));
+}
+
+
+
 
 int main(int argc, char** argv){
 
@@ -41,7 +97,10 @@ int main(int argc, char** argv){
   if ((NULL == CU_add_test(pSuite, "créer un Ensemble", test_Ens_ensemble))
       || (NULL == CU_add_test(pSuite, "obtenir les éléments et le nombre d'éléments", test_Ens_obtenir))
       || (NULL == CU_add_test(pSuite, "ajouter une lettre à un ensemble", test_Ens_ajouterEtestPresent))
-    //  || (NULL == CU_add_test(pSuite,"fixer élément et liste suivante", test_LC_fixer))
+      || (NULL == CU_add_test(pSuite,"ajouter un autre liste à l'ensemble", test_Ens_ajouterDUneAutreListe))
+      || (NULL == CU_add_test(pSuite,"union de deux ensemble", test_Ens_union))
+      || (NULL == CU_add_test(pSuite,"intersection de deux ensemble", test_Ens_intersection))
+      || (NULL == CU_add_test(pSuite,"soustraction de deux ensemble de deux ensemble", test_Ens_soustraction))
       )
     {
       CU_cleanup_registry();

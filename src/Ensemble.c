@@ -54,7 +54,7 @@ void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble* ens,LC_ListeChainee lc,E
   }while(!LC_estVide(lc));
 }
 
-Ens_Ensemble Ens_intersection(Ens_Ensemble ens1,Ens_Ensemble ens2){
+Ens_Ensemble Ens_soustraction(Ens_Ensemble ens1,Ens_Ensemble ens2){
   Ens_Ensemble resultat= Ens_ensemble();
   Ens_ajouterElementsListeSiNonPresent(&resultat,Ens_obtenirLesElements(ens1),ens2);
   return resultat;
@@ -69,7 +69,7 @@ void Ens_ajouterElementsListeSiPresent(Ens_Ensemble* ens,LC_ListeChainee lc,Ens_
   }while(!LC_estVide(lc));
 }
 
-Ens_Ensemble Ens_soustraction(Ens_Ensemble ens1,Ens_Ensemble ens2){
+Ens_Ensemble Ens_intersection(Ens_Ensemble ens1,Ens_Ensemble ens2){
   Ens_Ensemble resultat= Ens_ensemble();
   Ens_ajouterElementsListeSiPresent(&resultat,Ens_obtenirLesElements(ens1),ens2);
   return resultat;

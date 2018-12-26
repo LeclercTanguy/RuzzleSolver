@@ -16,28 +16,28 @@ int LC_estVide(LC_ListeChainee lc){
     return lc==NULL;
 }
 
-void LC_ajouter(LC_ListeChainee* lc,char lettre){
+void LC_ajouter(LC_ListeChainee* lc,void* unElement){
   LC_ListeChainee temp = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
-  LC_fixerElement(temp,lettre);
+  LC_fixerElement(temp,&unElement);
   LC_fixerListeSuivante(temp,*lc);
   *lc = temp;
 }
 
-int LC_estPresent(LC_ListeChainee lc,char lettre){
+int LC_estPresent(LC_ListeChainee lc,void* unElement){
   if (LC_estVide(lc)){
     return FALSE;
   }else{
-    if (LC_obtenirElement(lc)==lettre){
+    if (LC_obtenirElement(lc)==unElement){
       return TRUE;
     }else{
-      return LC_estPresent(LC_obtenirListeSuivante(lc),lettre);
+      return LC_estPresent(LC_obtenirListeSuivante(lc),unElement);
     }
   }
 }
 
-char LC_obtenirElement(LC_ListeChainee lc){
+void* LC_obtenirElement(LC_ListeChainee lc){
   assert (!LC_estVide(lc));
-  return lc->lettreLC;
+  return lc->element;
 }
 
 LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee lc){
@@ -45,9 +45,9 @@ LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee lc){
   return lc->listeSuivante;
 }
 
-void LC_fixerElement(LC_ListeChainee lc,char lettre){
+void LC_fixerElement(LC_ListeChainee lc,void* lElement){
   assert (!LC_estVide(lc));
-  (lc)->lettreLC=lettre;
+  (lc)->element=lElement;
 }
 
 void LC_fixerListeSuivante(LC_ListeChainee lc,LC_ListeChainee lcSuivante){
