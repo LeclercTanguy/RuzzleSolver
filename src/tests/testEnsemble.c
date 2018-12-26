@@ -18,21 +18,22 @@ void test_Ens_obtenir(void){
 void test_Ens_ajouterEtestPresent(void){
   Ens_Ensemble ens = Ens_ensemble();
   char lettre = 'a';
-  Ens_ajouter(&ens,lettre);
-  CU_ASSERT_TRUE((Ens_obtenirNbElements(ens)==1)&&(Ens_estPresent(ens,lettre)));
+  Ens_ajouter(&ens,&lettre,sizeof(char));
+  CU_ASSERT_TRUE((Ens_obtenirNbElements(ens)==1)&&(Ens_estPresent(ens,&lettre,sizeof(char))));
 }
 
 void test_Ens_ajouterDUneAutreListe(void){
   Ens_Ensemble ens = Ens_ensemble();
   char lettre = 'b';
-  Ens_ajouter(&ens,lettre);
+  Ens_ajouter(&ens,&lettre,sizeof(char));
   LC_ListeChainee lc = LC_listeVide();
   lettre = 'c';
-  LC_ajouter(&lc,lettre);
+  LC_ajouter(&lc,&lettre,sizeof(char));
   lettre = 'd';
-  LC_ajouter(&lc,lettre);
-  Ens_ajouterElementsDUneAutreListe(&ens,lc);
-  CU_ASSERT_TRUE((Ens_estPresent(ens,'b'))&&(Ens_estPresent(ens,'c'))&&(Ens_estPresent(ens,'d')));
+  LC_ajouter(&lc,&lettre,sizeof(char));
+  Ens_ajouterElementsDUneAutreListe(&ens,lc,sizeof(char));
+  char b = 'b', c = 'c', d = 'd';
+  CU_ASSERT_TRUE((Ens_estPresent(ens,&b,sizeof(char)))&&(Ens_estPresent(ens,&c,sizeof(char)))&&(Ens_estPresent(ens,&d,sizeof(char))));
   LC_supprimer(&lc);
 }
 
@@ -41,11 +42,12 @@ void test_Ens_union(void){
   Ens_Ensemble ens2 = Ens_ensemble();
   Ens_Ensemble ens3 = Ens_ensemble();
   char lettre = 'a';
-  Ens_ajouter(&ens1,lettre);
+  Ens_ajouter(&ens1,&lettre,sizeof(char));
   lettre = 'b';
-  Ens_ajouter(&ens2,lettre);
-  ens3 = Ens_union(ens1,ens2);
-  CU_ASSERT_TRUE((Ens_estPresent(ens3,'a'))&&(Ens_estPresent(ens3,'b')));
+  Ens_ajouter(&ens2,&lettre,sizeof(char));
+  ens3 = Ens_union(ens1,ens2,sizeof(char));
+  char a = 'a', b = 'b';
+  CU_ASSERT_TRUE((Ens_estPresent(ens3,&a,sizeof(char)))&&(Ens_estPresent(ens3,&b,sizeof(char))));
 
 }
 
@@ -54,12 +56,13 @@ void test_Ens_soustraction(void){
   Ens_Ensemble ens2 = Ens_ensemble();
   Ens_Ensemble ens3 = Ens_ensemble();
   char lettre = 'a';
-  Ens_ajouter(&ens1,lettre);
-  Ens_ajouter(&ens2,lettre);
+  Ens_ajouter(&ens1,&lettre,sizeof(char));
+  Ens_ajouter(&ens2,&lettre,sizeof(char));
   lettre = 'b';
-  Ens_ajouter(&ens1,lettre);
-  ens3 = Ens_soustraction(ens1,ens2);
-  CU_ASSERT_TRUE((Ens_estPresent(ens3,'b'))&&(!Ens_estPresent(ens3,'a')));
+  Ens_ajouter(&ens1,&lettre,sizeof(char));
+  ens3 = Ens_soustraction(ens1,ens2,sizeof(char));
+  char a = 'a', b = 'b';
+  CU_ASSERT_TRUE((Ens_estPresent(ens3,&b,sizeof(char)))&&(!Ens_estPresent(ens3,&a,sizeof(char))));
 }
 
 void test_Ens_intersection(void){
@@ -67,12 +70,13 @@ void test_Ens_intersection(void){
   Ens_Ensemble ens2 = Ens_ensemble();
   Ens_Ensemble ens3 = Ens_ensemble();
   char lettre = 'a';
-  Ens_ajouter(&ens1,lettre);
-  Ens_ajouter(&ens2,lettre);
+  Ens_ajouter(&ens1,&lettre,sizeof(char));
+  Ens_ajouter(&ens2,&lettre,sizeof(char));
   lettre = 'b';
-  Ens_ajouter(&ens1,lettre);
-  ens3 = Ens_intersection(ens1,ens2);
-  CU_ASSERT_TRUE((Ens_estPresent(ens3,'a'))&&(!Ens_estPresent(ens3,'b')));
+  Ens_ajouter(&ens1,&lettre,sizeof(char));
+  ens3 = Ens_intersection(ens1,ens2,sizeof(char));
+  char a = 'a', b = 'b';
+  CU_ASSERT_TRUE((Ens_estPresent(ens3,&a,sizeof(char)))&&(!Ens_estPresent(ens3,&b,sizeof(char))));
 }
 
 

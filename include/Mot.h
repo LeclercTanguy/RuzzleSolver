@@ -2,9 +2,8 @@
 #define __MOT__
 #include "ListeChainee.h"
 
-typedef struct LC_ListeChainee Mot_Lettre;
 typedef struct {
-  Mot_Lettre *lettres; //dernière lettre du mot
+  LC_ListeChainee *lettres; //Liste chaînée de Mot_Lettre, commençant par la dernière lettre du mot
   unsigned int longueur;
 } Mot;
 
@@ -14,7 +13,6 @@ struct Mot_Lettre{
   char lettre;
   Dictionnaire refDico; //pointeur vers le nœud correspondant dans le dictionnaire
                         //à générer avec DC_obtenirReferenceLettre(refPrécédente,lettreÀAjouter)
-  Mot_Lettre *lettrePrecedente; //pointeur vers la lettre prédédente dans la mot
 };
 
 Mot creerMot (void);
