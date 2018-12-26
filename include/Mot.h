@@ -1,13 +1,14 @@
 #ifndef __MOT__
 #define __MOT__
 
-typedef struct Mot_Lettre Mot_Lettre;
+typedef struct LC_ListeChainee Mot_Lettre;
 typedef struct {
   Mot_Lettre *lettres; //dernière lettre du mot
   unsigned int longueur;
 } Mot;
 
 #include "Dictionnaire.h"
+#include "LC_ListeChainee.h"
 
 struct Mot_Lettre{
   char lettre;
@@ -17,6 +18,7 @@ struct Mot_Lettre{
 };
 
 Mot creerMot (void);
+char Mot_obtenirLettre(Mot leMot);
 void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire *dico);
 void Mot_retirerLettre(Mot *leMot);
 Mot chaineEnMot (Dictionnaire *dico, char *chaine);
