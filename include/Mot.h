@@ -1,5 +1,6 @@
 #ifndef __MOT__
 #define __MOT__
+#include "ListeChainee.h"
 
 typedef struct LC_ListeChainee Mot_Lettre;
 typedef struct {
@@ -8,7 +9,6 @@ typedef struct {
 } Mot;
 
 #include "Dictionnaire.h"
-#include "LC_ListeChainee.h"
 
 struct Mot_Lettre{
   char lettre;

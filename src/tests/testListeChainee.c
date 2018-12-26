@@ -2,36 +2,37 @@
 #include <CUnit/Basic.h>
 #include "ListeChainee.h"
 
+
 void test_ListeChainee(void){
   LC_ListeChainee lc = LC_listeVide();
   CU_ASSERT_TRUE(LC_estVide(lc));
 }
 
 void test_LC_ajouter(void){
-  LC_ListeChainee lc = LC_allouer();
+  LC_ListeChainee lc = LC_allouer(sizeof(char));
   char lettre ='a';
-  LC_ajouter(&lc,lettre);
-  CU_ASSERT_TRUE((LC_obtenirElement(lc)==lettre) && (!LC_estVide(LC_obtenirListeSuivante(lc))));
+  LC_ajouter(&lc,&lettre,sizeof(char));
+  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==lettre) && (!LC_estVide(LC_obtenirListeSuivante(lc))));
   LC_supprimer(&lc);
 }
 
 void test_LC_obtenir(void){
-  LC_ListeChainee lc = LC_allouer();
+  LC_ListeChainee lc = LC_allouer(sizeof(char));
   LC_ListeChainee temp;
   char lettre ='a';
   temp = lc;
-  LC_ajouter(&lc,lettre);
-  CU_ASSERT_TRUE((LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
+  LC_ajouter(&lc,&lettre,sizeof(char));
+  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
   LC_supprimer(&lc);
 }
 
 void test_LC_fixer(void){
-  LC_ListeChainee lc = LC_allouer();
+  LC_ListeChainee lc = LC_allouer(sizeof(char));
   LC_ListeChainee temp = LC_listeVide();
   char lettre ='a';
-  LC_fixerElement(lc,lettre);
+  LC_fixerElement(lc,&lettre);
   LC_fixerListeSuivante(lc,temp);
-  CU_ASSERT_TRUE((LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
+  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
   LC_supprimer(&lc);
 }
 

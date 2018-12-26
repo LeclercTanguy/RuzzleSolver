@@ -99,8 +99,8 @@ int DC_estUnMot(Dictionnaire dico, Mot prefixe) {
   return 0; //AB_obtenirElement(AB_obtenirFilsGauche(prefixe->lettres->refDico))=='\0';
 }
 
-Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe) {
-  Ensemble lettresSuivantes = Ens_ensemble();
+Ens_Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe) {
+  Ens_Ensemble lettresSuivantes = Ens_ensemble();
   //Dictionnaire temp = AB_obtenirFilsGauche(prefixe);
   //AB_obtenirElement(AB_obtenirFilsGauche);
   return lettresSuivantes;
