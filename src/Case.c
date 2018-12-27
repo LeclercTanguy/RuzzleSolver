@@ -2,18 +2,11 @@
 #include <stdlib.h>
 #include "Case.h"
 
-Case CASE_creerCase() {
-  Case uneCase;
-  CASE_fixerLettre(&uneCase, 'A');
-  CASE_fixerBonus(&uneCase,AB);
-  return uneCase;
-}
-
 void CASE_fixerLettre(Case* uneCase, char uneLettre){
   (*uneCase).lettre=uneLettre;
 }
 
-void CASE_fixerNBPoints(Case* uneCase, unsigned short points){
+void CASE_fixerNbPoints(Case* uneCase, unsigned short points){
   (*uneCase).nbPoints=points;
 }
 
@@ -31,7 +24,7 @@ char CASE_obtenirLettre(Case uneCase){
   return laLettre;
 }
 
-unsigned short CASE_obtenirNBPoints(Case uneCase){
+unsigned short CASE_obtenirNbPoints(Case uneCase){
   unsigned short leNBPoints = uneCase.nbPoints;
   return leNBPoints;
 }
