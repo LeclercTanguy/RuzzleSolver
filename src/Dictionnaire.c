@@ -50,11 +50,15 @@ void DC_ajouterMot(Dictionnaire* dico, char* leMot) {
   DC_ajouterMot_R(dico,leMot,&finDuMot);
 }
 
-void DC_supprimerMot(Dictionnaire dico, Mot motASupprimer) {
+void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer) {
 
 }
 
-int DC_estUnPrefixe(Dictionnaire dico, char *chaine) {
+void DC_supprimer(Dictionnaire* dico) {
+
+}
+
+int DC_estUnPrefixe(Dictionnaire dico, char* chaine) {
   if (DC_estVide(dico)) {
     //la chaîne est plus longue que le plus long mot du dictionnaire
     return FALSE;
@@ -153,7 +157,11 @@ void DC_charger_R(Dictionnaire* dico, FILE* data) {
 int DC_charger(char *nomFichier, Dictionnaire* dico) {
   FILE* data = fopen (nomFichier,"r");
   if (data!=NULL) {
-    *dico = DC_creerDictionnaire();
+    if (DC_estVide(*dico)) {
+      *dico = DC_creerDictionnaire();
+    } else {
+      DC_supprimer(dico);
+    }
     DC_charger_R(dico,data);
     return fclose(data);
   } else {
