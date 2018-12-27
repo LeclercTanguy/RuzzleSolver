@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "ArbreBinaire.h"
 
 ArbreBinaire AB_arbreBinaire(){
@@ -14,16 +15,17 @@ ArbreBinaire AB_allouer(void) {
   return (ArbreBinaire)malloc(sizeof(AB_Noeud));
 }
 
-ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
-    ArbreBinaire a;
-    a = AB_allouer();
-    a->lElement = element;
+ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd,Element element,size_t tailleElement){
+    ArbreBinaire a = AB_allouer();
+    Element elementRacine = malloc(tailleElement);
+    memcpy(elementRacine,element,tailleElement);
+    a->lElement = elementRacine;
     a->filsGauche = fg;
     a->filsDroit = fd;
     return a;
 }
 
-char AB_obtenirElement(ArbreBinaire a){
+Element AB_obtenirElement(ArbreBinaire a){
     assert (!AB_estVide(a));
     return a->lElement;
 }

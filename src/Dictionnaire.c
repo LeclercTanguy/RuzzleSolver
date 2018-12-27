@@ -23,15 +23,15 @@ void DC_ajouterMot_R(Dictionnaire* dico, char* leMot, int* finDuMot) {
   Dictionnaire temp;
   if (DC_estVide(*dico)) {
     //aucun nœud frère ni fils
-    *dico = AB_ajouterRacine(AB_arbreBinaire(),AB_arbreBinaire(),leMot[0]);
-  } else if (AB_obtenirElement(*dico)-leMot[0]<0) {
+    *dico = AB_ajouterRacine(AB_arbreBinaire(),AB_arbreBinaire(),leMot,sizeof(char));
+  } else if (*(char*)AB_obtenirElement(*dico)-leMot[0]<0) {
     //la lettre à insérer est plus grande, on passe au frère suivant
     temp = AB_obtenirFilsDroit(*dico);
     DC_ajouterMot_R(&temp,leMot,finDuMot);
     AB_fixerFilsDroit(*dico,temp);
-  } else if (AB_obtenirElement(*dico)-leMot[0]>0) {
+  } else if (*(char*)AB_obtenirElement(*dico)-leMot[0]>0) {
     //la lettre à insérer est plus petite, on insère le nœud avant le frère suivant
-    *dico = AB_ajouterRacine(AB_arbreBinaire(),*dico,leMot[0]);
+    *dico = AB_ajouterRacine(AB_arbreBinaire(),*dico,leMot,sizeof(char));
   }
   //si le nœud est déjà présent : rien à faire
 
@@ -60,10 +60,10 @@ int DC_estUnPrefixe(Dictionnaire dico, char *chaine) {
     return FALSE;
   } else if (chaine[0]=='\0') {
     return TRUE; //on est à la fin de la chaine, c'est donc un préfixe
-  } else if (AB_obtenirElement(dico)==chaine[0]) {
+  } else if (*(char*)AB_obtenirElement(dico)==chaine[0]) {
     //le caractère est dans le dictionnaire, on passe au suivant
     return DC_estUnPrefixe(AB_obtenirFilsGauche(dico),chaine+1);
-  } else if (AB_obtenirElement(dico)-chaine[0]<0) {
+  } else if (*(char*)AB_obtenirElement(dico)-chaine[0]<0) {
     //le caractère est plus grand, on essaye le frère suivant
     return DC_estUnPrefixe(AB_obtenirFilsDroit(dico),chaine);
   } else {
@@ -74,10 +74,10 @@ int DC_estUnPrefixe(Dictionnaire dico, char *chaine) {
 
 Dictionnaire DC_obtenirReferenceLettre_R(Dictionnaire dico, char lettre) {
   if (!DC_estVide(dico)) {
-    if (AB_obtenirElement(dico)==lettre) {
+    if (*(char*)AB_obtenirElement(dico)==lettre) {
       //on a trouvé la bonne lettre
       return dico;
-    } else if (AB_obtenirElement(dico)-lettre<0) {
+    } else if (*(char*)AB_obtenirElement(dico)-lettre<0) {
       //le caractère est plus grand, on essaye le frère suivant
       return DC_obtenirReferenceLettre(AB_obtenirFilsDroit(dico),lettre);
     } else {
@@ -109,7 +109,7 @@ Ens_Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe) {
 void DC_sauvegarder_R(Dictionnaire dico, FILE* data) {
   if (!DC_estVide(dico)) {
     //écrire élement
-    fputc(AB_obtenirElement(dico),data);
+    fputc(*(char*)AB_obtenirElement(dico),data);
     //écrire fils gauche
     DC_sauvegarder_R(AB_obtenirFilsGauche(dico),data);
     //écrire fils droit
@@ -135,7 +135,7 @@ void DC_charger_R(Dictionnaire* dico, FILE* data) {
   char c = fgetc(data);
   if (c!=EOF) { //tant que l'on est pas à la fin
     if (c!='\n') { //arbre non vide
-      *dico = AB_ajouterRacine(DC_creerDictionnaire(),DC_creerDictionnaire(),c);
+      *dico = AB_ajouterRacine(DC_creerDictionnaire(),DC_creerDictionnaire(),&c,sizeof(char));
       //fils gauche
       Dictionnaire* arbreGauche = DC_allouer();
       DC_charger_R(arbreGauche,data);

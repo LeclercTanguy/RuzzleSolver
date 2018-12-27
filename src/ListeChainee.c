@@ -9,8 +9,8 @@ LC_ListeChainee LC_listeVide(void){
   return NULL;
 }
 
-LC_ListeChainee LC_allouer(size_t tailleElement) {
-  return (LC_ListeChainee)malloc(tailleElement+sizeof(LC_ListeChainee));
+LC_ListeChainee LC_allouer(void) {
+  return (LC_ListeChainee)malloc(sizeof(LC_Noeud));
 }
 
 int LC_estVide(LC_ListeChainee lc){
@@ -18,7 +18,7 @@ int LC_estVide(LC_ListeChainee lc){
 }
 
 void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement){
-  LC_ListeChainee temp = LC_allouer(tailleElement);
+  LC_ListeChainee temp = LC_allouer();
   Element elementAjoute = malloc(tailleElement);
   memcpy(elementAjoute,elementAAjouter,tailleElement);
   LC_fixerElement(temp,elementAjoute);

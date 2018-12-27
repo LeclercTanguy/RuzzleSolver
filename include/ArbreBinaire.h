@@ -1,9 +1,10 @@
 #ifndef __ARBRE_BINAIRE__
 #define __ARBRE_BINAIRE__
+#include "ListeChainee.h"
 
 typedef struct AB_Noeud* ArbreBinaire;
 typedef struct AB_Noeud{
-  char lElement;
+  Element lElement;
   ArbreBinaire filsGauche;
   ArbreBinaire filsDroit;
 } AB_Noeud;
@@ -11,8 +12,8 @@ typedef struct AB_Noeud{
 ArbreBinaire AB_arbreBinaire();
 ArbreBinaire AB_allouer(void);
 int AB_estVide(ArbreBinaire a);
-ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element);
-char AB_obtenirElement(ArbreBinaire a);
+ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, Element element,size_t tailleElement);
+Element AB_obtenirElement(ArbreBinaire a);
 ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a);
 ArbreBinaire AB_obtenirFilsDroit(ArbreBinaire a);
 void AB_fixerFilsGauche(ArbreBinaire a, ArbreBinaire ag);
