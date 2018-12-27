@@ -8,7 +8,7 @@
 //   Dictionnaire *suffixe; //pointeur vers la première lettre pouvant être ajoutée au mot
 // };
 #include "Ensemble.h"
-#include "ArbreB.h"
+#include "ArbreBinaire.h"
 
 typedef ArbreBinaire Dictionnaire;
 

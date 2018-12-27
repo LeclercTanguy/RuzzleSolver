@@ -1,5 +1,5 @@
-#ifndef __ARBRE_B__
-#define __ARBRE_B__
+#ifndef __ARBRE_BINAIRE__
+#define __ARBRE_BINAIRE__
 
 typedef struct AB_Noeud* ArbreBinaire;
 typedef struct AB_Noeud{

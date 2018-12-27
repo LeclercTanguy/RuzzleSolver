@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <CUnit/Basic.h>
-#include "ArbreB.h"
+#include "ArbreBinaire.h"
 
 void test_ArbreBinaire(void){
     ArbreBinaire a=AB_arbreBinaire();

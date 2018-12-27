@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
-#include "ArbreB.h"
+#include "ArbreBinaire.h"
 
 ArbreBinaire AB_arbreBinaire(){
     return NULL;

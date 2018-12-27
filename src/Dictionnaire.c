@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ArbreB.h"
+#include "ArbreBinaire.h"
 #include "Ensemble.h"
 #include "Dictionnaire.h"
 #define TRUE 1
