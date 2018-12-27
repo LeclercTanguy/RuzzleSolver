@@ -2,7 +2,7 @@
  * \file Dictionnaire.h
  * \brief Implantation du TAD Dictionnaire
  * \author Yves LE GUENNEC
- * \version α
+ * \version alpha
  * \date décembre 2018
  */
 
