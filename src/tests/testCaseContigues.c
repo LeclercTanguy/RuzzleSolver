@@ -12,9 +12,9 @@ void test_CC_creer_casesContigues(){
 void test_CC_ajouterCase(){
   CaseContigue desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
-  Case uneCase = CASE_creerCase();
+  Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
-  CASE_fixerNBPoints(&uneCase, 2);
+  CASE_fixerNbPoints(&uneCase, 2);
   CASE_fixerPosition(&uneCase, 2, 3);
   CASE_fixerBonus(&uneCase, LD);
   // Test
@@ -25,15 +25,15 @@ void test_CC_ajouterCase(){
 void test_CC_supprimerCase(){
   CaseContigue desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
-  Case uneCase = CASE_creerCase();
+  Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
-  CASE_fixerNBPoints(&uneCase, 2);
+  CASE_fixerNbPoints(&uneCase, 2);
   CASE_fixerPosition(&uneCase, 2, 3);
   CASE_fixerBonus(&uneCase, LD);
   // Création d'une deuxième case
-  Case case2 = CASE_creerCase();
+  Case case2;
   CASE_fixerLettre(&case2, 'B');
-  CASE_fixerNBPoints(&case2, 3);
+  CASE_fixerNbPoints(&case2, 3);
   CASE_fixerPosition(&case2, 1, 2);
   CASE_fixerBonus(&case2, LD);
 
@@ -47,15 +47,15 @@ void test_CC_supprimerCase(){
 void test_CC_nbCaseContigue(){
   CaseContigue desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
-  Case uneCase = CASE_creerCase();
+  Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
-  CASE_fixerNBPoints(&uneCase, 2);
+  CASE_fixerNbPoints(&uneCase, 2);
   CASE_fixerPosition(&uneCase, 2, 3);
   CASE_fixerBonus(&uneCase, LD);
   // Création d'une deuxième case
-  Case case2 = CASE_creerCase();
+  Case case2;
   CASE_fixerLettre(&case2, 'B');
-  CASE_fixerNBPoints(&case2, 3);
+  CASE_fixerNbPoints(&case2, 3);
   CASE_fixerPosition(&case2, 1, 2);
   CASE_fixerBonus(&case2, LD);
 
@@ -67,9 +67,9 @@ void test_CC_nbCaseContigue(){
 
 //  CaseContigue desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
-  //Case uneCase = CASE_creerCase();
+  //Case uneCase;
   //CASE_fixerLettre(&uneCase, 'A');
-  //CASE_fixerNBPoints(&uneCase, 2);
+  //CASE_fixerNbPoints(&uneCase, 2);
   //CASE_fixerPosition(&uneCase, 2, 3);
   //CASE_fixerBonus(&uneCase, LD);
 //  CC_ajouterCase(&desCasesContigues, uneCase);

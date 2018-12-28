@@ -53,7 +53,7 @@ $(TESTDIR)/testEnsemble: $(SRCTESTS)/testEnsemble.o $(LIBDIR)/libEnsemble.a $(LI
 		$(CC) -o $(TESTDIR)/testEnsemble $^ $(LDFLAGS) -lEnsemble -lListeChainee -lcunit
 $(TESTDIR)/testDictionnaire: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libListeChainee.a $(LIBDIR)/libComparer.a
 		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lComparer -lListeChainee -lcunit
-$(TESTDIR)/testCaseContigues: $(SRCTESTS)/testCaseContigues.c $(LIBDIR)/libCase.a
+$(TESTDIR)/testCaseContigues: $(SRCTESTS)/testCaseContigues.o $(LIBDIR)/libCase.a
 		$(CC) -o $(TESTDIR)/testCaseContigues $^ $(LDFLAGS) -lCase -lListeChainee -lcunit
 testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libListeChainee.a
 		$(CC) -o $(TESTDIR)/testPerformance $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lListeChainee

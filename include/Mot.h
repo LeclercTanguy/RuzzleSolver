@@ -16,13 +16,12 @@ typedef struct Mot_Lettre{
 }Mot_Lettre;
 
 Mot creerMot (void);
+int Mot_estVide(Mot leMot);
 unsigned int Mot_obtenirTaille(Mot leMot);
-LC_ListeChainee Mot_obtenirLesElements(Mot leMot);
-char Mot_obtenirLettre(Mot_Lettre motLettre);
-Mot* Mot_allouer(size_t taille);
-void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire *dico);
+Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot);
+void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico);
 void Mot_retirerLettre(Mot *leMot);
-Mot chaineEnMot (Dictionnaire *dico, char *chaine);
+Mot chaineEnMot (Dictionnaire dico, char *chaine);
 char* motEnChaine (Mot leMot);
 
 #endif
