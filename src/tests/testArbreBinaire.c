@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <CUnit/Basic.h>
-#include "ArbreB.h"
+#include "ArbreBinaire.h"
 
-void test_ArbreBinaire(void){
+void test_ArbreVide(void){
     ArbreBinaire a=AB_arbreBinaire();
     CU_ASSERT_TRUE(AB_estVide(a));
 }
@@ -10,9 +10,8 @@ void test_ArbreBinaire(void){
 void test_AB_ajouterRacine(void){
     ArbreBinaire a ,fd=AB_arbreBinaire(),fg=AB_arbreBinaire();
     char element = 'A';
-    a = AB_ajouterRacine(fg,fd,element);
-    CU_ASSERT_TRUE((AB_obtenirElement(a)==element) && (AB_obtenirFilsDroit(a)==fd) && (AB_obtenirFilsGauche(a)==fg));
-
+    a = AB_ajouterRacine(fg,fd,&element,sizeof(char));
+    CU_ASSERT_TRUE((*(char*)AB_obtenirElement(a)==element) && (AB_obtenirFilsDroit(a)==fd) && (AB_obtenirFilsGauche(a)==fg));
 }
 
 int main(int argc, char** argv){
@@ -31,8 +30,8 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "créer une arbre vide", test_ArbreBinaire))
-      //|| (NULL == CU_add_test(pSuite, "ajouter un élément à la Liste Chaînée", test_LC_ajouter))
+  if ((NULL == CU_add_test(pSuite, "créer une arbre vide", test_ArbreVide))
+      || (NULL == CU_add_test(pSuite, "ajouter racine", test_AB_ajouterRacine))
       //|| (NULL == CU_add_test(pSuite, "obtenir élément et liste suivante", test_LC_obtenir))
       // || (NULL == CU_add_test(pSuite,"fixer élément et liste suivante", test_LC_fixer))
       )

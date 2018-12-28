@@ -3,8 +3,12 @@
 !*.*
 !Makefile
 .DS_Store
+!Doxyfile
+doc/html
+doc/latex
 *.o
 *.pdf
+*.html
 *.gz
 *.log
 *.toc

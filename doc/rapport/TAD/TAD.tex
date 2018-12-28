@@ -2,7 +2,6 @@
   \tadNom{Case}
   \tadDependances{A..Z,\naturelNonNul,Bonus,1..4}
   \begin{tadOperations}{obtenirNbPoints}%nom de l'opération le plus long
-    \tadOperation{creerCase}{}{\tadUnParam{Case}}
     \tadOperation{fixerLettre}{\tadDeuxParams{Case}{A..Z}}{\tadUnParam{Case}}
     \tadOperation{fixerNbPoints}{\tadDeuxParams{Case}{\naturelNonNul}}{\tadUnParam{Case}}
     \tadOperation{fixerBonus}{\tadDeuxParams{Case}{Bonus}}{\tadUnParam{Case}}
@@ -14,9 +13,6 @@
     \tadOperation{fixerPosition}{\tadTroisParams{Case}{1..4}{1..4}}{\tadUnParam{Case}}
   \end{tadOperations}
   \begin{tadAxiomes}
-    \tadAxiome{obtenirLettre(creerCase())='A'}
-    \tadAxiome{obtenirNbPoints(creerCase())=1}
-    \tadAxiome{obtenirBonus(creerCase())="\textvisiblespace\textvisiblespace"}
     \tadAxiome{obtenirLettre(fixerLettre(uneCase,uneLettre))=uneLettre}
     \tadAxiome{obtenirBonus(fixerBonus(uneCase,leBonus))=leBonus}
     \tadAxiome{obtenirNbPoints(fixerNbPoints(uneCase,nbPoints))=nbPoints}
@@ -74,9 +70,8 @@
   \tadNom{Dictionnaire}
   \tadDependances{Mot,\chaine,Fichier,\booleen}
   \begin{tadOperations}{obtenirLettresSuivantes}%nom de l'opération le plus long
-    \tadOperation{creerDictionnaire}{\tadUnParam{Ensemble<\chaine>}}{\tadUnParam{Dictionnaire}}
+    \tadOperation{creerDictionnaire}{}{\tadUnParam{Dictionnaire}}
     \tadOperation{ajouterMot}{\tadDeuxParams{Dictionnaire}{\chaine}}{\tadUnParam{Dictionnaire}}
-    % pas nécessaire pour le Ruzzle, tous les mots étant contenus dans le fichier utilisé par creerDictionnaire
     \tadOperationAvecPreconditions{supprimerMot}{\tadDeuxParams{Dictionnaire}{Mot}}{\tadUnParam{Dictionnaire}}
    % pas nécessaire pour le Ruzzle
     \tadOperation{estUnPrefixe}{\tadDeuxParams{Dictionnaire}{\chaine}}{\tadUnParam{\booleen}}
@@ -89,7 +84,7 @@
     \tadPrecondition{supprimerMot}{estUnMot(motASupprimer)}
    \end{tadPreconditions}
   \begin{tadSemantiques}{obtenirLettresSuivantes}
-    \tadSemantique{creerDictionnaire}{création d'un dictionnaire à partir d'une suite de mots}
+    \tadSemantique{creerDictionnaire}{création d'un dictionnaire vide}
     \tadSemantique{ajouterMot}{ajout d'un mot dans le dictionnaire}
     \tadSemantique{supprimerMot}{suppression d'un mot du dictionnaire}
     \tadSemantique{estUnPrefixe}{indique si la suite de caractères est le début d'un mot du dictionnaire}

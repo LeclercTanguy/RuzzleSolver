@@ -20,57 +20,57 @@ int Ens_obtenirNbElements(Ens_Ensemble ens){
   return ens.nbElements;
 }
 
-void Ens_ajouter(Ens_Ensemble* ens,char lettre){
-  LC_ajouter(&(ens->lesElements),lettre);
+void Ens_ajouter(Ens_Ensemble* ens,Element element,size_t tailleElement){
+  LC_ajouter(&(ens->lesElements),element,tailleElement);
   ens->nbElements=Ens_obtenirNbElements(*ens)+1;
 }
 
-int Ens_estPresent(Ens_Ensemble ens,char lettre){
+int Ens_estPresent(Ens_Ensemble ens, Element element,size_t tailleElement){
   LC_ListeChainee listemp;
   listemp = Ens_obtenirLesElements(ens);
-  return LC_estPresent(listemp,lettre);
+  return LC_estPresent(listemp,element,tailleElement);
 }
 
-void Ens_ajouterElementsDUneAutreListe(Ens_Ensemble* ens,LC_ListeChainee lc){
+void Ens_ajouterElementsDUneAutreListe(Ens_Ensemble* ens,LC_ListeChainee lc,size_t tailleElement){
   do{
-    Ens_ajouter(ens,LC_obtenirElement(lc));
+    Ens_ajouter(ens,LC_obtenirElement(lc),tailleElement);
     lc = LC_obtenirListeSuivante(lc);
   }while(!LC_estVide(lc));
 }
 
-Ens_Ensemble Ens_union(Ens_Ensemble ens1,Ens_Ensemble ens2){
+Ens_Ensemble Ens_union(Ens_Ensemble ens1,Ens_Ensemble ens2,size_t tailleElement){
   Ens_Ensemble resultat = Ens_ensemble();
-  Ens_ajouterElementsDUneAutreListe(&resultat,Ens_obtenirLesElements(ens1));
-  Ens_ajouterElementsDUneAutreListe(&resultat,Ens_obtenirLesElements(ens2));
+  Ens_ajouterElementsDUneAutreListe(&resultat,Ens_obtenirLesElements(ens1),tailleElement);
+  Ens_ajouterElementsDUneAutreListe(&resultat,Ens_obtenirLesElements(ens2),tailleElement);
   return resultat;
 }
 
-void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble* ens,LC_ListeChainee lc,Ens_Ensemble ensRef){
+void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble* ens,LC_ListeChainee lc,Ens_Ensemble ensRef,size_t tailleElement){
   do{
-    if (!Ens_estPresent(ensRef,LC_obtenirElement(lc))){
-      Ens_ajouter(ens,LC_obtenirElement(lc));
+    if (!Ens_estPresent(ensRef,LC_obtenirElement(lc),tailleElement)){
+      Ens_ajouter(ens,LC_obtenirElement(lc),tailleElement);
     }
     lc = LC_obtenirListeSuivante(lc);
   }while(!LC_estVide(lc));
 }
 
-Ens_Ensemble Ens_soustraction(Ens_Ensemble ens1,Ens_Ensemble ens2){
+Ens_Ensemble Ens_soustraction(Ens_Ensemble ens1,Ens_Ensemble ens2,size_t tailleElement){
   Ens_Ensemble resultat= Ens_ensemble();
-  Ens_ajouterElementsListeSiNonPresent(&resultat,Ens_obtenirLesElements(ens1),ens2);
+  Ens_ajouterElementsListeSiNonPresent(&resultat,Ens_obtenirLesElements(ens1),ens2,tailleElement);
   return resultat;
 }
 
-void Ens_ajouterElementsListeSiPresent(Ens_Ensemble* ens,LC_ListeChainee lc,Ens_Ensemble ensRef){
+void Ens_ajouterElementsListeSiPresent(Ens_Ensemble* ens,LC_ListeChainee lc,Ens_Ensemble ensRef,size_t tailleElement){
   do{
-    if (Ens_estPresent(ensRef,LC_obtenirElement(lc))){
-      Ens_ajouter(ens,LC_obtenirElement(lc));
+    if (Ens_estPresent(ensRef,LC_obtenirElement(lc),tailleElement)){
+      Ens_ajouter(ens,LC_obtenirElement(lc),tailleElement);
     }
     lc = LC_obtenirListeSuivante(lc);
   }while(!LC_estVide(lc));
 }
 
-Ens_Ensemble Ens_intersection(Ens_Ensemble ens1,Ens_Ensemble ens2){
+Ens_Ensemble Ens_intersection(Ens_Ensemble ens1,Ens_Ensemble ens2,size_t tailleElement){
   Ens_Ensemble resultat= Ens_ensemble();
-  Ens_ajouterElementsListeSiPresent(&resultat,Ens_obtenirLesElements(ens1),ens2);
+  Ens_ajouterElementsListeSiPresent(&resultat,Ens_obtenirLesElements(ens1),ens2,tailleElement);
   return resultat;
 }

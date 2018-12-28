@@ -2,16 +2,15 @@
 \begin{algorithme}
 
   \signaturefonction
-  {creerDictionnaire}{lesMots : Ensemble<\chaine>}{Dictionnaire}
+  {creerDictionnaire}{}{Dictionnaire}
 
   \signatureProcedure
   {ajouterMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{leMot : \chaine}}
-  % pas nécessaire pour le Ruzzle, tous les mots étant contenus dans le fichier utilisé par creerDictionnaire
 
   \signatureProcedureAvecPreconditions
   {supprimerMot}{\paramEntreeSortie{dico : Dictionnaire} \paramEntree{motASupprimer : Mot}}{estUnMot(motASupprimer)}
-
   % pas nécessaire pour le Ruzzle
+  
   \signaturefonction
   {estUnPrefixe}{dico : Dictionnaire ; chaine : \chaine}{\booleen}
 

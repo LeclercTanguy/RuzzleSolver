@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "ListeChainee.h"
 #define TRUE 1
 #define FALSE 0
@@ -16,26 +17,28 @@ int LC_estVide(LC_ListeChainee lc){
     return lc==NULL;
 }
 
-void LC_ajouter(LC_ListeChainee* lc,void* unElement){
-  LC_ListeChainee temp = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
-  LC_fixerElement(temp,&unElement);
+void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement){
+  LC_ListeChainee temp = LC_allouer();
+  Element elementAjoute = malloc(tailleElement);
+  memcpy(elementAjoute,elementAAjouter,tailleElement);
+  LC_fixerElement(temp,elementAjoute);
   LC_fixerListeSuivante(temp,*lc);
   *lc = temp;
 }
 
-int LC_estPresent(LC_ListeChainee lc,void* unElement){
+int LC_estPresent(LC_ListeChainee lc,Element unElement,size_t tailleElement){
   if (LC_estVide(lc)){
     return FALSE;
   }else{
-    if (LC_obtenirElement(lc)==unElement){
+    if (!memcmp(LC_obtenirElement(lc),unElement,tailleElement)){
       return TRUE;
     }else{
-      return LC_estPresent(LC_obtenirListeSuivante(lc),unElement);
+      return LC_estPresent(LC_obtenirListeSuivante(lc),unElement,tailleElement);
     }
   }
 }
 
-void* LC_obtenirElement(LC_ListeChainee lc){
+Element LC_obtenirElement(LC_ListeChainee lc){
   assert (!LC_estVide(lc));
   return lc->element;
 }
@@ -45,7 +48,7 @@ LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee lc){
   return lc->listeSuivante;
 }
 
-void LC_fixerElement(LC_ListeChainee lc,void* lElement){
+void LC_fixerElement(LC_ListeChainee lc,Element lElement){
   assert (!LC_estVide(lc));
   (lc)->element=lElement;
 }
