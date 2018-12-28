@@ -1,14 +1,17 @@
-#ifndef _CaseContigue_
-#define _CaseContigue_
+#ifndef _CASECONTIGUE_
+#define _CASECONTIGUE_
 #include "Case.h"
 #include "ListeChainee.h"
 
 typedef struct CaseContigue{
-    Case ListeChainee;
+    LC_ListeChainee listeCases;
     int nbCases;
-}
-CaseContigue CaseContigue();
-void CC_ajouterCase(CaseContigue,Case);
-void CC_SuprimmerCase(CaseContigue);
+}CaseContigue;
+
+CaseContigue CC_creer_CasesContigues(void);
+void CC_ajouterCase(CaseContigue*,Case);
+void CC_suprimmerCase(CaseContigue*);
 int CC_nbCaseContigue(CaseContigue);
-*char CC_CaseContigueEnChaine(CaseContigue); //Doit retourner une chaine de caractere
+char* CC_caseContigueEnChaine(CaseContigue); //Doit retourner une chaine de caractere
+
+#endif
