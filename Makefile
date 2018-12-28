@@ -65,13 +65,13 @@ $(LIBDIR)/libListeChainee.a : $(SRCDIR)/ListeChainee.o
 $(LIBDIR)/libArbreBinaire.a : $(SRCDIR)/ArbreBinaire.o
 	$(AR) -r $@ $^
 
+$(LIBDIR)/libEnsemble.a : $(SRCDIR)/Ensemble.o
+		$(AR) -r $@ $^
+
 $(LIBDIR)/libCase.a : $(SRCDIR)/Case.o
 	$(AR) -r $@ $^
 
-$(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o
-	$(AR) -r $@ $^
-
-$(LIBDIR)/libEnsemble.a : $(SRCDIR)/Ensemble.o
+$(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o $(SRCDIR)/Mot.o
 	$(AR) -r $@ $^
 
 $(SRCDIR)/%.o : $(SRCDIR)/%.c

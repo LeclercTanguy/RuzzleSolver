@@ -7,14 +7,39 @@
 
 Mot Mot_creerMot(void){
   Mot leMot;
-  LeMot.lettres = *NULL;
-  LeMot.longueur = 0;
+  leMot.lettres = LC_listeVide();
+  leMot.longueur = 0;
+  return leMot;
+}
+
+int Mot_estVide(Mot leMot){
+  return 0;
 }
 
 char Mot_obtenirLettre(Mot leMot){
-  return leMot.lettres.lettre;
+  return (*(Mot_Lettre*)LC_obtenirElement(leMot.lettres)).lettre;
+}
+
+Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot){
+  return (*(Mot_Lettre*)LC_obtenirElement(leMot.lettres)).refDico;
 }
 
 void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire *dico){
-  &leMot.lettres
+
+}
+
+void Mot_retirerLettre(Mot *leMot){
+
+}
+
+Mot Mot_chaineEnMot (Dictionnaire *dico, char *chaine){
+  return Mot_creerMot();
+}
+
+char* Mot_motEnChaine (Mot leMot){
+  return "\0";
+}
+
+unsigned int Mot_longueur (Mot leMot){
+  return 0;
 }

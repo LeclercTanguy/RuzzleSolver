@@ -55,7 +55,7 @@ void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer) {
 }
 
 void DC_supprimer(Dictionnaire* dico) {
-
+  AB_supprimer(dico);
 }
 
 int DC_estUnPrefixe(Dictionnaire dico, char* chaine) {
@@ -83,7 +83,7 @@ Dictionnaire DC_obtenirReferenceLettre_R(Dictionnaire dico, char lettre) {
       return dico;
     } else if (*(char*)AB_obtenirElement(dico)-lettre<0) {
       //le caractère est plus grand, on essaye le frère suivant
-      return DC_obtenirReferenceLettre(AB_obtenirFilsDroit(dico),lettre);
+      return DC_obtenirReferenceLettre_R(AB_obtenirFilsDroit(dico),lettre);
     } else {
       return NULL;  //la lettre n'est pas dans le dictionnaire
     }
@@ -92,21 +92,35 @@ Dictionnaire DC_obtenirReferenceLettre_R(Dictionnaire dico, char lettre) {
   }
 }
 
-Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre) {
-  assert(!DC_estVide(refPrecedente));
-  //la référence pointe vers un dictionnaire vide, on ne peut pas continuer
-  Dictionnaire dico = AB_obtenirFilsGauche(refPrecedente);
-  return DC_obtenirReferenceLettre_R(dico,lettre);
+Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre, Dictionnaire dico) {
+  Dictionnaire dicoSuivant;
+  if (DC_estVide(refPrecedente)) {
+    dicoSuivant = dico;
+  } else {
+    dicoSuivant = AB_obtenirFilsGauche(refPrecedente);
+  }
+  return DC_obtenirReferenceLettre_R(dicoSuivant,lettre);
 }
 
-int DC_estUnMot(Dictionnaire dico, Mot prefixe) {
-  return 0; //AB_obtenirElement(AB_obtenirFilsGauche(prefixe->lettres->refDico))=='\0';
+int DC_estUnMotComplet(Mot prefixe) {
+  assert(!Mot_estVide(prefixe));
+  Dictionnaire refDico = Mot_obtenirReferenceDictionnaire(prefixe);
+  return *(char*)AB_obtenirElement(AB_obtenirFilsGauche(refDico))=='\0';
 }
 
-Ens_Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe) {
+Ens_Ensemble DC_obtenirLettresSuivantes(Mot prefixe) {
+  assert(!Mot_estVide(prefixe));
   Ens_Ensemble lettresSuivantes = Ens_ensemble();
-  //Dictionnaire temp = AB_obtenirFilsGauche(prefixe);
-  //AB_obtenirElement(AB_obtenirFilsGauche);
+  Dictionnaire dico = Mot_obtenirReferenceDictionnaire(prefixe);
+  char lettre;
+  dico = AB_obtenirFilsGauche(dico);
+  while (!DC_estVide(dico)) {
+    lettre = *(char*)AB_obtenirElement(dico);
+    if (lettre!='\0') {
+      Ens_ajouter(&lettresSuivantes,&lettre,sizeof(char));
+    }
+    dico = AB_obtenirFilsGauche(dico);
+  }
   return lettresSuivantes;
 }
 

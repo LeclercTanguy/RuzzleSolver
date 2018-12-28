@@ -15,6 +15,7 @@ void test_DC_ajoutMot() {
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"TEST"));
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"DICO"));
   CU_ASSERT_FALSE(DC_estUnPrefixe(dico,"TESTEUR"));
+  DC_supprimer(&dico);
 }
 
 void test_DC_sauvegarder() {
@@ -27,6 +28,7 @@ void test_DC_sauvegarder() {
   DC_ajouterMot (&dico,"FONCTIONNERA");
   err = DC_sauvegarder(dico,"tests/dico.dat");
   CU_ASSERT_FALSE(err);
+  DC_supprimer(&dico);
 }
 
 void test_DC_charger() {
@@ -36,6 +38,7 @@ void test_DC_charger() {
   CU_ASSERT_FALSE(errCharger);
   CU_ASSERT_FALSE(errSauvegarder);
   CU_ASSERT_TRUE(comparer2Fichiers("tests/dico.dat","tests/dico2.dat"));
+  DC_supprimer(&dico);
 }
 
 // void test_DC_obtenirLettresSuivantes() {
@@ -46,6 +49,7 @@ void test_DC_charger() {
 //   DC_ajouterMot (&dico,"LIT");
 //   lettresSuivantes = DC_obtenirLettresSuivantes(dico,chaineEnMot(&dico,"L"));
 //   CU_ASSERT_TRUE(Ens_estPresent(lettresSuivantes,'A') && Ens_estPresent(lettresSuivantes,'E') && Ens_estPresent(lettresSuivantes,'I'));
+//   DC_supprimer(&dico);
 // }
 
 int main(int argc, char** argv){

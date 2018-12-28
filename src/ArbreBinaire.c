@@ -50,8 +50,19 @@ void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad){
     a->filsDroit=ad;
 }
 
-void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire *fg, ArbreBinaire *fd){
-    assert (!AB_estVide(a));
+void AB_supprimerRacine(ArbreBinaire* a, ArbreBinaire* fg, ArbreBinaire* fd){
+    assert (!AB_estVide(*a));
+    *fg = AB_obtenirFilsGauche(*a);
+    *fd = AB_obtenirFilsDroit(*a);
+    free(*a);
+    *a = NULL;
+}
 
-
+void AB_supprimer(ArbreBinaire* a){
+  ArbreBinaire fg, fd;
+  if (!AB_estVide(*a)) {
+    AB_supprimerRacine(a,&fg,&fd);
+    AB_supprimer(&fg);
+    AB_supprimer(&fd);
+  }
 }

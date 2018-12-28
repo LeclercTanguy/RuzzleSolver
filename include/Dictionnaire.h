@@ -57,7 +57,6 @@ void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer);
 
 /**
   * \brief Permet de supprimer un Dictionnaire
-  * \todo développer la procédure DC_supprimer
   * \param dico un pointeur vers le dictionnaire que l'on veut supprimer
 */
 void DC_supprimer(Dictionnaire* dico);
@@ -72,29 +71,30 @@ int DC_estUnPrefixe(Dictionnaire dico, char* chaine);
 
 /**
   * \brief Permet d'obtenir les références des lettres dans le Dictionnaire afin de convertir une chaîne en Mot
-  * \param refPrecedente la référence du dernier caractère du préfixe contenu dans Mot
-  * \param lettre le caractère à ajouter au Mot dont la dernière référence est refPrecedente
+  * \param refPrecedente la référence du dernier caractère du préfixe contenu dans Mot.
+  * Si le préfixe est vide, indiquer NULL
+  * \param lettre le caractère à ajouter au Mot dont la référence de la dernière lettre est refPrecedente
+  * \param dico le dictionnaire dans lequel sont stockés les mots
   * \return la référence (pointeur) correspondant à la lettre que l'on souhaite ajouter au Mot.
   * NULL si la lettre à ajouter ne figure pas dans le dictionnaire
 */
-Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre);
+Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre, Dictionnaire dico);
 
 /**
   * \brief Permet de savoir si un préfixe est un mot complet du Dictionnaire
-  * \param dico le Dictionnaire dans lequel on veut vérifier si le préfixe est un mot du Dictionnaire
-  * \param prefixe la suite de caractères (sous forme de Mot) que l'on veut tester
+  * \param prefixe la suite de caractères (sous forme de Mot) que l'on veut tester.
+  * Le dictionnaire est déjà accessible par l'intermédiaire du Mot
   * \return VRAI (1) si le préfixe est un mot du Dictionnaire, FAUX (0) sinon
 */
-int DC_estUnMot(Dictionnaire dico, Mot prefixe);
+int DC_estUnMotComplet(Mot prefixe);
 
 /**
   * \brief Permet de savoir quelles lettres peuvent être ajoutées au préfixe pour former un nouveau préfixe du Dictionnaire
-  * \todo développer DC_obtenirLettresSuivantes
-  * \param dico le Dictionnaire dans lequel on cherche les lettres que l'on peut ajouter au préfixe
   * \param prefixe la suite de caractères (sous forme de Mot) à laquelle on veut rajouter une lettre
+  * Le dictionnaire est déjà accessible par l'intermédiaire du Mot
   * \return un ensemble de caractères pouvant être ajouté au préfixe pour former un nouveau préfixe
 */
-Ens_Ensemble DC_obtenirLettresSuivantes(Dictionnaire dico, Mot prefixe);
+Ens_Ensemble DC_obtenirLettresSuivantes(Mot prefixe);
 
 /**
   * \brief Permet de sauvegarder le Dictionnaire dans un fichier
