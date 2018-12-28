@@ -7,17 +7,9 @@
 
 Mot Mot_creerMot(void){
   Mot leMot;
-  leMot.lettres = NULL;
+  leMot.lettres = LC_listeVide();
   leMot.taille = 0;
   return leMot;
-}
-
-Mot* Mot_allouer(size_t taille) {
-  return (Mot*)LC_allouer(taille);
-}
-
-unsigned int Mot_obtenirTaille(Mot leMot){
-  return leMot.taille;
 }
 
 LC_ListeChainee Mot_obtenirLesElements(Mot leMot){
@@ -28,42 +20,65 @@ char Mot_obtenirLettre(Mot_Lettre motLettre){
   return motLettre.lettre;
 }
 
-void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire *dico){
+
+int Mot_estVide(Mot leMot){
+  return LC_estVide(Mot_obtenirLesElements(leMot));
+}
+
+Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot){
+  if (!Mot_estVide(leMot)) {
+    return (*(Mot_Lettre*)LC_obtenirElement(leMot.lettres)).refDico;
+  } else {
+    return NULL;
+  }
+}
+
+unsigned int Mot_obtenirTaille(Mot leMot){
+  return leMot.taille;
+}
+
+void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico){
   Mot_Lettre motLettre;
   LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(*leMot);
+  Dictionnaire refPrecedente = Mot_obtenirReferenceDictionnaire(*leMot);
   motLettre.lettre = lettre;
-  motLettre.refDico = DC_obtenirReferenceLettre(*dico,lettre);
-  LC_ajouter(&laListeDeLettre,&motLettre,Mot_obtenirTaille(*leMot));
+  motLettre.refDico = DC_obtenirReferenceLettre(refPrecedente,lettre,dico);
+  LC_ajouter(&laListeDeLettre,&motLettre,sizeof(Mot_Lettre));
+  leMot->lettres=laListeDeLettre;
   leMot->taille=Mot_obtenirTaille(*leMot)+1;
 }
 
 void Mot_retirerLettre(Mot* leMot){
-  assert(!LC_estVide(Mot_obtenirLesElements(*leMot)));
+  assert(!Mot_estVide(*leMot));
   leMot->taille = Mot_obtenirTaille(*leMot)-1;
   LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(*leMot);
   LC_supprimerTete(&laListeDeLettre);
+  leMot->lettres=laListeDeLettre;
 }
 
 char* motEnChaine(Mot leMot){
-  char* chaine[Mot_obtenirTaille(leMot)+1];
-  int i=0;
+  int longueur = Mot_obtenirTaille(leMot);
+  char* chaine = (char*)malloc((longueur+1)*sizeof(char));
+  int i=longueur;
   LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(leMot);
   Mot_Lettre motLettre;
-  do{
+  while (i>=0) {
     motLettre = *(Mot_Lettre*)LC_obtenirElement(laListeDeLettre);
-    *chaine[i] = Mot_obtenirLettre(motLettre);
-    i++;
+    chaine[i] = Mot_obtenirLettre(motLettre);
+    i--;
     laListeDeLettre = LC_obtenirListeSuivante(laListeDeLettre);
-  }while(!LC_estVide(laListeDeLettre));
-  return *chaine;
+  }
+  chaine[longueur+1]='\0';
+  return chaine;
 }
 
-Mot chaineEnMot(Dictionnaire *dico, char *chaine){
-  Mot *leMot = Mot_allouer(sizeof(chaine));
+Mot chaineEnMot(Dictionnaire dico, char *chaine){
+  assert(DC_estUnPrefixe(dico,chaine));
+  Mot leMot = Mot_creerMot();
   int i = 0;
-  do{
-    Mot_ajouterLettre(leMot,chaine[i],dico);
+  while (chaine[i]!='\0'){
+    Mot_ajouterLettre(&leMot,chaine[i],dico);
     i++;
-  }while(chaine[i]!='\0');
-  return *leMot;
+  }
+  return leMot;
 }
