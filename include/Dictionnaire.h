@@ -2,7 +2,7 @@
  * \file Dictionnaire.h
  * \brief Implantation du TAD Dictionnaire
  * \author Yves LE GUENNEC
- * \version alpha
+ * \version 1.0
  * \date décembre 2018
  */
 
@@ -49,7 +49,6 @@ void DC_ajouterMot(Dictionnaire* dico, char* leMot);
 
 /**
   * \brief Permet de supprimer un mot du Dictionnaire
-  * \todo développer la procédure DC_supprimerMot
   * \param dico un pointeur vers le dictionnaire dans lequel on veut supprimer le mot
   * \param motASupprimer le Mot que l'on souhaite supprimer du Dictionnaire
 */

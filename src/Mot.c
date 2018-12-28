@@ -24,7 +24,7 @@ Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot){
   return (*(Mot_Lettre*)LC_obtenirElement(leMot.lettres)).refDico;
 }
 
-void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire *dico){
+void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico){
 
 }
 

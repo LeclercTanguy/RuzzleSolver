@@ -50,8 +50,64 @@ void DC_ajouterMot(Dictionnaire* dico, char* leMot) {
   DC_ajouterMot_R(dico,leMot,&finDuMot);
 }
 
-void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer) {
+Dictionnaire DC_obtenirFilsPrecedent(Dictionnaire pere, Dictionnaire fils, Dictionnaire dico) {
+  assert (!DC_estVide(fils));
+  Dictionnaire frere;
+  if (DC_estVide(pere)) {
+    frere = dico;
+  } else {
+    frere = AB_obtenirFilsGauche(pere);
+  }
+  if (fils==frere) {
+    return NULL; //pas de fils précédent
+  } else {
+    Dictionnaire filsPrecedent;
+    while (fils!=frere) {
+      filsPrecedent = frere;
+      frere = AB_obtenirFilsDroit(frere);
+    }
+    return filsPrecedent;
+  }
+}
 
+void DC_supprimerMot_R(Dictionnaire* dico, Mot motASupprimer) {
+  assert(!Mot_estVide(motASupprimer));
+  Dictionnaire fils = Mot_obtenirReferenceDictionnaire(motASupprimer);
+  Dictionnaire fg = AB_obtenirFilsGauche(fils);
+  Dictionnaire fd = AB_obtenirFilsDroit(fils);
+  if (DC_estVide(fg)) {
+    // si il y a un fils gauche, on ne fait rien (la lettre appartient à d'autres mots)
+    //on récupère le père
+    Dictionnaire pere;
+    Mot_retirerLettre(&motASupprimer);
+    if (!Mot_estVide(motASupprimer)) {
+      pere = Mot_obtenirReferenceDictionnaire(motASupprimer);
+    } else {
+      pere = NULL;
+    }
+    //pour trouver le fils précédent
+    Dictionnaire filsPrecedent = DC_obtenirFilsPrecedent(pere,fils,*dico);
+    //on supprime la lettre de l'arbre
+    AB_supprimerRacine(&fils,&fg,&fd);
+    //s'il y a un fils précédent, on lui accroche le nouveau fils droit
+    if (!DC_estVide(filsPrecedent)) {
+      AB_fixerFilsDroit(filsPrecedent,fd);
+    } else { //sinon (le fils était le premier), on accroche le nouveau fils gauche du père
+      AB_fixerFilsGauche(pere,fd);
+    }
+    //si il reste encore des lettres dans le mot (et que le fils gauche était vide), on continue
+    if (!Mot_estVide(motASupprimer)) {
+      DC_supprimerMot_R(dico,motASupprimer);
+    }
+  }
+}
+
+void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer) {
+  assert(DC_estUnMotComplet(motASupprimer));
+  //on ajoute le \0 au mot
+  Mot_ajouterLettre(&motASupprimer,'\0',*dico);
+  //on supprime le mot
+  DC_supprimerMot_R(dico,motASupprimer);
 }
 
 void DC_supprimer(Dictionnaire* dico) {

@@ -19,7 +19,7 @@ Mot Mot_creerMot (void);
 int Mot_estVide(Mot leMot);
 char Mot_obtenirLettre(Mot leMot);
 Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot);
-void Mot_ajouterLettre(Mot* leMot, char lettre, Dictionnaire* dico);
+void Mot_ajouterLettre(Mot* leMot, char lettre, Dictionnaire dico);
 void Mot_retirerLettre(Mot* leMot);
 Mot Mot_chaineEnMot (Dictionnaire* dico, char* chaine);
 char* Mot_motEnChaine (Mot leMot);
