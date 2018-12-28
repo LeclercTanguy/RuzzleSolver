@@ -102,12 +102,14 @@ void DC_supprimerMot_R(Dictionnaire* dico, Mot motASupprimer) {
   }
 }
 
-void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer) {
-  assert(DC_estUnMotComplet(motASupprimer));
+void DC_supprimerMot(Dictionnaire* dico, Mot* motASupprimer) {
+  assert(DC_estUnMotComplet(*motASupprimer));
   //on ajoute le \0 au mot
-  Mot_ajouterLettre(&motASupprimer,'\0',*dico);
-  //on supprime le mot
-  DC_supprimerMot_R(dico,motASupprimer);
+  Mot_ajouterLettre(motASupprimer,'\0',*dico);
+  //on supprime le mot du dictionnaire
+  DC_supprimerMot_R(dico,*motASupprimer);
+  //on supprime le mot (les références au dictionnaire ne sont plus valides)
+  Mot_supprimerMot(motASupprimer);
 }
 
 void DC_supprimer(Dictionnaire* dico) {
@@ -175,7 +177,7 @@ Ens_Ensemble DC_obtenirLettresSuivantes(Mot prefixe) {
     if (lettre!='\0') {
       Ens_ajouter(&lettresSuivantes,&lettre,sizeof(char));
     }
-    dico = AB_obtenirFilsGauche(dico);
+    dico = AB_obtenirFilsDroit(dico);
   }
   return lettresSuivantes;
 }

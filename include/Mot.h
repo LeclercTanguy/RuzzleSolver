@@ -15,13 +15,14 @@ typedef struct Mot_Lettre{
                         //à générer avec DC_obtenirReferenceLettre(refPrécédente,lettreÀAjouter)
 }Mot_Lettre;
 
-Mot creerMot (void);
+Mot Mot_creerMot (void);
 int Mot_estVide(Mot leMot);
 unsigned int Mot_obtenirTaille(Mot leMot);
 Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot);
 void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico);
 void Mot_retirerLettre(Mot *leMot);
-Mot chaineEnMot (Dictionnaire dico, char *chaine);
-char* motEnChaine (Mot leMot);
+void Mot_supprimerMot(Mot* leMot);
+Mot Mot_chaineEnMot (Dictionnaire dico, char *chaine);
+char* Mot_motEnChaine (Mot leMot);
 
 #endif

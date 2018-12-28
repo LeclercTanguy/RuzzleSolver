@@ -50,9 +50,10 @@ void DC_ajouterMot(Dictionnaire* dico, char* leMot);
 /**
   * \brief Permet de supprimer un mot du Dictionnaire
   * \param dico un pointeur vers le dictionnaire dans lequel on veut supprimer le mot
-  * \param motASupprimer le Mot que l'on souhaite supprimer du Dictionnaire
+  * \param motASupprimer un pointeur vers le Mot que l'on souhaite supprimer du Dictionnaire.
+  Le mot est également supprimé car les références au dictionnaire deviennent invalides après que le mot ait été supprimé du dictionnaire.
 */
-void DC_supprimerMot(Dictionnaire* dico, Mot motASupprimer);
+void DC_supprimerMot(Dictionnaire* dico, Mot* motASupprimer);
 
 /**
   * \brief Permet de supprimer un Dictionnaire

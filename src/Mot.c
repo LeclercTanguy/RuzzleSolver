@@ -56,7 +56,13 @@ void Mot_retirerLettre(Mot* leMot){
   leMot->lettres=laListeDeLettre;
 }
 
-char* motEnChaine(Mot leMot){
+void Mot_supprimerMot(Mot* leMot){
+  while(!Mot_estVide(*leMot)){
+    Mot_retirerLettre(leMot);
+  }
+}
+
+char* Mot_motEnChaine(Mot leMot){
   int longueur = Mot_obtenirTaille(leMot);
   char* chaine = (char*)malloc((longueur+1)*sizeof(char));
   int i=longueur;
@@ -72,7 +78,7 @@ char* motEnChaine(Mot leMot){
   return chaine;
 }
 
-Mot chaineEnMot(Dictionnaire dico, char *chaine){
+Mot Mot_chaineEnMot(Dictionnaire dico, char *chaine){
   assert(DC_estUnPrefixe(dico,chaine));
   Mot leMot = Mot_creerMot();
   int i = 0;

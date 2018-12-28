@@ -69,7 +69,6 @@ void test_CC_nbCaseContigue(){
 void test_CC_CaseContigueEnChaine(){
   CaseContigue desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
-<<<<<<< HEAD
   Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
   CASE_fixerNbPoints(&uneCase, 2);
@@ -127,12 +126,3 @@ int main(int argc, char** argv){
   CU_cleanup_registry();
   return CU_get_error();
 }
-=======
-  //Case uneCase;
-  //CASE_fixerLettre(&uneCase, 'A');
-  //CASE_fixerNbPoints(&uneCase, 2);
-  //CASE_fixerPosition(&uneCase, 2, 3);
-  //CASE_fixerBonus(&uneCase, LD);
-//  CC_ajouterCase(&desCasesContigues, uneCase);
-//}
->>>>>>> ad12e1f557bc21cc1d7b29345466edc02add5116

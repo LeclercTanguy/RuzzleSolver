@@ -8,6 +8,13 @@ void test_DC_creerDictionnaire() {
   CU_ASSERT_TRUE(DC_estVide(dico));
 }
 
+void test_DC_supprimer(){
+  Dictionnaire dico = DC_creerDictionnaire();
+  DC_ajouterMot (&dico,"TEST");
+  DC_supprimer(&dico);
+  CU_ASSERT_TRUE(DC_estVide(dico));
+}
+
 void test_DC_ajoutMot() {
   Dictionnaire dico = DC_creerDictionnaire();
   DC_ajouterMot (&dico,"DICO");
@@ -15,6 +22,14 @@ void test_DC_ajoutMot() {
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"TEST"));
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"DICO"));
   CU_ASSERT_FALSE(DC_estUnPrefixe(dico,"TESTEUR"));
+  DC_supprimer(&dico);
+}
+
+void test_DC_estUnMotComplet(){
+  Dictionnaire dico = DC_creerDictionnaire();
+  DC_ajouterMot (&dico,"TEST");
+  CU_ASSERT_TRUE(DC_estUnMotComplet(Mot_chaineEnMot(dico,"TEST")));
+  CU_ASSERT_FALSE(DC_estUnMotComplet(Mot_chaineEnMot(dico,"TES")));
   DC_supprimer(&dico);
 }
 
@@ -32,25 +47,40 @@ void test_DC_sauvegarder() {
 }
 
 void test_DC_charger() {
-  Dictionnaire dico;
+  Dictionnaire dico = DC_creerDictionnaire();
   int errCharger = DC_charger("tests/dico.dat",&dico); //généré au test précédent
-  int errSauvegarder = DC_sauvegarder(dico,"tests/dico2.dat");
   CU_ASSERT_FALSE(errCharger);
+  int errSauvegarder = DC_sauvegarder(dico,"tests/dico2.dat");
   CU_ASSERT_FALSE(errSauvegarder);
   CU_ASSERT_TRUE(comparer2Fichiers("tests/dico.dat","tests/dico2.dat"));
   DC_supprimer(&dico);
 }
 
-// void test_DC_obtenirLettresSuivantes() {
-//   Dictionnaire dico = DC_creerDictionnaire();
-//   Ensemble lettresSuivantes;
-//   DC_ajouterMot (&dico,"LA");
-//   DC_ajouterMot (&dico,"LE");
-//   DC_ajouterMot (&dico,"LIT");
-//   lettresSuivantes = DC_obtenirLettresSuivantes(dico,chaineEnMot(&dico,"L"));
-//   CU_ASSERT_TRUE(Ens_estPresent(lettresSuivantes,'A') && Ens_estPresent(lettresSuivantes,'E') && Ens_estPresent(lettresSuivantes,'I'));
-//   DC_supprimer(&dico);
-// }
+void test_DC_obtenirLettresSuivantes() {
+  Dictionnaire dico = DC_creerDictionnaire();
+  DC_ajouterMot (&dico,"LA");
+  DC_ajouterMot (&dico,"LE");
+  DC_ajouterMot (&dico,"LIT");
+  Ens_Ensemble lettresSuivantes = DC_obtenirLettresSuivantes(Mot_chaineEnMot(dico,"L"));
+  char a='A', e='E', i='I';
+  CU_ASSERT_TRUE(
+    Ens_estPresent(lettresSuivantes,&a,sizeof(char)) &&
+    Ens_estPresent(lettresSuivantes,&e,sizeof(char)) && Ens_estPresent(lettresSuivantes,&i,sizeof(char))
+  );
+  CU_ASSERT_TRUE(Ens_obtenirNbElements(lettresSuivantes)==3);
+  DC_supprimer(&dico);
+}
+
+void test_DC_supprimerMot(){
+  Dictionnaire dico = DC_creerDictionnaire();
+  DC_ajouterMot (&dico,"TEST");
+  DC_ajouterMot (&dico,"TESTER");
+  Mot motTester = Mot_chaineEnMot(dico,"TESTER");
+  DC_supprimerMot (&dico,&motTester);
+  CU_ASSERT_TRUE(Mot_estVide(motTester));
+  CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"TEST"));
+  CU_ASSERT_FALSE(DC_estUnPrefixe(dico,"TESTER"));
+}
 
 int main(int argc, char** argv){
 
@@ -70,7 +100,11 @@ int main(int argc, char** argv){
   /* Ajout des tests à la suite de tests boite noire */
   if (
     (NULL == CU_add_test(pSuite, "dictionnaire vide", test_DC_creerDictionnaire)) ||
+    (NULL == CU_add_test(pSuite, "suppression du dictionnaire",test_DC_supprimer)) ||
     (NULL == CU_add_test(pSuite, "ajout d'un mot", test_DC_ajoutMot)) ||
+    (NULL == CU_add_test(pSuite, "suppression d'un mot",test_DC_supprimerMot)) ||
+    (NULL == CU_add_test(pSuite, "obtenirLettresSuivantes",test_DC_obtenirLettresSuivantes)) ||
+    (NULL == CU_add_test(pSuite, "estUnMotComplet",test_DC_estUnMotComplet)) ||
     (NULL == CU_add_test(pSuite, "sauvegarde sans erreur", test_DC_sauvegarder)) ||
     (NULL == CU_add_test(pSuite, "chargement",test_DC_charger))
       )
