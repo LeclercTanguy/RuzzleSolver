@@ -104,7 +104,7 @@ int main(int argc, char** argv){
       || (NULL == CU_add_test(pSuite,"ajouter un autre liste à l'ensemble", test_Ens_ajouterDUneAutreListe))
       || (NULL == CU_add_test(pSuite,"union de deux ensemble", test_Ens_union))
       || (NULL == CU_add_test(pSuite,"intersection de deux ensemble", test_Ens_intersection))
-      || (NULL == CU_add_test(pSuite,"soustraction de deux ensemble de deux ensemble", test_Ens_soustraction))
+      || (NULL == CU_add_test(pSuite,"soustraction de deux ensemble", test_Ens_soustraction))
       )
     {
       CU_cleanup_registry();

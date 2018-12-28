@@ -2,34 +2,29 @@
 #include <CUnit/Basic.h>
 #include "Case.h"
 
-void test_CASE_creerCase(void){
-
-  //CU_ASSERT_TRUE();
-}
-
-void test_CASE_fixerLettre(void){
-  Case uneCase = CASE_creerCase();
-  char lettre = 'A';
+void test_CASE_Lettre(void){
+  Case uneCase;
+  char lettre = 'T';
   CASE_fixerLettre(&uneCase, lettre);
   CU_ASSERT_TRUE(CASE_obtenirLettre(uneCase)==lettre);
 }
 
-void test_CASE_fixerNBPoints(void){
-  Case uneCase = CASE_creerCase();
+void test_CASE_NbPoints(void){
+  Case uneCase;
   unsigned short points = 2;
-  CASE_fixerNBPoints(&uneCase, points);
-  CU_ASSERT_TRUE(CASE_obtenirNBPoints(uneCase)==points);
+  CASE_fixerNbPoints(&uneCase, points);
+  CU_ASSERT_TRUE(CASE_obtenirNbPoints(uneCase)==points);
 }
 
-void test_CASE_fixerBonus(void){
-  Case uneCase = CASE_creerCase();
+void test_CASE_Bonus(void){
+  Case uneCase;
   Bonus unBonus = LD;
   CASE_fixerBonus(&uneCase, unBonus);
   CU_ASSERT_TRUE(CASE_obtenirBonus(uneCase)==unBonus);
 }
 
-void test_CASE_fixerPosition(void){
-  Case uneCase = CASE_creerCase();
+void test_CASE_Position(void){
+  Case uneCase;
   unsigned short positionX = 2;
   unsigned short positionY = 3;
   CASE_fixerPosition(&uneCase, positionX, positionY);
@@ -52,11 +47,10 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "creer case", test_CASE_creerCase))
-      || (NULL == CU_add_test(pSuite, "fixer lettre", test_CASE_fixerLettre))
-      || (NULL == CU_add_test(pSuite, "fixer nb de points", test_CASE_fixerNBPoints))
-      || (NULL == CU_add_test(pSuite,"fixer bonus", test_CASE_fixerBonus))
-      || (NULL == CU_add_test(pSuite,"fixer position", test_CASE_fixerPosition))
+  if ((NULL == CU_add_test(pSuite, "fixer / obtenir lettre", test_CASE_Lettre))
+      || (NULL == CU_add_test(pSuite, "fixer / obtenir nb de points", test_CASE_NbPoints))
+      || (NULL == CU_add_test(pSuite,"fixer / obtenir bonus", test_CASE_Bonus))
+      || (NULL == CU_add_test(pSuite,"fixer / obtenir position", test_CASE_Position))
       )
     {
       CU_cleanup_registry();

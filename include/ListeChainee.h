@@ -1,5 +1,6 @@
 #ifndef __LISTE_CHAINEE__
 #define __LISTE_CHAINEE__
+#include <stddef.h>
 
 typedef void* Element;
 
@@ -10,7 +11,7 @@ typedef struct LC_Noeud {
 } LC_Noeud;
 
 LC_ListeChainee LC_listeVide(void);
-LC_ListeChainee LC_allouer(size_t tailleElement);
+LC_ListeChainee LC_allouer(void);
 int LC_estVide(LC_ListeChainee);
 int LC_estPresent(LC_ListeChainee lc,Element unElement,size_t tailleElement);
 void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement);

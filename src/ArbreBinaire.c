@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <assert.h>
-#include "ArbreB.h"
+#include <string.h>
+#include "ArbreBinaire.h"
 
 ArbreBinaire AB_arbreBinaire(){
     return NULL;
@@ -14,16 +15,17 @@ ArbreBinaire AB_allouer(void) {
   return (ArbreBinaire)malloc(sizeof(AB_Noeud));
 }
 
-ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, char element){
-    ArbreBinaire a;
-    a = AB_allouer();
-    a->lElement = element;
+ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd,Element element,size_t tailleElement){
+    ArbreBinaire a = AB_allouer();
+    Element elementRacine = malloc(tailleElement);
+    memcpy(elementRacine,element,tailleElement);
+    a->lElement = elementRacine;
     a->filsGauche = fg;
     a->filsDroit = fd;
     return a;
 }
 
-char AB_obtenirElement(ArbreBinaire a){
+Element AB_obtenirElement(ArbreBinaire a){
     assert (!AB_estVide(a));
     return a->lElement;
 }
@@ -48,8 +50,19 @@ void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad){
     a->filsDroit=ad;
 }
 
-void AB_supprimerRacine(ArbreBinaire a, ArbreBinaire *fg, ArbreBinaire *fd){
-    assert (!AB_estVide(a));
+void AB_supprimerRacine(ArbreBinaire* a, ArbreBinaire* fg, ArbreBinaire* fd){
+    assert (!AB_estVide(*a));
+    *fg = AB_obtenirFilsGauche(*a);
+    *fd = AB_obtenirFilsDroit(*a);
+    free(*a);
+    *a = NULL;
+}
 
-
+void AB_supprimer(ArbreBinaire* a){
+  ArbreBinaire fg, fd;
+  if (!AB_estVide(*a)) {
+    AB_supprimerRacine(a,&fg,&fd);
+    AB_supprimer(&fg);
+    AB_supprimer(&fd);
+  }
 }
