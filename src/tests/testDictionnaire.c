@@ -80,6 +80,11 @@ void test_DC_supprimerMot(){
   CU_ASSERT_TRUE(Mot_estVide(motTester));
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"TEST"));
   CU_ASSERT_FALSE(DC_estUnPrefixe(dico,"TESTER"));
+  DC_ajouterMot (&dico,"TESTER");
+  Mot motTest = Mot_chaineEnMot(dico,"TEST");
+  DC_supprimerMot (&dico,&motTest);
+  CU_ASSERT_FALSE(DC_estUnMotComplet(Mot_chaineEnMot(dico,"TEST")));
+  DC_supprimer(&dico);
 }
 
 int main(int argc, char** argv){

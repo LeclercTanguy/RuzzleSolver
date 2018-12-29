@@ -70,18 +70,18 @@ Dictionnaire DC_obtenirFilsPrecedent(Dictionnaire pere, Dictionnaire fils, Dicti
   }
 }
 
-void DC_supprimerMot_R(Dictionnaire* dico, Mot motASupprimer) {
-  assert(!Mot_estVide(motASupprimer));
-  Dictionnaire fils = Mot_obtenirReferenceDictionnaire(motASupprimer);
+void DC_supprimerMot_R(Dictionnaire* dico, Mot* motASupprimer) {
+  assert(!Mot_estVide(*motASupprimer));
+  Dictionnaire fils = Mot_obtenirReferenceDictionnaire(*motASupprimer);
   Dictionnaire fg = AB_obtenirFilsGauche(fils);
   Dictionnaire fd = AB_obtenirFilsDroit(fils);
   if (DC_estVide(fg)) {
     // si il y a un fils gauche, on ne fait rien (la lettre appartient à d'autres mots)
     //on récupère le père
     Dictionnaire pere;
-    Mot_retirerLettre(&motASupprimer);
-    if (!Mot_estVide(motASupprimer)) {
-      pere = Mot_obtenirReferenceDictionnaire(motASupprimer);
+    Mot_retirerLettre(motASupprimer);
+    if (!Mot_estVide(*motASupprimer)) {
+      pere = Mot_obtenirReferenceDictionnaire(*motASupprimer);
     } else {
       pere = NULL;
     }
@@ -96,7 +96,7 @@ void DC_supprimerMot_R(Dictionnaire* dico, Mot motASupprimer) {
       AB_fixerFilsGauche(pere,fd);
     }
     //si il reste encore des lettres dans le mot (et que le fils gauche était vide), on continue
-    if (!Mot_estVide(motASupprimer)) {
+    if (!Mot_estVide(*motASupprimer)) {
       DC_supprimerMot_R(dico,motASupprimer);
     }
   }
@@ -107,8 +107,8 @@ void DC_supprimerMot(Dictionnaire* dico, Mot* motASupprimer) {
   //on ajoute le \0 au mot
   Mot_ajouterLettre(motASupprimer,'\0',*dico);
   //on supprime le mot du dictionnaire
-  DC_supprimerMot_R(dico,*motASupprimer);
-  //on supprime le mot (les références au dictionnaire ne sont plus valides)
+  DC_supprimerMot_R(dico,motASupprimer);
+  //on supprime le reste du mot (les références au dictionnaire ne sont plus valides)
   Mot_supprimerMot(motASupprimer);
 }
 
@@ -229,11 +229,12 @@ void DC_charger_R(Dictionnaire* dico, FILE* data) {
 int DC_charger(char *nomFichier, Dictionnaire* dico) {
   FILE* data = fopen (nomFichier,"r");
   if (data!=NULL) {
-    if (DC_estVide(*dico)) {
-      *dico = DC_creerDictionnaire();
-    } else {
-      DC_supprimer(dico);
-    }
+    *dico = DC_creerDictionnaire();
+    // if (DC_estVide(*dico)) {
+    //   *dico = DC_creerDictionnaire();
+    // } else {
+    //   DC_supprimer(dico);
+    // }
     DC_charger_R(dico,data);
     return fclose(data);
   } else {
