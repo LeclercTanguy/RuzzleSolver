@@ -55,13 +55,8 @@ $(TESTDIR)/testDictionnaire: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDiction
 		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lTools -lListeChainee -lcunit
 $(TESTDIR)/testCasesContigues: $(SRCTESTS)/testCasesContigues.o $(LIBDIR)/libCase.a
 		$(CC) -o $(TESTDIR)/testCasesContigues $^ $(LDFLAGS) -lCase -lListeChainee -lcunit
-<<<<<<< HEAD
-$(TESTDIR)/testMot: $(SRCTESTS)/testMot.o $(LIBDIR)/libMot.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChainee.a 
-		$(CC) -o $(TESTDIR)/testMot $^ $(LDFLAGS) -lMot -lDictionnaire -lListeChainee -lcunit
-=======
 $(TESTDIR)/testMot: $(SRCTESTS)/testMot.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChainee.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libEnsemble.a
 		$(CC) -o $(TESTDIR)/testMot $^ $(LDFLAGS) -lDictionnaire -lListeChainee -lArbreBinaire -lEnsemble -lcunit
->>>>>>> 3d7854b8ad508b1945eed523d3899d93543f1e2e
 testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libListeChainee.a
 		$(CC) -o $(TESTDIR)/testPerformance $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lListeChainee
 
