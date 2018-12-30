@@ -11,7 +11,7 @@ Grille G_grille(void){
             Case caseVide;
             CASE_fixerPosition(&caseVide,i+1,j+1);
             grilleVide.grille[i][j] = caseVide;
-            grilleVide.utilisee[i][j]= 0;
+            grilleVide.caseUtilisee[i][j]= 0;
         }
 
     }
@@ -27,15 +27,15 @@ void G_fixerCase(Grille* laGrille,Case uneCase,int posx,int posy){
 }
 
 void G_debutUtilisation(Grille* laGrille,int posx,int posy){
-    (*laGrille).utilisee[posx-1][posy-1] = 1;
+    (*laGrille).caseUtilisee[posx-1][posy-1] = 1;
 
 }
 
 void G_finUtilisation(Grille* laGrille,int posx,int posy){
-    (*laGrille).utilisee[posx-1][posy-1] = 0;
+    (*laGrille).caseUtilisee[posx-1][posy-1] = 0;
 
 }
 
 int G_estUtilisee(Grille laGrille,int posx,int posy){
-    return laGrille.utilisee[posx-1][posy-1];
+    return laGrille.caseUtilisee[posx-1][posy-1];
 }

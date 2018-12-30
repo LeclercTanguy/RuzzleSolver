@@ -4,7 +4,7 @@
 
 typedef struct {
     Case grille[4][4];
-    int utilisee[4][4];
+    int caseUtilisee[4][4];
 }Grille;
 
 Grille G_grille();
