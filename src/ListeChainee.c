@@ -61,7 +61,8 @@ void LC_fixerListeSuivante(LC_ListeChainee lc,LC_ListeChainee lcSuivante){
 void LC_supprimerTete(LC_ListeChainee* lc){
   assert (!LC_estVide(*lc));
   LC_ListeChainee temp = *lc;
-  *lc = LC_obtenirListeSuivante(*lc);
+  *lc = LC_obtenirListeSuivante(temp);
+  free(LC_obtenirElement(temp));
   free(temp);
 }
 

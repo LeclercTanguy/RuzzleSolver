@@ -1,4 +1,32 @@
 #include <stdio.h>
+#include "tools.h"
+
+int min(int a, int b) {
+  if (a<=b) {
+    return a;
+  } else {
+    return b;
+  }
+}
+
+int max(int a, int b) {
+  if (a>=b) {
+    return a;
+  } else {
+    return b;
+  }
+}
+
+void chaineEnMajuscule(char* chaine) {
+  int i = 0;
+  int min2maj = 'A'-'a';
+  while (chaine[i]!='\0') {
+    if ((chaine[i]>='a') && (chaine[i]<='z')) {
+      chaine[i]=chaine[i]+min2maj;
+    }
+    i++;
+  }
+}
 
 int comparer_R(FILE* fichier1, FILE* fichier2) {
   char c = fgetc(fichier1);

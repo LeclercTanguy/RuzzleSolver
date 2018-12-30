@@ -3,9 +3,14 @@
 #include "Case.h"
 
 typedef struct {
+<<<<<<< HEAD
     Case grille[4][4];
     int utilise[4][4];
 }Grille;
+=======
+    Case tab[4][4];
+} Grille;
+>>>>>>> 4e60cfd484b07f35432c18f1b2de10c59fb500a4
 
 
 Grille G_grille();

@@ -30,6 +30,11 @@ Element AB_obtenirElement(ArbreBinaire a){
     return a->lElement;
 }
 
+void AB_fixerElement(ArbreBinaire a,Element element){
+    assert (!AB_estVide(a));
+    a->lElement=element;
+}
+
 ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a){
     assert (!AB_estVide(a));
     return a->filsGauche;
@@ -54,6 +59,7 @@ void AB_supprimerRacine(ArbreBinaire* a, ArbreBinaire* fg, ArbreBinaire* fd){
     assert (!AB_estVide(*a));
     *fg = AB_obtenirFilsGauche(*a);
     *fd = AB_obtenirFilsDroit(*a);
+    free(AB_obtenirElement(*a));
     free(*a);
     *a = NULL;
 }

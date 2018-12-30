@@ -1,17 +1,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <CUnit/Basic.h>
-#include "CaseContigue.h"
+#include "CasesContigues.h"
 #include "Case.h"
 #include "ListeChainee.h"
 
 void test_CC_creer_casesContigues(){
-  CaseContigue desCasesContigues = CC_creer_CasesContigues();
+  CasesContigues desCasesContigues = CC_creer_CasesContigues();
   CU_ASSERT_TRUE(((desCasesContigues.nbCases)==0)&&(LC_estVide(desCasesContigues.listeCases)))
 }
 
 void test_CC_ajouterCase(){
-  CaseContigue desCasesContigues = CC_creer_CasesContigues();
+  CasesContigues desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
   Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
@@ -20,11 +20,11 @@ void test_CC_ajouterCase(){
   CASE_fixerBonus(&uneCase, LD);
   // Test
   CC_ajouterCase(&desCasesContigues, uneCase);
-  CU_ASSERT_TRUE(CC_nbCaseContigue(desCasesContigues)==1);
+  CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==1);
 }
 
 void test_CC_supprimerCase(){
-  CaseContigue desCasesContigues = CC_creer_CasesContigues();
+  CasesContigues desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
   Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
@@ -41,12 +41,12 @@ void test_CC_supprimerCase(){
   CC_ajouterCase(&desCasesContigues, uneCase);
   CC_ajouterCase(&desCasesContigues, case2);
   // Test
-  CC_suprimmerCase(&desCasesContigues);
-  CU_ASSERT_TRUE(CC_nbCaseContigue(desCasesContigues)==1);
+  CC_suprimerCase(&desCasesContigues);
+  CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==1);
 }
 
-void test_CC_nbCaseContigue(){
-  CaseContigue desCasesContigues = CC_creer_CasesContigues();
+void test_CC_nbCasesContigues(){
+  CasesContigues desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
   Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
@@ -63,11 +63,11 @@ void test_CC_nbCaseContigue(){
   CC_ajouterCase(&desCasesContigues, uneCase);
   CC_ajouterCase(&desCasesContigues, case2);
 
-  CU_ASSERT_TRUE(CC_nbCaseContigue(desCasesContigues)==desCasesContigues.nbCases);
+  CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==desCasesContigues.nbCases);
 }
 
-void test_CC_CaseContigueEnChaine(){
-  CaseContigue desCasesContigues = CC_creer_CasesContigues();
+void test_CC_CasesContiguesEnChaine(){
+  CasesContigues desCasesContigues = CC_creer_CasesContigues();
   // Création d'une case à ajouter
   Case uneCase;
   CASE_fixerLettre(&uneCase, 'A');
@@ -84,7 +84,7 @@ void test_CC_CaseContigueEnChaine(){
   CC_ajouterCase(&desCasesContigues, uneCase);
   CC_ajouterCase(&desCasesContigues, case2);
 
-  CU_ASSERT_TRUE(strcmp(CC_CaseContigueEnChaine(desCasesContigues),"AB")==0);
+  CU_ASSERT_TRUE(strcmp(CC_CasesContiguesEnChaine(desCasesContigues),"AB")==0);
 }
 
 
@@ -105,10 +105,10 @@ int main(int argc, char** argv){
 
   /* Ajout des tests à la suite de tests boite noire */
   if ((NULL == CU_add_test(pSuite, "Créer cases contigues", test_CC_creer_casesContigues))
-      || (NULL == CU_add_test(pSuite, "Ajouter case contigue", test_CC_ajouterCase))
-      || (NULL == CU_add_test(pSuite,"Supprimer case contigue", test_CC_supprimerCase))
-      || (NULL == CU_add_test(pSuite,"Nombre de cases contigues", test_CC_nbCaseContigue))
-      || (NULL == CU_add_test(pSuite,"Cases contigues en chaine", test_CC_CaseContigueEnChaine))
+      || (NULL == CU_add_test(pSuite, "Ajouter cases contigues", test_CC_ajouterCase))
+      || (NULL == CU_add_test(pSuite,"Supprimer cases contigues", test_CC_supprimerCase))
+      || (NULL == CU_add_test(pSuite,"Nombre de cases contigues", test_CC_nbCasesContigues))
+      || (NULL == CU_add_test(pSuite,"Cases contigues en chaine", test_CC_CasesContiguesEnChaine))
       )
     {
       CU_cleanup_registry();
