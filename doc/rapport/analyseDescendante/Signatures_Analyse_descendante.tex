@@ -1,0 +1,48 @@
+\begin{algorithme}
+  \signatureprocedure
+    {ruzzleSolver}
+    {
+      \paramEntree{grilleRuzzle, nomFichierDico: \chaine}
+    }
+
+  \signaturefonction
+    {chaineEnGrille}
+    {\chaine}
+    {Grille}
+
+  \signatureprocedure
+    {trouverMots}
+    {
+      \paramEntree{posX, posY: 1..4 ; dico: Dictionnaire}
+      \paramEntreeSortie{g: Grille; prefixe: Mot; cheminRuzzle : CasesContigues, resultat: SolutionRuzzle}
+    }
+
+  \signatureprocedure
+    {afficherResultat}
+    {
+      \paramEntree{resultat: SolutionRuzzle}
+    }
+
+  \signaturefonction
+    {casesAdjacentesNonUtilisees}
+    {posX, posY : 1..4 ; g : Grille}
+    {Ensemble<Case>}
+
+  \signaturefonction
+    {min}
+    {a,b : \entier}
+    {\entier}
+
+  \signaturefonction
+    {max}
+    {a,b : \entier}
+    {\entier}
+
+  \signatureprocedure
+    {insererMotResultat}
+    {
+      \paramEntree{cheminRuzzle : CasesContigues}
+      \paramEntreeSortie{resultat: SolutionRuzzle}
+    }
+
+\end{algorithme}
