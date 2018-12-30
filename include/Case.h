@@ -11,6 +11,7 @@ typedef struct {
   unsigned short posY;
 } Case;
 
+Case CASE_creerCase(void);
 void CASE_fixerLettre(Case*,char uneLettre);
 void CASE_fixerNbPoints(Case*,unsigned short points);
 void CASE_fixerBonus(Case*,Bonus);

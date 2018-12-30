@@ -3,29 +3,33 @@
 #include "Grille.h"
 #include "Case.h"
 
-
-
-void test_G_Case(void){
-    Case uneCase,casetest;
+void test_G_modifierCase(void){
+    Case uneCase;
     char lettre = 'T';
-    CASE_fixerLettre(&uneCase, lettre);
     Grille uneGrille=G_grille();
-    G_fixerCase(&uneGrille,uneCase,2,2);
-    casetest=G_obtenirCase(uneGrille,2,2);
-    CU_ASSERT_TRUE(CASE_obtenirLettre(casetest)==CASE_obtenirLettre(uneCase));
-
+    uneCase=G_obtenirCase(uneGrille,2,3);
+    CASE_fixerLettre(&uneCase, lettre);
+    G_fixerCase(&uneGrille,uneCase,2,3);
+    CU_ASSERT_TRUE(
+    (CASE_obtenirLettre(G_obtenirCase(uneGrille,2,3))==lettre) &&
+    (CASE_obtenirPositionX(G_obtenirCase(uneGrille,2,3))==2) &&
+    (CASE_obtenirPositionY(G_obtenirCase(uneGrille,2,3))==3)
+    );
 }
 
 void test_G_debutUtilisation(void){
     Grille uneGrille=G_grille();
+    CU_ASSERT_FALSE(G_estUtilisee(uneGrille,1,1));
     G_debutUtilisation(&uneGrille,1,1);
-    CU_ASSERT_TRUE(G_estUtilisee(uneGrille,1,1)==1);
+    CU_ASSERT_TRUE(G_estUtilisee(uneGrille,1,1));
 }
 
 void test_G_finUtilisation(void){
     Grille uneGrille=G_grille();
+    G_debutUtilisation(&uneGrille,1,1);
+    CU_ASSERT_TRUE(G_estUtilisee(uneGrille,1,1));
     G_finUtilisation(&uneGrille,1,1);
-    CU_ASSERT_TRUE(G_estUtilisee(uneGrille,1,1)==0);
+    CU_ASSERT_FALSE(G_estUtilisee(uneGrille,1,1));
 }
 
 
@@ -46,8 +50,8 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "Fixer/obtenir case", test_G_Case))
-      || (NULL == CU_add_test(pSuite, "Debut utilisation / Est Utilisé", test_G_debutUtilisation))
+  if ((NULL == CU_add_test(pSuite, "modifier une case de la grille", test_G_modifierCase))
+      || (NULL == CU_add_test(pSuite, "Début utilisation / Est Utilisée", test_G_debutUtilisation))
       || (NULL == CU_add_test(pSuite,"fin utilisation", test_G_finUtilisation))
 
       )

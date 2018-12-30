@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include "Case.h"
 
+Case CASE_creerCase(void) {
+  Case uneCase;
+  CASE_fixerLettre(&uneCase,'A');
+  CASE_fixerNbPoints(&uneCase,1);
+  CASE_fixerBonus(&uneCase,AB);
+  //La position est déterminée au moment de l'insertion dans la grille est n'est
+  //donc pas initialisée ici
+  return uneCase;
+}
+
 void CASE_fixerLettre(Case* uneCase, char uneLettre){
   (*uneCase).lettre=uneLettre;
 }
