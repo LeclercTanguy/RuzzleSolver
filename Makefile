@@ -41,7 +41,7 @@ $(DOCPDF)/refman.pdf: $(shell ls $(SRCDIR)/*.c) $(shell ls $(INCLUDEDIR)/*.h)
 $(RAPPORT)/CRProjet.pdf: $(shell find $(RAPPORT) -name '*.tex') $(shell find $(RAPPORT) -name '*.sty') $(shell find $(RAPPORT) -name '*.svg')
 	cd $(RAPPORT); make
 
-tests: $(TESTDIR)/testListeChainee $(TESTDIR)/testArbreBinaire $(TESTDIR)/testCase $(TESTDIR)/testEnsemble $(TESTDIR)/testDictionnaire $(TESTDIR)/testCasesContigues
+tests: $(TESTDIR)/testListeChainee $(TESTDIR)/testArbreBinaire $(TESTDIR)/testCase $(TESTDIR)/testEnsemble $(TESTDIR)/testDictionnaire $(TESTDIR)/testCasesContigues $(TESTDIR)/testMot
 
 $(TESTDIR)/testListeChainee: $(SRCTESTS)/testListeChainee.o $(LIBDIR)/libListeChainee.a
 		$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lListeChainee -lcunit
@@ -55,8 +55,8 @@ $(TESTDIR)/testDictionnaire: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDiction
 		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lTools -lListeChainee -lcunit
 $(TESTDIR)/testCasesContigues: $(SRCTESTS)/testCasesContigues.o $(LIBDIR)/libCase.a
 		$(CC) -o $(TESTDIR)/testCasesContigues $^ $(LDFLAGS) -lCase -lListeChainee -lcunit
-$(TESTDIR)/testMot: $(SRCTESTS)/testMot.o $(LIBDIR)/libMot.a
-		$(CC) -o $(TESTDIR)/testMot $^ $(LDFLAGS) -lMot -lDictionnaire -lListeChainee -lcunit
+$(TESTDIR)/testMot: $(SRCTESTS)/testMot.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChainee.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libEnsemble.a
+		$(CC) -o $(TESTDIR)/testMot $^ $(LDFLAGS) -lDictionnaire -lListeChainee -lArbreBinaire -lEnsemble -lcunit
 testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libListeChainee.a
 		$(CC) -o $(TESTDIR)/testPerformance $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lListeChainee
 
