@@ -17,8 +17,8 @@ all : $(BINDIR)/ruzzleSolver $(BINDIR)/transcoder tests
 
 $(BINDIR)/ruzzleSolver :
 
-$(BINDIR)/transcoder : $(SRCDIR)/transcoder.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libTools.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libListeChainee.a
-	$(CC) -o $(BINDIR)/transcoder $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lListeChainee -lTools
+$(BINDIR)/transcoder : $(SRCDIR)/transcoder.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libTools.a $(LIBDIR)/libCollections.a
+	$(CC) -o $(BINDIR)/transcoder $^ $(LDFLAGS) -lDictionnaire -lCollections -lTools
 
 doc : $(DOCDIR)/doc.html $(DOCDIR)/doc.pdf $(DOCDIR)/rapport.pdf
 
@@ -38,52 +38,49 @@ $(DOCPDF)/refman.pdf: $(shell ls $(SRCDIR)/*.c) $(shell ls $(INCLUDEDIR)/*.h)
 	doxygen
 	cd $(DOCPDF); make
 
-$(RAPPORT)/CRProjet.pdf: $(shell find $(RAPPORT) -name '*.tex') $(shell find $(RAPPORT) -name '*.sty') $(shell find $(RAPPORT) -name '*.svg')
+$(RAPPORT)/CRProjet.pdf: $(shell find $(RAPPORT)/ -name '*.tex') $(shell find $(RAPPORT)/ -name '*.sty') $(shell find $(RAPPORT)/ -name '*.svg')
 	cd $(RAPPORT); make
 
 tests: $(TESTDIR)/testListeChainee $(TESTDIR)/testArbreBinaire $(TESTDIR)/testCase $(TESTDIR)/testEnsemble $(TESTDIR)/testDictionnaire $(TESTDIR)/testCasesContigues $(TESTDIR)/testMot $(TESTDIR)/testGrille
 
-$(TESTDIR)/testListeChainee: $(SRCTESTS)/testListeChainee.o $(LIBDIR)/libListeChainee.a
-		$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lListeChainee -lcunit
-$(TESTDIR)/testArbreBinaire: $(SRCTESTS)/testArbreBinaire.o $(LIBDIR)/libArbreBinaire.a
-		$(CC) -o $(TESTDIR)/testArbreBinaire $^ $(LDFLAGS) -lArbreBinaire -lcunit
-$(TESTDIR)/testCase: $(SRCTESTS)/testCase.o $(LIBDIR)/libCase.a
-		$(CC) -o $(TESTDIR)/testCase $^ $(LDFLAGS) -lCase -lcunit
-$(TESTDIR)/testEnsemble: $(SRCTESTS)/testEnsemble.o $(LIBDIR)/libEnsemble.a $(LIBDIR)/libListeChainee.a
-		$(CC) -o $(TESTDIR)/testEnsemble $^ $(LDFLAGS) -lEnsemble -lListeChainee -lcunit
-$(TESTDIR)/testDictionnaire: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libListeChainee.a $(LIBDIR)/libTools.a
-		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lTools -lListeChainee -lcunit
-$(TESTDIR)/testCasesContigues: $(SRCTESTS)/testCasesContigues.o $(LIBDIR)/libCase.a
-		$(CC) -o $(TESTDIR)/testCasesContigues $^ $(LDFLAGS) -lCase -lListeChainee -lcunit
-$(TESTDIR)/testMot: $(SRCTESTS)/testMot.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChainee.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libEnsemble.a
-		$(CC) -o $(TESTDIR)/testMot $^ $(LDFLAGS) -lDictionnaire -lListeChainee -lArbreBinaire -lEnsemble -lcunit
-$(TESTDIR)/testGrille: $(SRCTESTS)/testGrille.o $(LIBDIR)/libGrille.a $(LIBDIR)/libCase.a
-		$(CC) -o $(TESTDIR)/testGrille $^ $(LDFLAGS) -lArbreBinaire -lCase -lcunit
-testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libEnsemble.a $(LIBDIR)/libArbreBinaire.a $(LIBDIR)/libListeChainee.a
-		$(CC) -o $(TESTDIR)/testPerformance $^ $(LDFLAGS) -lDictionnaire -lArbreBinaire -lEnsemble -lListeChainee
+$(TESTDIR)/testListeChainee: $(SRCTESTS)/testListeChainee.o $(LIBDIR)/libCollections.a
+		$(CC) -o $(TESTDIR)/testListeChainee $^ $(LDFLAGS) -lCollections -lcunit
 
+$(TESTDIR)/testArbreBinaire: $(SRCTESTS)/testArbreBinaire.o $(LIBDIR)/libCollections.a
+		$(CC) -o $(TESTDIR)/testArbreBinaire $^ $(LDFLAGS) -lCollections -lcunit
+
+$(TESTDIR)/testCase: $(SRCTESTS)/testCase.o $(LIBDIR)/libGrille.a
+		$(CC) -o $(TESTDIR)/testCase $^ $(LDFLAGS) -lGrille -lcunit
+
+$(TESTDIR)/testEnsemble: $(SRCTESTS)/testEnsemble.o $(LIBDIR)/libCollections.a
+		$(CC) -o $(TESTDIR)/testEnsemble $^ $(LDFLAGS) -lCollections -lcunit
+
+$(TESTDIR)/testDictionnaire: $(SRCTESTS)/testDictionnaire.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCollections.a $(LIBDIR)/libTools.a
+		$(CC) -o $(TESTDIR)/testDictionnaire $^ $(LDFLAGS) -lDictionnaire -lCollections -lTools -lcunit
+
+$(TESTDIR)/testCasesContigues: $(SRCTESTS)/testCasesContigues.o $(LIBDIR)/libGrille.a $(LIBDIR)/libCollections.a
+		$(CC) -o $(TESTDIR)/testCasesContigues $^ $(LDFLAGS) -lGrille -lCollections -lcunit
+
+$(TESTDIR)/testMot: $(SRCTESTS)/testMot.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCollections.a
+		$(CC) -o $(TESTDIR)/testMot $^ $(LDFLAGS) -lDictionnaire -lCollections -lcunit
+
+$(TESTDIR)/testGrille: $(SRCTESTS)/testGrille.o $(LIBDIR)/libGrille.a
+		$(CC) -o $(TESTDIR)/testGrille $^ $(LDFLAGS) -lGrille -lcunit
+
+testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCollections.a
+		$(CC) -o $(TESTDIR)/testPerformance $^ $(LDFLAGS) -lDictionnaire -lCollections
+
+# bibliothèques
 $(LIBDIR)/libTools.a : $(SRCDIR)/tools.o
 	$(AR) -r $@ $^
 
-$(LIBDIR)/libListeChainee.a : $(SRCDIR)/ListeChainee.o
-	$(AR) -r $@ $^
-
-$(LIBDIR)/libArbreBinaire.a : $(SRCDIR)/ArbreBinaire.o
-	$(AR) -r $@ $^
-
-$(LIBDIR)/libEnsemble.a : $(SRCDIR)/Ensemble.o
-		$(AR) -r $@ $^
-
-$(LIBDIR)/libCase.a : $(SRCDIR)/Case.o $(SRCDIR)/CasesContigues.o
+$(LIBDIR)/libCollections.a : $(SRCDIR)/ListeChainee.o $(SRCDIR)/ArbreBinaire.o $(SRCDIR)/Ensemble.o
 	$(AR) -r $@ $^
 
 $(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o $(SRCDIR)/Mot.o
 	$(AR) -r $@ $^
 
-$(LIBDIR)/libMot.a : $(SRCDIR)/Mot.o
-	$(AR) -r $@ $^
-
-$(LIBDIR)/libGrille.a : $(SRCDIR)/Grille.o $(SRCDIR)/Case.o
+$(LIBDIR)/libGrille.a : $(SRCDIR)/Grille.o $(SRCDIR)/Case.o $(SRCDIR)/CasesContigues.o
 		$(AR) -r $@ $^
 
 $(SRCDIR)/%.o : $(SRCDIR)/%.c
