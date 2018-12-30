@@ -30,7 +30,7 @@ void test_LC_fixer(void){
   LC_ListeChainee lc = LC_allouer();
   LC_ListeChainee temp = LC_listeVide();
   char lettre ='a';
-  LC_fixerElement(lc,&lettre);
+  LC_fixerElement(lc,&lettre,sizeof(char));
   LC_fixerListeSuivante(lc,temp);
   CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
   LC_supprimer(&lc);

@@ -17,7 +17,7 @@ int LC_estPresent(LC_ListeChainee lc,Element unElement,size_t tailleElement);
 void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement);
 Element LC_obtenirElement(LC_ListeChainee);
 LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee);
-void LC_fixerElement(LC_ListeChainee,Element);
+void LC_fixerElement(LC_ListeChainee,Element,size_t tailleElement);
 void LC_fixerListeSuivante(LC_ListeChainee,LC_ListeChainee);
 void LC_supprimerTete(LC_ListeChainee*);
 void LC_supprimer(LC_ListeChainee*);

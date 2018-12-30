@@ -19,9 +19,7 @@ int LC_estVide(LC_ListeChainee lc){
 
 void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement){
   LC_ListeChainee temp = LC_allouer();
-  Element elementAjoute = malloc(tailleElement);
-  memcpy(elementAjoute,elementAAjouter,tailleElement);
-  LC_fixerElement(temp,elementAjoute);
+  LC_fixerElement(temp,elementAAjouter,tailleElement);
   LC_fixerListeSuivante(temp,*lc);
   *lc = temp;
 }
@@ -48,9 +46,11 @@ LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee lc){
   return lc->listeSuivante;
 }
 
-void LC_fixerElement(LC_ListeChainee lc,Element lElement){
+void LC_fixerElement(LC_ListeChainee lc,Element lElement,size_t tailleElement){
   assert (!LC_estVide(lc));
-  (lc)->element=lElement;
+  Element elementAjoute = malloc(tailleElement);
+  memcpy(elementAjoute,lElement,tailleElement);
+  (lc)->element=elementAjoute;
 }
 
 void LC_fixerListeSuivante(LC_ListeChainee lc,LC_ListeChainee lcSuivante){
