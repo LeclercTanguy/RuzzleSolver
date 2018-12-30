@@ -1,18 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "Dictionnaire.h"
+#include "tools.h"
 #define LONGUEUR_MAX_MOT 30
-
-void chaineEnMajuscule(char* chaine) {
-  int i = 0;
-  int min2maj = 'A'-'a';
-  while (chaine[i]!='\0') {
-    if ((chaine[i]>='a') && (chaine[i]<='z')) {
-      chaine[i]=chaine[i]+min2maj;
-    }
-    i++;
-  }
-}
 
 int main(int argc, char* argv[]) {
   if (argc==3) {

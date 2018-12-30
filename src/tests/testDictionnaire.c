@@ -1,5 +1,5 @@
 #include <CUnit/Basic.h>
-#include <comparer.h>
+#include "tools.h"
 #include "Dictionnaire.h"
 #include "Mot.h"
 
