@@ -15,7 +15,8 @@ LDFLAGS=-L$(LIBDIR)
 
 all : $(BINDIR)/ruzzleSolver $(BINDIR)/transcoder tests
 
-$(BINDIR)/ruzzleSolver :
+$(BINDIR)/ruzzleSolver : $(SRCDIR)/Ruzzle.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libGrille.a $(LIBDIR)/libCollections.a $(LIBDIR)/libTools.a
+	$(CC) -o $(BINDIR)/ruzzleSolver $^ $(LDFLAGS) -lDictionnaire -lGrille -lCollections -lTools
 
 $(BINDIR)/transcoder : $(SRCDIR)/transcoder.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libTools.a $(LIBDIR)/libCollections.a
 	$(CC) -o $(BINDIR)/transcoder $^ $(LDFLAGS) -lDictionnaire -lCollections -lTools
@@ -74,7 +75,7 @@ testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/li
 $(LIBDIR)/libTools.a : $(SRCDIR)/tools.o
 	$(AR) -r $@ $^
 
-$(LIBDIR)/libCollections.a : $(SRCDIR)/ListeChainee.o $(SRCDIR)/ArbreBinaire.o $(SRCDIR)/Ensemble.o
+$(LIBDIR)/libCollections.a : $(SRCDIR)/ListeChainee.o $(SRCDIR)/ArbreBinaire.o $(SRCDIR)/Ensemble.o $(SRCDIR)/ABR.o
 	$(AR) -r $@ $^
 
 $(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o $(SRCDIR)/Mot.o

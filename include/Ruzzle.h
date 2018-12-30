@@ -18,7 +18,6 @@ typedef struct {
   unsigned short nbPoints;
 } MotRuzzle;
 
-void ruzzleSolver(void);
 Grille chaineEnGrille(char* chaine);
 void trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico, Grille* g, Mot* prefixe, CasesContigues* cheminRuzzle, SolutionRuzzle resultat);
 void afficherResultat(SolutionRuzzle resultat);
