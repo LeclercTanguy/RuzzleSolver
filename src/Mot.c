@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "Mot.h"
 #include "Dictionnaire.h"
+#include "ListeChainee.h"
 
 
 Mot Mot_creerMot(void){
