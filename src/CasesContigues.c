@@ -1,36 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "CaseContigue.h"
+#include "CasesContigues.h"
 #include "ListeChainee.h"
 
-CaseContigue CC_creer_CasesContigues(void){
+CasesContigues CC_creer_CasesContigues(void){
   int nombreCases=0;
   LC_ListeChainee listeDeCases= LC_listeVide();
 
-  CaseContigue desCasesContigues;
+  CasesContigues desCasesContigues;
   desCasesContigues.nbCases=nombreCases;
   desCasesContigues.listeCases=listeDeCases;
 
   return desCasesContigues;
 }
 
-void CC_ajouterCase(CaseContigue* desCasesContigues,Case uneCase){
+void CC_ajouterCase(CasesContigues* desCasesContigues,Case uneCase){
   LC_ajouter(&(*desCasesContigues).listeCases, &uneCase, sizeof(Case));
   (*desCasesContigues).nbCases=(*desCasesContigues).nbCases+1;
 }
 
-void CC_suprimmerCase(CaseContigue* desCasesContigues){
+void CC_suprimerCase(CasesContigues* desCasesContigues){
   LC_supprimerTete(&(*desCasesContigues).listeCases);
   (*desCasesContigues).nbCases=(*desCasesContigues).nbCases-1;
 }
 
-int CC_nbCaseContigue(CaseContigue desCasesContigues){
+int CC_nbCasesContigues(CasesContigues desCasesContigues){
   int nombreCases=desCasesContigues.nbCases;
   return nombreCases;
 }
 
-char* CC_CaseContigueEnChaine(CaseContigue desCasesContigues){
+char* CC_CasesContiguesEnChaine(CasesContigues desCasesContigues){
   LC_ListeChainee listeDeCases=desCasesContigues.listeCases;
   char* chaine = "";
     while (!LC_estVide(listeDeCases)){

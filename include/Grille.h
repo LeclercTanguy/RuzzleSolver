@@ -2,12 +2,12 @@
 #define __GRILLE__
 #include "Case.h"
 
-typedef struct Grille {
+typedef struct {
     Case tab[4][4];
-}
+} Grille;
 
 
-G_grille G_grille();
+Grille G_grille();
 Case G_obtenirCase(Grille ,int,int);
 void G_FixerCase(Grille,int,int);
 int G_EstUtilise(Grille,int,int);
