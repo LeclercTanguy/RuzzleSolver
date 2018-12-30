@@ -4,41 +4,38 @@
 #include "Case.h"
 
 Grille G_grille(void){
-    Case Casevide;
-    CASE_fixerLettre(&Casevide,'Z');
-    CASE_fixerBonus(&Casevide,LD);
-    CASE_fixerPosition(&Casevide,0,0);
-    CASE_fixerNbPoints(&Casevide,0);
-    Grille grille_vide;
+    Grille grilleVide;
     int i,j;
-    for (i = 1; i < 4; i++) {
-        for ( j = 1; j < 4; j++) {
-            grille_vide.grille[i][j] = Casevide;
-            grille_vide.utilise[i][j]= 0;
+    for (i = 0; i < 4; i++) {
+        for ( j = 0; j < 4; j++) {
+            Case caseVide;
+            CASE_fixerPosition(&caseVide,i+1,j+1);
+            grilleVide.grille[i][j] = caseVide;
+            grilleVide.utilisee[i][j]= 0;
         }
 
     }
-    return grille_vide;
+    return grilleVide;
 }
 
 Case G_obtenirCase(Grille laGrille,int posx,int posy){
-    return laGrille.grille[posx][posy];
+    return laGrille.grille[posx-1][posy-1];
 }
 
-void G_FixerCase(Grille* laGrille,Case uneCase,int posx,int posy){
-    (*laGrille).grille[posx][posy] = uneCase;
+void G_fixerCase(Grille* laGrille,Case uneCase,int posx,int posy){
+    (*laGrille).grille[posx-1][posy-1] = uneCase;
 }
 
 void G_debutUtilisation(Grille* laGrille,int posx,int posy){
-    (*laGrille).utilise[posx][posy] = 1;
+    (*laGrille).utilisee[posx-1][posy-1] = 1;
 
 }
 
 void G_finUtilisation(Grille* laGrille,int posx,int posy){
-    (*laGrille).utilise[posx][posy] = 0;
+    (*laGrille).utilisee[posx-1][posy-1] = 0;
 
 }
 
-int G_EstUtilise(Grille laGrille,int posx,int posy){
-    return laGrille.utilise[posx][posy];
+int G_estUtilisee(Grille laGrille,int posx,int posy){
+    return laGrille.utilisee[posx-1][posy-1];
 }

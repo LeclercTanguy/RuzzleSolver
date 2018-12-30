@@ -10,7 +10,7 @@ void test_G_Case(void){
     char lettre = 'T';
     CASE_fixerLettre(&uneCase, lettre);
     Grille uneGrille=G_grille();
-    G_FixerCase(&uneGrille,uneCase,2,2);
+    G_fixerCase(&uneGrille,uneCase,2,2);
     casetest=G_obtenirCase(uneGrille,2,2);
     CU_ASSERT_TRUE(CASE_obtenirLettre(casetest)==CASE_obtenirLettre(uneCase));
 
@@ -19,13 +19,13 @@ void test_G_Case(void){
 void test_G_debutUtilisation(void){
     Grille uneGrille=G_grille();
     G_debutUtilisation(&uneGrille,1,1);
-    CU_ASSERT_TRUE(G_EstUtilise(uneGrille,1,1)==1);
+    CU_ASSERT_TRUE(G_estUtilisee(uneGrille,1,1)==1);
 }
 
 void test_G_finUtilisation(void){
     Grille uneGrille=G_grille();
     G_finUtilisation(&uneGrille,1,1);
-    CU_ASSERT_TRUE(G_EstUtilise(uneGrille,1,1)==0);
+    CU_ASSERT_TRUE(G_estUtilisee(uneGrille,1,1)==0);
 }
 
 
