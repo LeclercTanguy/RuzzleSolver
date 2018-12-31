@@ -14,6 +14,8 @@ void test_RZ_chaineEnBonus() {
   CU_ASSERT_TRUE(!err && (leBonus==MD));
   err = (RZ_chaineEnBonus("MT",&leBonus));
   CU_ASSERT_TRUE(!err && (leBonus==MT));
+  err = (RZ_chaineEnBonus("TW",&leBonus));
+  CU_ASSERT_TRUE(!err && (leBonus==MT));
   err = (RZ_chaineEnBonus("TEST",&leBonus));
   CU_ASSERT_TRUE(err);
   err = (RZ_chaineEnBonus("L",&leBonus));
@@ -29,6 +31,8 @@ void test_RZ_chaineEnGrille() {
   CU_ASSERT_TRUE(err);
   err = RZ_chaineEnGrille("XXLDR1  A1  S1MTE1LTN1  C3LTE1  U1  R1  I1  L2MDS1  O1MDP3  S1  ",&grilleRuzzle);
   CU_ASSERT_TRUE(err);
+  err = RZ_chaineEnGrille("T1DLR1  A1  S1TWE1TLN1  C3TLE1  U1  R1  I1  L2DWS1  O1DWP3  S1  ",&grilleRuzzle);
+  CU_ASSERT_FALSE(err); //compatibilité notation anglaise
   err = RZ_chaineEnGrille("T1LDR1  A1  S1MTE1LTN1  C3LTE1  U1  R1  I1  L2MDS1  O1MDP3  S1  ",&grilleRuzzle);
   CU_ASSERT_FALSE(err);
   Case caseTest = G_obtenirCase(grilleRuzzle,3,2);

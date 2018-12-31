@@ -13,16 +13,16 @@ int RZ_chaineEnBonus(char* chaine, Bonus* leBonus) {
       if (strncmp(chaine,"  ",2)==0) {
         *leBonus = AB; //pas de bonus
         return 0;
-      } else if (strncmp(chaine,"LD",2)==0) {
+      } else if ((strncmp(chaine,"LD",2)==0) || (strncmp(chaine,"DL",2)==0)){
         *leBonus = LD; //lettre compte double
         return 0;
-      } else if (strncmp(chaine,"LT",2)==0) {
+      } else if ((strncmp(chaine,"LT",2)==0) || (strncmp(chaine,"TL",2)==0)){
         *leBonus = LT; //lettre compte triple
         return 0;
-      } else if (strncmp(chaine,"MD",2)==0) {
+      } else if ((strncmp(chaine,"MD",2)==0) || (strncmp(chaine,"DW",2)==0)){
         *leBonus = MD; //mot compte double
         return 0;
-      } else if (strncmp(chaine,"MT",2)==0) {
+      } else if ((strncmp(chaine,"MT",2)==0) || (strncmp(chaine,"TW",2)==0)) {
         *leBonus = MT; //mot compte triple
         return 0;
       } else {

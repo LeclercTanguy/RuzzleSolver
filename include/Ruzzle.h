@@ -6,7 +6,6 @@
 #include "Dictionnaire.h"
 #include "Mot.h"
 #include "CasesContigues.h"
-#include "Ensemble.h"
 
 typedef struct {
   ABR motsTrouves; //ABR de MotRuzzle
@@ -19,10 +18,12 @@ typedef struct {
 } MotRuzzle;
 
 /**
-* \brief permet de convertir une chaîne de 2 caractères en un Bonus utilisé dans une case de la grille de Ruzzle
+* \brief Permet de convertir une chaîne de 2 caractères en un Bonus utilisé dans une Case de la Grille de Ruzzle.
 *
 * Si la chaîne fait plus de deux caractères, seul les 2 premiers sont utilisés.
 * \author Yves LE GUENNEC
+* \version 1.1
+* \diff Prise en compte des notations du jeu Ruzzle (DL, TL, DW, TW) pour faciliter la saisie de la Grille
 * \param chaine la chaîne à convertir en Bonus
 * \param leBonus le Bonus obtenu à partir de la chaîne
 * \return  0 : pas d'erreur,
@@ -39,7 +40,7 @@ int RZ_chaineEnBonus(char* chaine, Bonus* leBonus);
 *   et les deux derniers représentent le Bonus (LD, LT, MD, MT, ou deux espaces s'il n'y a pas de bonus).
 *   Les cases sont prises par ligne puis par colonne.
 * \param grilleRuzzle un pointeur sur une Grille, qui est remplie tel que décrite dans la chaîne.
-*   Pensez à vérifier que la procédure n'a pas retourné d'erreur avant d'utiliser la Grille produite.
+* \warning Pensez à vérifier que la procédure n'a pas retourné d'erreur avant d'utiliser la Grille produite.
 * \return  0 : pas d'erreur,
 *         -1 : la chaine n'a pas la taille attendue,
 *          1 : caractère inattendu dans la chaine
