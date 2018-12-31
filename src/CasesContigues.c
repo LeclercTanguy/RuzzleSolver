@@ -40,3 +40,7 @@ char* CC_CasesContiguesEnChaine(CasesContigues desCasesContigues){
     }
     return chaine;
 }
+
+unsigned int CC_totalPointsCasesContigues(CasesContigues suiteCase) {
+  return 0;
+}
