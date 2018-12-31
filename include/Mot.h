@@ -16,7 +16,7 @@ typedef struct Mot_Lettre{
 }Mot_Lettre;
 
 Mot Mot_creerMot (void);
-int Mot_estVide(Mot leMot);
+bool Mot_estVide(Mot leMot);
 unsigned int Mot_obtenirTaille(Mot leMot);
 Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot);
 void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico);

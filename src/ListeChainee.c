@@ -2,8 +2,6 @@
 #include <assert.h>
 #include <string.h>
 #include "ListeChainee.h"
-#define TRUE 1
-#define FALSE 0
 
 LC_ListeChainee LC_listeVide(void){
   return NULL;
@@ -13,7 +11,7 @@ LC_ListeChainee LC_allouer(void) {
   return (LC_ListeChainee)malloc(sizeof(LC_Noeud));
 }
 
-int LC_estVide(LC_ListeChainee lc){
+bool LC_estVide(LC_ListeChainee lc){
     return lc==NULL;
 }
 
@@ -24,12 +22,12 @@ void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement
   *lc = temp;
 }
 
-int LC_estPresent(LC_ListeChainee lc,Element unElement,size_t tailleElement){
+bool LC_estPresent(LC_ListeChainee lc,Element unElement,size_t tailleElement){
   if (LC_estVide(lc)){
-    return FALSE;
+    return false;
   }else{
     if (!memcmp(LC_obtenirElement(lc),unElement,tailleElement)){
-      return TRUE;
+      return true;
     }else{
       return LC_estPresent(LC_obtenirListeSuivante(lc),unElement,tailleElement);
     }

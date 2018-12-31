@@ -95,10 +95,10 @@ void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat
 
 }
 
-int RZ_comparerMotRuzzle(MotRuzzle* mot1, MotRuzzle* mot2) {
+bool RZ_estInferieur(MotRuzzle* mot1, MotRuzzle* mot2) {
   if ((mot1->nbPoints)<(mot2->nbPoints)) {
-    return 1;
+    return true;
   } else {
-    return 0;
+    return false;
   }
 }

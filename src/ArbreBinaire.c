@@ -7,7 +7,7 @@ ArbreBinaire AB_arbreBinaire(){
     return NULL;
 }
 
-int AB_estVide(ArbreBinaire a){
+bool AB_estVide(ArbreBinaire a){
     return a==NULL;
 }
 

@@ -4,8 +4,6 @@
 #include "ArbreBinaire.h"
 #include "Ensemble.h"
 #include "Dictionnaire.h"
-#define TRUE 1
-#define FALSE 0
 
 Dictionnaire DC_creerDictionnaire(void) {
   return AB_arbreBinaire();
@@ -15,7 +13,7 @@ Dictionnaire* DC_allouer(void) {
   return (Dictionnaire*)AB_allouer();
 }
 
-int DC_estVide(Dictionnaire dico) {
+bool DC_estVide(Dictionnaire dico) {
   return AB_estVide(dico);
 }
 
@@ -46,7 +44,7 @@ void DC_ajouterMot_R(Dictionnaire* dico, char* leMot, int* finDuMot) {
 }
 
 void DC_ajouterMot(Dictionnaire* dico, char* leMot) {
-  int finDuMot = FALSE;
+  int finDuMot = false;
   DC_ajouterMot_R(dico,leMot,&finDuMot);
 }
 
@@ -116,12 +114,12 @@ void DC_supprimer(Dictionnaire* dico) {
   AB_supprimer(dico);
 }
 
-int DC_estUnPrefixe(Dictionnaire dico, char* chaine) {
+bool DC_estUnPrefixe(Dictionnaire dico, char* chaine) {
   if (DC_estVide(dico)) {
     //la chaîne est plus longue que le plus long mot du dictionnaire
-    return FALSE;
+    return false;
   } else if (chaine[0]=='\0') {
-    return TRUE; //on est à la fin de la chaine, c'est donc un préfixe
+    return true; //on est à la fin de la chaine, c'est donc un préfixe
   } else if (*(char*)AB_obtenirElement(dico)==chaine[0]) {
     //le caractère est dans le dictionnaire, on passe au suivant
     return DC_estUnPrefixe(AB_obtenirFilsGauche(dico),chaine+1);
@@ -130,7 +128,7 @@ int DC_estUnPrefixe(Dictionnaire dico, char* chaine) {
     return DC_estUnPrefixe(AB_obtenirFilsDroit(dico),chaine);
   } else {
     //le caractère est plus petit, le début de la chaîne n'est pas dans le dictionnaire
-    return FALSE;
+    return false;
   }
 }
 
@@ -160,7 +158,7 @@ Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre, 
   return DC_obtenirReferenceLettre_R(dicoSuivant,lettre);
 }
 
-int DC_estUnMotComplet(Mot prefixe) {
+bool DC_estUnMotComplet(Mot prefixe) {
   assert(!Mot_estVide(prefixe));
   Dictionnaire refDico = Mot_obtenirReferenceDictionnaire(prefixe);
   return *(char*)AB_obtenirElement(AB_obtenirFilsGauche(refDico))=='\0';

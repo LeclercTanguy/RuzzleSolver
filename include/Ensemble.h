@@ -17,43 +17,40 @@ typedef struct Ens_Ensemble {
 
 /**
  *\brief création d'un ensemble LC_estVide
- *\param  aucun paramètre d'entrée
- *\return Ens_Ensemble
+ *\return un ensemble vide
 */
-
 Ens_Ensemble Ens_ensemble(void);
 
 /**
  *\brief nous permet d'obtenir la liste chainée d'éléments
- *\param  Ens_Ensemble , l'ensemble dont on veux les éléments
- *\return LC_ListeChainee
+ *\param ens l'ensemble dont on veux les éléments
+ *\return la liste chainée des éléments
 */
-
-LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble);
+LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble ens);
 
 /**
-  *\brief Permet d'obtenir le nombre délement contenue dans un Ensemble
-  *\param il prend l'ensemble dont on veut connaitre le nombre déléments en entrer
-  *\return il nous rend un interger, le nombre d'élément
+  *\brief Permet d'obtenir le nombre d'élements contenus dans un Ensemble
+  *\param ens l'ensemble dont on veut connaître le nombre d'éléments
+  *\return le nombre d'éléments de l'ensemble
 */
-
-int Ens_obtenirNbElements(Ens_Ensemble);
+int Ens_obtenirNbElements(Ens_Ensemble ens);
 
 /**
-  *\brief Permet d'ajouter un élément à un Ensemble
-  *\param il prend  un pointer vers la case mémoire d'un ensemble l'élément à ajouter et la taille de l'élément
-  *\return ici l'ensemble est en Entrer-Sortie.
+  *\brief Permet d'ajouter un Element à un Ensemble
+  *\param ens un pointer vers l'ensemble à modifier
+  *\param element l'élément à ajouter
+  *\param tailleElement la taille de l'élément
 */
-
-void Ens_ajouter(Ens_Ensemble*,Element,size_t tailleElement);
+void Ens_ajouter(Ens_Ensemble* ens,Element element,size_t tailleElement);
 
 /**
-  *\brief permet de savoir si un element est present dans un Ensemble
-  *\param Pour cela on a besoin de l'Esemble, de l'element à rechercher et de ça taille
+  *\brief permet de savoir si un element est présent dans un Ensemble
+  *\param ens l'ensemble à tester
+  *\param element l'élement à rechercher dans l'ensemble
+  *\param tailleElement la taille de l'élément
   *\return VRAI(1) si l'élément est présent, FAUX(0) sinon
 */
-
-int Ens_estPresent(Ens_Ensemble,Element,size_t tailleElement);
+bool Ens_estPresent(Ens_Ensemble ens, Element element,size_t tailleElement);
 void Ens_ajouterElementsDUneAutreListe(Ens_Ensemble*,LC_ListeChainee,size_t tailleElement);
 Ens_Ensemble Ens_union(Ens_Ensemble,Ens_Ensemble,size_t tailleElement);
 void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble*,LC_ListeChainee,Ens_Ensemble,size_t tailleElement);

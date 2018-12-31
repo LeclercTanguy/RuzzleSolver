@@ -25,7 +25,7 @@ void Ens_ajouter(Ens_Ensemble* ens,Element element,size_t tailleElement){
   ens->nbElements=Ens_obtenirNbElements(*ens)+1;
 }
 
-int Ens_estPresent(Ens_Ensemble ens, Element element,size_t tailleElement){
+bool Ens_estPresent(Ens_Ensemble ens, Element element,size_t tailleElement){
   LC_ListeChainee listemp;
   listemp = Ens_obtenirLesElements(ens);
   return LC_estPresent(listemp,element,tailleElement);

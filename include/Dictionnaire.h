@@ -8,7 +8,7 @@
 
 #ifndef __DICTIONNAIRE__
 #define __DICTIONNAIRE__
-
+#include <stdbool.h>
 #include "Ensemble.h"
 #include "ArbreBinaire.h"
 
@@ -38,7 +38,7 @@ Dictionnaire DC_creerDictionnaire(void);
   * \param dico Le Dictionnaire que l'on veut tester
   * \return VRAI (1) si le Dictionnaire est vide, FAUX (0) sinon
 */
-int DC_estVide(Dictionnaire dico);
+bool DC_estVide(Dictionnaire dico);
 
 /**
   * \brief Permet d'ajouter un mot dans le Dictionnaire
@@ -67,7 +67,7 @@ void DC_supprimer(Dictionnaire* dico);
   * \param chaine la chaîne pouvant être un préfixe d'un mot du Dictionnaire
   * \return VRAI (1) si la chaîne est un préfixe, FAUX (0) sinon
 */
-int DC_estUnPrefixe(Dictionnaire dico, char* chaine);
+bool DC_estUnPrefixe(Dictionnaire dico, char* chaine);
 
 /**
   * \brief Permet d'obtenir les références des lettres dans le Dictionnaire afin de convertir une chaîne en Mot
@@ -86,7 +86,7 @@ Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre, 
   * Le dictionnaire est déjà accessible par l'intermédiaire du Mot
   * \return VRAI (1) si le préfixe est un mot du Dictionnaire, FAUX (0) sinon
 */
-int DC_estUnMotComplet(Mot prefixe);
+bool DC_estUnMotComplet(Mot prefixe);
 
 /**
   * \brief Permet de savoir quelles lettres peuvent être ajoutées au préfixe pour former un nouveau préfixe du Dictionnaire

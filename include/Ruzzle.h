@@ -62,6 +62,6 @@ void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat
 * \param mot2 un pointeur vers le deuxième mot à comparer
 * \return VRAI (1) si mot1<mot2, FAUX (0) sinon
 */
-int RZ_comparerMotRuzzle(MotRuzzle* mot1, MotRuzzle* mot2);
+bool RZ_estInferieur(MotRuzzle* mot1, MotRuzzle* mot2);
 
 #endif

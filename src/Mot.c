@@ -22,7 +22,7 @@ char Mot_obtenirLettre(Mot_Lettre motLettre){
 }
 
 
-int Mot_estVide(Mot leMot){
+bool Mot_estVide(Mot leMot){
   return LC_estVide(Mot_obtenirLesElements(leMot));
 }
 
