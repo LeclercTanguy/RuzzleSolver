@@ -35,7 +35,7 @@ int RZ_chaineEnBonus(char* chaine, Bonus* leBonus) {
 
 int RZ_chaineEnGrille(char* chaine, Grille* grilleRuzzle) {
   int err = 0;
-  if (strlen(chaine)==16) {
+  if (strlen(chaine)==16*4) {
     unsigned short numCase = 0;
     unsigned short posX,posY;
     *grilleRuzzle = G_grille();
@@ -44,6 +44,7 @@ int RZ_chaineEnGrille(char* chaine, Grille* grilleRuzzle) {
     while ((numCase<16) && !err) {
       numCase++;
       posX = numCase % 4;
+      if (posX==0) {posX=4;}
       posY = ((numCase-1)/4)+1;
       laCase = G_obtenirCase(*grilleRuzzle,posX,posY);
       //on fixe la lettre

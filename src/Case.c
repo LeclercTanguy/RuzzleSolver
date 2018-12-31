@@ -30,26 +30,21 @@ void CASE_fixerPosition(Case* uneCase, unsigned short positionX, unsigned short 
 }
 
 char CASE_obtenirLettre(Case uneCase){
-  char laLettre = uneCase.lettre;
-  return laLettre;
+  return uneCase.lettre;
 }
 
 unsigned short CASE_obtenirNbPoints(Case uneCase){
-  unsigned short leNBPoints = uneCase.nbPoints;
-  return leNBPoints;
+  return uneCase.nbPoints;
 }
 
 Bonus CASE_obtenirBonus(Case uneCase){
-  Bonus leBonus = uneCase.bonus;
-  return leBonus;
+  return uneCase.bonus;
 }
 
 unsigned short CASE_obtenirPositionX(Case uneCase){
-  unsigned short positionX = uneCase.posX;
-  return positionX;
+  return uneCase.posX;
 }
 
 unsigned short CASE_obtenirPositionY(Case uneCase){
-  unsigned short positionY = uneCase.posY;
-  return positionY;
+  return uneCase.posY;
 }

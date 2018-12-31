@@ -16,13 +16,25 @@ void test_RZ_chaineEnBonus() {
   CU_ASSERT_TRUE(!err && (leBonus==MT));
   err = (RZ_chaineEnBonus("TEST",&leBonus));
   CU_ASSERT_TRUE(err);
-  err = (RZ_chaineEnBonus("1",&leBonus));
+  err = (RZ_chaineEnBonus("L",&leBonus));
   CU_ASSERT_TRUE(err);
   err = (RZ_chaineEnBonus("RZ",&leBonus));
   CU_ASSERT_TRUE(err);
 }
 
 void test_RZ_chaineEnGrille() {
+  int err;
+  Grille grilleRuzzle;
+  err = RZ_chaineEnGrille("TEST",&grilleRuzzle);
+  CU_ASSERT_TRUE(err);
+  err = RZ_chaineEnGrille("XXLDR1  A1  S1MTE1LTN1  C3LTE1  U1  R1  I1  L2MDS1  O1MDP3  S1  ",&grilleRuzzle);
+  CU_ASSERT_TRUE(err);
+  err = RZ_chaineEnGrille("T1LDR1  A1  S1MTE1LTN1  C3LTE1  U1  R1  I1  L2MDS1  O1MDP3  S1  ",&grilleRuzzle);
+  CU_ASSERT_FALSE(err);
+  Case caseTest = G_obtenirCase(grilleRuzzle,3,2);
+  CU_ASSERT_TRUE(CASE_obtenirLettre(caseTest)=='C');
+  CU_ASSERT_TRUE(CASE_obtenirNbPoints(caseTest)==3);
+  CU_ASSERT_TRUE(CASE_obtenirBonus(caseTest)==LT);
 }
 
 int main(int argc, char* argv[]){
