@@ -53,15 +53,24 @@ void RZ_afficherResultat(SolutionRuzzle resultat);
 
 Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short posY, Grille g);
 
+/**
+* \brief insère un mot trouvé dans la grille Ruzzle dans la solution
+* \author Yves LE GUENNEC
+* \param cheminRuzzle le mot trouvé dans la grille Ruzzle, stocké sous forme de CasesContigues
+* \param resultat un pointeur vers la solution à mettre à jour
+*/
 void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat);
 
 /**
-* \brief permet de comparer deux MotRuzzle, en se basant sur le nombre de points associé à chaque mot
+* \brief permet de comparer deux MotRuzzle afin d'être utilisée dans des fonctions génériques.
+* La comparaison se base sur le nombre de points associé à chaque mot, et, en cas d'égalité, sur le mot lui même.
 * \author Yves LE GUENNEC
-* \param mot1 un pointeur vers le premier mot à comparer (pour correspondre au type générique Element)
-* \param mot2 un pointeur vers le deuxième mot à comparer
-* \return VRAI (1) si mot1<mot2, FAUX (0) sinon
+* \param mr1 un pointeur vers le premier mot à comparer (pour correspondre au type générique Element)
+* \param mr2 un pointeur vers le deuxième mot à comparer
+* \return un nombre négatif si mr1<mr2,
+          0 si les deux mots sont identiques
+          un nombre positif si mr1>mr2;
 */
-bool RZ_estInferieur(MotRuzzle* mot1, MotRuzzle* mot2);
+int RZ_comparerMotRuzzle(Element mr1, Element mr2);
 
 #endif

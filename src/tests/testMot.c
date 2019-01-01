@@ -7,7 +7,7 @@
 
 void test_Mot_creerMot(void){
   Mot leMot = Mot_creerMot();
-  CU_ASSERT_TRUE((Mot_estVide(leMot))&& (Mot_obtenirTaille(leMot) ==0));
+  CU_ASSERT_TRUE((Mot_estVide(leMot))&& (Mot_obtenirTaille(leMot)==0));
 }
 
 void test_Mot_ajouterLettre(void){

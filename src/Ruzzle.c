@@ -92,13 +92,25 @@ Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short 
 }
 
 void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat) {
-
+  MotRuzzle nouveauMot;
+  nouveauMot.mot = CC_CasesContiguesEnChaine(cheminRuzzle);
+  nouveauMot.nbPoints = CC_totalPointsCasesContigues(cheminRuzzle);
+  (resultat->nbMots)++;
+  ABR_inserer(&(resultat->motsTrouves),&nouveauMot,RZ_comparerMotRuzzle);
 }
 
-bool RZ_estInferieur(MotRuzzle* mot1, MotRuzzle* mot2) {
-  if ((mot1->nbPoints)<(mot2->nbPoints)) {
-    return true;
-  } else {
-    return false;
+int RZ_comparerMotRuzzle(Element mr1, Element mr2) {
+  //Element pour compatibilité avec les fonctions génériques (sinon warning lors de la compilation)
+  unsigned short nbPointsMot1 = ((MotRuzzle*)mr1)->nbPoints;
+  unsigned short nbPointsMot2 = ((MotRuzzle*)mr2)->nbPoints;
+  if (nbPointsMot1<nbPointsMot2) {
+    return -1;
+  } else if (nbPointsMot1>nbPointsMot2) {
+    return 1;
+  } else { //si le nombre de points est identique, on compare les mots associés
+    char* mot1 = ((MotRuzzle*)mr1)->mot;
+    char* mot2 = ((MotRuzzle*)mr1)->mot;
+    return strcmp(mot1,mot2);
+    }
   }
 }

@@ -26,9 +26,9 @@ bool Mot_estVide(Mot leMot){
   return LC_estVide(Mot_obtenirLesElements(leMot));
 }
 
-Dictionnaire Mot_obtenirReferenceDictionnaire(Mot leMot){
+Dictionnaire Mot_obtenirDerniereReferenceDictionnaire(Mot leMot){
   if (!Mot_estVide(leMot)) {
-    return (*(Mot_Lettre*)LC_obtenirElement(leMot.lettres)).refDico;
+    return (*(Mot_Lettre*)LC_obtenirElement(Mot_obtenirLesElements(leMot))).refDico;
   } else {
     return NULL;
   }
@@ -38,15 +38,22 @@ unsigned int Mot_obtenirTaille(Mot leMot){
   return leMot.taille;
 }
 
-void Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico){
+int Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico){
+  int err = 0;
   Mot_Lettre motLettre;
   LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(*leMot);
-  Dictionnaire refPrecedente = Mot_obtenirReferenceDictionnaire(*leMot);
+  Dictionnaire refPrecedente = Mot_obtenirDerniereReferenceDictionnaire(*leMot);
   motLettre.lettre = lettre;
-  motLettre.refDico = DC_obtenirReferenceLettre(refPrecedente,lettre,dico);
+  Dictionnaire  refDico = DC_obtenirReferenceLettre(refPrecedente,lettre,dico);
+  if (refDico!=NULL) {
+    motLettre.refDico = refDico;
+  } else {
+    err = 1;
+  }
   LC_ajouter(&laListeDeLettre,&motLettre,sizeof(Mot_Lettre));
   leMot->lettres=laListeDeLettre;
   leMot->taille=Mot_obtenirTaille(*leMot)+1;
+  return err;
 }
 
 void Mot_retirerLettre(Mot* leMot){

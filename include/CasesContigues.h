@@ -13,6 +13,6 @@ void CC_ajouterCase(CasesContigues*,Case);
 void CC_suprimerCase(CasesContigues*);
 int CC_nbCasesContigues(CasesContigues);
 char* CC_CasesContiguesEnChaine(CasesContigues); //Doit retourner une chaine de caractere
-unsigned int totalPointsCasesContigues(CasesContigues);
+unsigned int CC_totalPointsCasesContigues(CasesContigues);
 
 #endif

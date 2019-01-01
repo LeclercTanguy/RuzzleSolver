@@ -70,7 +70,7 @@ Dictionnaire DC_obtenirFilsPrecedent(Dictionnaire pere, Dictionnaire fils, Dicti
 
 void DC_supprimerMot_R(Dictionnaire* dico, Mot* motASupprimer) {
   assert(!Mot_estVide(*motASupprimer));
-  Dictionnaire fils = Mot_obtenirReferenceDictionnaire(*motASupprimer);
+  Dictionnaire fils = Mot_obtenirDerniereReferenceDictionnaire(*motASupprimer);
   Dictionnaire fg = AB_obtenirFilsGauche(fils);
   Dictionnaire fd = AB_obtenirFilsDroit(fils);
   if (DC_estVide(fg)) {
@@ -79,7 +79,7 @@ void DC_supprimerMot_R(Dictionnaire* dico, Mot* motASupprimer) {
     Dictionnaire pere;
     Mot_retirerLettre(motASupprimer);
     if (!Mot_estVide(*motASupprimer)) {
-      pere = Mot_obtenirReferenceDictionnaire(*motASupprimer);
+      pere = Mot_obtenirDerniereReferenceDictionnaire(*motASupprimer);
     } else {
       pere = NULL;
     }
@@ -160,14 +160,14 @@ Dictionnaire DC_obtenirReferenceLettre(Dictionnaire refPrecedente, char lettre, 
 
 bool DC_estUnMotComplet(Mot prefixe) {
   assert(!Mot_estVide(prefixe));
-  Dictionnaire refDico = Mot_obtenirReferenceDictionnaire(prefixe);
+  Dictionnaire refDico = Mot_obtenirDerniereReferenceDictionnaire(prefixe);
   return *(char*)AB_obtenirElement(AB_obtenirFilsGauche(refDico))=='\0';
 }
 
 Ens_Ensemble DC_obtenirLettresSuivantes(Mot prefixe) {
   assert(!Mot_estVide(prefixe));
   Ens_Ensemble lettresSuivantes = Ens_ensemble();
-  Dictionnaire dico = Mot_obtenirReferenceDictionnaire(prefixe);
+  Dictionnaire dico = Mot_obtenirDerniereReferenceDictionnaire(prefixe);
   char lettre;
   dico = AB_obtenirFilsGauche(dico);
   while (!DC_estVide(dico)) {
@@ -228,11 +228,11 @@ int DC_charger(char *nomFichier, Dictionnaire* dico) {
   FILE* data = fopen (nomFichier,"r");
   if (data!=NULL) {
     *dico = DC_creerDictionnaire();
-    // if (DC_estVide(*dico)) {
-    //   *dico = DC_creerDictionnaire();
-    // } else {
-    //   DC_supprimer(dico);
-    // }
+    if (DC_estVide(*dico)) {
+      *dico = DC_creerDictionnaire();
+    } else {
+      DC_supprimer(dico);
+    }
     DC_charger_R(dico,data);
     return fclose(data);
   } else {
