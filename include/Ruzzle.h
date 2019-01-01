@@ -17,6 +17,8 @@ typedef struct {
   unsigned short nbPoints;
 } MotRuzzle;
 
+SolutionRuzzle RZ_creerSolutionRuzzle(void);
+
 /**
 * \brief Permet de convertir une chaîne de 2 caractères en un Bonus utilisé dans une Case de la Grille de Ruzzle.
 *
