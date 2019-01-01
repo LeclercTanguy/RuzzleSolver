@@ -11,8 +11,8 @@
 
 SolutionRuzzle RZ_creerSolutionRuzzle(void){
   SolutionRuzzle solution;
-  resultat.motsTrouves= ABR_creer();
-  resultat.nbMot = 0;
+  solution.motsTrouves= ABR_creer();
+  solution.nbMots = 0;
   return solution;
 }
 
