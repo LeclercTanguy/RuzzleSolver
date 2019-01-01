@@ -2,6 +2,11 @@
 #include <CUnit/Basic.h>
 #include "Case.h"
 
+void test_CASE_creerCase(){
+  Case uneCase = CASE_creerCase();
+  CU_ASSERT_TRUE(((CASE_obtenirLettre(uneCase))=='A')&&(CASE_obtenirNbPoints(uneCase)=1)&& (CASE_obtenirBonus(uneCase)=AB))
+}
+
 void test_CASE_Lettre(void){
   Case uneCase;
   char lettre = 'T';
