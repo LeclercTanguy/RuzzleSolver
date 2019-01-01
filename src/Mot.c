@@ -76,7 +76,7 @@ char* Mot_motEnChaine(Mot leMot){
   int i=longueur;
   LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(leMot);
   Mot_Lettre motLettre;
-  while (i>=0) {
+  while (i>0) {
     motLettre = *(Mot_Lettre*)LC_obtenirElement(laListeDeLettre);
     chaine[i] = Mot_obtenirLettre(motLettre);
     i--;
