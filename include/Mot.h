@@ -17,9 +17,8 @@ typedef struct Mot_Lettre{
 
 Mot Mot_creerMot (void);
 bool Mot_estVide(Mot leMot);
-LC_ListeChainee Mot_obtenirLesElements(Mot leMot);
-char Mot_obtenirLettre(Mot_Lettre motLettre);
 unsigned int Mot_obtenirTaille(Mot leMot);
+char Mot_obtenirDerniereLettre(Mot leMot);
 Dictionnaire Mot_obtenirDerniereReferenceDictionnaire(Mot leMot);
 int Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico);
 void Mot_retirerLettre(Mot *leMot);

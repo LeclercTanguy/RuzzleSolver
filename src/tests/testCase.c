@@ -4,7 +4,7 @@
 
 void test_CASE_creerCase(){
   Case uneCase = CASE_creerCase();
-  CU_ASSERT_TRUE(((CASE_obtenirLettre(uneCase))=='A')&&(CASE_obtenirNbPoints(uneCase)=1)&& (CASE_obtenirBonus(uneCase)=AB))
+  CU_ASSERT_TRUE(((CASE_obtenirLettre(uneCase))=='A')&&(CASE_obtenirNbPoints(uneCase)==1)&& (CASE_obtenirBonus(uneCase)==AB))
 }
 
 void test_CASE_Lettre(void){
@@ -52,7 +52,9 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "fixer / obtenir lettre", test_CASE_Lettre))
+  if (
+      (NULL == CU_add_test(pSuite, "créer case", test_CASE_creerCase))
+      || (NULL == CU_add_test(pSuite, "fixer / obtenir lettre", test_CASE_Lettre))
       || (NULL == CU_add_test(pSuite, "fixer / obtenir nb de points", test_CASE_NbPoints))
       || (NULL == CU_add_test(pSuite,"fixer / obtenir bonus", test_CASE_Bonus))
       || (NULL == CU_add_test(pSuite,"fixer / obtenir position", test_CASE_Position))

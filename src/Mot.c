@@ -13,35 +13,45 @@ Mot Mot_creerMot(void){
   return leMot;
 }
 
-LC_ListeChainee Mot_obtenirLesElements(Mot leMot){
+LC_ListeChainee Mot_obtenirLesLettres(Mot leMot){
   return leMot.lettres;
 }
 
-char Mot_obtenirLettre(Mot_Lettre motLettre){
-  return motLettre.lettre;
-}
-
-
 bool Mot_estVide(Mot leMot){
-  return LC_estVide(Mot_obtenirLesElements(leMot));
-}
-
-Dictionnaire Mot_obtenirDerniereReferenceDictionnaire(Mot leMot){
-  if (!Mot_estVide(leMot)) {
-    return (*(Mot_Lettre*)LC_obtenirElement(Mot_obtenirLesElements(leMot))).refDico;
-  } else {
-    return NULL;
-  }
+  return LC_estVide(Mot_obtenirLesLettres(leMot));
 }
 
 unsigned int Mot_obtenirTaille(Mot leMot){
   return leMot.taille;
 }
 
+char Mot_obtenirLettre(Mot_Lettre motLettre){
+  return motLettre.lettre;
+}
+
+Dictionnaire Mot_obtenirReferenceDictionnaire(Mot_Lettre motLettre){
+  return motLettre.refDico;
+}
+
+char Mot_obtenirDerniereLettre(Mot leMot){
+  assert(!Mot_estVide(leMot));
+  Mot_Lettre laLettre = *(Mot_Lettre*)LC_obtenirElement(Mot_obtenirLesLettres(leMot));
+  return Mot_obtenirLettre(laLettre);
+}
+
+Dictionnaire Mot_obtenirDerniereReferenceDictionnaire(Mot leMot){
+  if (!Mot_estVide(leMot)) {
+    Mot_Lettre laLettre = *(Mot_Lettre*)LC_obtenirElement(Mot_obtenirLesLettres(leMot));
+    return Mot_obtenirReferenceDictionnaire(laLettre);
+  } else {
+    return NULL;
+  }
+}
+
 int Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico){
   int err = 0;
   Mot_Lettre motLettre;
-  LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(*leMot);
+  LC_ListeChainee laListeDeLettre = Mot_obtenirLesLettres(*leMot);
   Dictionnaire refPrecedente = Mot_obtenirDerniereReferenceDictionnaire(*leMot);
   motLettre.lettre = lettre;
   Dictionnaire  refDico = DC_obtenirReferenceLettre(refPrecedente,lettre,dico);
@@ -59,7 +69,7 @@ int Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico){
 void Mot_retirerLettre(Mot* leMot){
   assert(!Mot_estVide(*leMot));
   leMot->taille = Mot_obtenirTaille(*leMot)-1;
-  LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(*leMot);
+  LC_ListeChainee laListeDeLettre = Mot_obtenirLesLettres(*leMot);
   LC_supprimerTete(&laListeDeLettre);
   leMot->lettres=laListeDeLettre;
 }
@@ -74,7 +84,7 @@ char* Mot_motEnChaine(Mot leMot){
   int longueur = Mot_obtenirTaille(leMot);
   char* chaine = (char*)malloc((longueur+1)*sizeof(char));
   int i=longueur;
-  LC_ListeChainee laListeDeLettre = Mot_obtenirLesElements(leMot);
+  LC_ListeChainee laListeDeLettre = Mot_obtenirLesLettres(leMot);
   Mot_Lettre motLettre;
   while (i>0) {
     motLettre = *(Mot_Lettre*)LC_obtenirElement(laListeDeLettre);

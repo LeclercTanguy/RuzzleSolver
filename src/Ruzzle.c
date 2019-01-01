@@ -111,6 +111,5 @@ int RZ_comparerMotRuzzle(Element mr1, Element mr2) {
     char* mot1 = ((MotRuzzle*)mr1)->mot;
     char* mot2 = ((MotRuzzle*)mr1)->mot;
     return strcmp(mot1,mot2);
-    }
   }
 }
