@@ -8,6 +8,14 @@
 #include "Ensemble.h"
 #include "tools.h"
 
+
+SolutionRuzzle RZ_creerSolutionRuzzle(void){
+  SolutionRuzzle solution;
+  resultat.motsTrouves= ABR_creer();
+  resultat.nbMot = 0;
+  return solution;
+}
+
 int RZ_chaineEnBonus(char* chaine, Bonus* leBonus) {
   if (strlen(chaine)>=2) {
       if (strncmp(chaine,"  ",2)==0) {
