@@ -8,7 +8,7 @@
 #include "CasesContigues.h"
 #include "Ensemble.h"
 #include "tools.h"
-
+#include "ListeChainee.h"
 
 SolutionRuzzle RZ_creerSolutionRuzzle(void){
   SolutionRuzzle solution;
@@ -89,7 +89,35 @@ int RZ_chaineEnGrille(char* chaine, Grille* grilleRuzzle) {
 }
 
 void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico, Grille* g, Mot* prefixe, CasesContigues* cheminRuzzle, SolutionRuzzle* resultat) {
+  // Ensemble contenant les lettres del'alphabet
+  Ens_Ensemble lettresPossibles = Ens_ensemble();
+  for(char lettre = 'A' ; lettre <= 'Z' ; lettre++)
+  {
+        Ens_ajouter(&lettresPossibles, &lettre ,sizeof(char));
+  }
+  G_debutUtilisation(g, posX, posY); // la case est marquée comme utilisée
+  // Liste des lettres possibles à partir de l'ensemble
+  lettresPossibles=DC_obtenirLettresSuivantes(*prefixe);
+  LC_ListeChainee listeLettresPossibles = Ens_obtenirLesElements(lettresPossibles);
+  // Liste des cases adjacentes à partir de l'ensemble
+  Ens_Ensemble casesAdjacentesNonUtilisees= RZ_casesAdjacentesNonUtilisees(posX, posY, *g);
+  LC_ListeChainee listeCasesAdjacentesNonUtilisees = Ens_obtenirLesElements(casesAdjacentesNonUtilisees);
 
+  while (!LC_estVide(listeCasesAdjacentesNonUtilisees)){
+    Case  maCase=*(Case*)LC_obtenirElement(listeCasesAdjacentesNonUtilisees);
+    char maLettre = CASE_obtenirLettre(maCase);
+    if (LC_estPresent(listeLettresPossibles, &maLettre, sizeof(char))){ //Si la lettre de la case adjacente fait partie des lettres possibles
+      Mot_ajouterLettre(prefixe,CASE_obtenirLettre(maCase),dico);
+      CC_ajouterCase(cheminRuzzle,maCase);
+      if (DC_estUnMotComplet(*prefixe)){
+        RZ_insererMotResultat(*cheminRuzzle, resultat);
+      }
+      RZ_trouverMots(CASE_obtenirPositionX(maCase), CASE_obtenirPositionY(maCase), dico, g, prefixe, cheminRuzzle, resultat);
+      Mot_retirerLettre(prefixe);
+      CC_suprimerCase(cheminRuzzle);
+    }
+    }
+    G_finUtilisation(g, posX, posY);
 }
 
 void RZ_afficherResultat_R(ABR arbreResultat){
