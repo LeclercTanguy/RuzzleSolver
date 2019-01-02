@@ -23,10 +23,10 @@ typedef struct Ens_Ensemble {
 Ens_Ensemble Ens_ensemble(void);
 
 /**
- * \brief permet d'obtenir la liste chainée d'éléments contenue den un ensemble
+ * \brief permet d'obtenir la liste chainée d'éléments contenue dans un ensemble
  * \author Simon LEBEAUD
  * \param Ensemble dont on veux les éléments
- * \return  Liste chainée des éléments contenue dans l'Ensemble
+ * \return  Liste chainée des éléments contenus dans l'Ensemble
 */
 LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble ens);
 
