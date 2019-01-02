@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include "Ruzzle.h"
 #include "ABR.h"
 #include "Grille.h"
@@ -11,7 +12,7 @@
 
 SolutionRuzzle RZ_creerSolutionRuzzle(void){
   SolutionRuzzle solution;
-  solution.motsTrouves= *(char*)ABR_creer();
+  solution.motsTrouves= ABR_creer();
   solution.nbMots = 0;
   return solution;
 }
@@ -94,7 +95,7 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 void RZ_afficherResultat_R(ABR arbreResultat){
   if(!ABR_estVide(arbreResultat)){
     RZ_afficherResultat_R(ABR_obtenirFilsGauche(arbreResultat));
-    printf("%s",ABR_obtenirElement(arbreResultat));
+    printf("%p\n",ABR_obtenirElement(arbreResultat));
     RZ_afficherResultat_R(ABR_obtenirFilsDroit(arbreResultat));
   }
 }

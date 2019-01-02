@@ -20,6 +20,9 @@ typedef struct {
 /**
  * \brief Permet d'initialiser une variable de type RZ_creerSolutionRuzzle.
  * Elle initialise celle-ci avec un arbre Vide et nombre de Mots égale à 0.
+ * \author Simon LEBEAUD
+ * \version 1.1
+ * \return SolutionRuzzle Vide
 */
 
 SolutionRuzzle RZ_creerSolutionRuzzle(void);
@@ -59,7 +62,8 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
   /**
   * \brief Permet d'afficher dans le terminal tout les Mot qui on été trouver et qui sont contenue dans une variable
   * SolutionRuzzle
-  *\param Cette fonction prend la variable resultat qui est de type SolutionRuzzle et qui contient
+  * \author Simon LEBEAUD
+  *\param variable resultat qui est de type SolutionRuzzle et qui contient
   * un arbre contenant tout les mots trouvé.
   */
 
