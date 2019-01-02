@@ -11,7 +11,7 @@
 
 SolutionRuzzle RZ_creerSolutionRuzzle(void){
   SolutionRuzzle solution;
-  solution.motsTrouves= ABR_creer();
+  solution.motsTrouves= *(char*)ABR_creer();
   solution.nbMots = 0;
   return solution;
 }
@@ -91,8 +91,17 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 
 }
 
-void RZ_afficherResultat(SolutionRuzzle resultat) {
+void RZ_afficherResultat_R(ABR arbreResultat){
+  if(!ABR_estVide(arbreResultat)){
+    RZ_afficherResultat_R(ABR_obtenirFilsGauche(arbreResultat));
+    printf("%s",ABR_obtenirElement(arbreResultat));
+    RZ_afficherResultat_R(ABR_obtenirFilsDroit(arbreResultat));
+  }
+}
 
+
+void RZ_afficherResultat(SolutionRuzzle resultat) {
+  RZ_afficherResultat_R(resultat.motsTrouves);
 }
 
 Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short posY, Grille g) {
