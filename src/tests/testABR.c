@@ -1,28 +1,6 @@
-#include <stdlib.h>
 #include <CUnit/Basic.h>
+#include "tools.h"
 #include "ABR.h"
-
-
-int comparerint (Element a,Element b){
-    int *c = (void*) a;
-    int *d = (void*) b;
-    if (*c== *d){
-        return 0;
-    }
-    else if (*c<*d){
-        return -1;
-    }
-    else {
-        return 1;
-    }
-}
-
-void test_comparerint(void){
-    int a = 1;
-    int b = 2;
-    CU_ASSERT_TRUE(comparerint(&a,&b)==-1);
-}
-
 
 void test_ABR_creer(void){
     ABR a=ABR_creer();
@@ -31,15 +9,12 @@ void test_ABR_creer(void){
 
 void test_ABR_inserer_present(void){
     ABR a = ABR_creer();
-    int element = 4,racine = 3;
-    a = ABR_allouer();
-    ABR_fixerElement(a,&racine);
-    ABR_inserer(&a,&element,comparerint);
-    CU_ASSERT_TRUE(ABR_estPresent(a,&element,comparerint)==true);
+    int element = 4;
+    ABR_inserer(&a,&element,comparerInt);
+    CU_ASSERT_TRUE(ABR_estPresent(a,&element,comparerInt));
 }
 
-
-
+//tester l'insertion de trois éléments distincts (ex: 2, 1, 3) et vérifier que le fils gauche est bien plus petit que la racine et que le fils droit est bien plus grand
 
 int main(int argc, char** argv){
 
@@ -58,8 +33,7 @@ int main(int argc, char** argv){
 
   /* Ajout des tests à la suite de tests boite noire */
   if ((NULL == CU_add_test(pSuite, "créer un ABR vide", test_ABR_creer))
-      || (NULL == CU_add_test(pSuite, "inserer est present", test_comparerint))
-
+      || (NULL == CU_add_test(pSuite, "insérer / est present", test_ABR_inserer_present))
       )
     {
       CU_cleanup_registry();

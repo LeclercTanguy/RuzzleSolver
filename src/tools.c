@@ -58,14 +58,15 @@ int comparer2Fichiers(char* nomFichier1, char* nomFichier2) {
     }
 }
 
-int comparerint (int a,int b){
-    if (a==b){
-        return 0;
-    }
-    else if (a<b){
-        return -1;
-    }
-    else {
-        return 1;
-    }
+int comparerInt (Element a, Element b) {
+  int int1 = *(int*)a;
+  int int2 = *(int*)b;
+  if (int1==int2){
+    return 0;
+  }
+  else if (int1<int2){
+    return -1;
+  } else {
+    return 1;
+  }
 }

@@ -71,8 +71,8 @@ $(TESTDIR)/testGrille: $(SRCTESTS)/testGrille.o $(LIBDIR)/libRuzzle.a
 $(TESTDIR)/testRuzzle: $(SRCTESTS)/testRuzzle.o $(LIBDIR)/libRuzzle.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCollections.a
 		$(CC) -o $(TESTDIR)/testRuzzle $^ $(LDFLAGS) -lRuzzle -lDictionnaire -lCollections -lcunit
 
-$(TESTDIR)/testABR: $(SRCTESTS)/testABR.o $(LIBDIR)/libCollections.a
-		$(CC) -o $(TESTDIR)/testABR $^ $(LDFLAGS) -lCollections -lcunit
+$(TESTDIR)/testABR: $(SRCTESTS)/testABR.o $(LIBDIR)/libCollections.a $(LIBDIR)/libTools.a
+		$(CC) -o $(TESTDIR)/testABR $^ $(LDFLAGS) -lCollections -lTools -lcunit
 
 testPerf: $(SRCTESTS)/testPerformance.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCollections.a
 		$(CC) -o $(TESTDIR)/testPerformance $^ $(LDFLAGS) -lDictionnaire -lCollections

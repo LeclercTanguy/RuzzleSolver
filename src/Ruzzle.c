@@ -122,9 +122,9 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 
 void RZ_afficherResultat_R(ABR arbreResultat){
   if(!ABR_estVide(arbreResultat)){
-    RZ_afficherResultat_R(ABR_obtenirFilsGauche(arbreResultat));
-    printf("%p\n",ABR_obtenirElement(arbreResultat));
-    RZ_afficherResultat_R(ABR_obtenirFilsDroit(arbreResultat));
+    RZ_afficherResultat_R(AB_obtenirFilsGauche(arbreResultat));
+    printf("%p\n",AB_obtenirElement(arbreResultat));
+    RZ_afficherResultat_R(AB_obtenirFilsDroit(arbreResultat));
   }
 }
 
