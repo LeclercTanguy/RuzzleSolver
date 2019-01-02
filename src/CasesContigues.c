@@ -32,7 +32,7 @@ int CC_nbCasesContigues(CasesContigues desCasesContigues){
 
 char* CC_CasesContiguesEnChaine(CasesContigues desCasesContigues){
   LC_ListeChainee listeDeCases=desCasesContigues.listeCases;
-  int longueurCC=desCasesContigues.nbCases;
+  int longueurCC=CC_nbCasesContigues(desCasesContigues);
   char* chaine = (char*)malloc((longueurCC+1)*sizeof(char));
   int i=longueurCC;
     while (i>0){
@@ -48,7 +48,7 @@ char* CC_CasesContiguesEnChaine(CasesContigues desCasesContigues){
 
 unsigned int CC_totalPointsCasesContigues(CasesContigues desCasesContigues) {
   LC_ListeChainee listeDeCases=desCasesContigues.listeCases;
-  int longueurCC=desCasesContigues.nbCases;
+  int longueurCC=CC_nbCasesContigues(desCasesContigues);
 
   unsigned int nombrePoints = 0;
   int i=longueurCC;

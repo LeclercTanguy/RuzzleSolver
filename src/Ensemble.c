@@ -24,7 +24,7 @@ void* Ens_ensembleEnTableau (Ens_Ensemble ens, size_t tailleElement) {
   LC_ListeChainee listeElements = Ens_obtenirLesElements(ens);
   void* pCaseTableau;
   for (int i = 0; i < nbElements; i++) {
-    pCaseTableau = (char*)tableau+i*tailleElement; 
+    pCaseTableau = (char*)tableau+i*tailleElement;
     //char : 1 octet -> pour permettre l'arithmétique sur les pointeurs
     memcpy(pCaseTableau,LC_obtenirElement(listeElements),tailleElement);
     listeElements = LC_obtenirListeSuivante(listeElements);
@@ -32,6 +32,11 @@ void* Ens_ensembleEnTableau (Ens_Ensemble ens, size_t tailleElement) {
   return tableau;
 }
 
+//normalement un ensemble ne doit pas comporter de doublons
+//cependant, au vu des algos utilisés par la suite et afin de gagner du temps
+//lors de l'exécution, je laisse le code ainsi    YLG
+//des fonctions avec vérification de la présence des éléments sont présentes plus bas si besoin
+//TODO reprendre le code de Ensemble afin de respecter la définition
 void Ens_ajouter(Ens_Ensemble* ens,Element element,size_t tailleElement){
   LC_ajouter(&(ens->lesElements),element,tailleElement);
   ens->nbElements=Ens_obtenirNbElements(*ens)+1;

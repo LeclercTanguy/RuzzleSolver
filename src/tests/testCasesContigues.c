@@ -7,7 +7,7 @@
 
 void test_CC_creer_casesContigues(){
   CasesContigues desCasesContigues = CC_creer_CasesContigues();
-  CU_ASSERT_TRUE(((desCasesContigues.nbCases)==0)&&(LC_estVide(desCasesContigues.listeCases)))
+  CU_ASSERT_TRUE((CC_nbCasesContigues(desCasesContigues)==0)&&(LC_estVide(desCasesContigues.listeCases)))
 }
 
 void test_CC_ajouterCase(){
@@ -63,7 +63,7 @@ void test_CC_nbCasesContigues(){
   CC_ajouterCase(&desCasesContigues, uneCase);
   CC_ajouterCase(&desCasesContigues, case2);
 
-  CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==desCasesContigues.nbCases);
+  CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==2);
 }
 
 void test_CC_CasesContiguesEnChaine(){
@@ -126,12 +126,12 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "Créer cases contigues", test_CC_creer_casesContigues))
-      || (NULL == CU_add_test(pSuite, "Ajouter cases contigues", test_CC_ajouterCase))
-      || (NULL == CU_add_test(pSuite,"Supprimer cases contigues", test_CC_supprimerCase))
-      || (NULL == CU_add_test(pSuite,"Nombre de cases contigues", test_CC_nbCasesContigues))
-      || (NULL == CU_add_test(pSuite,"Cases contigues en chaine", test_CC_CasesContiguesEnChaine))
-      || (NULL == CU_add_test(pSuite,"Nombre total de points des cases contigues",test_CC_totalPointsCasesContigues))
+  if ((NULL == CU_add_test(pSuite, "Créer cases contiguës", test_CC_creer_casesContigues))
+      || (NULL == CU_add_test(pSuite, "Ajouter cases contiguës", test_CC_ajouterCase))
+      || (NULL == CU_add_test(pSuite,"Supprimer cases contiguës", test_CC_supprimerCase))
+      || (NULL == CU_add_test(pSuite,"Nombre de cases contiguës", test_CC_nbCasesContigues))
+      || (NULL == CU_add_test(pSuite,"Cases contiguës en chaîne", test_CC_CasesContiguesEnChaine))
+      || (NULL == CU_add_test(pSuite,"Nombre total de points des cases contiguës",test_CC_totalPointsCasesContigues))
       )
     {
       CU_cleanup_registry();
