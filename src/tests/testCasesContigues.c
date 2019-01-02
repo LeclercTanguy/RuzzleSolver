@@ -84,9 +84,31 @@ void test_CC_CasesContiguesEnChaine(){
   CC_ajouterCase(&desCasesContigues, uneCase);
   CC_ajouterCase(&desCasesContigues, case2);
 
-  CU_ASSERT_TRUE(strcmp(CC_CasesContiguesEnChaine(desCasesContigues),"AB")==0);
+  char* maChaine=CC_CasesContiguesEnChaine(desCasesContigues);
+  CU_ASSERT_TRUE(strcmp(maChaine,"AB")==0);
 }
 
+void test_CC_totalPointsCasesContigues(){
+  CasesContigues desCasesContigues = CC_creer_CasesContigues();
+  // Création d'une case à ajouter
+  Case uneCase;
+  CASE_fixerLettre(&uneCase, 'A');
+  CASE_fixerNbPoints(&uneCase, 2);
+  CASE_fixerPosition(&uneCase, 2, 3);
+  CASE_fixerBonus(&uneCase, LD);
+  // Création d'une deuxième case
+  Case case2;
+  CASE_fixerLettre(&case2, 'B');
+  CASE_fixerNbPoints(&case2, 3);
+  CASE_fixerPosition(&case2, 1, 2);
+  CASE_fixerBonus(&case2, LD);
+
+  CC_ajouterCase(&desCasesContigues, uneCase);
+  CC_ajouterCase(&desCasesContigues, case2);
+
+  unsigned int totalPoints = CC_totalPointsCasesContigues(desCasesContigues);
+  CU_ASSERT_TRUE(totalPoints==5);
+}
 
 int main(int argc, char** argv){
 
@@ -109,6 +131,7 @@ int main(int argc, char** argv){
       || (NULL == CU_add_test(pSuite,"Supprimer cases contigues", test_CC_supprimerCase))
       || (NULL == CU_add_test(pSuite,"Nombre de cases contigues", test_CC_nbCasesContigues))
       || (NULL == CU_add_test(pSuite,"Cases contigues en chaine", test_CC_CasesContiguesEnChaine))
+      || (NULL == CU_add_test(pSuite,"Nombre total de points des cases contigues",test_CC_totalPointsCasesContigues))
       )
     {
       CU_cleanup_registry();

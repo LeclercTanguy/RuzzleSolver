@@ -7,8 +7,8 @@ Case CASE_creerCase(void) {
   CASE_fixerLettre(&uneCase,'A');
   CASE_fixerNbPoints(&uneCase,1);
   CASE_fixerBonus(&uneCase,AB);
-  //La position est déterminée au moment de l'insertion dans la grille est n'est
-  //donc pas initialisée ici
+  /*La position est déterminée au moment de l'insertion dans la grille est n'est
+  donc pas initialisée ici*/
   return uneCase;
 }
 

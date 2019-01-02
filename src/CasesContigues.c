@@ -32,15 +32,32 @@ int CC_nbCasesContigues(CasesContigues desCasesContigues){
 
 char* CC_CasesContiguesEnChaine(CasesContigues desCasesContigues){
   LC_ListeChainee listeDeCases=desCasesContigues.listeCases;
-  char* chaine = "";
-    while (!LC_estVide(listeDeCases)){
-      Case*  maCase=LC_obtenirElement(listeDeCases);
-      char maLettre=CASE_obtenirLettre(*maCase);
-      strcat(chaine,&maLettre);
+  int longueurCC=desCasesContigues.nbCases;
+  char* chaine = (char*)malloc((longueurCC+1)*sizeof(char));
+  int i=longueurCC;
+    while (i>0){
+      Case  maCase=*(Case*)LC_obtenirElement(listeDeCases);
+      char maLettre=CASE_obtenirLettre(maCase);
+      chaine[i-1]=maLettre;
+      listeDeCases = LC_obtenirListeSuivante(listeDeCases);
+      i--;
     }
+    chaine[longueurCC+1]='\0';
     return chaine;
 }
 
-unsigned int CC_totalPointsCasesContigues(CasesContigues suiteCase) {
-  return 0;
+unsigned int CC_totalPointsCasesContigues(CasesContigues desCasesContigues) {
+  LC_ListeChainee listeDeCases=desCasesContigues.listeCases;
+  int longueurCC=desCasesContigues.nbCases;
+
+  unsigned int nombrePoints = 0;
+  int i=longueurCC;
+    while (i>0){
+      Case  maCase=*(Case*)LC_obtenirElement(listeDeCases);
+      char mesPoints=CASE_obtenirNbPoints(maCase);
+      nombrePoints = nombrePoints + mesPoints;
+      listeDeCases = LC_obtenirListeSuivante(listeDeCases);
+      i--;
+    }
+    return nombrePoints;
 }
