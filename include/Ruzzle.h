@@ -17,6 +17,11 @@ typedef struct {
   unsigned short nbPoints;
 } MotRuzzle;
 
+/**
+ * \brief Permet d'initialiser une variable de type RZ_creerSolutionRuzzle.
+ * Elle initialise celle-ci avec un arbre Vide et nombre de Mots égale à 0.
+*/
+
 SolutionRuzzle RZ_creerSolutionRuzzle(void);
 
 /**
@@ -50,6 +55,13 @@ int RZ_chaineEnBonus(char* chaine, Bonus* leBonus);
 int RZ_chaineEnGrille(char* chaine, Grille* grilleRuzzle);
 
 void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico, Grille* g, Mot* prefixe, CasesContigues* cheminRuzzle, SolutionRuzzle* resultat);
+
+  /**
+  * \brief Permet d'afficher dans le terminal tout les Mot qui on été trouver et qui sont contenue dans une variable
+  * SolutionRuzzle
+  *\param Cette fonction prend la variable resultat qui est de type SolutionRuzzle et qui contient
+  * un arbre contenant tout les mots trouvé.
+  */
 
 void RZ_afficherResultat(SolutionRuzzle resultat);
 

@@ -2,7 +2,7 @@
 #include "Mot.h"
 
 int main(int argc, char const *argv[]) {
-  /*void ruzzleSolver(char* grilleRuzzle, char* nomFichierDico){
+  void ruzzleSolver(char* grilleRuzzle, char* nomFichierDico){
     Grille g = RZ_chaineEnGrille(grilleRuzzle);
     Dictionnaire dico;
     DC_charger(nomFichierDico,&dico);
@@ -18,6 +18,6 @@ int main(int argc, char const *argv[]) {
       }
     }
     RZ_afficherResultat(resultat);
-  }*/
+  }
   return 0;
 }
