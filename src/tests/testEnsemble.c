@@ -15,6 +15,18 @@ void test_Ens_obtenir(void){
   CU_ASSERT_TRUE((Ens_obtenirLesElements(ens)==NULL)&&(Ens_obtenirNbElements(ens)==0));
 }
 
+void test_ensembleEnTableau(void) {
+  Ens_Ensemble ens = Ens_ensemble();
+  char lettre1 = 'A';
+  Ens_ajouter(&ens,&lettre1,sizeof(char));
+  char lettre2 = 'B';
+  Ens_ajouter(&ens,&lettre2,sizeof(char));
+  int nbElements = Ens_obtenirNbElements(ens);
+  char* tab = (char*)Ens_ensembleEnTableau(ens,sizeof(char));
+  CU_ASSERT_TRUE((nbElements==2)&&(tab[0]==lettre2)&&(tab[1]==lettre1));
+  free(tab);
+}
+
 void test_Ens_ajouterEtestPresent(void){
   Ens_Ensemble ens = Ens_ensemble();
   char lettre = 'a';
@@ -100,6 +112,7 @@ int main(int argc, char** argv){
   /* Ajout des tests à la suite de tests boite noire */
   if ((NULL == CU_add_test(pSuite, "créer un Ensemble", test_Ens_ensemble))
       || (NULL == CU_add_test(pSuite, "obtenir les éléments et le nombre d'éléments", test_Ens_obtenir))
+      || (NULL == CU_add_test(pSuite, "convertir un ensemble en tableau",test_ensembleEnTableau))
       || (NULL == CU_add_test(pSuite, "ajouter une lettre à un ensemble", test_Ens_ajouterEtestPresent))
       || (NULL == CU_add_test(pSuite,"ajouter un autre liste à l'ensemble", test_Ens_ajouterDUneAutreListe))
       || (NULL == CU_add_test(pSuite,"union de deux ensemble", test_Ens_union))

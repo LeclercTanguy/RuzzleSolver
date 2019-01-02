@@ -31,6 +31,18 @@ Ens_Ensemble Ens_ensemble(void);
 LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble ens);
 
 /**
+  *\brief conversion d'un ensemble en tableau d'éléments
+  *\author Yves LE GUENNEC
+  *\param ens l'ensemble à convertir
+  *\param tailleElement la taille (en octets) des éléments contenus dans l'Ensemble
+  *\return un pointeur vers le premier élément du tableau
+  *\warning transtypez le tableau en un pointeur vers le type des éléments de l'ensemble avant de l'utiliser (ex: char* tab = (char*)Ens_ensembleEnTableau(ens,sizeof(char))).
+  *\warning utiliser Ens_obtenirNbElements pour connaître le nombre d'éléments du tableau
+  *\warning pensez à libérer le tableau quand il n'est plus nécessaire (free(tab))
+*/
+void* Ens_ensembleEnTableau (Ens_Ensemble ens, size_t tailleElement);
+
+/**
   * \brief Permet d'obtenir le nombre d'élements contenus dans un Ensemble
   * \author Simon LEBEAUD
   * \param Ensemble dont on veut connaître le nombre d'éléments

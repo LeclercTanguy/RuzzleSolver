@@ -1,9 +1,7 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Ensemble.h"
 #include "ListeChainee.h"
-#define TRUE 1
-#define FALSE 0
 
 Ens_Ensemble Ens_ensemble(void){
   Ens_Ensemble resultat;
@@ -18,6 +16,20 @@ LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble ens){
 
 int Ens_obtenirNbElements(Ens_Ensemble ens){
   return ens.nbElements;
+}
+
+void* Ens_ensembleEnTableau (Ens_Ensemble ens, size_t tailleElement) {
+  int nbElements = Ens_obtenirNbElements(ens);
+  void* tableau = malloc(nbElements*tailleElement);
+  LC_ListeChainee listeElements = Ens_obtenirLesElements(ens);
+  void* pCaseTableau;
+  for (int i = 0; i < nbElements; i++) {
+    pCaseTableau = (char*)tableau+i*tailleElement; 
+    //char : 1 octet -> pour permettre l'arithmétique sur les pointeurs
+    memcpy(pCaseTableau,LC_obtenirElement(listeElements),tailleElement);
+    listeElements = LC_obtenirListeSuivante(listeElements);
+  }
+  return tableau;
 }
 
 void Ens_ajouter(Ens_Ensemble* ens,Element element,size_t tailleElement){
