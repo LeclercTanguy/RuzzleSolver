@@ -14,6 +14,16 @@ void test_ABR_inserer_present(void){
     CU_ASSERT_TRUE(ABR_estPresent(a,&element,comparerInt));
 }
 
+void test_ABR_insertion_ordonnee(void){
+    ABR a = ABR_creer();
+    int un = 1, deux =2 , trois=3;
+    ABR_inserer(&a,&deux,comparerInt);
+    ABR_inserer(&a,&trois,comparerInt);
+    ABR_inserer(&a,&un,comparerInt);
+    CU_ASSERT_TRUE(*(int*)AB_obtenirElement(a)==deux && *(int*)AB_obtenirElement(AB_obtenirFilsDroit(a))==un && *(int*)AB_obtenirElement(AB_obtenirFilsGauche(a))==trois)
+
+}
+
 //tester l'insertion de trois éléments distincts (ex: 2, 1, 3) et vérifier que le fils gauche est bien plus petit que la racine et que le fils droit est bien plus grand
 
 int main(int argc, char** argv){
@@ -34,6 +44,7 @@ int main(int argc, char** argv){
   /* Ajout des tests à la suite de tests boite noire */
   if ((NULL == CU_add_test(pSuite, "créer un ABR vide", test_ABR_creer))
       || (NULL == CU_add_test(pSuite, "insérer / est present", test_ABR_inserer_present))
+      || (NULL == CU_add_test(pSuite, "insertion dans le bonne ordre", test_ABR_insertion_ordonnee))
       )
     {
       CU_cleanup_registry();
