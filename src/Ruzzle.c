@@ -114,7 +114,7 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
       }
       RZ_trouverMots(CASE_obtenirPositionX(maCase), CASE_obtenirPositionY(maCase), dico, g, prefixe, cheminRuzzle, resultat);
       Mot_retirerLettre(prefixe);
-      CC_suprimerCase(cheminRuzzle);
+      CC_supprimerCase(cheminRuzzle);
     }
     }
     G_finUtilisation(g, posX, posY);

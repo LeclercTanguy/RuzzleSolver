@@ -41,7 +41,7 @@ void test_CC_supprimerCase(){
   CC_ajouterCase(&desCasesContigues, uneCase);
   CC_ajouterCase(&desCasesContigues, case2);
   // Test
-  CC_suprimerCase(&desCasesContigues);
+  CC_supprimerCase(&desCasesContigues);
   CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==1);
 }
 

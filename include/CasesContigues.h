@@ -32,7 +32,7 @@ void CC_ajouterCase(CasesContigues* desCasesContigues,Case uneCase);
   * \brief Permet de supprimer la derniere case des cases contigues
   * \param desCasesContigues un pointeur vers les cases contigues auxquelles on souhaite supprimer la derniere case
 */
-void CC_suprimerCase(CasesContigues* desCasesContigues);
+void CC_supprimerCase(CasesContigues* desCasesContigues);
 
 /**
   * \brief Permet d'obtenir le nombre de cases présentes dans les cases contigues

@@ -20,7 +20,7 @@ void CC_ajouterCase(CasesContigues* desCasesContigues,Case uneCase){
   (*desCasesContigues).nbCases=(*desCasesContigues).nbCases+1;
 }
 
-void CC_suprimerCase(CasesContigues* desCasesContigues){
+void CC_supprimerCase(CasesContigues* desCasesContigues){
   LC_supprimerTete(&(*desCasesContigues).listeCases);
   (*desCasesContigues).nbCases=(*desCasesContigues).nbCases-1;
 }
