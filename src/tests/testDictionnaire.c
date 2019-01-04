@@ -28,9 +28,13 @@ void test_DC_ajoutMot() {
 void test_DC_estUnMotComplet(){
   Dictionnaire dico = DC_creerDictionnaire();
   DC_ajouterMot (&dico,"TEST");
-  CU_ASSERT_TRUE(DC_estUnMotComplet(Mot_chaineEnMot(dico,"TEST")));
-  CU_ASSERT_FALSE(DC_estUnMotComplet(Mot_chaineEnMot(dico,"TES")));
+  Mot motTest = Mot_chaineEnMot(dico,"TEST");
+  CU_ASSERT_TRUE(DC_estUnMotComplet(motTest));
+  Mot motTes = Mot_chaineEnMot(dico,"TES");
+  CU_ASSERT_FALSE(DC_estUnMotComplet(motTes));
   DC_supprimer(&dico);
+  Mot_supprimerMot(&motTest);
+  Mot_supprimerMot(&motTes);
 }
 
 void test_DC_sauvegarder() {
@@ -61,7 +65,8 @@ void test_DC_obtenirLettresSuivantes() {
   DC_ajouterMot (&dico,"LA");
   DC_ajouterMot (&dico,"LE");
   DC_ajouterMot (&dico,"LIT");
-  Ens_Ensemble lettresSuivantes = DC_obtenirLettresSuivantes(Mot_chaineEnMot(dico,"L"));
+  Mot motL = Mot_chaineEnMot(dico,"L");
+  Ens_Ensemble lettresSuivantes = DC_obtenirLettresSuivantes(motL);
   char a='A', e='E', i='I';
   CU_ASSERT_TRUE(
     Ens_estPresent(lettresSuivantes,&a,sizeof(char)) &&
@@ -69,22 +74,26 @@ void test_DC_obtenirLettresSuivantes() {
   );
   CU_ASSERT_TRUE(Ens_obtenirNbElements(lettresSuivantes)==3);
   DC_supprimer(&dico);
+  Mot_supprimerMot(&motL);
+  Ens_supprimer(&lettresSuivantes);
 }
 
 void test_DC_supprimerMot(){
   Dictionnaire dico = DC_creerDictionnaire();
   DC_ajouterMot (&dico,"TEST");
   DC_ajouterMot (&dico,"TESTER");
+  Mot motTest = Mot_chaineEnMot(dico,"TEST");
   Mot motTester = Mot_chaineEnMot(dico,"TESTER");
   DC_supprimerMot (&dico,&motTester);
   CU_ASSERT_TRUE(Mot_estVide(motTester));
   CU_ASSERT_TRUE(DC_estUnPrefixe(dico,"TEST"));
   CU_ASSERT_FALSE(DC_estUnPrefixe(dico,"TESTER"));
   DC_ajouterMot (&dico,"TESTER");
-  Mot motTest = Mot_chaineEnMot(dico,"TEST");
   DC_supprimerMot (&dico,&motTest);
-  CU_ASSERT_FALSE(DC_estUnMotComplet(Mot_chaineEnMot(dico,"TEST")));
+  motTest = Mot_chaineEnMot(dico,"TEST");
+  CU_ASSERT_FALSE(DC_estUnMotComplet(motTest));
   DC_supprimer(&dico);
+  Mot_supprimerMot(&motTest);
 }
 
 int main(int argc, char** argv){

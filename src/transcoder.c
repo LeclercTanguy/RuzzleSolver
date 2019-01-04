@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
         err = fgets(mot,LONGUEUR_MAX_MOT,listeMots);
       }
       DC_sauvegarder(dico,destination);
+      DC_supprimer(&dico);
       return fclose(listeMots);
     } else {
       printf("Impossible d'ouvrir le fichier %s \n",source);

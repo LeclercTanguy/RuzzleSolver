@@ -91,3 +91,10 @@ Ens_Ensemble Ens_intersection(Ens_Ensemble ens1,Ens_Ensemble ens2,size_t tailleE
   Ens_ajouterElementsListeSiPresent(&resultat,Ens_obtenirLesElements(ens1),ens2,tailleElement);
   return resultat;
 }
+
+void Ens_supprimer(Ens_Ensemble* ens) {
+  LC_ListeChainee temp = Ens_obtenirLesElements(*ens);
+  LC_supprimer(&temp);
+  ens->lesElements = temp;
+  ens->nbElements = 0;
+}

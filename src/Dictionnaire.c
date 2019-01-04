@@ -211,13 +211,13 @@ void DC_charger_R(Dictionnaire* dico, FILE* data) {
     if (c!='\n') { //arbre non vide
       *dico = AB_ajouterRacine(DC_creerDictionnaire(),DC_creerDictionnaire(),&c,sizeof(char));
       //fils gauche
-      Dictionnaire* arbreGauche = DC_allouer();
-      DC_charger_R(arbreGauche,data);
-      AB_fixerFilsGauche(*dico,*arbreGauche);
+      Dictionnaire arbreGauche = DC_creerDictionnaire();
+      DC_charger_R(&arbreGauche,data);
+      AB_fixerFilsGauche(*dico,arbreGauche);
       //fils droit
-      Dictionnaire* arbreDroit = DC_allouer();
-      DC_charger_R(arbreDroit,data);
-      AB_fixerFilsDroit(*dico,*arbreDroit);
+      Dictionnaire arbreDroit = DC_creerDictionnaire();
+      DC_charger_R(&arbreDroit,data);
+      AB_fixerFilsDroit(*dico,arbreDroit);
     } else { //arbre vide
       *dico = DC_creerDictionnaire();
     }

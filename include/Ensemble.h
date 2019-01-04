@@ -128,4 +128,10 @@ void ajouterElementsListeSiPresent(Ens_Ensemble*,LC_ListeChainee,Ens_Ensemble,si
 
 Ens_Ensemble Ens_soustraction(Ens_Ensemble,Ens_Ensemble,size_t tailleElement);
 
+/**
+  *\brief permet de supprimer un Ensemble
+  *\author Yves LE GUENNEC
+  \param ens un pointeur vers l'ensemble à supprimer
+*/
+void Ens_supprimer(Ens_Ensemble* ens);
 #endif
