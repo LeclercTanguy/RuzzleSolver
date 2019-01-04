@@ -82,17 +82,17 @@ void Mot_supprimerMot(Mot* leMot){
 
 char* Mot_motEnChaine(Mot leMot){
   int longueur = Mot_obtenirTaille(leMot);
-  char* chaine = (char*)malloc((longueur+1)*sizeof(char));
-  int i=longueur;
+  char* chaine = (char*)malloc((longueur+1)*sizeof(char)); //avec le /0
   LC_ListeChainee laListeDeLettre = Mot_obtenirLesLettres(leMot);
   Mot_Lettre motLettre;
-  while (i>0) {
+  int i=longueur-1; //chaine commence à i=0
+  while (i>=0) {
     motLettre = *(Mot_Lettre*)LC_obtenirElement(laListeDeLettre);
     chaine[i] = Mot_obtenirLettre(motLettre);
     i--;
     laListeDeLettre = LC_obtenirListeSuivante(laListeDeLettre);
   }
-  chaine[longueur+1]='\0';
+  chaine[longueur]='\0';
   return chaine;
 }
 

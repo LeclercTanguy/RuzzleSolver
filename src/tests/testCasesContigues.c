@@ -7,7 +7,8 @@
 
 void test_CC_creer_casesContigues(){
   CasesContigues desCasesContigues = CC_creer_CasesContigues();
-  CU_ASSERT_TRUE((CC_nbCasesContigues(desCasesContigues)==0)&&(LC_estVide(desCasesContigues.listeCases)))
+  CU_ASSERT_TRUE((CC_nbCasesContigues(desCasesContigues)==0)&&(LC_estVide(desCasesContigues.listeCases)));
+  CC_supprimer(&desCasesContigues);
 }
 
 void test_CC_ajouterCase(){
@@ -21,6 +22,7 @@ void test_CC_ajouterCase(){
   // Test
   CC_ajouterCase(&desCasesContigues, uneCase);
   CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==1);
+  CC_supprimer(&desCasesContigues);
 }
 
 void test_CC_supprimerCase(){
@@ -43,6 +45,7 @@ void test_CC_supprimerCase(){
   // Test
   CC_supprimerCase(&desCasesContigues);
   CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==1);
+  CC_supprimer(&desCasesContigues);
 }
 
 void test_CC_nbCasesContigues(){
@@ -64,6 +67,7 @@ void test_CC_nbCasesContigues(){
   CC_ajouterCase(&desCasesContigues, case2);
 
   CU_ASSERT_TRUE(CC_nbCasesContigues(desCasesContigues)==2);
+  CC_supprimer(&desCasesContigues);
 }
 
 void test_CC_CasesContiguesEnChaine(){
@@ -86,6 +90,8 @@ void test_CC_CasesContiguesEnChaine(){
 
   char* maChaine=CC_CasesContiguesEnChaine(desCasesContigues);
   CU_ASSERT_TRUE(strcmp(maChaine,"AB")==0);
+  CC_supprimer(&desCasesContigues);
+  free(maChaine);
 }
 
 void test_CC_totalPointsCasesContigues(){
@@ -107,7 +113,8 @@ void test_CC_totalPointsCasesContigues(){
   CC_ajouterCase(&desCasesContigues, case2);
 
   unsigned int totalPoints = CC_totalPointsCasesContigues(desCasesContigues);
-  CU_ASSERT_TRUE(totalPoints==5);
+  CU_ASSERT_TRUE(totalPoints==(2*2+3*2));
+  CC_supprimer(&desCasesContigues);
 }
 
 int main(int argc, char** argv){

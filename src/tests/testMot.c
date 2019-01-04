@@ -25,6 +25,8 @@ void test_Mot_ajouterLettre(void){
   CU_ASSERT_TRUE(Mot_obtenirDerniereLettre(leMot)==lettre2);
   Mot_retirerLettre(&leMot);
   CU_ASSERT_TRUE(Mot_obtenirDerniereLettre(leMot)==lettre1);
+  Mot_supprimerMot(&leMot);
+  DC_supprimer(&dico);
 }
 
 void test_Mot_retirerLettre(void){
@@ -35,6 +37,8 @@ void test_Mot_retirerLettre(void){
   CU_ASSERT_TRUE(Mot_obtenirDerniereLettre(leMot)=='M');
   Mot_retirerLettre(&leMot);
   CU_ASSERT_TRUE(Mot_estVide(leMot));
+  Mot_supprimerMot(&leMot);
+  DC_supprimer(&dico);
 }
 
 void test_Mot_supprimerMot(void){
@@ -47,6 +51,7 @@ void test_Mot_supprimerMot(void){
   CU_ASSERT_FALSE(Mot_estVide(leMot));
   Mot_supprimerMot(&leMot);
   CU_ASSERT_TRUE(Mot_estVide(leMot));
+  DC_supprimer(&dico);
 }
 
   void test_Mot_motEnChaine(void){
@@ -57,7 +62,11 @@ void test_Mot_supprimerMot(void){
   Mot_ajouterLettre(&leMot,'O',dico);
   Mot_ajouterLettre(&leMot,'T',dico);
   char* motEnChaine = Mot_motEnChaine(leMot);
-  CU_ASSERT_TRUE(strcmp(motEnChaine,"MOT"));
+  CU_ASSERT_TRUE(strcmp(motEnChaine,"MOT")==0);
+  CU_ASSERT_TRUE(strlen(motEnChaine)==3);
+  Mot_supprimerMot(&leMot);
+  DC_supprimer(&dico);
+  free(motEnChaine);
 }
 
 void test_Mot_chaineEnMot(void){
@@ -73,6 +82,8 @@ void test_Mot_chaineEnMot(void){
   CU_ASSERT_TRUE(Mot_obtenirDerniereLettre(leMot)==lettre2);
   Mot_retirerLettre(&leMot);
   CU_ASSERT_TRUE(Mot_obtenirDerniereLettre(leMot)==lettre1);
+  Mot_supprimerMot(&leMot);
+  DC_supprimer(&dico);
 }
 
 

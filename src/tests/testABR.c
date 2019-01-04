@@ -12,6 +12,7 @@ void test_ABR_inserer_present(void){
     int element = 4;
     ABR_inserer(&a,&element,comparerInt);
     CU_ASSERT_TRUE(ABR_estPresent(a,&element,comparerInt));
+    ABR_supprimer(&a);
 }
 
 void test_ABR_insertion_ordonnee(void){
@@ -21,7 +22,7 @@ void test_ABR_insertion_ordonnee(void){
     ABR_inserer(&a,&trois,comparerInt);
     ABR_inserer(&a,&un,comparerInt);
     CU_ASSERT_TRUE(*(int*)AB_obtenirElement(a)==deux && *(int*)AB_obtenirElement(AB_obtenirFilsDroit(a))==un && *(int*)AB_obtenirElement(AB_obtenirFilsGauche(a))==trois)
-
+    ABR_supprimer(&a);
 }
 
 //tester l'insertion de trois éléments distincts (ex: 2, 1, 3) et vérifier que le fils gauche est bien plus petit que la racine et que le fils droit est bien plus grand

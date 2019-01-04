@@ -135,17 +135,15 @@ Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short 
     int borneMaxX = min(4,posX+1);
     int borneMaxY = min(4,posY+1);
     Ens_Ensemble casesAdjacentes = Ens_ensemble();
-    for ( y = borneMinY; y < borneMaxY+1; y++){
-        for ( x = borneMinX; x < borneMaxX+1; x++){
+    for ( y = borneMinY; y <= borneMaxY; y++){
+        for ( x = borneMinX; x <= borneMaxX; x++){
             if (((x != posX) || (y != posY)) && (!G_estUtilisee(g,x,y))){
                 Case lacase= G_obtenirCase(g,x,y);
                 Ens_ajouter(&casesAdjacentes,&lacase,sizeof(Case));
             }
-
         }
     }
-return casesAdjacentes;
-
+    return casesAdjacentes;
 }
 
 void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat) {

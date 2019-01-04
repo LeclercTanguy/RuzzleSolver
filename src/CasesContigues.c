@@ -25,6 +25,12 @@ void CC_supprimerCase(CasesContigues* desCasesContigues){
   (*desCasesContigues).nbCases=(*desCasesContigues).nbCases-1;
 }
 
+void CC_supprimer(CasesContigues* desCasesContigues){
+  while (CC_nbCasesContigues(*desCasesContigues)>0) {
+    CC_supprimerCase(desCasesContigues);
+  }
+}
+
 int CC_nbCasesContigues(CasesContigues desCasesContigues){
   int nombreCases=desCasesContigues.nbCases;
   return nombreCases;

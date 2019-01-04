@@ -67,7 +67,10 @@ void test_RZ_casesAdjacentesNonUtilisees(void){
     CU_ASSERT_FALSE(Ens_estPresent(ensemble2,&Caseutilisee2,sizeof(Case)));
     CU_ASSERT_FALSE(Ens_estPresent(ensemble3,&Caseutilisee3,sizeof(Case)));
     CU_ASSERT_FALSE(Ens_estPresent(ensemble4,&Caseutilisee4,sizeof(Case)));
-
+    Ens_supprimer(&ensemble1);
+    Ens_supprimer(&ensemble2);
+    Ens_supprimer(&ensemble3);
+    Ens_supprimer(&ensemble4);
 }
 // Test de tout les coins et que les cases utilisees ne sont pas dans l'ensemble non utilisees
 

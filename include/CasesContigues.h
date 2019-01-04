@@ -18,6 +18,7 @@ typedef struct {
 /**
   * \brief Permet de créer une case contigue vide
   * \return une CaseContigue vide c'est à dire une liste de case vide, et un nombre de case égale à 0
+  * \warning utilisez CC_supprimer(CasesContigues*) à la fin de l'utilisation des CasesContigues
 */
 CasesContigues CC_creer_CasesContigues(void);
 
@@ -33,6 +34,12 @@ void CC_ajouterCase(CasesContigues* desCasesContigues,Case uneCase);
   * \param desCasesContigues un pointeur vers les cases contigues auxquelles on souhaite supprimer la derniere case
 */
 void CC_supprimerCase(CasesContigues* desCasesContigues);
+
+/**
+  * \brief Permet de supprimer l'ensemble des cases contiguës
+  * \param desCasesContigues un pointeur vers les cases contiguës à supprimer
+*/
+void CC_supprimer(CasesContigues* desCasesContigues);
 
 /**
   * \brief Permet d'obtenir le nombre de cases présentes dans les cases contigues

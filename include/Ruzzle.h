@@ -19,13 +19,12 @@ typedef struct {
 } MotRuzzle;
 
 /**
- * \brief Permet d'initialiser une variable de type RZ_creerSolutionRuzzle.
- * Elle initialise celle-ci avec un arbre Vide et nombre de Mots égale à 0.
+ * \brief Permet d'initialiser une variable de type SolutionRuzzle.
+ * Elle initialise celle-ci avec un arbre Vide et nombre de mots égale à 0.
  * \author Simon LEBEAUD
  * \version 1.1
  * \return SolutionRuzzle Vide
 */
-
 SolutionRuzzle RZ_creerSolutionRuzzle(void);
 
 /**
@@ -61,20 +60,29 @@ int RZ_chaineEnGrille(char* chaine, Grille* grilleRuzzle);
 void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico, Grille* g, Mot* prefixe, CasesContigues* cheminRuzzle, SolutionRuzzle* resultat);
 
   /**
-  * \brief Permet d'afficher dans le terminal tout les Mot qui on été trouver et qui sont contenue dans une variable
-  * SolutionRuzzle
+  * \brief Permet d'afficher dans le terminal tous les mots qui ont été trouvés
+  * et qui sont contenus dans une variable de type SolutionRuzzle
   * \author Simon LEBEAUD
-  *\param variable resultat qui est de type SolutionRuzzle et qui contient
-  * un arbre contenant tout les mots trouvé.
+  * \param resultat l'arbre contenant tous les mots trouvés.
   */
-
 void RZ_afficherResultat(SolutionRuzzle resultat);
 
+/**
+* \brief permet de connaître les cases pouvant être choisies pour construire le Mot
+* \author Tanguy LECLERC
+* \param posX la position (de 1 à 4) de la case en largeur
+* \param posY la position (de 1 à 4) de la case en hauteur
+* \param g la grille de Ruzzle
+* \return un ensemble contenant les cases adjacentes à la case de position (posX,posY)
+* et qui ne sont pas utilisées dans le Mot en cours
+*/
 Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short posY, Grille g);
 
 /**
 * \brief insère un mot trouvé dans la grille Ruzzle dans la solution
 * \author Yves LE GUENNEC
+* \version 1.1
+* \diff prise en compte des éventuels doublons lors de la recherche des mots
 * \param cheminRuzzle le mot trouvé dans la grille Ruzzle, stocké sous forme de CasesContigues
 * \param resultat un pointeur vers la solution à mettre à jour
 */

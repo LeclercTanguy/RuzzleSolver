@@ -8,11 +8,13 @@
 void test_Ens_ensemble(void){
   Ens_Ensemble ens= Ens_ensemble();
   CU_ASSERT_TRUE((LC_estVide(ens.lesElements))&&(ens.nbElements==0));
+  Ens_supprimer(&ens);
 }
 
 void test_Ens_obtenir(void){
   Ens_Ensemble ens = Ens_ensemble();
   CU_ASSERT_TRUE((Ens_obtenirLesElements(ens)==NULL)&&(Ens_obtenirNbElements(ens)==0));
+  Ens_supprimer(&ens);
 }
 
 void test_ensembleEnTableau(void) {
@@ -25,6 +27,7 @@ void test_ensembleEnTableau(void) {
   char* tab = (char*)Ens_ensembleEnTableau(ens,sizeof(char));
   CU_ASSERT_TRUE((nbElements==2)&&(tab[0]==lettre2)&&(tab[1]==lettre1));
   free(tab);
+  Ens_supprimer(&ens);
 }
 
 void test_Ens_ajouterEtestPresent(void){
@@ -32,6 +35,7 @@ void test_Ens_ajouterEtestPresent(void){
   char lettre = 'a';
   Ens_ajouter(&ens,&lettre,sizeof(char));
   CU_ASSERT_TRUE((Ens_obtenirNbElements(ens)==1)&&(Ens_estPresent(ens,&lettre,sizeof(char))));
+  Ens_supprimer(&ens);
 }
 
 void test_Ens_ajouterDUneAutreListe(void){
@@ -47,6 +51,7 @@ void test_Ens_ajouterDUneAutreListe(void){
   char b = 'b', c = 'c', d = 'd';
   CU_ASSERT_TRUE((Ens_estPresent(ens,&b,sizeof(char)))&&(Ens_estPresent(ens,&c,sizeof(char)))&&(Ens_estPresent(ens,&d,sizeof(char))));
   LC_supprimer(&lc);
+  Ens_supprimer(&ens);
 }
 
 void test_Ens_union(void){
@@ -60,7 +65,9 @@ void test_Ens_union(void){
   ens3 = Ens_union(ens1,ens2,sizeof(char));
   char a = 'a', b = 'b';
   CU_ASSERT_TRUE((Ens_estPresent(ens3,&a,sizeof(char)))&&(Ens_estPresent(ens3,&b,sizeof(char))));
-
+  Ens_supprimer(&ens1);
+  Ens_supprimer(&ens2);
+  Ens_supprimer(&ens3);
 }
 
 void test_Ens_soustraction(void){
@@ -75,6 +82,9 @@ void test_Ens_soustraction(void){
   ens3 = Ens_soustraction(ens1,ens2,sizeof(char));
   char a = 'a', b = 'b';
   CU_ASSERT_TRUE((Ens_estPresent(ens3,&b,sizeof(char)))&&(!Ens_estPresent(ens3,&a,sizeof(char))));
+  Ens_supprimer(&ens1);
+  Ens_supprimer(&ens2);
+  Ens_supprimer(&ens3);
 }
 
 void test_Ens_intersection(void){
@@ -89,6 +99,9 @@ void test_Ens_intersection(void){
   ens3 = Ens_intersection(ens1,ens2,sizeof(char));
   char a = 'a', b = 'b';
   CU_ASSERT_TRUE((Ens_estPresent(ens3,&a,sizeof(char)))&&(!Ens_estPresent(ens3,&b,sizeof(char))));
+  Ens_supprimer(&ens1);
+  Ens_supprimer(&ens2);
+  Ens_supprimer(&ens3);
 }
 
 
