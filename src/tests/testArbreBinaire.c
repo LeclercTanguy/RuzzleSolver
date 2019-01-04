@@ -12,6 +12,7 @@ void test_AB_ajouterRacine(void){
     char element = 'A';
     a = AB_ajouterRacine(fg,fd,&element,sizeof(char));
     CU_ASSERT_TRUE((*(char*)AB_obtenirElement(a)==element) && (AB_obtenirFilsDroit(a)==fd) && (AB_obtenirFilsGauche(a)==fg));
+    AB_supprimer(&a);
 }
 
 int main(int argc, char** argv){
