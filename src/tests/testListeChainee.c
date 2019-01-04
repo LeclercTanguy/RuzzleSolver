@@ -9,30 +9,36 @@ void test_ListeChainee(void){
 }
 
 void test_LC_ajouter(void){
-  LC_ListeChainee lc = LC_allouer();
-  char lettre ='a';
-  LC_ajouter(&lc,&lettre,sizeof(char));
-  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==lettre) && (!LC_estVide(LC_obtenirListeSuivante(lc))));
+  LC_ListeChainee lc = LC_listeVide();
+  char a ='a', b = 'b';
+  LC_ajouter(&lc,&a,sizeof(char));
+  LC_ajouter(&lc,&b,sizeof(char));
+  CU_ASSERT_TRUE(
+    (*(char*)LC_obtenirElement(lc)==b) &&
+    (!LC_estVide(LC_obtenirListeSuivante(lc))));
+    CU_ASSERT_TRUE((*(char*)LC_obtenirElement(LC_obtenirListeSuivante(lc))==a));
   LC_supprimer(&lc);
 }
 
 void test_LC_obtenir(void){
-  LC_ListeChainee lc = LC_allouer();
+  LC_ListeChainee lc = LC_listeVide();
   LC_ListeChainee temp;
-  char lettre ='a';
+  char a ='a', b = 'b';
+  LC_ajouter(&lc,&a,sizeof(char));
   temp = lc;
-  LC_ajouter(&lc,&lettre,sizeof(char));
-  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
+  LC_ajouter(&lc,&b,sizeof(char));
+  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==b) && (LC_obtenirListeSuivante(lc)==temp));
   LC_supprimer(&lc);
 }
 
 void test_LC_fixer(void){
-  LC_ListeChainee lc = LC_allouer();
+  LC_ListeChainee lc = LC_listeVide();
   LC_ListeChainee temp = LC_listeVide();
-  char lettre ='a';
-  LC_fixerElement(lc,&lettre,sizeof(char));
+  char a ='a', b = 'b';
+  LC_ajouter(&lc,&a,sizeof(char));
+  LC_fixerElement(lc,&b,sizeof(char));
   LC_fixerListeSuivante(lc,temp);
-  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==lettre) && (LC_obtenirListeSuivante(lc)==temp));
+  CU_ASSERT_TRUE((*(char*)LC_obtenirElement(lc)==b) && (LC_obtenirListeSuivante(lc)==temp));
   LC_supprimer(&lc);
 }
 

@@ -8,7 +8,10 @@ LC_ListeChainee LC_listeVide(void){
 }
 
 LC_ListeChainee LC_allouer(void) {
-  return (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+  LC_ListeChainee lc = (LC_ListeChainee)malloc(sizeof(LC_Noeud));
+  lc->element = NULL;
+  lc->listeSuivante = NULL;
+  return lc;
 }
 
 bool LC_estVide(LC_ListeChainee lc){
@@ -46,9 +49,13 @@ LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee lc){
 
 void LC_fixerElement(LC_ListeChainee lc,Element lElement,size_t tailleElement){
   assert (!LC_estVide(lc));
-  Element elementAjoute = malloc(tailleElement);
-  memcpy(elementAjoute,lElement,tailleElement);
-  (lc)->element=elementAjoute;
+  if (LC_obtenirElement(lc)==NULL) {
+    Element elementAjoute = malloc(tailleElement);
+    memcpy(elementAjoute,lElement,tailleElement);
+    (lc)->element=elementAjoute;
+  } else {
+    memcpy(LC_obtenirElement(lc),lElement,tailleElement);
+  }
 }
 
 void LC_fixerListeSuivante(LC_ListeChainee lc,LC_ListeChainee lcSuivante){
@@ -60,7 +67,9 @@ void LC_supprimerTete(LC_ListeChainee* lc){
   assert (!LC_estVide(*lc));
   LC_ListeChainee temp = *lc;
   *lc = LC_obtenirListeSuivante(temp);
-  free(LC_obtenirElement(temp));
+  if (LC_obtenirElement(temp)!=NULL) {
+    free(LC_obtenirElement(temp));
+  }
   free(temp);
 }
 
