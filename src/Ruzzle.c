@@ -12,7 +12,8 @@
 
 SolutionRuzzle RZ_creerSolutionRuzzle(void){
   SolutionRuzzle solution;
-  solution.motsTrouves= ABR_creer();
+  solution.motsTrouvesParPoints = ABR_creer();
+  solution.motsTrouvesParMot = ABR_creer();
   solution.nbMots = 0;
   return solution;
 }
@@ -89,18 +90,12 @@ int RZ_chaineEnGrille(char* chaine, Grille* grilleRuzzle) {
 }
 
 void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico, Grille* g, Mot* prefixe, CasesContigues* cheminRuzzle, SolutionRuzzle* resultat) {
-  // Ensemble contenant les lettres del'alphabet
-  Ens_Ensemble lettresPossibles = Ens_ensemble();
-  for(char lettre = 'A' ; lettre <= 'Z' ; lettre++)
-  {
-        Ens_ajouter(&lettresPossibles, &lettre ,sizeof(char));
-  }
   G_debutUtilisation(g, posX, posY); // la case est marquée comme utilisée
-  // Liste des lettres possibles à partir de l'ensemble
-  lettresPossibles=DC_obtenirLettresSuivantes(*prefixe);
+  // Liste des lettres possibles
+  Ens_Ensemble lettresPossibles = DC_obtenirLettresSuivantes(*prefixe);
   LC_ListeChainee listeLettresPossibles = Ens_obtenirLesElements(lettresPossibles);
   // Liste des cases adjacentes à partir de l'ensemble
-  Ens_Ensemble casesAdjacentesNonUtilisees= RZ_casesAdjacentesNonUtilisees(posX, posY, *g);
+  Ens_Ensemble casesAdjacentesNonUtilisees = RZ_casesAdjacentesNonUtilisees(posX, posY, *g);
   LC_ListeChainee listeCasesAdjacentesNonUtilisees = Ens_obtenirLesElements(casesAdjacentesNonUtilisees);
 
   while (!LC_estVide(listeCasesAdjacentesNonUtilisees)){
@@ -116,8 +111,8 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
       Mot_retirerLettre(prefixe);
       CC_supprimerCase(cheminRuzzle);
     }
-    }
-    G_finUtilisation(g, posX, posY);
+  }
+  G_finUtilisation(g, posX, posY);
 }
 
 void RZ_afficherResultat_R(ABR arbreResultat){
@@ -130,7 +125,7 @@ void RZ_afficherResultat_R(ABR arbreResultat){
 
 
 void RZ_afficherResultat(SolutionRuzzle resultat) {
-  RZ_afficherResultat_R(resultat.motsTrouves);
+  RZ_afficherResultat_R(resultat.motsTrouvesParPoints);
 }
 
 Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short posY, Grille g) {
@@ -138,14 +133,29 @@ Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short 
 }
 
 void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat) {
+  //création du MotRuzzle correspondant
   MotRuzzle nouveauMot;
   nouveauMot.mot = CC_CasesContiguesEnChaine(cheminRuzzle);
   nouveauMot.nbPoints = CC_totalPointsCasesContigues(cheminRuzzle);
-  (resultat->nbMots)++;
-  ABR_inserer(&(resultat->motsTrouves),&nouveauMot,RZ_comparerMotRuzzle);
+  //on regarde si le mot est déjà présent dans les mots trouvés
+  MotRuzzle* motDansResultat = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParMot,&nouveauMot,RZ_comparerMotRuzzleParMot));
+  if (motDansResultat!=NULL) { //on a déjà trouvé ce mot précédemment
+    if (RZ_comparerMotRuzzleParPoints(motDansResultat,&nouveauMot)>0) {
+      //si le nombre de points est mieux, on remplace dans l'arbre
+      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle));
+      //évite de supprimer l'ancien puis d'ajouter le nouveau, opération plus couteuse en temps
+      //on le change aussi dans l'arbre classé par points
+      motDansResultat = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParPoints,&nouveauMot,RZ_comparerMotRuzzleParPoints));
+      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle));
+    } //sinon on ne change rien
+  } else { //sinon on l'ajoute à la liste des mots trouvés
+    (resultat->nbMots)++;
+    ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints);
+    ABR_inserer(&(resultat->motsTrouvesParMot),&nouveauMot,RZ_comparerMotRuzzleParMot);
+  }
 }
 
-int RZ_comparerMotRuzzle(Element mr1, Element mr2) {
+int RZ_comparerMotRuzzleParPoints(Element mr1, Element mr2) {
   //Element pour compatibilité avec les fonctions génériques (sinon warning lors de la compilation)
   unsigned short nbPointsMot1 = ((MotRuzzle*)mr1)->nbPoints;
   unsigned short nbPointsMot2 = ((MotRuzzle*)mr2)->nbPoints;
@@ -154,8 +164,12 @@ int RZ_comparerMotRuzzle(Element mr1, Element mr2) {
   } else if (nbPointsMot1>nbPointsMot2) {
     return 1;
   } else { //si le nombre de points est identique, on compare les mots associés
-    char* mot1 = ((MotRuzzle*)mr1)->mot;
-    char* mot2 = ((MotRuzzle*)mr1)->mot;
-    return strcmp(mot1,mot2);
+    return RZ_comparerMotRuzzleParMot(mr1,mr2);
   }
+}
+
+int RZ_comparerMotRuzzleParMot(Element mr1, Element mr2) {
+  char* mot1 = ((MotRuzzle*)mr1)->mot;
+  char* mot2 = ((MotRuzzle*)mr1)->mot;
+  return strcmp(mot1,mot2);
 }

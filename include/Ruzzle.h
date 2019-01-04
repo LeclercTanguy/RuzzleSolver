@@ -8,7 +8,8 @@
 #include "CasesContigues.h"
 
 typedef struct {
-  ABR motsTrouves; //ABR de MotRuzzle
+  ABR motsTrouvesParPoints; //ABR de MotRuzzle trié par nb de points
+  ABR motsTrouvesParMot; //ABR de MotRuzzle trié par mot
   int nbMots;
 } SolutionRuzzle;
 
@@ -83,12 +84,24 @@ void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat
 * \brief permet de comparer deux MotRuzzle afin d'être utilisée dans des fonctions génériques.
 * La comparaison se base sur le nombre de points associé à chaque mot, et, en cas d'égalité, sur le mot lui même.
 * \author Yves LE GUENNEC
-* \param mr1 un pointeur vers le premier mot à comparer (pour correspondre au type générique Element)
-* \param mr2 un pointeur vers le deuxième mot à comparer
+* \param mr1 un pointeur vers le premier MotRuzzle à comparer (pour correspondre au type générique Element)
+* \param mr2 un pointeur vers le deuxième MotRuzzle à comparer
 * \return un nombre négatif si mr1<mr2,
-          0 si les deux mots sont identiques
+          0 si les deux MotRuzzle sont identiques
           un nombre positif si mr1>mr2;
 */
-int RZ_comparerMotRuzzle(Element mr1, Element mr2);
+int RZ_comparerMotRuzzleParPoints(Element mr1, Element mr2);
+
+/**
+* \brief permet de comparer deux mots d'un MotRuzzle afin d'être utilisée dans des fonctions génériques.
+* \author Yves LE GUENNEC
+* \param mr1 un pointeur vers le premier mot à comparer (mot1)
+* (pour correspondre au type générique Element)
+* \param mr2 un pointeur vers le deuxième mot à comparer (mot2)
+* \return un nombre négatif si mot1<mot2,
+          0 si les deux mots sont identiques
+          un nombre positif si mot1>mot2;
+*/
+int RZ_comparerMotRuzzleParMot(Element mr1, Element mr2);
 
 #endif
