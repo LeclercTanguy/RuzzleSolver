@@ -10,7 +10,7 @@ void test_ABR_creer(void){
 void test_ABR_inserer_present(void){
     ABR a = ABR_creer();
     int element = 4;
-    ABR_inserer(&a,&element,comparerInt);
+    ABR_inserer(&a,&element,comparerInt,sizeof(int));
     CU_ASSERT_TRUE(ABR_estPresent(a,&element,comparerInt));
     ABR_supprimer(&a);
 }
@@ -18,10 +18,14 @@ void test_ABR_inserer_present(void){
 void test_ABR_insertion_ordonnee(void){
     ABR a = ABR_creer();
     int un = 1, deux =2 , trois=3;
-    ABR_inserer(&a,&deux,comparerInt);
-    ABR_inserer(&a,&trois,comparerInt);
-    ABR_inserer(&a,&un,comparerInt);
-    CU_ASSERT_TRUE(*(int*)AB_obtenirElement(a)==deux && *(int*)AB_obtenirElement(AB_obtenirFilsDroit(a))==un && *(int*)AB_obtenirElement(AB_obtenirFilsGauche(a))==trois)
+    ABR_inserer(&a,&deux,comparerInt,sizeof(int));
+    ABR_inserer(&a,&trois,comparerInt,sizeof(int));
+    ABR_inserer(&a,&un,comparerInt,sizeof(int));
+    CU_ASSERT_TRUE(
+      (*(int*)AB_obtenirElement(a)==deux)
+      && (*(int*)AB_obtenirElement(AB_obtenirFilsDroit(a))==un)
+      && (*(int*)AB_obtenirElement(AB_obtenirFilsGauche(a))==trois)
+    );
     ABR_supprimer(&a);
 }
 
@@ -45,7 +49,7 @@ int main(int argc, char** argv){
   /* Ajout des tests à la suite de tests boite noire */
   if ((NULL == CU_add_test(pSuite, "créer un ABR vide", test_ABR_creer))
       || (NULL == CU_add_test(pSuite, "insérer / est present", test_ABR_inserer_present))
-      || (NULL == CU_add_test(pSuite, "insertion dans le bonne ordre", test_ABR_insertion_ordonnee))
+      || (NULL == CU_add_test(pSuite, "insertion dans le bon ordre", test_ABR_insertion_ordonnee))
       )
     {
       CU_cleanup_registry();

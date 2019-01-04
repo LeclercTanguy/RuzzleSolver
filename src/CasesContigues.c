@@ -40,15 +40,15 @@ char* CC_CasesContiguesEnChaine(CasesContigues desCasesContigues){
   LC_ListeChainee listeDeCases=desCasesContigues.listeCases;
   int longueurCC=CC_nbCasesContigues(desCasesContigues);
   char* chaine = (char*)malloc((longueurCC+1)*sizeof(char));
-  int i=longueurCC;
-    while (i>0){
+  int i=longueurCC-1; //chaine commence à i=0
+    while (i>=0){
       Case  maCase=*(Case*)LC_obtenirElement(listeDeCases);
       char maLettre=CASE_obtenirLettre(maCase);
-      chaine[i-1]=maLettre;
+      chaine[i]=maLettre;
       listeDeCases = LC_obtenirListeSuivante(listeDeCases);
       i--;
     }
-    chaine[longueurCC+1]='\0';
+    chaine[longueurCC]='\0';
     return chaine;
 }
 

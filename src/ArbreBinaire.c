@@ -13,7 +13,7 @@ bool AB_estVide(ArbreBinaire a){
 
 ArbreBinaire AB_allouer(void) {
   ArbreBinaire a = (ArbreBinaire)malloc(sizeof(AB_Noeud));
-  AB_fixerElement(a,NULL);
+  AB_fixerElement(a,NULL,0);
   AB_fixerFilsGauche(a,NULL);
   AB_fixerFilsDroit(a,NULL);
   return a;
@@ -21,9 +21,7 @@ ArbreBinaire AB_allouer(void) {
 
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd,Element element,size_t tailleElement){
     ArbreBinaire a = AB_allouer();
-    Element elementRacine = malloc(tailleElement);
-    memcpy(elementRacine,element,tailleElement);
-    AB_fixerElement(a,elementRacine);
+    AB_fixerElement(a,element,tailleElement);
     AB_fixerFilsGauche(a,fg);
     AB_fixerFilsDroit(a,fd);
     return a;
@@ -34,9 +32,19 @@ Element AB_obtenirElement(ArbreBinaire a){
     return a->lElement;
 }
 
-void AB_fixerElement(ArbreBinaire a,Element element){
+void AB_fixerElement(ArbreBinaire a,Element element,size_t tailleElement){
     assert (!AB_estVide(a));
-    a->lElement=element;
+    Element elementRacine;
+    if (element!=NULL) {
+      elementRacine = AB_obtenirElement(a);
+      if (elementRacine==NULL) {
+        elementRacine = malloc(tailleElement);
+      }
+      memcpy(elementRacine,element,tailleElement);
+    } else {
+      elementRacine = element;
+    }
+    a->lElement = elementRacine;
 }
 
 ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a){
@@ -71,8 +79,8 @@ void AB_supprimerRacine(ArbreBinaire* a, ArbreBinaire* fg, ArbreBinaire* fd){
 }
 
 void AB_supprimer(ArbreBinaire* a){
-  ArbreBinaire fg, fd;
   if (!AB_estVide(*a)) {
+    ArbreBinaire fg, fd;
     AB_supprimerRacine(a,&fg,&fd);
     AB_supprimer(&fg);
     AB_supprimer(&fd);

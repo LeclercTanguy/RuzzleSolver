@@ -7,7 +7,7 @@ typedef ArbreBinaire ABR;
 
 ABR ABR_creer(void);
 bool ABR_estVide(ABR a);
-void ABR_inserer(ABR* a, Element e, int(*comparerElement)(Element,Element));
+void ABR_inserer(ABR* a, Element e, int(*comparerElement)(Element,Element),size_t tailleElement);
 bool ABR_estPresent(ABR a, Element e, int(*comparerElement)(Element,Element));
 
 /**

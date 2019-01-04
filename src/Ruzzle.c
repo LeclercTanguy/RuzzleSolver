@@ -156,16 +156,17 @@ void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat
   if (motDansResultat!=NULL) { //on a déjà trouvé ce mot précédemment
     if (RZ_comparerMotRuzzleParPoints(motDansResultat,&nouveauMot)>0) {
       //si le nombre de points est mieux, on remplace dans l'arbre
-      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle));
+      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
       //évite de supprimer l'ancien puis d'ajouter le nouveau, opération plus couteuse en temps
+      //le mot étant le même, la taille en mémoire est donc identique
       //on le change aussi dans l'arbre classé par points
       motDansResultat = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParPoints,&nouveauMot,RZ_comparerMotRuzzleParPoints));
-      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle));
+      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
     } //sinon on ne change rien
   } else { //sinon on l'ajoute à la liste des mots trouvés
     (resultat->nbMots)++;
-    ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints);
-    ABR_inserer(&(resultat->motsTrouvesParMot),&nouveauMot,RZ_comparerMotRuzzleParMot);
+    ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
+    ABR_inserer(&(resultat->motsTrouvesParMot),&nouveauMot,RZ_comparerMotRuzzleParMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
   }
 }
 

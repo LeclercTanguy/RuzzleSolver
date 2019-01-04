@@ -14,7 +14,11 @@ ArbreBinaire AB_allouer(void);
 bool AB_estVide(ArbreBinaire a);
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, Element element,size_t tailleElement);
 Element AB_obtenirElement(ArbreBinaire a);
-void AB_fixerElement(ArbreBinaire a,Element element);
+
+/**
+* \param tailleElement taille de l'élément à insérer dans l'arbre, ignoré si element==NULL
+*/
+void AB_fixerElement(ArbreBinaire a,Element element,size_t tailleElement);
 ArbreBinaire AB_obtenirFilsGauche(ArbreBinaire a);
 ArbreBinaire AB_obtenirFilsDroit(ArbreBinaire a);
 void AB_fixerFilsGauche(ArbreBinaire a, ArbreBinaire ag);

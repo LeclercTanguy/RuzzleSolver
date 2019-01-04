@@ -11,40 +11,33 @@ bool ABR_estVide(ABR a){
   return AB_estVide(a);
 }
 
-void ABR_inserer(ABR* a, Element e, int(*comparerElement)(Element,Element)){
+void ABR_inserer(ABR* a, Element e, int(*comparerElement)(Element,Element),size_t tailleElement){
     if (ABR_estVide(*a)) {
         *a = AB_allouer();
-        AB_fixerElement(*a,e);
+        AB_fixerElement(*a,e,tailleElement);
     }
     else if (comparerElement(e,AB_obtenirElement(*a))<=0) {
         ABR fd = AB_obtenirFilsDroit(*a);
-        ABR_inserer(&fd,e,comparerElement);
+        ABR_inserer(&fd,e,comparerElement,tailleElement);
         AB_fixerFilsDroit(*a,fd);
     }
     else {
         ABR fg = AB_obtenirFilsGauche(*a);
-        ABR_inserer(&fg,e,comparerElement);
+        ABR_inserer(&fg,e,comparerElement,tailleElement);
         AB_fixerFilsGauche(*a,fg);
     }
 }
 
 bool ABR_estPresent(ABR a, Element e, int(*comparerElement)(Element,Element)){
-    if (ABR_estVide(a)){
-        return false;
-    }
-    else {
-        if (comparerElement(AB_obtenirElement(a),e)==0){
-            return true;
-        }
-
-        else if (comparerElement(AB_obtenirElement(a),e)<0){
-        return ABR_estPresent(AB_obtenirFilsDroit(a),e,comparerElement);
-        }
-        else{
-        return ABR_estPresent(AB_obtenirFilsGauche(a),e,comparerElement);
-        }
-
-    }
+  if (ABR_estVide(a)){
+    return false;
+  } else if (comparerElement(AB_obtenirElement(a),e)==0){
+    return true;
+  } else if (comparerElement(AB_obtenirElement(a),e)<0){
+    return ABR_estPresent(AB_obtenirFilsDroit(a),e,comparerElement);
+  } else {
+    return ABR_estPresent(AB_obtenirFilsGauche(a),e,comparerElement);
+  }
 }
 
 Element ABR_estPresentAvecReference(ABR a, Element e, int(*comparerElement)(Element,Element)){
