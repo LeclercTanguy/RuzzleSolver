@@ -41,6 +41,36 @@ void test_RZ_chaineEnGrille() {
   CU_ASSERT_TRUE(CASE_obtenirBonus(caseTest)==LT);
 }
 
+void test_RZ_casesAdjacentesNonUtilisees(void){
+    Grille g=G_grille();
+    G_debutUtilisation(&g,2,2);
+    G_debutUtilisation(&g,2,3);
+    G_debutUtilisation(&g,3,2);
+    G_debutUtilisation(&g,3,3);
+    Ens_Ensemble ensemble1=RZ_casesAdjacentesNonUtilisees(2,2,g);
+    Ens_Ensemble ensemble2=RZ_casesAdjacentesNonUtilisees(2,3,g);
+    Ens_Ensemble ensemble3=RZ_casesAdjacentesNonUtilisees(3,2,g);
+    Ens_Ensemble ensemble4=RZ_casesAdjacentesNonUtilisees(3,3,g);
+    Case CoinHautGauche= G_obtenirCase(g,1,1);
+    Case CoinHautDroit= G_obtenirCase(g,1,4);
+    Case CoinBasGauche= G_obtenirCase(g,4,1);
+    Case CoinBasDroite= G_obtenirCase(g,4,4);
+    Case Caseutilisee1= G_obtenirCase(g,2,2);
+    Case Caseutilisee2= G_obtenirCase(g,2,3);
+    Case Caseutilisee3= G_obtenirCase(g,3,2);
+    Case Caseutilisee4= G_obtenirCase(g,3,3);
+    CU_ASSERT_TRUE(Ens_estPresent(ensemble1,&CoinHautGauche,sizeof(Case)));
+    CU_ASSERT_TRUE(Ens_estPresent(ensemble2,&CoinHautDroit,sizeof(Case)));
+    CU_ASSERT_TRUE(Ens_estPresent(ensemble3,&CoinBasGauche,sizeof(Case)));
+    CU_ASSERT_TRUE(Ens_estPresent(ensemble4,&CoinBasDroite,sizeof(Case)));
+    CU_ASSERT_FALSE(Ens_estPresent(ensemble1,&Caseutilisee1,sizeof(Case)));
+    CU_ASSERT_FALSE(Ens_estPresent(ensemble2,&Caseutilisee2,sizeof(Case)));
+    CU_ASSERT_FALSE(Ens_estPresent(ensemble3,&Caseutilisee3,sizeof(Case)));
+    CU_ASSERT_FALSE(Ens_estPresent(ensemble4,&Caseutilisee4,sizeof(Case)));
+
+}
+// Test de tout les coins et que les cases utilisees ne sont pas dans l'ensemble non utilisees
+
 int main(int argc, char* argv[]){
 
   CU_pSuite pSuite = NULL;
@@ -59,7 +89,8 @@ int main(int argc, char* argv[]){
   /* Ajout des tests à la suite de tests boite noire */
   if (
     (NULL == CU_add_test(pSuite, "convertir une chaîne en Bonus",test_RZ_chaineEnBonus)) ||
-    (NULL == CU_add_test(pSuite, "convertir une chaîne en Grille",test_RZ_chaineEnGrille))
+    (NULL == CU_add_test(pSuite, "convertir une chaîne en Grille",test_RZ_chaineEnGrille)) ||
+    (NULL == CU_add_test(pSuite, "cases adjactentes non utilisees ",test_RZ_casesAdjacentesNonUtilisees))
       )
     {
       CU_cleanup_registry();

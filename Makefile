@@ -68,8 +68,8 @@ $(TESTDIR)/testMot: $(SRCTESTS)/testMot.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/
 $(TESTDIR)/testGrille: $(SRCTESTS)/testGrille.o $(LIBDIR)/libRuzzle.a
 		$(CC) -o $(TESTDIR)/testGrille $^ $(LDFLAGS) -lRuzzle -lcunit
 
-$(TESTDIR)/testRuzzle: $(SRCTESTS)/testRuzzle.o $(LIBDIR)/libRuzzle.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCollections.a
-		$(CC) -o $(TESTDIR)/testRuzzle $^ $(LDFLAGS) -lRuzzle -lDictionnaire -lCollections -lcunit
+$(TESTDIR)/testRuzzle: $(SRCTESTS)/testRuzzle.o $(LIBDIR)/libRuzzle.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCollections.a $(LIBDIR)/libTools.a
+		$(CC) -o $(TESTDIR)/testRuzzle $^ $(LDFLAGS) -lRuzzle -lDictionnaire -lCollections -lcunit -lTools
 
 $(TESTDIR)/testABR: $(SRCTESTS)/testABR.o $(LIBDIR)/libCollections.a $(LIBDIR)/libTools.a
 		$(CC) -o $(TESTDIR)/testABR $^ $(LDFLAGS) -lCollections -lTools -lcunit
