@@ -120,13 +120,14 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 void RZ_afficherResultat_R(ABR arbreResultat){
   if(!ABR_estVide(arbreResultat)){
     RZ_afficherResultat_R(AB_obtenirFilsGauche(arbreResultat));
-    printf("%p\n",AB_obtenirElement(arbreResultat));
+    printf("%s %d\n",(*(MotRuzzle*)AB_obtenirElement(arbreResultat)).mot,(*(MotRuzzle*)AB_obtenirElement(arbreResultat)).nbPoints);
     RZ_afficherResultat_R(AB_obtenirFilsDroit(arbreResultat));
   }
 }
 
 
 void RZ_afficherResultat(SolutionRuzzle resultat) {
+  printf("Nous avons trouvé %d mots\n",resultat.nbMots);
   RZ_afficherResultat_R(resultat.motsTrouvesParPoints);
 }
 
