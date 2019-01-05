@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "Ruzzle.h"
 #include "ABR.h"
 #include "Grille.h"
@@ -187,4 +188,19 @@ int RZ_comparerMotRuzzleParMot(Element mr1, Element mr2) {
   char* mot1 = ((MotRuzzle*)mr1)->mot;
   char* mot2 = ((MotRuzzle*)mr1)->mot;
   return strcmp(mot1,mot2);
+}
+
+void infosGrille(void) {
+  printf("     La chaîne décrivant la Grille doit respecter le format suivant :\n");
+  printf("     Pour chaque case : \n       la lettre, le nombre de points et les deux caractères du Bonus (deux espaces s'il n'y a pas de Bonus).\n");
+  printf("     Les Cases sont prises de Gauche à Droite puis de Haut en Bas.\n");
+  printf("     Exemple : \"T1LDR1  A1  S1MTE1LTN1  C3LTE1  U1  R1  I1  L2MDS1  O1MDP3  S1  \".\n");
+  printf("     Vous pouvez également utiliser les notations du jeu Ruzzle (DL, TL, DW, TW) pour les Bonus.\n");
+}
+
+char* caractereEnChaine(char c) {
+  char* chaine = malloc(sizeof(c)*2);
+  chaine[0] = c;
+  chaine[1] = '\0';
+  return chaine;
 }

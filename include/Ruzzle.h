@@ -112,4 +112,18 @@ int RZ_comparerMotRuzzleParPoints(Element mr1, Element mr2);
 */
 int RZ_comparerMotRuzzleParMot(Element mr1, Element mr2);
 
+/**
+* \brief indique comment doit être décrite la grille de Ruzzle en cas de saisie incorrecte
+* \author Yves LE GUENNEC
+*/
+void infosGrille(void);
+
+/**
+* \brief conversion d'un caractère en chaîne de caractères
+* \author Yves LE GUENNEC
+* \param c le caractère à convertir
+* \return la chaîne obtenue
+*/
+char* caractereEnChaine(char c);
+
 #endif

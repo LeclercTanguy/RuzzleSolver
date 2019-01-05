@@ -201,7 +201,7 @@ int DC_sauvegarder(Dictionnaire dico, char* nomFichier) {
     return fclose(data);
   } else {
     return 1;
-    printf("Impossible de créer le fichier de sauvegarde %s",nomFichier);
+    printf("Impossible de créer le fichier de sauvegarde %s\n",nomFichier);
   }
 }
 
@@ -237,6 +237,6 @@ int DC_charger(char *nomFichier, Dictionnaire* dico) {
     return fclose(data);
   } else {
     return 1;
-    printf("Impossible d'ouvrir le fichier %s",nomFichier);
+    printf("Impossible d'ouvrir le fichier %s\n",nomFichier);
   }
 }

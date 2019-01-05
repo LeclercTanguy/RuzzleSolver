@@ -15,8 +15,8 @@ LDFLAGS=-L$(LIBDIR)
 
 all : $(BINDIR)/ruzzleSolver $(BINDIR)/transcoder tests
 
-$(BINDIR)/ruzzleSolver : $(SRCDIR)/ruzzleSolver.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libRuzzle.a $(LIBDIR)/libCollections.a
-	$(CC) -o $(BINDIR)/ruzzleSolver $^ $(LDFLAGS) -lDictionnaire -lRuzzle -lCollections
+$(BINDIR)/ruzzleSolver : $(SRCDIR)/ruzzleSolver.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libRuzzle.a $(LIBDIR)/libCollections.a $(LIBDIR)/libTools.a
+	$(CC) -o $(BINDIR)/ruzzleSolver $^ $(LDFLAGS) -lDictionnaire -lRuzzle -lCollections -lTools
 
 $(BINDIR)/transcoder : $(SRCDIR)/transcoder.o $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libTools.a $(LIBDIR)/libCollections.a
 	$(CC) -o $(BINDIR)/transcoder $^ $(LDFLAGS) -lDictionnaire -lCollections -lTools

@@ -29,8 +29,8 @@ int main(int argc, char* argv[]) {
   } else {
     printf("Il n'y a pas assez d'arguments\n");
     printf("transcoder nécessite dans l'ordre : \n");
-    printf("1) le nom du fichier où est stocké le dictionnaire sous forme de liste de mots avec un mot par ligne. \n");
-    printf("2) le nom du fichier où doit être enregistré le résultat de la sérialisation. Si le fichier existe, il sera écrasé.\n");
+    printf("  1) le nom du fichier où est stocké le dictionnaire sous forme de liste de mots avec un mot par ligne. \n");
+    printf("  2) le nom du fichier où doit être enregistré le résultat de la sérialisation. Si le fichier existe, il sera écrasé.\n");
     return 1;
   }
 }
