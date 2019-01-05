@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
         Mot initMot;
         CasesContigues initChemin;
         for(int y = 1;y<=4;y++){
-          for(int x = 1;x<=4;y++){
+          for(int x = 1;x<=4;x++){
             char lettre = CASE_obtenirLettre(G_obtenirCase(g,x,y));
             initMot = Mot_chaineEnMot(dico,caractereEnChaine(lettre));
             initChemin = CC_creer_CasesContigues();

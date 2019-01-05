@@ -112,6 +112,7 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
       Mot_retirerLettre(prefixe);
       CC_supprimerCase(cheminRuzzle);
     }
+    LC_supprimerTete(&listeCasesAdjacentesNonUtilisees);
   }
   G_finUtilisation(g, posX, posY);
 }
@@ -186,7 +187,7 @@ int RZ_comparerMotRuzzleParPoints(Element mr1, Element mr2) {
 
 int RZ_comparerMotRuzzleParMot(Element mr1, Element mr2) {
   char* mot1 = ((MotRuzzle*)mr1)->mot;
-  char* mot2 = ((MotRuzzle*)mr1)->mot;
+  char* mot2 = ((MotRuzzle*)mr2)->mot;
   return strcmp(mot1,mot2);
 }
 
