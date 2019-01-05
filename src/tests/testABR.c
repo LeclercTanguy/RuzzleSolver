@@ -23,8 +23,8 @@ void test_ABR_insertion_ordonnee(void){
     ABR_inserer(&a,&un,comparerInt,sizeof(int));
     CU_ASSERT_TRUE(
       (*(int*)AB_obtenirElement(a)==deux)
-      && (*(int*)AB_obtenirElement(AB_obtenirFilsDroit(a))==un)
-      && (*(int*)AB_obtenirElement(AB_obtenirFilsGauche(a))==trois)
+      && (*(int*)AB_obtenirElement(AB_obtenirFilsGauche(a))==un)
+      && (*(int*)AB_obtenirElement(AB_obtenirFilsDroit(a))==trois)
     );
     ABR_supprimer(&a);
 }

@@ -119,10 +119,10 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 
 void RZ_afficherResultat_R(ABR arbreResultat){
   if(!ABR_estVide(arbreResultat)){
-    RZ_afficherResultat_R(AB_obtenirFilsGauche(arbreResultat));
+    RZ_afficherResultat_R(AB_obtenirFilsDroit(arbreResultat));
     MotRuzzle leMot = *(MotRuzzle*)AB_obtenirElement(arbreResultat);
     printf("%s %d\n",leMot.mot,leMot.nbPoints);
-    RZ_afficherResultat_R(AB_obtenirFilsDroit(arbreResultat));
+    RZ_afficherResultat_R(AB_obtenirFilsGauche(arbreResultat));
   }
 }
 
@@ -183,7 +183,7 @@ int RZ_comparerMotRuzzleParPoints(Element mr1, Element mr2) {
   } else if (nbPointsMot1>nbPointsMot2) {
     return 1;
   } else { //si le nombre de points est identique, on compare les mots associés
-    return RZ_comparerMotRuzzleParMot(mr1,mr2);
+    return RZ_comparerMotRuzzleParMot(mr2,mr1); //pour avoir un ordre croissant sur l'affichage
   }
 }
 

@@ -16,7 +16,7 @@ void ABR_inserer(ABR* a, Element e, int(*comparerElement)(Element,Element),size_
         *a = AB_allouer();
         AB_fixerElement(*a,e,tailleElement);
     }
-    else if (comparerElement(e,AB_obtenirElement(*a))<=0) {
+    else if (comparerElement(AB_obtenirElement(*a),e)<=0) {
         ABR fd = AB_obtenirFilsDroit(*a);
         ABR_inserer(&fd,e,comparerElement,tailleElement);
         AB_fixerFilsDroit(*a,fd);
@@ -41,22 +41,15 @@ bool ABR_estPresent(ABR a, Element e, int(*comparerElement)(Element,Element)){
 }
 
 Element ABR_estPresentAvecReference(ABR a, Element e, int(*comparerElement)(Element,Element)){
-    if (ABR_estVide(a)){
-        return NULL;
-    }
-    else {
-        if (comparerElement(AB_obtenirElement(a),e)==0){
-            return AB_obtenirElement(a);
-        }
-
-        else if (comparerElement(AB_obtenirElement(a),e)<0){
-        return ABR_estPresentAvecReference(AB_obtenirFilsDroit(a),e,comparerElement);
-        }
-        else{
-        return ABR_estPresentAvecReference(AB_obtenirFilsGauche(a),e,comparerElement);
-        }
-
-    }
+  if (ABR_estVide(a)){
+    return NULL;
+  } else if (comparerElement(AB_obtenirElement(a),e)==0){
+    return AB_obtenirElement(a);
+  } else if (comparerElement(AB_obtenirElement(a),e)<0){
+    return ABR_estPresentAvecReference(AB_obtenirFilsDroit(a),e,comparerElement);
+  } else {
+    return ABR_estPresentAvecReference(AB_obtenirFilsGauche(a),e,comparerElement);
+  }
 }
 
 void ABR_supprimer(ABR* a) {

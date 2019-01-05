@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
       return errGrille;
     }
   } else {
-    printf("Erreur : il n'y a pas assez d'arguments pour utiliser ruzzleSolver\n");
+    printf("Erreur : il n'y a pas le bon nombre d'arguments pour utiliser ruzzleSolver\n");
     printf("ruzzleSolver nécessite dans l'ordre :\n");
     printf("  1) une chaîne décrivant la grille de Ruzzle\n");
     infosGrille();
