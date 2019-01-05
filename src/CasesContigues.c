@@ -57,13 +57,34 @@ unsigned int CC_totalPointsCasesContigues(CasesContigues desCasesContigues) {
   int longueurCC=CC_nbCasesContigues(desCasesContigues);
 
   unsigned int nombrePoints = 0;
+  unsigned int bonusMot=1;
   int i=longueurCC;
     while (i>0){
       Case  maCase=*(Case*)LC_obtenirElement(listeDeCases);
-      char mesPoints=CASE_obtenirNbPoints(maCase);
+      unsigned short mesPoints=CASE_obtenirNbPoints(maCase);
+      Bonus monBonus= CASE_obtenirBonus(maCase);
+      if (monBonus!=AB){
+        switch (monBonus){
+        case LD:
+          mesPoints=mesPoints*2;
+          break;
+        case LT:
+          mesPoints=mesPoints*3;
+          break;
+        case MD:
+          bonusMot=bonusMot*2;
+          break;
+        case MT:
+          bonusMot=bonusMot*3;
+          break;
+        default :
+          bonusMot=1;
+        }
+      }
       nombrePoints = nombrePoints + mesPoints;
       listeDeCases = LC_obtenirListeSuivante(listeDeCases);
       i--;
     }
+    nombrePoints=nombrePoints*bonusMot;
     return nombrePoints;
 }

@@ -57,7 +57,7 @@ int CC_nbCasesContigues(CasesContigues desCasesContigues);
 char* CC_CasesContiguesEnChaine(CasesContigues desCasesContigues);
 
 /**
-  * \brief Permet d'obtenir le nombre total de points contenus dans les cases contigues, c'est à dire la somme des points de chaque cases des cases contigues
+  * \brief Permet d'obtenir le nombre total de points contenus dans les cases contigues, c'est à dire la somme des points et des bonus de chaque cases des cases contigues
   * \param desCasesContigues les cases contigues dont on souhaite connaitre le nombre total de points
   * \return un entier positif représentatntla somme des points de toutes les cases composant les cases contigues
 */
