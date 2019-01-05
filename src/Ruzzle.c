@@ -120,7 +120,8 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 void RZ_afficherResultat_R(ABR arbreResultat){
   if(!ABR_estVide(arbreResultat)){
     RZ_afficherResultat_R(AB_obtenirFilsGauche(arbreResultat));
-    printf("%s %d\n",(*(MotRuzzle*)AB_obtenirElement(arbreResultat)).mot,(*(MotRuzzle*)AB_obtenirElement(arbreResultat)).nbPoints);
+    MotRuzzle leMot = *(MotRuzzle*)AB_obtenirElement(arbreResultat);
+    printf("%s %d\n",leMot.mot,leMot.nbPoints);
     RZ_afficherResultat_R(AB_obtenirFilsDroit(arbreResultat));
   }
 }
@@ -155,16 +156,16 @@ void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat
   nouveauMot.mot = CC_CasesContiguesEnChaine(cheminRuzzle);
   nouveauMot.nbPoints = CC_totalPointsCasesContigues(cheminRuzzle);
   //on regarde si le mot est déjà présent dans les mots trouvés
-  MotRuzzle* motDansResultat = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParMot,&nouveauMot,RZ_comparerMotRuzzleParMot));
-  if (motDansResultat!=NULL) { //on a déjà trouvé ce mot précédemment
-    if (RZ_comparerMotRuzzleParPoints(motDansResultat,&nouveauMot)>0) {
+  MotRuzzle* motDansResultatParMot = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParMot,&nouveauMot,RZ_comparerMotRuzzleParMot));
+  if (motDansResultatParMot!=NULL) { //on a déjà trouvé ce mot précédemment
+    if (RZ_comparerMotRuzzleParPoints(&nouveauMot,motDansResultatParMot)>0) {
       //si le nombre de points est mieux, on remplace dans l'arbre
-      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
+      memcpy(motDansResultatParMot,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
       //évite de supprimer l'ancien puis d'ajouter le nouveau, opération plus couteuse en temps
       //le mot étant le même, la taille en mémoire est donc identique
       //on le change aussi dans l'arbre classé par points
-      motDansResultat = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParPoints,&nouveauMot,RZ_comparerMotRuzzleParPoints));
-      memcpy(motDansResultat,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
+      MotRuzzle* motDansResultatParPoints = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParPoints,motDansResultatParMot,RZ_comparerMotRuzzleParPoints));
+      memcpy(motDansResultatParPoints,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
     } //sinon on ne change rien
   } else { //sinon on l'ajoute à la liste des mots trouvés
     (resultat->nbMots)++;
