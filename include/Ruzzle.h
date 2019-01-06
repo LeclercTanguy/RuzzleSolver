@@ -65,7 +65,7 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
   * \author Simon LEBEAUD
   * \param resultat l'arbre contenant tous les mots trouvés.
   */
-void RZ_afficherResultat(SolutionRuzzle resultat);
+void RZ_afficherResultat(SolutionRuzzle resultat,int* nbIteration);
 
 /**
 * \brief permet de connaître les cases pouvant être choisies pour construire le Mot

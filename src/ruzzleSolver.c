@@ -24,7 +24,10 @@ int main(int argc, char *argv[]) {
             RZ_trouverMots(x,y,dico,&g,&initMot,&initChemin,&resultat);
           }
         }
-        RZ_afficherResultat(resultat);
+        int* nbIterationAffichage;
+        int i = 0;
+        nbIterationAffichage = &i;
+        RZ_afficherResultat(resultat, nbIterationAffichage);
         return 0;
       } else {
         return errDico;
