@@ -21,6 +21,7 @@ bool ABR_estPresent(ABR a, Element e, int(*comparerElement)(Element,Element));
 */
 Element ABR_estPresentAvecReference(ABR a, Element e, int(*comparerElement)(Element,Element));
 ABR ABR_lePlusGrand(ABR a);
+void ABR_supprimerElement(ABR* a, Element e, int(*comparerElement)(Element,Element),size_t tailleElement);
 void ABR_supprimer(ABR* a);
-void ABR_supprimerElement(ABR* a, Element e, int(*comparerElement)(Element,Element));
+
 #endif

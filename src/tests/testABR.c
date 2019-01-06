@@ -38,7 +38,7 @@ void test_ABR_supprimerElement(void){
     ABR_inserer(&a,&trois,comparerInt,sizeof(int));
     ABR_inserer(&a,&un,comparerInt,sizeof(int));
     ABR_inserer(&a,&quatre,comparerInt,sizeof(int));
-    ABR_supprimerElement(&a,&quatre,comparerInt);
+    ABR_supprimerElement(&a,&quatre,comparerInt,sizeof(int));
     CU_ASSERT_FALSE(ABR_estPresent(a,&quatre,comparerInt));
 }
 

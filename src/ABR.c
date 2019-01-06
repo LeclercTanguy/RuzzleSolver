@@ -66,32 +66,30 @@ ABR ABR_lePlusGrand(ABR a){
     }
 }
 
-void ABR_supprimerElement(ABR* a, Element e, int(*comparerElement)(Element,Element)){
-    assert(ABR_estPresent(*a,e,comparerElement));
+void ABR_supprimerElement(ABR* a, Element e, int(*comparerElement)(Element,Element),size_t tailleElement){
+    //assert(ABR_estPresent(*a,e,comparerElement));
     if (!AB_estVide(*a)){
         if (comparerElement(AB_obtenirElement(*a),e)>0){
             ABR tempfg = AB_obtenirFilsGauche(*a);
-            ABR_supprimerElement(&tempfg,e,comparerElement);
+            ABR_supprimerElement(&tempfg,e,comparerElement,tailleElement);
             AB_fixerFilsGauche(*a,tempfg);
         }
         else {
             if (comparerElement(AB_obtenirElement(*a),e)<0){
                 ABR tempfd = AB_obtenirFilsDroit(*a);
-                ABR_supprimerElement(&tempfd,e,comparerElement);
+                ABR_supprimerElement(&tempfd,e,comparerElement,tailleElement);
                 AB_fixerFilsDroit(*a,tempfd);
             }
             else {
                 if (ABR_estVide(AB_obtenirFilsGauche(*a)) && ABR_estVide(AB_obtenirFilsDroit(*a))){
-                    ABR tempfd = AB_obtenirFilsDroit(*a); // Ou tempfd = ABR_creer doit etre plus correct
-                    ABR tempfg = AB_obtenirFilsGauche(*a);
+                    ABR tempfd,tempfg;
                     AB_supprimerRacine(a,&tempfg,&tempfd);
                 }
                 else {
                     if(ABR_estVide(AB_obtenirFilsGauche(*a)) || ABR_estVide(AB_obtenirFilsDroit(*a))){
-                        ABR tempfd = AB_obtenirFilsDroit(*a);
-                        ABR tempfg = AB_obtenirFilsGauche(*a);
+                        ABR tempfd,tempfg;
                         AB_supprimerRacine(a,&tempfg,&tempfd);
-                        if (AB_estVide(tempfg)){
+                        if (ABR_estVide(tempfg)){
                             *a = tempfd;
                         }
                         else {
@@ -99,13 +97,12 @@ void ABR_supprimerElement(ABR* a, Element e, int(*comparerElement)(Element,Eleme
                         }
                     }
                     else{
-                        ABR tempfd = AB_obtenirFilsDroit(*a);
-                        ABR tempfg = AB_obtenirFilsGauche(*a);
+                        ABR tempfd,tempfg;
                         AB_supprimerRacine(a,&tempfg,&tempfd);
                         Element nouveauSommet = AB_obtenirElement(ABR_lePlusGrand(tempfg));
-                        ABR_supprimerElement(&tempfg,nouveauSommet,comparerElement);
-                        *a = AB_ajouterRacine(tempfg,tempfd,nouveauSommet,sizeof(Element));
-
+                        *a = AB_ajouterRacine(tempfg,tempfd,nouveauSommet,tailleElement);
+                        ABR_supprimerElement(&tempfg,nouveauSommet,comparerElement,tailleElement);
+                        AB_fixerFilsGauche(*a,tempfg);
                     }
                 }
             }
