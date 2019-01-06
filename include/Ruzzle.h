@@ -61,11 +61,12 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 
   /**
   * \brief Permet d'afficher dans le terminal tous les mots qui ont été trouvés
-  * et qui sont contenus dans une variable de type SolutionRuzzle
+  * et qui sont contenus dans une variable de type SolutionRuzzle.
+  * Seul les 20 meilleurs mots sont affichés
   * \author Simon LEBEAUD
   * \param resultat l'arbre contenant tous les mots trouvés.
   */
-void RZ_afficherResultat(SolutionRuzzle resultat,int* nbIteration);
+void RZ_afficherResultat(SolutionRuzzle resultat);
 
 /**
 * \brief permet de connaître les cases pouvant être choisies pour construire le Mot

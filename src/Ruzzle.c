@@ -120,25 +120,23 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
 
 void RZ_afficherResultat_R(ABR arbreResultat,int* nbIteration ){
   if(!ABR_estVide(arbreResultat)){
-    *nbIteration=*nbIteration+1;
     RZ_afficherResultat_R(AB_obtenirFilsDroit(arbreResultat),nbIteration);
     MotRuzzle leMot = *(MotRuzzle*)AB_obtenirElement(arbreResultat);
-    if(*nbIteration<=30){
-    printf("%s %d\n",leMot.mot,leMot.nbPoints);
-    RZ_afficherResultat_R(AB_obtenirFilsGauche(arbreResultat),nbIteration);
+    if(*nbIteration<20){
+      *nbIteration=*nbIteration+1;
+      printf("%s %d\n",leMot.mot,leMot.nbPoints);
+      RZ_afficherResultat_R(AB_obtenirFilsGauche(arbreResultat),nbIteration);
     }
   }
 }
 
 
-void RZ_afficherResultat(SolutionRuzzle resultat,int* nbIteration) {
+void RZ_afficherResultat(SolutionRuzzle resultat) {
   printf("Nous avons trouvé %d mots\n",resultat.nbMots);
-  printf("Voici les 25 mots : \n");
+  int* nbIteration = (int*)malloc(sizeof(int));
+  *nbIteration = 0;
+  printf("Voici les 20 meilleurs mots : \n");
   RZ_afficherResultat_R(resultat.motsTrouvesParPoints,nbIteration);
-  printf(".\n");
-  printf(".\n");
-  printf(".\n");
-  printf(".\n");
 }
 
 Ens_Ensemble RZ_casesAdjacentesNonUtilisees(unsigned short posX, unsigned short posY, Grille g) {
