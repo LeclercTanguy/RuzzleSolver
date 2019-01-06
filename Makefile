@@ -102,6 +102,7 @@ clean :
 	rm -rf $(LIBDIR)/*
 	rm -rf $(DOCHTML)/*
 	rm -rf $(DOCPDF)/*
+	rm -rf $(RAPPORT)/_minted-CRProjet
 	find . -name '*.o' -delete
 	find . -name '*.pdf' -delete
 	find . -name '*.html' -delete
