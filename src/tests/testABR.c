@@ -31,6 +31,17 @@ void test_ABR_insertion_ordonnee(void){
 
 //tester l'insertion de trois éléments distincts (ex: 2, 1, 3) et vérifier que le fils gauche est bien plus petit que la racine et que le fils droit est bien plus grand
 
+void test_ABR_supprimerElement(void){
+    ABR a = ABR_creer();
+    int un = 1, deux =2 , trois=3 , quatre = 4;
+    ABR_inserer(&a,&deux,comparerInt,sizeof(int));
+    ABR_inserer(&a,&trois,comparerInt,sizeof(int));
+    ABR_inserer(&a,&un,comparerInt,sizeof(int));
+    ABR_inserer(&a,&quatre,comparerInt,sizeof(int));
+    ABR_supprimerElement(&a,&quatre,comparerInt);
+    CU_ASSERT_FALSE(ABR_estPresent(a,&quatre,comparerInt));
+}
+
 int main(int argc, char** argv){
 
   CU_pSuite pSuite = NULL;
@@ -50,6 +61,7 @@ int main(int argc, char** argv){
   if ((NULL == CU_add_test(pSuite, "créer un ABR vide", test_ABR_creer))
       || (NULL == CU_add_test(pSuite, "insérer / est present", test_ABR_inserer_present))
       || (NULL == CU_add_test(pSuite, "insertion dans le bon ordre", test_ABR_insertion_ordonnee))
+      || (NULL == CU_add_test(pSuite, "Suprresion d'un élément ", test_ABR_supprimerElement))
       )
     {
       CU_cleanup_registry();

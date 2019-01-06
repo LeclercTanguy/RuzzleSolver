@@ -55,3 +55,22 @@ Element ABR_estPresentAvecReference(ABR a, Element e, int(*comparerElement)(Elem
 void ABR_supprimer(ABR* a) {
   AB_supprimer(a);
 }
+
+void ABR_supprimerElement(ABR* a, Element e, int(*comparerElement)(Element,Element)){
+    assert(ABR_estPresent(*a,e,comparerElement));
+    if (comparerElement(AB_obtenirElement(*a),e)==0){
+        free(AB_obtenirElement(*a));
+        free(*a);
+    }
+    else if (comparerElement(AB_obtenirElement(*a),e)<0){
+        ABR fd = AB_obtenirFilsDroit(*a);
+        ABR_supprimerElement(&fd,e,comparerElement);
+        AB_fixerFilsDroit(*a,fd);
+    }
+    else {
+        ABR fg = AB_obtenirFilsGauche(*a);
+        ABR_supprimerElement(&fg,e,comparerElement);
+        AB_fixerFilsGauche(*a,fg);
+
+    }
+}
