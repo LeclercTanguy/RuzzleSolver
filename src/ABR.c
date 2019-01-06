@@ -62,7 +62,7 @@ ABR ABR_lePlusGrand(ABR a){
         return a;
     }
     else {
-        return ABR_lePlusGrand(a);
+        return ABR_lePlusGrand(AB_obtenirFilsDroit(a));
     }
 }
 
