@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "Ruzzle.h"
 #include "ABR.h"
 #include "Grille.h"
@@ -160,12 +161,14 @@ void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat
   if (motDansResultatParMot!=NULL) { //on a déjà trouvé ce mot précédemment
     if (RZ_comparerMotRuzzleParPoints(&nouveauMot,motDansResultatParMot)>0) {
       //si le nombre de points est mieux, on remplace dans l'arbre
+      //on supprime le mot dans l'arbre classé par point (comme le nombre de points a changé)
+      ABR_supprimerElement(&(resultat->motsTrouvesParPoints),motDansResultatParMot, RZ_comparerMotRuzzleParPoints);
+      //on change dans l'arbre classé par mot
       memcpy(motDansResultatParMot,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
       //évite de supprimer l'ancien puis d'ajouter le nouveau, opération plus couteuse en temps
-      //le mot étant le même, la taille en mémoire est donc identique
-      //on le change aussi dans l'arbre classé par points
-      MotRuzzle* motDansResultatParPoints = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParPoints,motDansResultatParMot,RZ_comparerMotRuzzleParPoints));
-      memcpy(motDansResultatParPoints,&nouveauMot,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
+      //le mot étant le même, la taille en mémoire est donc identique et l'emplacement dans l'arbre trié par mot aussi
+      //on ajoute le nouveau mot dans l'arbre trié par points
+      ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints,sizeof(MotRuzzle)+strlen(nouveauMot.mot));
     } //sinon on ne change rien
   } else { //sinon on l'ajoute à la liste des mots trouvés
     (resultat->nbMots)++;
