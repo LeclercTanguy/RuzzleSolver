@@ -1,3 +1,4 @@
+\subsection{Case}
 \begin{tad}
   \tadNom{Case}
   \tadDependances{A..Z,\naturelNonNul,Bonus,1..4}
@@ -20,8 +21,28 @@
     \tadAxiome{obtenirPosY(fixerPosition(uneCase,x,y))=y}
   \end{tadAxiomes}
 \end{tad}
-\medskip
 
+\subsection{CasesContigues}
+\begin{tad}
+  \tadNom{CasesContigues}
+  \tadDependances{Case,\naturel,\chaine}
+  \begin{tadOperations}{CasesContiguesEnChaine}
+    \tadOperation{creerCasesContigues}{}{\tadUnParam{CasesContigues}}
+    \tadOperation{ajouterCase}{\tadDeuxParams{CasesContigues}{Case}}{\tadUnParam{CasesContigues}}
+    \tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
+    \tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
+    \tadOperation{casesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
+  \end{tadOperations}
+  \begin{tadPreconditions}{supprimerCase}
+     \tadPrecondition{supprimerCase}{nbCasesContigues(suiteCases) $>$ 0}
+  \end{tadPreconditions}
+  \begin{tadAxiomes}
+    \tadAxiome{supprimerCase(ajouterCase(suiteCases,uneCase))=uneCase}
+    \tadAxiome{nbCasesContigues(creerCasesContigues())=0}
+  \end{tadAxiomes}
+\end{tad}
+
+\subsection{Grille}
 \begin{tad}
   \tadNom{Grille}
   \tadDependances{Case,\booleen,1..4}
@@ -40,32 +61,8 @@
     \tadAxiome{estUtilisee(finUtilisation(g,x,y))=FAUX}
   \end{tadAxiomes}
 \end{tad}
-\medskip
 
-\begin{tad}
-  \tadNom{Mot}
-  \tadDependances{Dictionnaire,\chaine,\naturelNonNul,\caractere}
-  \begin{tadOperations}{ajouterLettre}%nom de l'opération le plus long
-    \tadOperationAvecPreconditions{chaineEnMot}{\tadDeuxParams{Dictionnaire}{\chaine}}{\tadUnParam{Mot}}
-    \tadOperation{motEnChaine}{\tadUnParam{Mot}}{\tadUnParam{\chaine}}
-    \tadOperation{longueur}{\tadUnParam{Mot}}{\tadUnParam{\naturelNonNul}}
-    \tadOperationAvecPreconditions{ajouterLettre}{\tadTroisParams{Dictionnaire}{Mot}{\caractere}}{\tadUnParam{Mot}}
-    \tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}}{\tadUnParam{Mot}}
-  \end{tadOperations}
-  \begin{tadPreconditions}{retirerLettre}
-    \tadPrecondition{chaineEnMot}{estUnPrefixe(dico,chaine) ET longueur(chaine)$\geq$1}
-    \tadPrecondition{ajouterLettre}{estUnPrefixe(dico,motEnChaine(unMot)+lettre)}
-    \tadPrecondition{retirerLettre}{longueur(unMot) $\geq$ 2}
-   \end{tadPreconditions}
-   \begin{tadAxiomes}
-     \tadAxiome{motEnChaine(chaineEnMot(dico,uneChaine))=uneChaine}
-     \tadAxiome{motEnChaine(ajouterLettre(dico,unMot,lettre))=motEnChaine(unMot)+lettre}
-     \tadAxiome{longueur(ajouterLettre(dico,unMot,lettre))=longueur(unMot)+1}
-     \tadAxiome{longueur(retirerLettre(unMot))=longueur(unMot)-1}
-   \end{tadAxiomes}
-\end{tad}
-\medskip
-
+\subsection{Dictionnaire}
 \begin{tad}
   \tadNom{Dictionnaire}
   \tadDependances{Mot,\chaine,Fichier,\booleen}
@@ -94,23 +91,27 @@
     \tadSemantique{charger}{charge le dictionnaire à partir d'un fichier préalablement généré par l'opération sauvegarder}
   \end{tadSemantiques}
 \end{tad}
-\medskip
 
+\subsection{Mot}
 \begin{tad}
-  \tadNom{CasesContigues}
-  \tadDependances{Case,\naturel,\chaine}
-  \begin{tadOperations}{CasesContiguesEnChaine}
-    \tadOperation{creerCasesContigues}{}{\tadUnParam{CasesContigues}}
-    \tadOperation{ajouterCase}{\tadDeuxParams{CasesContigues}{Case}}{\tadUnParam{CasesContigues}}
-    \tadOperationAvecPreconditions{supprimerCase}{\tadUnParam{CasesContigues}}{\tadUnParam{CasesContigues}}
-    \tadOperation{nbCasesContigues}{\tadUnParam{CasesContigues}}{\tadUnParam{\naturel}}
-    \tadOperation{casesContiguesEnChaine}{\tadUnParam{CasesContigues}}{\tadUnParam{\chaine}}
+  \tadNom{Mot}
+  \tadDependances{Dictionnaire,\chaine,\naturelNonNul,\caractere}
+  \begin{tadOperations}{ajouterLettre}%nom de l'opération le plus long
+    \tadOperationAvecPreconditions{chaineEnMot}{\tadDeuxParams{Dictionnaire}{\chaine}}{\tadUnParam{Mot}}
+    \tadOperation{motEnChaine}{\tadUnParam{Mot}}{\tadUnParam{\chaine}}
+    \tadOperation{longueur}{\tadUnParam{Mot}}{\tadUnParam{\naturelNonNul}}
+    \tadOperationAvecPreconditions{ajouterLettre}{\tadTroisParams{Dictionnaire}{Mot}{\caractere}}{\tadUnParam{Mot}}
+    \tadOperationAvecPreconditions{retirerLettre}{\tadUnParam{Mot}}{\tadUnParam{Mot}}
   \end{tadOperations}
-  \begin{tadPreconditions}{supprimerCase}
-     \tadPrecondition{supprimerCase}{nbCasesContigues(suiteCases) $>$ 0}
-  \end{tadPreconditions}
-  \begin{tadAxiomes}
-    \tadAxiome{supprimerCase(ajouterCase(suiteCases,uneCase))=uneCase}
-    \tadAxiome{nbCasesContigues(creerCasesContigues())=0}
-  \end{tadAxiomes}
+  \begin{tadPreconditions}{retirerLettre}
+    \tadPrecondition{chaineEnMot}{estUnPrefixe(dico,chaine) ET longueur(chaine)$\geq$1}
+    \tadPrecondition{ajouterLettre}{estUnPrefixe(dico,motEnChaine(unMot)+lettre)}
+    \tadPrecondition{retirerLettre}{longueur(unMot) $\geq$ 2}
+   \end{tadPreconditions}
+   \begin{tadAxiomes}
+     \tadAxiome{motEnChaine(chaineEnMot(dico,uneChaine))=uneChaine}
+     \tadAxiome{motEnChaine(ajouterLettre(dico,unMot,lettre))=motEnChaine(unMot)+lettre}
+     \tadAxiome{longueur(ajouterLettre(dico,unMot,lettre))=longueur(unMot)+1}
+     \tadAxiome{longueur(retirerLettre(unMot))=longueur(unMot)-1}
+   \end{tadAxiomes}
 \end{tad}
