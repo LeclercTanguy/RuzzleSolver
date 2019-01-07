@@ -5,16 +5,17 @@
 \usepackage{graphicx}
 \usepackage{algorithmeUTF8}
 \usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{minted}
 \newcommand{\noun}[1]{\textsc{#1}}
 
 \title{Projet Ruzzle}
 \author{Nina \noun{Lardiere}, Yves \noun{Le Guennec}, Simon \noun{Lebeaud}, Tanguy \noun{Leclerc}}
-\date{Novembre 2018}
+\date{Octobre 2018 - Janvier 2019}
 
 \begin{document}
 	\maketitle
-	%\newpage
-	%\tableofcontents
+	\tableofcontents
+	\newpage
 	\section{Analyse}
 		\subsection{Les TAD}
 			\input{./TAD/TAD}
@@ -26,7 +27,8 @@
 				\caption{\label{fig:AD}Analyse descendante}
 			\end{figure}
 
- \section{Conception préliminaire}
+	\newpage
+	\section{Conception préliminaire}
 		\subsection{Signatures des fonctions et procédures des TAD}
 			\input{./TAD/Signatures_1}
 			\input{./TAD/Signatures_2}
@@ -36,8 +38,14 @@
 		\subsection{Signatures des fonctions et procédures de l'analyse descendante}
 			\input{./analyseDescendante/Signatures_Analyse_descendante}
 
-\section{Conception détaillée}
-	\input{./conceptionDetaillee/trouverMot}
-	\input{./conceptionDetaillee/casesAdjacentes}
-	\input{./conceptionDetaillee/ruzzleSolver}
+	\newpage
+	\section{Conception détaillée}
+		\input{./conceptionDetaillee/trouverMot}
+		\input{./conceptionDetaillee/casesAdjacentes}
+		\input{./conceptionDetaillee/ruzzleSolver}
+
+	\newpage
+	\section{Développement}
+		\input{./developpement/developpement}
+
 \end{document}

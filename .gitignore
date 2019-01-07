@@ -6,6 +6,7 @@
 !Doxyfile
 doc/html
 doc/latex
+doc/rapport/_minted-CRProjet
 *.o
 *.pdf
 *.html

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Ruzzle.h"
 #include "Mot.h"
+#include "tools.h"
 
 int main(int argc, char *argv[]) {
   if (argc==3) {
@@ -24,10 +25,7 @@ int main(int argc, char *argv[]) {
             RZ_trouverMots(x,y,dico,&g,&initMot,&initChemin,&resultat);
           }
         }
-        int* nbIterationAffichage;
-        int i = 0;
-        nbIterationAffichage = &i;
-        RZ_afficherResultat(resultat, nbIterationAffichage);
+        RZ_afficherResultat(resultat);
         return 0;
       } else {
         return errDico;

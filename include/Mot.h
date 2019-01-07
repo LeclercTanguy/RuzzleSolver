@@ -1,3 +1,9 @@
+/**
+ *\file Mot.h
+ *\brief Implantation du TAD Mot
+ *\author Simon LEBEAUD
+ */
+
 #ifndef __MOT__
 #define __MOT__
 #include "ListeChainee.h"

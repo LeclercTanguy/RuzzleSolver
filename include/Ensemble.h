@@ -1,7 +1,7 @@
 /**
  *\file Ensemble.h
  *\brief Implantation du TAD Ensemble
- *\author S.Lebeaud
+ *\author Simon LEBEAUD
  *\version 1.0
  *
  */

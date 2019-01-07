@@ -1,11 +1,8 @@
 /**
-  * \file ListeChainee.h
-  * \brief Implantation du TAD Ensemble
-  * \author S.LEBEAUD
-  * \version 1.1
-*/
-
-
+ *\file ListeChainee.h
+ *\brief Implantation du TAD ListeChainee
+ *\author Simon LEBEAUD
+ */
 
 #ifndef __LISTE_CHAINEE__
 #define __LISTE_CHAINEE__

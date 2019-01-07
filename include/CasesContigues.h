@@ -1,6 +1,6 @@
 /**
- * \file Dictionnaire.h
- * \brief Implantation du TAD Case Contigue
+ * \file CasesContigues.h
+ * \brief Implantation du TAD CasesContigues
  * \author Nina LARDIERE
  * \version 1.0
  */
