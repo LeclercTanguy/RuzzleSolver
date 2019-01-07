@@ -52,8 +52,8 @@ unsigned int Mot_obtenirTaille(Mot leMot);
 
 /*
   * \brief permet d'obtenir la dernière lettre ajouté dans un Mot
-  * \param leMot de type Mot
-  * \return dernier caractère contenue dans la liste chainée contenue dans un Mot
+  * \param leMot de type Mot dont on veut obtenir la dernière lettre
+  * \return char dernier caractère contenue dans la liste chainée contenue dans un Mot
 */
 
 
@@ -62,7 +62,7 @@ char Mot_obtenirDerniereLettre(Mot leMot);
 /*
   * \brief Permet d'obtenir le noeud de l'arbre Dictionnaire de la dernière lettre d'un Mot
   * \author Simon LEABEAUD
-  * \param  leMot de type Mot
+  * \param  leMot de type Mot dont on veux obtenir la dernière référence
   * \return Dictionnaire qui est l'arbre binaire situer au noeud où ce trouve la dernière lettre du mot
 */
 
@@ -71,9 +71,9 @@ Dictionnaire Mot_obtenirDerniereReferenceDictionnaire(Mot leMot);
 /*
   * \brief Permet d'ajouter une lettre à un Mot
   * \author Simon LEABEAUD
-  * \param un pointeur sur le mot à qui on veut ajouter une lettre
-  * \param la caractère que l'on veut Ajouter
-  * \param le dictionnaire contant ce Mot
+  * \param leMot un pointeur sur le mot à qui on veut ajouter une lettre
+  * \param lettre le caractère que l'on veut Ajouter
+  * \param dico le dictionnaire contant ce Mot
   * \return 1 si il y a une erreur
   *         0 sinon
 */
@@ -83,7 +83,7 @@ int Mot_ajouterLettre(Mot *leMot, char lettre, Dictionnaire dico);
 /*
   * \brief retirer la dernière lettre ajouter dans un mot
   * \author Simon LEABEAUD
-  * \param pointeur sur le mot auquel on veut retirer la dernière lettre
+  * \param leMot pointeur sur le mot auquel on veut retirer la dernière lettre
 */
 
 void Mot_retirerLettre(Mot *leMot);
@@ -91,7 +91,7 @@ void Mot_retirerLettre(Mot *leMot);
 /*
   * \brief supprimer un mot
   * \author Simon LEABEAUD
-  * \param pointeur sur le mot à supprimer
+  * \param leMot pointeur sur le mot à supprimer
 */
 
 void Mot_supprimerMot(Mot* leMot);
@@ -100,11 +100,11 @@ void Mot_supprimerMot(Mot* leMot);
   * \brief permet mettre une chaine sous la forme d'une variable de type Mot
   * \author Simon LEABEAUD
   * \version 1.2
-  * \param Dictionnaire contenant le mot
-  * \param la chaine de caractère à ajouter
+  * \param dico Dictionnaire contenant le mot
+  * \param chaine la chaine de caractère à ajouter
 */
 
-Mot Mot_chaineEnMot (Dictionnaire dico, char *chaine);
+Mot Mot_chaineEnMot (Dictionnaire dico, char* chaine);
 
 /*
   * \brief transforme un Mot en chaine de caractère
