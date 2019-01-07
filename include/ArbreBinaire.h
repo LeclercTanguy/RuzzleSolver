@@ -1,3 +1,9 @@
+/**
+ * \file ArbreBinaire.h
+ * \brief Implantation du TAD ArbreBinaire
+ * \author Tanguy LECLERC
+ */
+
 #ifndef __ARBRE_BINAIRE__
 #define __ARBRE_BINAIRE__
 #include "ListeChainee.h" //définition de Element

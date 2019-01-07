@@ -1,3 +1,9 @@
+/**
+ *\file ListeChainee.h
+ *\brief Implantation du TAD ListeChainee
+ *\author Simon LEBEAUD
+ */
+
 #ifndef __LISTE_CHAINEE__
 #define __LISTE_CHAINEE__
 #include <stdbool.h>

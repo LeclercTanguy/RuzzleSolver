@@ -1,3 +1,9 @@
+/**
+ * \file Grille.h
+ * \brief Implantation du TAD Grille
+ * \author Tanguy LECLERC
+ */
+
 #ifndef __GRILLE__
 #define __GRILLE__
 #include <stdbool.h>

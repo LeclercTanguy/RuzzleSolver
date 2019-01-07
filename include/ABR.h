@@ -1,3 +1,9 @@
+/**
+ * \file ABR.h
+ * \brief Implantation du TAD ABR
+ * \author Tanguy LECLERC
+ */
+
 #ifndef __ABR__
 #define __ABR__
 

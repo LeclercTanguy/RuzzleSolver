@@ -24,13 +24,14 @@ int comparer2Fichiers(char* nomFichier1, char* nomFichier2);
 /**
   *\brief remplace les caractères de la chaîne compris entre 'a' et 'z' par le caractère correspondant entre 'A' et 'Z'
   * \author Yves LE GUENNEC
-  *\param la chaîne à mettre en majuscule
+  *\param chaine la chaîne à mettre en majuscule
 */
 void chaineEnMajuscule(char* chaine);
 
 /**
 * \brief conversion d'un caractère en chaîne de caractères
 * \param c le caractère à convertir
+* \author Yves LE GUENNEC
 * \return la chaîne obtenue
 */
 char* caractereEnChaine(char c);
