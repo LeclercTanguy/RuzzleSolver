@@ -45,7 +45,7 @@ bool Mot_estVide(Mot leMot);
   * \author Simon LEABEAUD
   * \version 1.0
   * \param leMot de type Mot
-  * \return unsigned int qui est la valeur de la variable taille de leMot
+  * \return la valeur de la variable taille de leMot
 */
 
 unsigned int Mot_obtenirTaille(Mot leMot);
@@ -53,7 +53,7 @@ unsigned int Mot_obtenirTaille(Mot leMot);
 /*
   * \brief permet d'obtenir la dernière lettre ajouté dans un Mot
   * \param leMot de type Mot dont on veut obtenir la dernière lettre
-  * \return char dernier caractère contenue dans la liste chainée contenue dans un Mot
+  * \return dernier caractère contenue dans la liste chainée contenue dans un Mot
 */
 
 
@@ -63,7 +63,7 @@ char Mot_obtenirDerniereLettre(Mot leMot);
   * \brief Permet d'obtenir le noeud de l'arbre Dictionnaire de la dernière lettre d'un Mot
   * \author Simon LEABEAUD
   * \param  leMot de type Mot dont on veux obtenir la dernière référence
-  * \return Dictionnaire qui est l'arbre binaire situer au noeud où ce trouve la dernière lettre du mot
+  * \return l'arbre binaire situer au noeud où ce trouve la dernière lettre du mot
 */
 
 Dictionnaire Mot_obtenirDerniereReferenceDictionnaire(Mot leMot);

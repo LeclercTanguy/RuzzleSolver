@@ -20,6 +20,12 @@ SolutionRuzzle RZ_creerSolutionRuzzle(void){
   return solution;
 }
 
+void RZ_supprimerSolutionRuzzle(SolutionRuzzle* resultat){
+  ABR_supprimer(&(resultat->motsTrouvesParMot));
+  ABR_supprimer(&(resultat->motsTrouvesParPoints));
+  resultat->nbMots = 0;
+}
+
 int RZ_chaineEnBonus(char* chaine, Bonus* leBonus) {
   if (strlen(chaine)>=2) {
       if (strncmp(chaine,"  ",2)==0) {
@@ -115,6 +121,7 @@ void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico,
     }
     LC_supprimerTete(&listeCasesAdjacentesNonUtilisees);
   }
+  Ens_supprimer(&lettresPossibles);
   G_finUtilisation(g, posX, posY);
 }
 
@@ -162,25 +169,25 @@ void RZ_insererMotResultat(CasesContigues cheminRuzzle, SolutionRuzzle* resultat
   MotRuzzle nouveauMot;
   nouveauMot.mot = CC_CasesContiguesEnChaine(cheminRuzzle);
   nouveauMot.nbPoints = CC_totalPointsCasesContigues(cheminRuzzle);
-  size_t tailleElement = sizeof(MotRuzzle)+strlen(nouveauMot.mot);
   //on regarde si le mot est déjà présent dans les mots trouvés
   MotRuzzle* motDansResultatParMot = (MotRuzzle*)(ABR_estPresentAvecReference(resultat->motsTrouvesParMot,&nouveauMot,RZ_comparerMotRuzzleParMot));
   if (motDansResultatParMot!=NULL) { //on a déjà trouvé ce mot précédemment
     if (RZ_comparerMotRuzzleParPoints(&nouveauMot,motDansResultatParMot)>0) {
       //si le nombre de points est mieux, on remplace dans l'arbre
       //on supprime le mot dans l'arbre classé par point (comme le nombre de points a changé)
-      ABR_supprimerElement(&(resultat->motsTrouvesParPoints),motDansResultatParMot,RZ_comparerMotRuzzleParPoints,tailleElement);
+      ABR_supprimerElement(&(resultat->motsTrouvesParPoints),motDansResultatParMot,RZ_comparerMotRuzzleParPoints,sizeof(MotRuzzle));
       //on change dans l'arbre classé par mot
-      memcpy(motDansResultatParMot,&nouveauMot,tailleElement);
+      memcpy(motDansResultatParMot,&nouveauMot,sizeof(MotRuzzle));
       //évite de supprimer l'ancien puis d'ajouter le nouveau, opération plus couteuse en temps
       //le mot étant le même, la taille en mémoire est donc identique et l'emplacement dans l'arbre trié par mot aussi
       //on ajoute le nouveau mot dans l'arbre trié par points
-      ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints,tailleElement);
+      ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints,sizeof(MotRuzzle));
     } //sinon on ne change rien
+    free(nouveauMot.mot); //le mot était déjà dans l'arbre
   } else { //sinon on l'ajoute à la liste des mots trouvés
     (resultat->nbMots)++;
-    ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints,sizeof(MotRuzzle)+tailleElement);
-    ABR_inserer(&(resultat->motsTrouvesParMot),&nouveauMot,RZ_comparerMotRuzzleParMot,sizeof(MotRuzzle)+tailleElement);
+    ABR_inserer(&(resultat->motsTrouvesParPoints),&nouveauMot,RZ_comparerMotRuzzleParPoints,sizeof(MotRuzzle));
+    ABR_inserer(&(resultat->motsTrouvesParMot),&nouveauMot,RZ_comparerMotRuzzleParMot,sizeof(MotRuzzle));
   }
 }
 

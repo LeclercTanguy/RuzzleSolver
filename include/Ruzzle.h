@@ -34,6 +34,13 @@ typedef struct {
 SolutionRuzzle RZ_creerSolutionRuzzle(void);
 
 /**
+* \brief permet de supprimer les arbres d'une structure SolutionRuzzle
+* \author Yves LE GUENNEC
+* \param resultat un pointeur vers la SolutionRuzzle à supprimer
+*/
+void RZ_supprimerSolutionRuzzle(SolutionRuzzle* resultat);
+
+/**
 * \brief Permet de convertir une chaîne de 2 caractères en un Bonus utilisé dans une Case de la Grille de Ruzzle.
 *
 * Si la chaîne fait plus de deux caractères, seul les 2 premiers sont utilisés.
