@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "Case.h"
 /**
- * \brief Une grille est tableau de Case 4x4 et un tableau de booléen 4x4 pour définir si une case est utilisée ou non.
+ * \brief Une grille est tableau de Case 4*4 et un tableau de booléen 4*4 pour définir si une case est utilisée ou non.
 */
 typedef struct {
     Case grille[4][4];
