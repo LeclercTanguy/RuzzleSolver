@@ -60,8 +60,30 @@
     \codeC{../../src/transcoder.c}
 
 \section{Deuxième version de sauvegarder et charger}
-  Cette version n'a pas été intégrée au projet final car
-  le chargement du dictionnaire était moins performant.
-  On passe en effet de 0.25s à 0.75s pour l'exécution de
-  ruzzleSolver.
+  Le chargement du Dictionnaire (si on exclu sa suppression), représente 97,8\%
+  du temps d'exécution de ruzzleSolver, j'ai donc cherché à améliorer sa vitesse
+  de chargement pour réduire le temps nécessaire à l'exécution de ruzzleSolver.
+  Étant donné que 35\% de ce temps est dédié à l'allocation mémoire (d'après Valgrind),
+  j'ai eu l'idée, au lieu d'allouer un espace mémoire pour chaque nœud et chaque
+  élément du Dictionnaire, d'allouer un espace de la taille du Dictionnaire entier,
+  qui permettrait d'avoir tous les mots dans la même zone mémoire et de ne faire qu'une
+  seule allocation.
+  
+  J'ai donc modifié la sauvegarde en associant un numéro à chaque nœuds afin de connaître
+  le positionnement en mémoire de fils gauche et du fils droit.
+  Le chargement consistait donc à remplir linéairement cet espace en suivant les données
+  générés par l'opération de sauvegarde, le pointeur vers le fils droit étant alors
+  l'indice mémoire du premier élément augmenté du numéro du nœud * la taille d'un nœud.
+  Chaque nœud contenait donc 3 pointeurs (Dictionnaire basé sur un ArbreBinaire générique)
+  ainsi qu'un caractère.
+
+  Le code correspondant à été développé et passe également les tests unitaires.
+  Seule la suppression de l'arbre a besoin d'être modifiée car free se réfère à l'espace
+  alloué par malloc, on ne peut donc supprimer que l'entièreté de l'arbre.
+  La suppression nœud par nœud, ou la suppression d'un mot, ne sont donc plus possible.
+
+  Cette version n'a pas été intégrée au projet final car le chargement du dictionnaire était moins performant. On passe en effet de 0.25s à 0.75s pour l'exécution de ruzzleSolver, ce qui
+  est à l'opposé de l'objectif recherché.
+
+  Yves LE GUENNEC
     \codeC{developpement/DictionnaireV2.c}
