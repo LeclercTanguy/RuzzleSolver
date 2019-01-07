@@ -84,5 +84,6 @@ void AB_supprimer(ArbreBinaire* a){
     AB_supprimerRacine(a,&fg,&fd);
     AB_supprimer(&fg);
     AB_supprimer(&fd);
+    *a = NULL;
   }
 }

@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     int errGrille = RZ_chaineEnGrille(grilleRuzzle,&g);
     if (!errGrille) {
       Dictionnaire dico = DC_creerDictionnaire();
-      int errDico = DC_charger(nomFichierDico,&dico);
+      int errDico = DC_charger(nomFichierDico,&dico); //97.9% du temps d'execution
       if (!errDico) {
         SolutionRuzzle resultat = RZ_creerSolutionRuzzle();
         Mot initMot;
@@ -23,9 +23,12 @@ int main(int argc, char *argv[]) {
             initChemin = CC_creer_CasesContigues();
             CC_ajouterCase(&initChemin,G_obtenirCase(g,x,y));
             RZ_trouverMots(x,y,dico,&g,&initMot,&initChemin,&resultat);
+            Mot_supprimerMot(&initMot);
           }
         }
         RZ_afficherResultat(resultat);
+        RZ_supprimerSolutionRuzzle(&resultat);
+        //DC_supprimer(&dico); // 30% du temps d'exécution, plus rapide en laissant l'OS gérer la libération de la mémoire à la fin de l'execution
         return 0;
       } else {
         return errDico;
