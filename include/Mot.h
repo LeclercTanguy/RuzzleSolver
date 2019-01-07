@@ -109,7 +109,7 @@ Mot Mot_chaineEnMot (Dictionnaire dico, char *chaine);
 /*
   * \brief transforme un Mot en chaine de caractère
   * \author Simon LEABEAUD
-  * \param leMot de type Mot
+  * \param leMot de type Mot, le mot que l'on veut mettre en chaîne
   * \return chaine de caractère contenue dans la liste chainee de la variable de type Mot
 */
 
