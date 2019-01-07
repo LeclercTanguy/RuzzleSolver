@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "tools.h"
 
 int min(int a, int b) {
@@ -28,33 +29,21 @@ void chaineEnMajuscule(char* chaine) {
   }
 }
 
-int comparer_R(FILE* fichier1, FILE* fichier2) {
-  char c = fgetc(fichier1);
-  if (c==fgetc(fichier2)) {
-    if (c==EOF) {
-      return 1; //fichiers identiques
-    } else {
-      return comparer_R(fichier1,fichier2);
-    }
-  } else {
-    return 0; //fichiers différents
-  }
-}
-
-// compare 2 fichiers caractère par caractère
-// 1 : fichiers identiques
-// 0 : fichiers différents
-// -1 : erreur à l'ouverture des fichiers
 int comparer2Fichiers(char* nomFichier1, char* nomFichier2) {
     FILE* fichier1 = fopen (nomFichier1,"rb");
     FILE* fichier2 = fopen (nomFichier2,"rb");
     if ((fichier1!=NULL) && (fichier2!=NULL)) {
-      int comp = comparer_R(fichier1,fichier2);
+      char c1 = fgetc(fichier1);
+      char c2 = fgetc(fichier2);
+      while((c1==c2) && (c1!=EOF)) {
+        c1 = fgetc(fichier1);
+        c2 = fgetc(fichier2);
+      }
       fclose(fichier1);
       fclose(fichier2);
-      return comp;
+      return c1==c2;
     } else {
-      return -1;
+      return -1; //erreur à l'ouverture des fichiers
     }
 }
 
@@ -69,4 +58,11 @@ int comparerInt (Element a, Element b) {
   } else {
     return 1;
   }
+}
+
+char* caractereEnChaine(char c) {
+  char* chaine = malloc(sizeof(c)*2);
+  chaine[0] = c;
+  chaine[1] = '\0';
+  return chaine;
 }

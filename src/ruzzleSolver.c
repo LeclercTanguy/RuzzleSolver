@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Ruzzle.h"
 #include "Mot.h"
+#include "tools.h"
 
 int main(int argc, char *argv[]) {
   if (argc==3) {

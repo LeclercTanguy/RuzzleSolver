@@ -1,3 +1,9 @@
+/**
+ *\file Ruzzle.h
+ *\brief Fonctions nécessaires à la résolution d'une grille de Ruzzle
+ *\author Nina LARDIÈRE, Yves LE GUENNEC, Simon LEBEAUD, Tanguy LECLERC
+ */
+
 #ifndef __RUZZLE__
 #define __RUZZLE__
 
@@ -118,13 +124,5 @@ int RZ_comparerMotRuzzleParMot(Element mr1, Element mr2);
 * \author Yves LE GUENNEC
 */
 void infosGrille(void);
-
-/**
-* \brief conversion d'un caractère en chaîne de caractères
-* \author Yves LE GUENNEC
-* \param c le caractère à convertir
-* \return la chaîne obtenue
-*/
-char* caractereEnChaine(char c);
 
 #endif
