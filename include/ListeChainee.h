@@ -10,16 +10,23 @@
 #include <stddef.h>
 
 /**
-  * \brief On declare un type Element qui est un espace mémoire
-  * dédié à un Element que l'on pourra ensuite changer, comme cela
-  * on un TAD Liste Chainee générique
+  * \brief On déclare un type Element qui est un pointeur vers un espace mémoire
+  * contenant un élément de type et donc de taille inconnue, afin d'avoir
+  * un TAD Liste Chainee générique.
 */
 typedef void* Element;
 
+/**
+  * \brief LC_ListeChainee est un pointeur vers une structure LC_Noeud
+*/
 typedef struct LC_Noeud* LC_ListeChainee;
+
+/**
+  * \brief nœud d'une liste chaînée
+*/
 typedef struct LC_Noeud {
-  Element element;
-  LC_ListeChainee listeSuivante;
+  Element element; /**< un pointeur générique vers l'élément du nœud */
+  LC_ListeChainee listeSuivante; /**<  un pointeur vers le nœud suivant */
 } LC_Noeud;
 
 /**
@@ -27,16 +34,15 @@ typedef struct LC_Noeud {
   * \author S.LEBEAUD
   * \return une liste chainée vide (NULL)
 */
-
 LC_ListeChainee LC_listeVide(void);
 
 /**
-  * \brief Permet d'allouer de l'espace mémoire celon les Elements qui serons
-  * contenu dans la liste chainée
+  * \brief Permet d'allouer de l'espace mémoire pour stocker un nœud de la liste chaînée
+  * L'espace mémoire pointé par Element est alloué lors de l'appel à LC_fixerElement
+  * Le pointeur Element et la liste suivante sont initialisés à NULL.
   * \author S.LEBEAUD
-  * \return une liste Chainee vide
+  * \return une liste Chainee initialisée sans élément ni liste suivante
 */
-
 LC_ListeChainee LC_allouer(void);
 
 /**
@@ -45,7 +51,6 @@ LC_ListeChainee LC_allouer(void);
   * \param lc la liste chainée dont on veux savoir si elle est vide ou non
   * \return un booléen Vrai si la liste est Vide, Faux sinon
 */
-
 bool LC_estVide(LC_ListeChainee lc);
 
 /**
@@ -53,29 +58,33 @@ bool LC_estVide(LC_ListeChainee lc);
   * \author S.LEBEAUD
   * \param lc la liste Chainee
   * \param unElement l'Element dont on veut vérifier la présence dans la liste Chainee lc
-  * \param tailleElement la taille de L'espace mémoire que prend l'élément
+  * Il s'agit donc d'un pointeur vers le type des données contenues dans la liste chaînée
+  * \param tailleElement la taille occupée en mémoire par le type d'élément stocké
+  * dans la liste chaînée et pointé par unElement.
   * \return un booléen, VRAI si l'élément est présent, FAUX sinon
 */
-
 bool LC_estPresent(LC_ListeChainee lc,Element unElement,size_t tailleElement);
 
 /**
   * \brief permet d'ajouter un élément à une liste chainee
   * \author S.LEBEAUD
   * \param lc un pointeur sur la liste chainée à laquelle on veut ajouter un élement
-  * \param elementAAjouter l'élément que l'on veux ajouter
-  * \param tailleElement la taille de l'espace mémoire que l'élément occupe.
+  * \param elementAAjouter un pointeur vers l'élément que l'on veux ajouter
+  * L'espace mémoire pointé par elementAAjouter sera copié lors de l'insertion.
+  * \param tailleElement la taille de l'espace mémoire occupé par le type de l'élément
+  à insérer.
 */
-
 void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement);
 
 /**
-  * \brief Permet d'obtenir le dernière élement ajouter à une liste chainée
+  * \brief Permet d'obtenir le dernier élement ajouté à une liste chainée
   * \author S.LEBEAUD
-  * \param  lc , une listechainne non vide
-  * \return le dernière élément ajouté à la liste
+  * \param  lc, une listechainne non vide
+  * \return un pointeur vers le dernier élément ajouté à la liste
+  * \warning vous devez donc transtyper cet Element vers un pointeur du type utilisé avant
+  * de vous en servir. Par exemple, pour une liste chaînée d'entier, vous auriez
+  * int a = *(int*)LC_obtenirElement(lc);
 */
-
 Element LC_obtenirElement(LC_ListeChainee lc);
 
 /**
@@ -84,16 +93,19 @@ Element LC_obtenirElement(LC_ListeChainee lc);
   * \param lc la liste chainée
   * \return la liste chainée suivante de lc
 */
-
 LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee lc);
 
 /**
   * \brief Permet de fixer un élement à la liste chainée, càd
-  * affecter un élément dans la structure de la liste chainée
+  * affecter un élément dans la structure de la liste chainée.
+  * Si l'espace mémoire occupé par l'élément à insérer n'est pas alloué,
+  * malloc est appelé et l'élément copié dans ce nouvel espace mémoire.
+  * Si cet espace était déjà alloué, l'élément est juste copié.
   * \author S.LEBEAUD
   * \param lc la liste chainée
   * \param Element l'élément que l'on veut fixer à lc
-  * \param tailleElement la taille de l'espace mémoire occupé par l'élément
+  * C'est un pointeur vers le type de donnée à insérer, de taille tailleElement
+  * \param tailleElement la taille de l'espace mémoire occupé par le type pointé par Element
 */
 
 void LC_fixerElement(LC_ListeChainee lc,Element,size_t tailleElement);
@@ -104,16 +116,14 @@ void LC_fixerElement(LC_ListeChainee lc,Element,size_t tailleElement);
   * \param lc la liste chainée
   * \param lcSuivante la liste que l'on veux fixer comme liste suivante de lc
 */
-
 void LC_fixerListeSuivante(LC_ListeChainee lc,LC_ListeChainee lcSuivante);
 
 /**
-  * \brief Procedure qui permet de suipprimer le dernière Element ajouter à une liste chainée
-  * Le dernière élément est supprimer et la liste chainée devient sa liste suivante.
+  * \brief Procedure qui permet de supprimer le dernier Element ajouté à une liste chainée
+  * Le dernier élément est supprimé et la liste chainée devient sa liste suivante.
   * \author S.LEBEAUD
   * \param lc un pointeur sur la liste
 */
-
 void LC_supprimerTete(LC_ListeChainee* lc);
 
 /**
@@ -121,7 +131,6 @@ void LC_supprimerTete(LC_ListeChainee* lc);
   * \author S.LEBEAUD
   * \param lc un pointeur sur la liste chainée à supprimer
 */
-
 void LC_supprimer(LC_ListeChainee*);
 
 #endif
