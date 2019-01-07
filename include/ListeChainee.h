@@ -25,7 +25,7 @@ typedef struct LC_Noeud {
 /**
   * \brief création d'une Liste Chainee vide
   * \author S.LEBEAUD
-  * \return LC_ListeChainee une liste chainée vide (NULL)
+  * \return une liste chainée vide (NULL)
 */
 
 LC_ListeChainee LC_listeVide(void);
@@ -34,7 +34,7 @@ LC_ListeChainee LC_listeVide(void);
   * \brief Permet d'allouer de l'espace mémoire celon les Elements qui serons
   * contenu dans la liste chainée
   * \author S.LEBEAUD
-  * \return LC_ListeChainee une liste Chainee vide
+  * \return une liste Chainee vide
 */
 
 LC_ListeChainee LC_allouer(void);
@@ -43,7 +43,7 @@ LC_ListeChainee LC_allouer(void);
   * \brief Permet de déterminer si une liste chainée est vide ou non
   * \author S.LEBEAUD
   * \param lc la liste chainée dont on veux savoir si elle est vide ou non
-  * \return bool un booléen Vrai si la liste est Vide, Faux sinon
+  * \return un booléen Vrai si la liste est Vide, Faux sinon
 */
 
 bool LC_estVide(LC_ListeChainee lc);
@@ -54,7 +54,7 @@ bool LC_estVide(LC_ListeChainee lc);
   * \param lc la liste Chainee
   * \param unElement l'Element dont on veut vérifier la présence dans la liste Chainee lc
   * \param tailleElement la taille de L'espace mémoire que prend l'élément
-  * \return bool un booléen, VRAI si l'élément est présent, FAUX sinon
+  * \return un booléen, VRAI si l'élément est présent, FAUX sinon
 */
 
 bool LC_estPresent(LC_ListeChainee lc,Element unElement,size_t tailleElement);
@@ -73,7 +73,7 @@ void LC_ajouter(LC_ListeChainee* lc,Element elementAAjouter,size_t tailleElement
   * \brief Permet d'obtenir le dernière élement ajouter à une liste chainée
   * \author S.LEBEAUD
   * \param  lc , une listechainne non vide
-  * \return Element le dernière élément ajouté à la liste
+  * \return le dernière élément ajouté à la liste
 */
 
 Element LC_obtenirElement(LC_ListeChainee lc);
@@ -82,7 +82,7 @@ Element LC_obtenirElement(LC_ListeChainee lc);
   * \brief Permet d'obtenir la liste suivante d'une liste chainée
   * \author S.LEBEAUD
   * \param lc la liste chainée
-  * \return LC_ListeChainee la liste chainée suivante de lc
+  * \return la liste chainée suivante de lc
 */
 
 LC_ListeChainee LC_obtenirListeSuivante(LC_ListeChainee lc);
