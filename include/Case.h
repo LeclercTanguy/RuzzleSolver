@@ -21,12 +21,15 @@ typedef enum {
   MT    /**< mot compte triple */
 } Bonus;
 
+/**
+*\brief le type Case permet de représenter une case de la Grille de Ruzzle
+*/
 typedef struct {
-  char lettre;
-  unsigned short nbPoints;
-  Bonus bonus;
-  unsigned short posX;
-  unsigned short posY;
+  char lettre; /**< la lettre de la case */
+  unsigned short nbPoints; /**< le nombre de points associé à la case */
+  Bonus bonus; /**< le bonus associé à la case */
+  unsigned short posX; /**< la position horizontale de 1 à 4 de la case dans la grille*/
+  unsigned short posY; /**< la position verticale de 1 à 4 de la case dans la grille*/
 } Case;
 
 /**

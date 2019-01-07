@@ -31,9 +31,9 @@ bool ABR_estVide(ABR a);
 /**
  * \brief Procédure permettant d'insérer un élément de façon ordonnée dans un ABR.
  * \author T.LECLERC
- * \param *a pointeur sur l'ABR que l'on veut modifier.
- * \param e l'élément que l'ont veut insérer.
- * \param comparerElement une fonction qui permet de comparer deux élément, utile pour ordonner l'insertion.
+ * \param a pointeur sur l'ABR que l'on veut modifier.
+ * \param e pointeur vers l'élément que l'on veut insérer.
+ * \param comparerElement une fonction qui permet de comparer deux élément utilisés dans l'arbre, utile pour ordonner l'insertion.
  * \param tailleElement taille de l'élément à insérer, ignoré si e==NULL.
  */
 void ABR_inserer(ABR* a, Element e, int(*comparerElement)(Element,Element),size_t tailleElement);
@@ -67,16 +67,16 @@ ABR ABR_lePlusGrand(ABR a);
 /**
  * \brief Procédure permettant de supprimer un élément dans un ABR.
  * \author T.LECLERC
- * \param *a pointeur sur l'ABR dont on veut supprimer un élément.
- * \param e l'élément que l'ont veut supprimer.
- * \param comparerElement une fonction qui permet de comparer deux élément.
+ * \param a pointeur sur l'ABR dont on veut supprimer un élément.
+ * \param e pointeur vers une variable égale à l'élément que l'on veut supprimer.
+ * \param comparerElement une fonction qui permet de comparer deux éléments.
  * \param tailleElement taille de l'élément à supprimer.
  */
 void ABR_supprimerElement(ABR* a, Element e, int(*comparerElement)(Element,Element),size_t tailleElement);
 /**
  * \brief Procédure permettant de supprimer un ABR.
  * \author T.LECLERC
- * \param *a pointeur sur l'arbre que l'on veut supprimer.
+ * \param a pointeur sur l'arbre que l'on veut supprimer.
  */
 void ABR_supprimer(ABR* a);
 

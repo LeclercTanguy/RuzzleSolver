@@ -10,23 +10,26 @@
 #define _ENSEMBLE_
 #include "ListeChainee.h"
 
+/**
+* \brief le type Ensemble permet de regrouper un ensemble de valeurs uniques du même type
+*/
 typedef struct Ens_Ensemble {
-  LC_ListeChainee lesElements;
-  unsigned int nbElements;
+  LC_ListeChainee lesElements; /**< la liste chaînée des éléments de l'ensemble */
+  unsigned int nbElements; /**< le nombre d'éléments de l'ensemble */
 }Ens_Ensemble;
 
 /**
- * \brief création d'un ensemble LC_estVide
+ * \brief création d'un ensemble vide
  * \author Simon LEBEAUD
- * \return Ens_Ensemble un ensemble vide
+ * \return un ensemble vide
 */
 Ens_Ensemble Ens_ensemble(void);
 
 /**
- * \brief permet d'obtenir la liste chainée d'éléments contenue dans un ensemble
+ * \brief permet d'obtenir la liste chainée d'éléments contenus dans un ensemble
  * \author Simon LEBEAUD
- * \param Ensemble dont on veux les éléments
- * \return  Liste chainée des éléments contenus dans l'Ensemble
+ * \param ens Ensemble dont on veux les éléments
+ * \return  la liste chaînée des éléments contenus dans l'Ensemble
 */
 LC_ListeChainee Ens_obtenirLesElements(Ens_Ensemble ens);
 
@@ -46,7 +49,7 @@ void* Ens_ensembleEnTableau (Ens_Ensemble ens, size_t tailleElement);
   * \brief Permet d'obtenir le nombre d'élements contenus dans un Ensemble
   * \author Simon LEBEAUD
   * \param ens Ensemble dont on veut connaître le nombre d'éléments
-  * \return integer qui est nombre d'éléments de l'Ensemble
+  * \return le nombre d'éléments de l'Ensemble
 */
 int Ens_obtenirNbElements(Ens_Ensemble ens);
 
@@ -54,8 +57,8 @@ int Ens_obtenirNbElements(Ens_Ensemble ens);
   * \brief Permet d'ajouter un Element à un Ensemble
   * \author Simon LEBEAUD
   * \param ens un pointer vers l'Ensemble à modifier
-  * \param element L'Elément à ajouter
-  * \param tailleElement taille de l'Element ajouter
+  * \param element L'Elément à ajouter (pointeur vers le type de données de l'ensemble)
+  * \param tailleElement taille du type de l'Element à ajouter
 */
 void Ens_ajouter(Ens_Ensemble* ens,Element element,size_t tailleElement);
 
@@ -70,65 +73,66 @@ void Ens_ajouter(Ens_Ensemble* ens,Element element,size_t tailleElement);
 bool Ens_estPresent(Ens_Ensemble ens, Element element,size_t tailleElement);
 
 /**
-  * \brief Permet d'ajouter les élements d'une ListeChainee à un ensemble
-  * cette fonction concatène la Liste Chainee de l'Ensemble et celle donner
+  * \brief Permet d'ajouter les élements d'une ListeChainee à un ensemble.
+  * Cette fonction concatène la Liste Chaînee de l'Ensemble et celle donnée
   * \author Simon LEBEAUD
-  * \param Ens_Ensemble* pointeur sur l'Ensemble à modifier
-  * \param  LC_ListeChaine La liste Chainée à ajouter à l'ensemble
-  * \param tailleElement la taille des élements contenu dans la liste Chainée
+  * \param ens pointeur sur l'Ensemble à modifier
+  * \param lc La liste Chainée à ajouter à l'ensemble
+  * \param tailleElement la taille des éléments contenus dans la liste Chaînée
 */
 
-void Ens_ajouterElementsDUneAutreListe(Ens_Ensemble*,LC_ListeChainee,size_t tailleElement);
+void Ens_ajouterElementsDUneAutreListe(Ens_Ensemble* ens,LC_ListeChainee lc,size_t tailleElement);
 
 /**
   * \brief permet de faire l'Union de deux ensemble
   * \author Simon LEBEAUD
-  * \param ensemble1 dont on veux faire l'union et leurs taille
-  * \param ensemble2 avec lequel on fait l'union de ensemble1
-  * \return ensemble3 le nouvel ensemble qui contient les Elements des deux Ensemble précédent
+  * \param ensemble1 le premier ensemble dont on veux faire l'union
+  * \param ensemble2 le second ensemble dont on veux faire l'union
+  * \return un nouvel ensemble qui contient les Elements des deux Ensembles précédent
 */
 
-Ens_Ensemble Ens_union(Ens_Ensemble,Ens_Ensemble,size_t tailleElement);
+Ens_Ensemble Ens_union(Ens_Ensemble ensemble1, Ens_Ensemble ensemble2,size_t tailleElement);
 
 /**
-  * \brief Permet d'ajouter à un ensemble, les élements d'une liste chainee, seulement si
-  * ces element ne sont pas présent dans l'ensemble.
+  * \brief Permet d'ajouter à un ensemble, les élements d'une liste chaînée, seulement si
+  * ces élément ne sont pas présents dans l'ensemble.
   * \author Simon LEBEAUD
-  * \param Ens_Ensemble* un pointeur sur l'ensemble à modifier
-  * \param LC_ListeChainee la liste à ajouter
-  * \param tailleElement la taille des element dans la liste
+  * \param ens un pointeur sur l'ensemble à modifier
+  * \param lc la liste des éléments à ajouter
+  * \param ensRef l'ensemble de référence pour savoir si un élément doit être ajouté
+  * \param tailleElement la taille des éléments dans la liste
 */
-
-void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble*,LC_ListeChainee,Ens_Ensemble,size_t tailleElement);
+void Ens_ajouterElementsListeSiNonPresent(Ens_Ensemble* ens,LC_ListeChainee lc, Ens_Ensemble ensRef,size_t tailleElement);
 
 /**
-  * \brief permet de faire l'intersection de deux ensemble, c'est a dire avoir les élements
-  * qui sont présent dans les deux ensemble.
+  * \brief permet de faire l'intersection de deux ensembles, c'est-à-dire avoir les élements
+  * qui sont présents dans les deux ensembles.
   * \author Simon LEBEAUD
-  * \param ensemble1 dont on veut faire l'intersection
-  * \param ensemble2 qui fait intersection avec ensemble1
+  * \param ensemble1 ensemble dont on veut faire l'intersection
+  * \param ensemble2 ensemble qui fait intersection avec ensemble1
   * \return l'Ensemble intersection de ces deux ensemble
 */
 
 Ens_Ensemble Ens_intersection(Ens_Ensemble,Ens_Ensemble,size_t tailleElement);
 
 /**
-  * \brief Permet d'ajouter à un ensemble, les élements d'une liste chainee, seulement si
-  * ces elements sont présent dans l'ensemble.
+  * \brief Permet d'ajouter à un ensemble, les élements d'une liste chaînée, seulement si
+  * ses éléments sont présents dans l'ensemble.
   * \author Simon LEBEAUD
-  * \param Ens_Ensemble* un pointeur sur l'ensemble à modifier
-  * \param LC_ListeChaineec la Liste chainée
-  * \param tailleElement la taille des element de la liste
+  * \param ens un pointeur sur l'ensemble à modifier
+  * \param lc la liste des éléments à ajouter
+  * \param ensRef l'ensemble de référence pour savoir si un élément doit être ajouté
+  * \param tailleElement la taille des éléments de la liste
 */
 
-void ajouterElementsListeSiPresent(Ens_Ensemble*,LC_ListeChainee,Ens_Ensemble,size_t tailleElement);
+void ajouterElementsListeSiPresent(Ens_Ensemble* ens,LC_ListeChainee lc,Ens_Ensemble ensRef,size_t tailleElement);
 
 /**
-  * \brief permet de faire la soustraction de deux ensemble, c'est a dire avoir les élements
-  * qui sont présent dans un seul des deux Ensemble
+  * \brief permet de faire la soustraction de deux ensembles, c'est-à-dire avoir les élements
+  * qui sont présent dans un seul des deux Ensembles
   * \author Simon LEBEAUD
-  * \param ensemble1 dont on veut faire la soustraction
-  * \param ensemble2 qui fait la soustraction avec ensemble1
+  * \param ensemble1 ensemble dont on veut faire la soustraction
+  * \param ensemble2 ensemble qui fait la soustraction avec ensemble1
   * \return l'Ensemble soustraction de ces deux ensemble
 */
 
