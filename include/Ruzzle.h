@@ -2,6 +2,7 @@
  *\file Ruzzle.h
  *\brief Fonctions nécessaires à la résolution d'une grille de Ruzzle
  *\author Nina LARDIÈRE, Yves LE GUENNEC, Simon LEBEAUD, Tanguy LECLERC
+ * \date janvier 2019
  */
 
 #ifndef __RUZZLE__
@@ -13,15 +14,24 @@
 #include "Mot.h"
 #include "CasesContigues.h"
 
+/**
+* \brief le type SolutionRuzzle permet de stocker l'ensemble des mots trouvés dans une Grille de Ruzzle.
+* Il permet de savoir si un mot a déjà été trouvé dans la grille et le nombre de points associé à chaque mot.
+* Il permet également l'affichage des mots triés par ordre de points croissant ou décroissant puis par ordre alphabétique.
+* Il peut également permettre l'affichage des mots triés dans l'ordre alphabétique.
+*/
 typedef struct {
-  ABR motsTrouvesParPoints; //ABR de MotRuzzle trié par nb de points
-  ABR motsTrouvesParMot; //ABR de MotRuzzle trié par mot
-  int nbMots;
+  ABR motsTrouvesParPoints; /**< ABR de MotRuzzle trié par nombre de points */
+  ABR motsTrouvesParMot; /**< ABR de MotRuzzle trié par mot */
+  int nbMots; /**< le nombre de mots trouvés dans la Grille de Ruzzle */
 } SolutionRuzzle;
 
+/**
+* \brief permet de représenter un mot trouvé dans la grille de Ruzzle
+*/
 typedef struct {
-  char* mot;
-  unsigned short nbPoints;
+  char* mot; /**< la chaîne de caractères correspondant au mot */
+  unsigned short nbPoints; /** le nombre de points associé à ce mot */
 } MotRuzzle;
 
 /**
@@ -70,6 +80,17 @@ int RZ_chaineEnBonus(char* chaine, Bonus* leBonus);
 */
 int RZ_chaineEnGrille(char* chaine, Grille* grilleRuzzle);
 
+/**
+* \brief ajoute les mots que l'on peut former en partant du case dans la SolutionRuzzle
+* \author Nina LARDIÈRE
+* \param posX la position horizontale de la case dont on part pour trouver les mots
+* \param posY la position verticale de la case dont on part pour trouver les mots
+* \param dico le dictionnaire contenant tous les mots possibles
+* \param g un pointeur sur la grille contenant les cases du jeu Ruzzle
+* \param prefixe un pointeur vers le début de mot déjà formé
+* \param cheminRuzzle un pointeur vers la suite de cases d'où est formé le préfixe
+* \param resultat un pointeur vers la SolutionRuzzle contenant l'ensemble des mots trouvés dans la Grille
+*/
 void RZ_trouverMots(unsigned short posX, unsigned short posY, Dictionnaire dico, Grille* g, Mot* prefixe, CasesContigues* cheminRuzzle, SolutionRuzzle* resultat);
 
   /**

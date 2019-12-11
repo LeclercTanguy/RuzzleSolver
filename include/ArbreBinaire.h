@@ -9,15 +9,19 @@
 #include "ListeChainee.h" //définition de Element
 
 /**
- * \brief Un arbre binaire est un pointeur sur un noeud et
- * un noeud est composé d'un élement et de deux fils (droit et gauche).
+ * \brief Un arbre binaire est un pointeur sur un nœud et
+ * un nœud est composé d'un élement et de deux fils (droit et gauche).
  * Ici on défini un arbre binaire générique.
  */
 typedef struct AB_Noeud* ArbreBinaire;
+
+/**
+  * \brief nœud d'un arbre binaire
+*/
 typedef struct AB_Noeud{
-  Element lElement;
-  ArbreBinaire filsGauche;
-  ArbreBinaire filsDroit;
+  Element lElement;  /**< un pointeur générique vers l'élément du nœud */
+  ArbreBinaire filsGauche; /**<  un pointeur vers le nœud du fils gauche */
+  ArbreBinaire filsDroit; /**<  un pointeur vers le nœud du fils droit */
 } AB_Noeud;
 
 /**
@@ -27,7 +31,7 @@ typedef struct AB_Noeud{
  */
 ArbreBinaire AB_arbreBinaire();
 /**
- * \brief Allocation d'éspace mémoire pour un arbre binaire.
+ * \brief Allocation d'espace mémoire pour un arbre binaire.
  * \author T.LECLERC
  * \return Un arbre binaire utilisable avec un espace mémoire modifiable.
  */
@@ -40,17 +44,17 @@ ArbreBinaire AB_allouer(void);
  */
 bool AB_estVide(ArbreBinaire a);
 /**
- * \brief Permet de lier deux arbres binaires à une racine .
+ * \brief Permet de lier deux arbres binaires à une racine.
  * \author T.LECLERC
  * \param fg l'arbre binaire qui sera le fils gauche.
  * \param fd l'arbre binaire qui sera le fils droit.
- * \param element l'élément que contiendra la racine.
- * \param tailleElement taille de l'élément que contiendra la racine, ignoré si element==NULL
- * \return Un nouvel arbre binaire
+ * \param element un pointeur vers l'élément que contiendra la racine.
+ * \param tailleElement taille de l'élément que contiendra la racine
+ * \return Un nouvel arbre binaire dont la racine contient l'élément
  */
 ArbreBinaire AB_ajouterRacine(ArbreBinaire fg, ArbreBinaire fd, Element element,size_t tailleElement);
 /**
- * \brief Permet d'obtenir l'élément de la racine .
+ * \brief Permet d'obtenir l'élément de la racine.
  * \author T.LECLERC
  * \param a l'arbre dont on veux l'élément.
  * \return L'élément de l'arbre.
@@ -93,15 +97,15 @@ void AB_fixerFilsDroit(ArbreBinaire a, ArbreBinaire ad);
 /**
  * \brief Permet de supprimer la racine d'un arbre et de rediriger deux arbres binaires vers ses fils pour les utiliser.
  * \author T.LECLERC
- * \param *a pointeur sur l'arbre dont on veut supprimer la racine.
- * \param *fg pointeur sur un arbre binaire qui deviendra le pointeur vers le fils gauche de l'arbre.
- * \param *fd pointeur sur un arbre binaire qui deviendra le pointeur vers le fils droit de l'arbre.
+ * \param a pointeur sur l'arbre dont on veut supprimer la racine.
+ * \param fg pointeur sur un arbre binaire qui deviendra le pointeur vers le fils gauche de l'arbre.
+ * \param fd pointeur sur un arbre binaire qui deviendra le pointeur vers le fils droit de l'arbre.
  */
 void AB_supprimerRacine(ArbreBinaire* a, ArbreBinaire* fg, ArbreBinaire* fd);
 /**
  * \brief Permet de supprimer un arbre binaire.
  * \author T.LECLERC
- * \param *a pointeur sur l'arbre que l'on veut supprimer.
+ * \param a pointeur sur l'arbre que l'on veut supprimer.
  */
 void AB_supprimer(ArbreBinaire* a);
 

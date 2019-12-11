@@ -2,66 +2,88 @@
   \inputminted[linenos,breaklines,breakanywhere,xleftmargin=-30pt,xrightmargin=-70pt]
   {C}{#1}\newpage}
 
-\subsection{Implantation des SDD définies pour le Ruzzle}
-  \subsubsection{Dictionnaire.h}
+\section{Implantation des TAD définis pour le Ruzzle}
+  \subsection{Dictionnaire.h}
     \codeC{../../include/Dictionnaire.h}
-  \subsubsection{Mot.h}
+  \subsection{Mot.h}
     \codeC{../../include/Mot.h}
-  \subsubsection{Case.h}
+  \subsection{Case.h}
     \codeC{../../include/Case.h}
-  \subsubsection{CasesContigues.h}
+  \subsection{CasesContigues.h}
     \codeC{../../include/CasesContigues.h}
-  \subsubsection{Grille.h}
+  \subsection{Grille.h}
     \codeC{../../include/Grille.h}
-  \subsubsection{Ruzzle.h}
+  \subsection{Ruzzle.h}
     \codeC{../../include/Ruzzle.h}
 
-\subsection{Implantation des SDD Collections}
-  \subsubsection{ArbreBinaire.h}
+\section{Implantation des TAD Collections}
+  \subsection{ArbreBinaire.h}
     \codeC{../../include/ArbreBinaire.h}
-  \subsubsection{ABR.h}
+  \subsection{ABR.h}
     \codeC{../../include/ABR.h}
-  \subsubsection{ListeChainee.h}
+  \subsection{ListeChainee.h}
     \codeC{../../include/ListeChainee.h}
-  \subsubsection{Ensemble.h}
+  \subsection{Ensemble.h}
     \codeC{../../include/Ensemble.h}
-  \subsubsection{tools.h}
+  \subsection{tools.h}
     \codeC{../../include/tools.h}
 
-\subsection{Implémentation des SDD définies pour le Ruzzle}
-  \subsubsection{Dictionnaire.c}
+\section{Implémentation des SDD définies pour le Ruzzle}
+  \subsection{Dictionnaire.c}
     \codeC{../../src/Dictionnaire.c}
-  \subsubsection{Mot.c}
+  \subsection{Mot.c}
     \codeC{../../src/Mot.c}
-  \subsubsection{Case.c}
+  \subsection{Case.c}
     \codeC{../../src/Case.c}
-  \subsubsection{CasesContigues.c}
+  \subsection{CasesContigues.c}
     \codeC{../../src/CasesContigues.c}
-  \subsubsection{Grille.c}
+  \subsection{Grille.c}
     \codeC{../../src/Grille.c}
-  \subsubsection{Ruzzle.c}
+  \subsection{Ruzzle.c}
     \codeC{../../src/Ruzzle.c}
 
-  \subsection{Implémentation des SDD Collections}
-    \subsubsection{ArbreBinaire.c}
+  \section{Implémentation des SDD Collections}
+    \subsection{ArbreBinaire.c}
       \codeC{../../src/ArbreBinaire.c}
-    \subsubsection{ABR.c}
+    \subsection{ABR.c}
       \codeC{../../src/ABR.c}
-    \subsubsection{ListeChainee.c}
+    \subsection{ListeChainee.c}
       \codeC{../../src/ListeChainee.c}
-    \subsubsection{Ensemble.h}
+    \subsection{Ensemble.h}
       \codeC{../../src/Ensemble.c}
-    \subsubsection{tools.c}
+    \subsection{tools.c}
       \codeC{../../src/tools.c}
 
-  \subsection{ruzzleSolver.c}
+  \section{ruzzleSolver.c}
     \codeC{../../src/ruzzleSolver.c}
-  \subsection{transcoder.c}
+  \section{transcoder.c}
     \codeC{../../src/transcoder.c}
 
-\subsection{Deuxième version de sauvegarder et charger}
-  Cette version n'a pas été intégrée au projet final car
-  le chargement du dictionnaire était moins performant.
-  On passe en effet de 0.25s à 0.75s pour l'exécution de
-  ruzzleSolver.
+\section{Deuxième version de sauvegarder et charger}
+  Le chargement du Dictionnaire (si on exclu sa suppression), représente 97,8\%
+  du temps d'exécution de ruzzleSolver, j'ai donc cherché à améliorer sa vitesse
+  de chargement pour réduire le temps nécessaire à l'exécution de ruzzleSolver.
+  Étant donné que 35\% de ce temps est dédié à l'allocation mémoire (d'après Valgrind),
+  j'ai eu l'idée, au lieu d'allouer un espace mémoire pour chaque nœud et chaque
+  élément du Dictionnaire, d'allouer un espace de la taille du Dictionnaire entier,
+  qui permettrait d'avoir tous les mots dans la même zone mémoire et de ne faire qu'une
+  seule allocation.
+
+  J'ai donc modifié la sauvegarde en associant un numéro à chaque nœud afin de connaître
+  le positionnement en mémoire du fils gauche et du fils droit.
+  Le chargement consistait donc à remplir linéairement cet espace en suivant les données
+  générés par l'opération de sauvegarde, le pointeur vers le fils droit étant alors
+  l'indice mémoire du premier élément augmenté du numéro du nœud * la taille d'un nœud.
+  Chaque nœud contenait donc 3 pointeurs (Dictionnaire basé sur un ArbreBinaire générique)
+  ainsi qu'un caractère.
+
+  Le code correspondant à été développé et passe également les tests unitaires.
+  Seule la suppression de l'arbre a besoin d'être modifiée car free se réfère à l'espace
+  alloué par malloc, on ne peut donc supprimer que l'entièreté de l'arbre.
+  La suppression nœud par nœud, ou la suppression d'un mot, ne sont donc plus possible.
+
+  Cette version n'a pas été intégrée au projet final car le chargement du dictionnaire était moins performant. On passe en effet de 0.25s à 0.75s pour l'exécution de ruzzleSolver, ce qui
+  est à l'opposé de l'objectif recherché.
+
+  Yves LE GUENNEC
     \codeC{developpement/DictionnaireV2.c}
